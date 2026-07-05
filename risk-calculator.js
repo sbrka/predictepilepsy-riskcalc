@@ -237,7 +237,7 @@
       bi.innerHTML = this._belowHTML();
       if (bi.innerHTML) bi.dataset.has = "1"; else bi.style.display = "none";
       this._bindChrome(root, back);
-      const dispatch = () => { d.kind === "curve" ? this._renderCurve() : d.kind === "formula" ? this._renderFormula() : d.kind === "lookup" ? this._renderLookup() : this._renderScore(); };
+      const dispatch = () => { d.kind === "curve" ? this._renderCurve() : d.kind === "cox" ? this._renderCox() : d.kind === "formula" ? this._renderFormula() : d.kind === "lookup" ? this._renderLookup() : this._renderScore(); };
       dispatch();
       this.render = dispatch;
     }
@@ -317,6 +317,91 @@
       seg2(this._panel.querySelector("#mode"), s.no_cum ? [{ l: "COSY", v: "cosy" }] : (s.no_cosy ? [{ l: "Cumulative risk", v: "cum" }] : [{ l: "Cumulative risk", v: "cum" }, { l: "COSY", v: "cosy" }]), this._mode, (v) => { this._mode = v; this._renderCurve(); });
       this._drawCurve();
       this._bindHover(cumArr, cosyArr, ax, th, cosyMax);
+    }
+
+    /* ---------------- COX (predictors -> personalised survival + COSY) ---------------- */
+    _renderCox() {
+      const d = this.data, m = d.model, th = d.thresholds || { group1: 20, group2: 2 };
+      const inputs = m.inputs || [];
+      if (this._mode == null) this._mode = "cum";
+      if (this._month == null) this._month = 12;
+      if (!this._coxVal || this._coxVal.length !== inputs.length)
+        this._coxVal = inputs.map((i) => i.type === "binary" ? 0 : (i.default != null ? i.default : (i.min || 0)));
+      const H0 = m.baseline_H0 || [];
+      const Hget = (mo) => H0[Math.max(0, Math.min(mo, H0.length - 1))] || 0;
+      const ax = { cum: m.month_max_cum || 120, cosy: m.month_max_cosy || 108 };
+      const cosyMax = m.cosy_axis_max || COSY_AXIS;
+      const HZ = m.horizon_months || 12;
+      const LP = inputs.reduce((a, i, idx) => a + i.coef * Number(this._coxVal[idx]), 0);
+      const eLP = Math.exp(LP);
+      const Sf = (mo) => Math.exp(-Hget(mo) * eLP);
+      const cum = [], cosy = [];
+      for (let mo = 0; mo <= ax.cum; mo++) cum[mo] = 100 * (1 - Sf(mo));
+      for (let mo = 0; mo <= ax.cosy; mo++) { const s0 = Sf(mo); cosy[mo] = s0 > 0 ? 100 * (1 - Sf(mo + HZ) / s0) : 0; }
+      const s = { cum, cosy };
+      this._cur = { s, th, ax, cosyMax };
+
+      const lbl = this._mode === "cosy" ? "Seizure-free interval" : "Months since withdrawal";
+      const xmax = ax[this._mode];
+      const mo = Math.min(this._month, xmax);
+
+      // rail — predictor inputs
+      let rail = "";
+      inputs.forEach((inp, i) => {
+        const info = inp.info ? ` <button class="info-dot" data-info="${attr(inp.info)}" aria-label="About ${attr(inp.name)}">i</button>` : "";
+        if (inp.type === "binary") {
+          rail += `<div class="field"><div class="flabel">${esc(inp.name)}${info}</div><div class="seg" data-ci="${i}">
+            <button data-v="0"${+this._coxVal[i] === 0 ? ' class="on"' : ""}>${esc(inp.off || "No")}</button>
+            <button data-v="1"${+this._coxVal[i] === 1 ? ' class="on"' : ""}>${esc(inp.on || "Yes")}</button></div></div>`;
+        } else {
+          const v = this._coxVal[i];
+          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(inp.name)}${info}</span><span class="pill" id="cip${i}">${v}${inp.unit ? " " + esc(inp.unit) : ""}</span></div>
+            <input type="range" class="coxnum" data-ci="${i}" min="${inp.min}" max="${inp.max}" step="${inp.step || 1}" value="${v}"></div>`;
+        }
+      });
+      // month slider
+      rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${lbl}</span><span class="pill" id="hzpill">${mo} mo</span></div>
+        <input type="range" id="hz" min="0" max="${xmax}" step="1" value="${mo}"></div>`;
+      // metrics
+      const sf = (mm) => Math.max(0, 100 - cum[Math.min(mm, ax.cum)]);
+      rail += `<div class="scorewrap">
+        <div class="metric"><div class="k">Seizure-free at 2 yr &middot; 4 yr</div><div class="v" style="font-size:26px">${sf(24).toFixed(0)}% &middot; ${sf(48).toFixed(0)}%</div></div>
+        <div class="metric sm"><div class="k">Cumulative risk at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cum[mo])}</div></div></div>`;
+      // driving verdict from COSY
+      const g1 = firstBelow(cosy, th.group1), g2 = firstBelow(cosy, th.group2);
+      rail += `<div class="verdict">
+        <div class="vhead">Driving orientation &middot; seizure-free interval <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY and the orientation cut-offs">i</button></div>
+        <div class="vrow"><span class="lab"><i style="background:var(--amber-deep)"></i><span class="lt"><b>Group 1</b><span class="t">private &middot; COSY &lt; ${th.group1}%</span></span></span><span class="val" style="color:var(--amber-deep)">${fmtMo(g1)}</span></div>
+        <div class="vrow"><span class="lab"><i style="background:var(--red)"></i><span class="lt"><b>Group 2</b><span class="t">commercial &middot; COSY &lt; ${th.group2}%</span></span></span><span class="val" style="color:var(--red)">${fmtMo(g2)}</span></div>
+        <div class="vnote">${th.group1}% and ${th.group2}% are orientation cut-offs used in some jurisdictions — not established limits. Local laws and guidelines apply.</div></div>`;
+      this._rail.innerHTML = rail;
+
+      // panel
+      this._panel.innerHTML = `<div class="panelhead"><div class="seg modeseg" id="mode"></div><div class="legend" id="legend"></div></div>
+        <div class="plotwrap" id="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${GEO.H}" role="img" aria-label="Personalised risk curve by month"></svg><div class="tip" id="tip"></div></div>
+        <p class="hint">Adjust the predictors on the left — the curve recomputes. Move the cursor across it to read any month.</p>`;
+
+      // wire
+      this._rail.querySelectorAll(".seg[data-ci]").forEach((seg) => seg.addEventListener("click", (e) => {
+        const b = e.target.closest("button"); if (!b) return;
+        this._coxVal[+seg.dataset.ci] = +b.dataset.v; this._renderCox();
+      }));
+      this._rail.querySelectorAll(".coxnum").forEach((r) => r.addEventListener("input", (e) => {
+        this._coxVal[+e.target.dataset.ci] = +e.target.value; this._renderCox();
+      }));
+      const hz = this._rail.querySelector("#hz");
+      hz.style.setProperty("--fill", (mo / xmax * 100) + "%");
+      hz.addEventListener("input", (e) => {
+        this._month = +e.target.value; const mm = Math.min(this._month, xmax);
+        e.target.style.setProperty("--fill", (mm / xmax * 100) + "%");
+        this._rail.querySelector("#hzpill").textContent = mm + " mo";
+        this._rail.querySelector("#atmo").textContent = mm;
+        this._rail.querySelector("#cumAt").textContent = fmtPct(cum[mm]);
+        this._drawCurve();
+      });
+      seg2(this._panel.querySelector("#mode"), [{ l: "Cumulative risk", v: "cum" }, { l: "COSY", v: "cosy" }], this._mode, (v) => { this._mode = v; this._renderCox(); });
+      this._drawCurve();
+      this._bindHover(cum, cosy, ax, th, cosyMax);
     }
 
     _drawCurve() {
