@@ -133,6 +133,11 @@
     .tip .z{margin-top:5px;font-size:10.5px;font-weight:600;display:inline-block;padding:2px 7px;border-radius:6px}
     .hint{color:var(--faint);font-size:11.5px;margin:10px 2px 0;text-align:center}
     .foot{padding:16px 34px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;line-height:1.6}
+    .foot .disclaimer{margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)}
+    .foot .disclaimer b{color:var(--ink);display:block;margin-bottom:5px;font-size:12px;letter-spacing:.02em}
+    .foot .disclaimer p{margin:0 0 7px;max-width:none}
+    .foot .disclaimer .copyr{color:var(--faint)}
+    .foot .disclaimer a{color:var(--azure-deep);text-decoration:none}
     .classicview{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 30px;color:var(--muted)}
     .classicview .h{font-family:var(--serif);font-size:19px;color:var(--ink);margin-bottom:8px}
     .pop{position:fixed;z-index:60;max-width:272px;background:var(--ink);color:#fff;font-size:12px;line-height:1.5;padding:10px 13px;border-radius:11px;box-shadow:0 12px 30px rgba(14,28,43,.32);opacity:0;pointer-events:none;transform:translateY(-100%);transition:opacity .1s}
@@ -400,8 +405,12 @@
       rail += `<div class="scorewrap" id="fmetrics"></div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
-      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")}</div></div>
-        <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${20 + (m.outputs || []).length * 44}" role="img" aria-label="Predicted risk"></svg></div>`;
+      const vizInfo = m.viz_info || "Each risk factor you select adds a coloured contribution. The waterfall (left) starts from the baseline risk and steps up with each active factor, so you can see which factors drive this patient's risk and by how much. The donut (right) shows the same factors as wedges summing to the total predicted risk in the centre.";
+      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
+        <div class="fviz" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+          <div style="flex:1 1 320px;min-width:300px"><svg id="fwater" role="img" aria-label="Contribution waterfall"></svg></div>
+          <div style="flex:0 0 210px;text-align:center"><svg id="fdonut" viewBox="0 0 210 224" role="img" aria-label="Risk donut"></svg></div>
+        </div>`;
       this._formulaUpdate();
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return; this._predSel[+seg.dataset.pi] = +b.dataset.oi; this._renderFormula();
@@ -442,6 +451,28 @@
       return { lp, outs };
     }
 
+    // Map a linear predictor to a risk %, using the primary output and the model link.
+    _linkRisk(lp) {
+      const m = this.data.model, o = (m.outputs || [{}])[0] || {};
+      if (m.type === "cloglog") return Math.max(0, Math.min(100, (1 - Math.pow(1 - (o.F0 || 0), Math.exp(lp - (m.center || 0)))) * 100));
+      if (m.type === "logistic") return Math.max(0, Math.min(100, 100 / (1 + Math.exp(-(lp + (o.intercept || 0))))));
+      if (m.type === "lookup") { const b = (m.bands || []).find((x) => lp < x.lt); return b ? b.pct : ((m.bands || []).length ? m.bands[m.bands.length - 1].pct : 0); }
+      return Math.max(0, Math.min(100, lp));
+    }
+    // Per-predictor additive contribution to the linear predictor at the current selection.
+    _formulaContribs() {
+      const m = this.data.model, preds = this.data.predictors || [];
+      const base = Number(m.intercept) || 0;
+      const items = preds.map((p, i) => {
+        const raw = (p.type === "slider" || p.type === "number") ? this._slider[i] : Number(((p.options || [])[this._predSel[i]] || {}).points || 0);
+        const term = p.transform === "exp" ? Math.exp(raw) : raw;
+        const contrib = (Number(p.coef) || 0) * term;
+        const optLabel = (p.type === "slider" || p.type === "number") ? (raw + (p.unit ? " " + p.unit : "")) : (((p.options || [])[this._predSel[i]] || {}).label || "");
+        return { name: p.name, label: optLabel, contrib, on: Math.abs(contrib) > 1e-9 };
+      });
+      return { base, items };
+    }
+
     _formulaUpdate() {
       const { lp, outs } = this._formulaCompute();
       const m = this.data.model;
@@ -452,7 +483,58 @@
         cells += outs.map((o, i) => `<div class="metric${(i || m.show_lp) ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v">${o.approx ? "~" : ""}${fmtPct(o.pct)}</div></div>`).join("");
         mroot.innerHTML = cells;
       }
-      this._drawBars(outs.map((o) => ({ label: o.label.replace(/(\d+)\s*-?\s*year risk/i, "$1 yr").replace(/ risk$/i, ""), pct: o.pct })), null);
+      this._drawWaterfall();
+      this._drawDonut();
+    }
+
+    _drawWaterfall() {
+      const svg = this._panel.querySelector("#fwater"); if (!svg) return;
+      const { base, items } = this._formulaContribs();
+      const active = items.filter((c) => c.on);
+      const W = 460, rowH = 26, x0 = 168, plotW = 250, n = active.length + 2, H = 18 + n * rowH + 16;
+      const sx = (v) => x0 + (Math.max(0, Math.min(100, v)) / 100) * plotW;
+      let g = `<line x1="${x0}" y1="12" x2="${x0}" y2="${H - 20}" stroke="var(--azure-line)"/>`;
+      [0, 25, 50, 75, 100].forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${v}%</text>`; });
+      const baseRisk = this._linkRisk(base);
+      let y = 16, cur = base;
+      // baseline row
+      g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (baseRisk / 100) * plotW)}" height="15" rx="2" fill="#9fb4c7"/>`;
+      g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#5b6b7b" font-family="var(--sans)">Baseline risk</text>`;
+      g += `<text x="${sx(baseRisk) + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
+      y += rowH;
+      active.forEach((c, k) => {
+        const before = this._linkRisk(cur), after = this._linkRisk(cur + c.contrib); cur += c.contrib;
+        const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);
+        g += `<rect x="${x1}" y="${y}" width="${w}" height="15" rx="2" fill="${up ? PAL[k % PAL.length] : "#b02020"}"/>`;
+        g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
+        g += `<text x="${sx(Math.max(before, after)) + 5}" y="${y + 12}" font-size="10" fill="${up ? "#135ba8" : "#b02020"}" font-family="var(--sans)">${up ? "+" : ""}${(after - before).toFixed(1)}</text>`;
+        y += rowH;
+      });
+      const total = this._linkRisk(cur);
+      g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (total / 100) * plotW)}" height="15" rx="2" fill="#0f7a54"/>`;
+      g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="12" fill="#1a2430" font-weight="700" font-family="var(--serif)">Total</text>`;
+      g += `<text x="${sx(total) + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPct(total)}</text>`;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "300px"; svg.innerHTML = g;
+    }
+
+    _drawDonut() {
+      const svg = this._panel.querySelector("#fdonut"); if (!svg) return;
+      const { base, items } = this._formulaContribs();
+      const active = items.filter((c) => c.on);
+      const cx = 105, cy = 104, rad = 66, w = 22;
+      const total = this._linkRisk(base + active.reduce((a, c) => a + c.contrib, 0));
+      const totContrib = active.reduce((a, c) => a + Math.abs(c.contrib), 0) || 1;
+      const fillFrac = total / 100;
+      let ang = -Math.PI / 2, segs = "";
+      active.forEach((c, k) => {
+        const frac = (Math.abs(c.contrib) / totContrib) * fillFrac, a2 = ang + frac * 2 * Math.PI;
+        segs += arcPath(cx, cy, rad, ang, a2, PAL[k % PAL.length], w); ang = a2;
+      });
+      const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef2f6" stroke-width="${w}"/>`;
+      svg.innerHTML = `${track}${segs}
+        <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-family="var(--serif)" font-size="30" fill="#1a2430">${fmtPct(total)}</text>
+        <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="#5b6b7b">predicted risk</text>
+        ${active.length ? "" : `<text x="${cx}" y="${cy + 40}" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="#98a6b5">baseline patient</text>`}`;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
@@ -515,7 +597,9 @@
       let banner = "";
       if (method === "figure_digitized" && (p.review_status || "unreviewed") !== "human_reviewed")
         banner = `<div class="warn review">Figure-digitized data, review status: <b>${esc(p.review_status || "unreviewed")}</b>. Not cleared for clinical deployment until human-reviewed.</div>`;
-      return `${banner}Fixed axes across the library so scores stay comparable. ${method === "figure_digitized" ? "Curves digitised from the source figure and monthly-resampled. " : ""}${citation(m, true)} Demonstration only — not for clinical or driving decisions.`;
+      const note = `${banner}Fixed axes across the library so scores stay comparable. ${method === "figure_digitized" ? "Curves digitised from the source figure and monthly-resampled. " : ""}${citation(m, true)} Demonstration only — not for clinical or driving decisions.`;
+      const disclaimer = `<div class="disclaimer"><b>Disclaimer</b><p>Most of the models featured on this website were not developed by us. For detailed information about each model or calculator, please refer to the links to the original publications. This website provides an overview of selected prognostic models for epilepsy for demonstration purposes only. If you believe a model should be removed, please contact us, and we will address your request promptly. We do not guarantee the accuracy, reliability, or scientific integrity of these calculators. The implementations may contain errors and could produce unreliable results. These prognostic tools are based on scientific research and are intended for demonstration purposes only. The clinical usefulness and robustness of most of these models have not been adequately tested, and they should not be used to guide medical decisions. All liability is excluded.</p><p class="copyr">&copy; 2025, SeLECT consortium &middot; <a href="mailto:select@usz.ch">select@usz.ch</a></p></div>`;
+      return note + disclaimer;
     }
 
     _bindChrome(root, back) {
@@ -538,8 +622,7 @@
       modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
       const tabs = root.querySelector("#viewtabs");
       const ext = this.hasAttribute("external-classic");   // page supplies the real CFF form; hide the internal placeholder
-      const classicTarget = () => this.getAttribute("classic-target") ? document.getElementById(this.getAttribute("classic-target")) : null;
-      if (tabs) tabs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; tabs.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); const cl = b.dataset.view === "classic"; root.querySelector("#grid").style.display = cl ? "none" : "grid"; root.querySelector("#classicview").style.display = (cl && !ext) ? "flex" : "none"; const bi2 = root.querySelector("#belowinfo"); if (bi2 && bi2.dataset.has) bi2.style.display = cl ? "none" : "block"; const ct = classicTarget(); if (ct) ct.style.display = cl ? "block" : "none"; this.dispatchEvent(new CustomEvent("riskcalc:view", { bubbles: true, detail: { view: cl ? "classic" : "new" } })); });
+      if (tabs) tabs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; tabs.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); const cl = b.dataset.view === "classic"; root.querySelector("#grid").style.display = cl ? "none" : "grid"; root.querySelector("#classicview").style.display = (cl && !ext) ? "flex" : "none"; const bi2 = root.querySelector("#belowinfo"); if (bi2 && bi2.dataset.has) bi2.style.display = cl ? "none" : "block"; this.dispatchEvent(new CustomEvent("riskcalc:view", { bubbles: true, detail: { view: cl ? "classic" : "new" } })); });
       const bb = root.querySelector("#back");
       if (bb) bb.onclick = () => { if (back) location.href = back; else history.back(); };
     }
@@ -550,7 +633,7 @@
         ? `<div class="cffinfo">${m.cff_info.replace(/<script[\s\S]*?<\/script>/gi, "")}</div>`
         : (m.clinical_utility ? `<div class="cffinfo"><p>${esc(m.clinical_utility)}</p></div>` : "");
       if (!body) return "";
-      return `<details open><summary>About this score &amp; how it's calculated</summary>${body}</details>`;
+      return `<details><summary>About this score &amp; how it's calculated</summary>${body}</details>`;
     }
 
     _modalHTML() {
@@ -565,6 +648,13 @@
   }
 
   /* helpers */
+  const PAL = ["#1f83e6", "#e0912b", "#0f7a54", "#b02020", "#7b52c9", "#2aa7b8", "#c94f8e", "#5b7b3a", "#d06a1f", "#3a6ea5"];
+  function shorten(s, n) { s = String(s == null ? "" : s); return s.length > n ? s.slice(0, n - 1) + "…" : s; }
+  function arcPath(cx, cy, rad, a1, a2, col, w) {
+    const x1 = cx + rad * Math.cos(a1), y1 = cy + rad * Math.sin(a1), x2 = cx + rad * Math.cos(a2), y2 = cy + rad * Math.sin(a2);
+    const large = (a2 - a1) > Math.PI ? 1 : 0;
+    return `<path d="M ${x1} ${y1} A ${rad} ${rad} 0 ${large} 1 ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="butt"/>`;
+  }
   function esc(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
   function attr(x) { return esc(x).replace(/'/g, "&#39;"); }
   function fmtPct(v) { return (v == null ? 0 : Math.round(v)) + "%"; }
