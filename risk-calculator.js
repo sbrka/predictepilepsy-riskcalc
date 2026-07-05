@@ -38,11 +38,11 @@
       display:block;width:100%;color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
     *{box-sizing:border-box}
     .sheet{background:var(--paper);min-height:100%;display:flex;flex-direction:column}
-    .banner{background:var(--pres-green);color:#fff;padding:12px 34px}
+    .banner{background:var(--azure-deep);color:#fff;padding:12px 34px}
     .banner .bwrap{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
     .banner .btitle{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.01em}
     .banner .bdot{opacity:.68;font-weight:400}
-    .banner .btag{font-size:13px;color:#c7ddcf;letter-spacing:.02em}
+    .banner .btag{font-size:13px;color:#cfe4fb;letter-spacing:.02em}
     .topstrip{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 34px;border-bottom:1px solid var(--line);background:#fbfcfe}
     .backbtn{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:550;cursor:pointer;font-family:inherit}
     .backbtn:hover{color:var(--azure-deep)}
@@ -139,11 +139,11 @@
     .tip .z{margin-top:5px;font-size:10.5px;font-weight:600;display:inline-block;padding:2px 7px;border-radius:6px}
     .hint{color:var(--faint);font-size:12.5px;margin:10px 2px 0;text-align:center}
     .foot{padding:18px 34px 26px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.65}
-    .foot .disclaimer{margin-top:16px;padding-top:16px;border-top:2px solid var(--pres-green)}
-    .foot .disclaimer b{color:var(--pres-green);display:block;margin-bottom:6px;font-size:14px;font-family:var(--serif);letter-spacing:.01em}
+    .foot .disclaimer{margin-top:16px;padding:15px 18px;background:var(--azure-wash);border:1px solid var(--azure-line);border-radius:12px}
+    .foot .disclaimer b{color:var(--azure-deep);display:block;margin-bottom:6px;font-size:14px;font-family:var(--serif);letter-spacing:.01em}
     .foot .disclaimer p{margin:0 0 7px;max-width:none}
     .foot .disclaimer .copyr{color:var(--faint)}
-    .foot .disclaimer a{color:var(--pres-green2);text-decoration:none;font-weight:600}
+    .foot .disclaimer a{color:var(--azure-deep);text-decoration:none;font-weight:600}
     .classicview{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 30px;color:var(--muted)}
     .classicview .h{font-family:var(--serif);font-size:19px;color:var(--ink);margin-bottom:8px}
     .pop{position:fixed;z-index:60;max-width:272px;background:var(--ink);color:#fff;font-size:12px;line-height:1.5;padding:10px 13px;border-radius:11px;box-shadow:0 12px 30px rgba(14,28,43,.32);opacity:0;pointer-events:none;transform:translateY(-100%);transition:opacity .1s}
@@ -190,7 +190,7 @@
       const root = document.createElement("div");
       root.innerHTML = `<style>${CSS}</style>
         <div class="sheet">
-          <div class="banner"><div class="bwrap"><span class="btitle">predictepilepsy<span class="bdot">.com</span></span><span class="btag">Epilepsy prognostic calculators &middot; SeLECT Consortium</span></div></div>
+          <div class="banner"><div class="bwrap"><span class="btitle">predictepilepsy<span class="bdot">.com</span></span><span class="btag">Epilepsy prognostic calculators</span></div></div>
           ${hasNav ? `<div class="topstrip">
             <button class="backbtn" id="back">&#8249;&nbsp;All calculators</button>
             <div class="viewtabs" id="viewtabs"><button class="on" data-view="new">New design</button><button data-view="classic">Classic (CFF)</button></div>
