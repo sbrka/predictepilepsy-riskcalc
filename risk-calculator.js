@@ -402,7 +402,8 @@
             <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
             <div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>
           </div>`;
-        this._drawWaterfall({ base, items }, link);
+        const maxScore = preds.reduce((a, p) => a + Math.max(...(p.options || [{ points: 0 }]).map((o) => Number(o.points) || 0)), 0);
+        this._drawWaterfall({ base, items }, link, { axis: "points", axisMax: maxScore });
         this._drawDonut({ base, items }, link);
       } else {
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk by group${m.horizon ? " &middot; at " + esc(m.horizon) : ""}</div></div>
@@ -520,35 +521,46 @@
       this._drawDonut(_cb, _link);
     }
 
-    _drawWaterfall(cb, link) {
+    _drawWaterfall(cb, link, opts) {
       const svg = this._panel.querySelector("#fwater"); if (!svg) return;
       const { base, items } = cb;
       const active = items.filter((c) => c.on);
+      const pmode = !!(opts && opts.axis === "points");   // bars sized by points (nomogram) vs by risk change
+      const totalAdd = base + active.reduce((a, c) => a + c.contrib, 0);
+      const axisMax = pmode ? Math.max(opts.axisMax || totalAdd, totalAdd, 1) : 100;
       const W = 460, rowH = 26, x0 = 168, plotW = 250, n = active.length + 2, H = 18 + n * rowH + 16;
-      const sx = (v) => x0 + (Math.max(0, Math.min(100, v)) / 100) * plotW;
+      const sx = (v) => x0 + (Math.max(0, Math.min(axisMax, v)) / axisMax) * plotW;
       let g = `<line x1="${x0}" y1="12" x2="${x0}" y2="${H - 20}" stroke="var(--azure-line)"/>`;
-      [0, 25, 50, 75, 100].forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${v}%</text>`; });
+      const ticks = pmode ? [0, axisMax / 4, axisMax / 2, 3 * axisMax / 4, axisMax] : [0, 25, 50, 75, 100];
+      ticks.forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${pmode ? Math.round(v) : v + "%"}</text>`; });
       const baseRisk = link(base);
       let y = 16, cur = base;
-      // baseline row
-      g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (baseRisk / 100) * plotW)}" height="15" rx="2" fill="#9fb4c7"/>`;
+      const baseEnd = pmode ? sx(base) : sx(baseRisk);
+      g += `<rect x="${x0}" y="${y}" width="${Math.max(pmode ? 0 : 1, baseEnd - x0)}" height="15" rx="2" fill="#9fb4c7"/>`;
       g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#5b6b7b" font-family="var(--sans)">Baseline risk</text>`;
-      g += `<text x="${sx(baseRisk) + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
+      g += `<text x="${baseEnd + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
       y += rowH;
       active.forEach((c, k) => {
-        const before = link(cur), after = link(cur + c.contrib); cur += c.contrib;
-        const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);
-        g += `<rect x="${x1}" y="${y}" width="${w}" height="15" rx="2" fill="${up ? PAL[k % PAL.length] : "#b02020"}"/>`;
-        g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
-        const wl = c.wlabel != null ? c.wlabel : ((up ? "+" : "") + (after - before).toFixed(1) + "%");
-        g += `<text x="${sx(Math.max(before, after)) + 6}" y="${y + 12}" font-size="11" fill="${(c.wlabel == null && !up) ? "#b02020" : "#135ba8"}" font-family="var(--sans)">${wl}</text>`;
+        if (pmode) {
+          const x1 = sx(cur), x2 = sx(cur + c.contrib); cur += c.contrib;
+          g += `<rect x="${x1}" y="${y}" width="${Math.max(2, x2 - x1)}" height="15" rx="2" fill="${PAL[k % PAL.length]}"/>`;
+          g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
+          g += `<text x="${x2 + 6}" y="${y + 12}" font-size="10.5" fill="#135ba8" font-family="var(--sans)">${c.wlabel != null ? c.wlabel : ("+" + c.contrib + " pts")}</text>`;
+        } else {
+          const before = link(cur), after = link(cur + c.contrib); cur += c.contrib;
+          const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);
+          g += `<rect x="${x1}" y="${y}" width="${w}" height="15" rx="2" fill="${up ? PAL[k % PAL.length] : "#b02020"}"/>`;
+          g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
+          const wl = c.wlabel != null ? c.wlabel : ((up ? "+" : "") + (after - before).toFixed(1) + "%");
+          g += `<text x="${sx(Math.max(before, after)) + 6}" y="${y + 12}" font-size="11" fill="${(c.wlabel == null && !up) ? "#b02020" : "#135ba8"}" font-family="var(--sans)">${wl}</text>`;
+        }
         y += rowH;
       });
-      const total = link(cur);
-      g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (total / 100) * plotW)}" height="15" rx="2" fill="#0f7a54"/>`;
+      const total = link(cur), totEnd = pmode ? sx(cur) : sx(total);
+      g += `<rect x="${x0}" y="${y}" width="${Math.max(1, totEnd - x0)}" height="15" rx="2" fill="#0f7a54"/>`;
       g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="12" fill="#1a2430" font-weight="700" font-family="var(--serif)">Total</text>`;
-      g += `<text x="${sx(total) + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPct(total)}</text>`;
-      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "300px"; svg.innerHTML = g;
+      g += `<text x="${totEnd + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPct(total)}</text>`;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "340px"; svg.innerHTML = g;
     }
 
     _drawDonut(cb, link) {
