@@ -1,0 +1,277 @@
+{
+  "schema_version": "1.0",
+  "id": "form13",
+  "kind": "score",
+  "meta": {
+    "title": "PTE Predictive Nomogram (2)",
+    "doi": "10.1038/s41598-022-24824-z",
+    "cff_info": "<div id=\"fieldInfoPTE2\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>PTE Predictive Nomogram (2)</h4>\n  <p><i>Lin et al., 2022</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1038/s4159802224824z\" target=\"_blank\">10.1038/s4159802224824z</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Contusion Site:</b>\n      <ul>\n        <li>0 points: Occipital</li>\n        <li>14 points: Parietal</li>\n        <li>73 points: Frontal</li>\n        <li>79 points: Temporal</li>\n        <li>100 points: Multiple sites</li>\n      </ul>\n    </li>\n    <li><b>Chronic Alcohol Use:</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>28 points: Yes</li>\n      </ul>\n    </li>\n    <li><b>Contusion Volume:</b>\n      <ul>\n        <li>0 points: ≤13.5 ml</li>\n        <li>61 points: >13.5 ml</li>\n      </ul>\n    </li>\n    <li><b>Skull Fracture:</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>24 points: Linear</li>\n        <li>78 points: Depressed</li>\n      </ul>\n    </li>\n    <li><b>Subdural Hematoma (SDH):</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>49 points: Yes</li>\n      </ul>\n    </li>\n    <li><b>Glasgow Coma Scale (GCS) Score:</b>\n      <ul>\n        <li>0 points: Mild (13-15)</li>\n        <li>22 points: Moderate (9-12)</li>\n        <li>95 points: Severe (3-8)</li>\n      </ul>\n    </li>\n    <li><b>Non-Late Post-Traumatic Seizures (Non-LPTS):</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>76 points: Yes</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Predicted risk of epilepsy after 2 years based on the score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">131</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">1%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">167</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">5%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">184</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">194</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">15%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">201</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">208</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">25%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">213</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">218</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">35%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">223</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">227</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">45%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">231</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">236</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">55%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">240</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">245</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">65%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">250</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">255</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">75%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">262</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">269</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">85%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">279</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">90%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">296</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">95%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">332</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">99%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 457 patients (Qinghai Provincial People’s Hospital, 2016-2019).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Univariate and multivariate logistic regression.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">C-index: 0.9829 (high predictive power).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited by single-center study).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Identifies high-risk patients for targeted anti-seizure medication (ASM) treatment or prophylaxis.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Lin S, Wang Q, Zhu Y, et al.",
+    "journal": "Scientific Reports",
+    "year": 2022,
+    "clinical_utility": "Post-traumatic epilepsy (PTE) is an important cause of poor prognosis in patients with cerebral contusions. The primary purpose of this study is to evaluate the high-risk factors of PTE by summarizing and analyzing the baseline data, laboratory examination, and imaging features of patients with a cerebral contusion, and then developing a Nomogram prediction model and validating it.",
+    "outcome": "Establishment and validation of PTE prediction model in patients with cerebral contusion"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "Contusion Site",
+      "options": [
+        {
+          "label": "Occipital",
+          "points": 0
+        },
+        {
+          "label": "Parietal",
+          "points": 14
+        },
+        {
+          "label": "Frontal",
+          "points": 73
+        },
+        {
+          "label": "Temporal",
+          "points": 79
+        },
+        {
+          "label": "Multiple Sites",
+          "points": 100
+        }
+      ],
+      "assess": "Brain contusion location. The frontal and temporal regions or multiple sites have higher PTE risk (up to 100 points)."
+    },
+    {
+      "name": "Chronic Alcohol Use",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 28
+        }
+      ],
+      "assess": "History of daily alcohol consumption for ≥1 year increases PTE risk significantly (28 points)."
+    },
+    {
+      "name": "Skull Fracture",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Linear",
+          "points": 24
+        },
+        {
+          "label": "Depressed",
+          "points": 78
+        }
+      ],
+      "assess": "Type of skull fracture based on radiographic findings. Depressed fractures (78 points) carry the highest PTE risk."
+    },
+    {
+      "name": "Contusion Volume",
+      "options": [
+        {
+          "label": "≤13.5 ml",
+          "points": 0
+        },
+        {
+          "label": "> 13.5 ml",
+          "points": 61
+        }
+      ],
+      "assess": "Contusion size was calculated using CT scans analyzed with 3D Slicer software (version 4.8.0). Regions of interest were manually selected, and a fixed Hounsfield unit threshold (50–110 HU) was applied to identify contused tissue. The software automatically calculated the volume by summing adjacent voxels. Volumes >13.5 ml are associated with higher PTE risk (61 points)."
+    },
+    {
+      "name": "Subdural Hematoma (SDH)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 49
+        }
+      ],
+      "assess": "Presence of subdural hematoma increases PTE risk significantly (49 points if present)."
+    },
+    {
+      "name": "Glasgow Coma Scale (GCS):",
+      "options": [
+        {
+          "label": "Mild (GCS 13-15)",
+          "points": 0
+        },
+        {
+          "label": "Moderate (GCS 8-12)",
+          "points": 22
+        },
+        {
+          "label": "Severe (GCS 3-7)",
+          "points": 95
+        }
+      ],
+      "assess": "The GCS score measures the severity of brain injury. Severe injury (3–8, 95 points) carries the highest risk of PTE."
+    },
+    {
+      "name": "Non-LPTS/ Acute Symptomatic Seizures/ Early Seizures",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 76
+        }
+      ],
+      "assess": "Non-LPTS refers to seizures occurring within seven days of traumatic brain injury (TBI), including Immediate Post-Traumatic Seizures (IPTS, within 24 hours) and Early Post-Traumatic Seizures (EPTS, 24 hours to seven days). The presence of Non-LPTS significantly increases the risk of Post-Traumatic Epilepsy (PTE), with a risk score of 76 points."
+    }
+  ],
+  "model": {
+    "score_type": "range",
+    "horizon": "2 years",
+    "rows": [
+      {
+        "label": "1%",
+        "lo": 0,
+        "hi": 164,
+        "pct": 1.0
+      },
+      {
+        "label": "5%",
+        "lo": 165,
+        "hi": 182,
+        "pct": 5.0
+      },
+      {
+        "label": "10%",
+        "lo": 183,
+        "hi": 193,
+        "pct": 10.0
+      },
+      {
+        "label": "15%",
+        "lo": 194,
+        "hi": 200,
+        "pct": 15.0
+      },
+      {
+        "label": "20%",
+        "lo": 201,
+        "hi": 207,
+        "pct": 20.0
+      },
+      {
+        "label": "25%",
+        "lo": 208,
+        "hi": 212,
+        "pct": 25.0
+      },
+      {
+        "label": "30%",
+        "lo": 213,
+        "hi": 217,
+        "pct": 30.0
+      },
+      {
+        "label": "35%",
+        "lo": 218,
+        "hi": 222,
+        "pct": 35.0
+      },
+      {
+        "label": "40%",
+        "lo": 223,
+        "hi": 226,
+        "pct": 40.0
+      },
+      {
+        "label": "45%",
+        "lo": 227,
+        "hi": 230,
+        "pct": 45.0
+      },
+      {
+        "label": "50%",
+        "lo": 231,
+        "hi": 235,
+        "pct": 50.0
+      },
+      {
+        "label": "55%",
+        "lo": 236,
+        "hi": 239,
+        "pct": 55.0
+      },
+      {
+        "label": "60%",
+        "lo": 240,
+        "hi": 244,
+        "pct": 60.0
+      },
+      {
+        "label": "65%",
+        "lo": 245,
+        "hi": 249,
+        "pct": 65.0
+      },
+      {
+        "label": "70%",
+        "lo": 250,
+        "hi": 254,
+        "pct": 70.0
+      },
+      {
+        "label": "75%",
+        "lo": 255,
+        "hi": 261,
+        "pct": 75.0
+      },
+      {
+        "label": "80%",
+        "lo": 262,
+        "hi": 268,
+        "pct": 80.0
+      },
+      {
+        "label": "85%",
+        "lo": 269,
+        "hi": 278,
+        "pct": 85.0
+      },
+      {
+        "label": "90%",
+        "lo": 279,
+        "hi": 295,
+        "pct": 90.0
+      },
+      {
+        "label": "95%",
+        "lo": 296,
+        "hi": 331,
+        "pct": 95.0
+      },
+      {
+        "label": "99%",
+        "lo": 332,
+        "hi": 100000,
+        "pct": 99.0
+      }
+    ]
+  },
+  "provenance": {
+    "extraction_method": "cff_export",
+    "source": "export_13_2026-04-07_172652.cpfm",
+    "review_status": "unreviewed",
+    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  }
+}

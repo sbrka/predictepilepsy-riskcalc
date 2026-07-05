@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "id": "form12",
+  "kind": "score",
+  "meta": {
+    "title": "PTE Predictive Nomogram (1)",
+    "doi": "10.1016/j.seizure.2021.03.023",
+    "cff_info": "<div id=\"fieldInfoPTE1\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Post Traumatic Brain Injury Epilepsy Predictive Nomogram (1)</h4>\n  <p><i>Wang et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1016/j.seizure.2021.03.023\" target=\"_blank\">10.1016/j.seizure.2021.03.023</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Loss of Consciousness (LOC):</b>\n      <ul>\n        <li>0 points: ≤30 min</li>\n        <li>59 points: 31 min - 24 h</li>\n        <li>67 points: >24 h</li>\n      </ul>\n    </li>\n    <li><b>Early Post-Traumatic Seizures (EPTS):</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>74 points: Yes</li>\n      </ul>\n    </li>\n    <li><b>Sex:</b>\n      <ul>\n        <li>0 points: Female</li>\n        <li>37 points: Male</li>\n      </ul>\n    </li>\n    <li><b>Treatment:</b>\n      <ul>\n        <li>0 points: Conservative</li>\n        <li>43 points: Puncture</li>\n        <li>51 points: Surgery</li>\n      </ul>\n    </li>\n    <li><b>Subdural Hematoma (SDH):</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>57 points: Yes</li>\n      </ul>\n    </li>\n    <li><b>Contusion Site:</b>\n      <ul>\n        <li>0 points: No</li>\n        <li>29 points: Other sites</li>\n        <li>65 points: Frontal temporal lobe</li>\n      </ul>\n    </li>\n    <li><b>Glasgow Coma Scale (GCS):</b>\n      <ul>\n        <li>0 points: Mild</li>\n        <li>76 points: Moderate</li>\n        <li>100 points: Severe</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n<p>Predicted risk of epilepsy at 1 and 5 years based on the score:</p>\n<table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n  <thead>\n    <tr style=\"background-color: #f2f2f2;\">\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">1-Year Risk</th>\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">5-Year Risk</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">200</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">238</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">291</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">325</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">350</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">372</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">392</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">411</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">432</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">457</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">90%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">90%</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">476</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">95%</td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">95%</td>\n    </tr>\n  </tbody>\n</table>\n  <h4>Clinical Utility</h4>\n  <p>The PTE Predictive Nomogram (1) assists in personalized risk prediction for post-traumatic brain injury epilepsy, guiding clinical decisions for anti-seizure medication and monitoring.</p>\n\t<h4>Additional Study Information</h4>\n<table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n  <thead>\n    <tr style=\"background-color: #f2f2f2;\">\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Score Name</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">PTE Predictive Nomogram (1)</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 1301 patients (West China Hospital, 2011-2017). Validation: 834 patients (two independent cohorts).</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">Multivariable Cox proportional hazards regression.</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">Internal: Retrospective cohort. External: Two independent cohorts (Chengdu Shang Jin Nan Fu Hospital and Sichuan Provincial People’s Hospital).</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">C-index: 0.846 (training), 0.895 (validation).</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">High (validated in two separate cohorts).</td>\n    </tr>\n    <tr>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n      <td style=\"border: 1px solid #ddd; padding: 8px;\">Guides targeted treatment and follow-up.</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+    "authors": "Wang X, Zhong J, Lei T, et al.",
+    "journal": "Seizure",
+    "year": 2021,
+    "outcome": "Development and external validation of a predictive nomogram model of posttraumatic epilepsy: A retrospective analysis"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "Loss of Consciousness (LOC)",
+      "options": [
+        {
+          "label": "≤30 minutes",
+          "points": 0
+        },
+        {
+          "label": "31 minutes–24 hours",
+          "points": 59
+        },
+        {
+          "label": "> 24 hours",
+          "points": 67
+        }
+      ],
+      "assess": "Loss of consciousness duration after TBI Please select the approximate length of time the patient was unconscious after the traumatic brain injury. 0–30 minutes: Brief or no observed LOC 31 minutes to 24 hours: Moderate LOC Over 24 hours: Prolonged unconsciousness Note: Longer LOC is associated with a higher risk of developing posttraumatic epilepsy (PTE)."
+    },
+    {
+      "name": "Early Post-Traumatic Seizures (EPTS)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 74
+        }
+      ],
+      "assess": "Seizures occurring within the first 7 days after TBI, where their presence substantially raises the risk of developing PTE."
+    },
+    {
+      "name": "Sex",
+      "options": [
+        {
+          "label": "Female",
+          "points": 0
+        },
+        {
+          "label": "Male",
+          "points": 37
+        }
+      ],
+      "assess": "Male sex is associated with a higher risk of PTE compared to females."
+    },
+    {
+      "name": "Treatment",
+      "options": [
+        {
+          "label": "Conservative",
+          "points": 0
+        },
+        {
+          "label": "Puncture",
+          "points": 43
+        },
+        {
+          "label": "Surgery",
+          "points": 51
+        }
+      ],
+      "assess": "The type of treatment received after TBI, with surgical interventions linked to the highest risk of PTE."
+    },
+    {
+      "name": "Subdural Hematoma (SDH)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 57
+        }
+      ],
+      "assess": "The presence of subdural hematoma significantly elevates the risk of PTE compared to its absence."
+    },
+    {
+      "name": "Contusion Site",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Other sites",
+          "points": 29
+        },
+        {
+          "label": "Frontal temporal lobe",
+          "points": 65
+        }
+      ],
+      "assess": "Location of brain contusion identified on imaging with brain contusions in the frontal-temporal lobe associated with the greatest risk of PTE."
+    },
+    {
+      "name": "Glasgow Coma Scale (GCS):",
+      "options": [
+        {
+          "label": "Mild (GCS 13-15)",
+          "points": 0
+        },
+        {
+          "label": "Moderate (GCS 8-12)",
+          "points": 76
+        },
+        {
+          "label": "Severe (GCS 3-7)",
+          "points": 100
+        }
+      ],
+      "assess": "Severity of TBI as measured by GCS at admission, with severe scores (3–8) presenting the highest risk of PTE."
+    }
+  ],
+  "model": {
+    "score_type": "range",
+    "horizon": "1 year",
+    "rows": [
+      {
+        "label": "Risk < 10%",
+        "lo": 0,
+        "hi": 237,
+        "pct": 10.0
+      },
+      {
+        "label": "10%",
+        "lo": 238,
+        "hi": 290,
+        "pct": 10.0
+      },
+      {
+        "label": "20%",
+        "lo": 291,
+        "hi": 325,
+        "pct": 20.0
+      },
+      {
+        "label": "30%",
+        "lo": 326,
+        "hi": 350,
+        "pct": 30.0
+      },
+      {
+        "label": "40%",
+        "lo": 351,
+        "hi": 372,
+        "pct": 40.0
+      },
+      {
+        "label": "50%",
+        "lo": 373,
+        "hi": 392,
+        "pct": 50.0
+      },
+      {
+        "label": "60%",
+        "lo": 393,
+        "hi": 411,
+        "pct": 60.0
+      },
+      {
+        "label": "70%",
+        "lo": 412,
+        "hi": 432,
+        "pct": 70.0
+      },
+      {
+        "label": "80%",
+        "lo": 433,
+        "hi": 457,
+        "pct": 80.0
+      },
+      {
+        "label": "90%",
+        "lo": 458,
+        "hi": 476,
+        "pct": 90.0
+      }
+    ]
+  },
+  "provenance": {
+    "extraction_method": "cff_export",
+    "source": "export_12_2026-04-07_172648.cpfm",
+    "review_status": "unreviewed",
+    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  }
+}

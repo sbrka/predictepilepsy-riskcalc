@@ -1,0 +1,1266 @@
+{
+  "schema_version": "1.0",
+  "id": "form32b",
+  "kind": "lookup",
+  "meta": {
+    "title": "MESS — risk of recurrence after a first seizure (Part 1)",
+    "doi": "10.1016/S1474-4422(06)70383-0",
+    "cff_info": "<h3>Risk of recurrence after a first seizure (Part 1)</h3><p>Estimates the chance of a further seizure within the next 12 months (COSY) after a first unprovoked seizure, from the MRC MESS trial, and the seizure-free interval after which the annual risk falls below 20% (a Group 1 / private-driving orientation cut-off used in some jurisdictions).</p><h3>Variables</h3><ul><li><strong>Aetiology</strong> — symptomatic (linked to a past neurological condition) vs cryptogenic/idiopathic (no identifiable cause).</li><li><strong>Treatment</strong> — immediate vs delayed antiepileptic-drug treatment.</li><li><strong>EEG</strong> and <strong>CT/MRI</strong> — normal, abnormal, or not done.</li><li><strong>Epilepsy in a first-degree relative</strong> and <strong>seizures only while asleep</strong>.</li><li><strong>Months seizure-free</strong> — COSY is reported at 6 and 12 months.</li></ul>",
+    "authors": "Kim LG, Johnson TL, Marson AG, et al.",
+    "journal": "The Lancet Neurology",
+    "year": 2006,
+    "outcome": "Prediction of risk of seizure recurrence after a single seizure and early epilepsy: further results from the MESS trial"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "Months seizure-free since first seizure",
+      "options": [
+        {
+          "label": "6 months",
+          "value": "6"
+        },
+        {
+          "label": "12 months",
+          "value": "12"
+        }
+      ],
+      "assess": "How long the patient has been seizure-free since the first seizure. COSY is reported at 6 or 12 months."
+    },
+    {
+      "name": "Aetiology",
+      "options": [
+        {
+          "label": "Symptomatic",
+          "value": "Symptomatic"
+        },
+        {
+          "label": "Cryptogenic / idiopathic",
+          "value": "Cryptogenic"
+        }
+      ],
+      "assess": "Symptomatic = seizure linked to a past condition (head injury, infection, stroke, other neurological cause). Cryptogenic/idiopathic = no identifiable structural cause."
+    },
+    {
+      "name": "Treatment",
+      "options": [
+        {
+          "label": "Immediate",
+          "value": "Immediate"
+        },
+        {
+          "label": "Delayed",
+          "value": "Delayed"
+        }
+      ],
+      "assess": "Immediate vs delayed (deferred) antiepileptic-drug treatment after the first seizure, as randomised in MESS."
+    },
+    {
+      "name": "EEG Results",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "Normal"
+        },
+        {
+          "label": "Abnormal",
+          "value": "Abnormal"
+        },
+        {
+          "label": "Not done",
+          "value": "Not done"
+        }
+      ],
+      "assess": "EEG results indicate brain activity patterns. Select 'Normal' if no epileptiform activity was detected. Choose 'Abnormal' if the EEG showed epileptiform activity, including focal or generalized spikes or spike-and-slow-wave patterns. Select 'Not Done' if the EEG test was not conducted."
+    },
+    {
+      "name": "CT / MRI Scan Results",
+      "options": [
+        {
+          "label": "Normal",
+          "value": "Normal"
+        },
+        {
+          "label": "Abnormal",
+          "value": "Abnormal"
+        },
+        {
+          "label": "Not done",
+          "value": "Not done"
+        }
+      ],
+      "assess": "EEG results indicate brain activity patterns. Select 'Normal' if no epileptiform activity was detected. Choose 'Abnormal' if the EEG showed epileptiform activity, including focal or generalized spikes or spike-and-slow-wave patterns. Select 'Not Done' if the EEG test was not conducted."
+    },
+    {
+      "name": "Epilepsy in a first-degree relative",
+      "options": [
+        {
+          "label": "No",
+          "value": "No"
+        },
+        {
+          "label": "Yes",
+          "value": "Yes"
+        }
+      ],
+      "assess": "Indicate if there is a history of epilepsy in immediate family members (parents, siblings)."
+    },
+    {
+      "name": "Seizures only while asleep",
+      "options": [
+        {
+          "label": "No",
+          "value": "No"
+        },
+        {
+          "label": "Yes",
+          "value": "Yes"
+        }
+      ],
+      "assess": "Select 'Yes' if seizures occurred exclusively during sleep; otherwise, choose 'No'."
+    }
+  ],
+  "model": {
+    "type": "table",
+    "table": {
+      "6|Cryptogenic|Immediate|Normal|Normal|No|No": {
+        "cosy": "13% (10%-16%)",
+        "drive": "1.2"
+      },
+      "12|Cryptogenic|Immediate|Normal|Normal|No|No": {
+        "cosy": "7% (5%-10%)",
+        "drive": "1.2"
+      },
+      "6|Cryptogenic|Immediate|Normal|Abnormal|No|No": {
+        "cosy": "14% (11%-17%)",
+        "drive": "2.1"
+      },
+      "12|Cryptogenic|Immediate|Normal|Abnormal|No|No": {
+        "cosy": "8% (5%-11%)",
+        "drive": "2.1"
+      },
+      "6|Cryptogenic|Immediate|Normal|Not done|No|No": {
+        "cosy": "17% (13%-20%)",
+        "drive": "3.5"
+      },
+      "12|Cryptogenic|Immediate|Normal|Not done|No|No": {
+        "cosy": "9% (7%-12%)",
+        "drive": "3.5"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Normal|No|No": {
+        "cosy": "20% (16%-23%)",
+        "drive": "5.5"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Normal|No|No": {
+        "cosy": "11% (9%-14%)",
+        "drive": "5.5"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Abnormal|No|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.1"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Abnormal|No|No": {
+        "cosy": "12% (9%-15%)",
+        "drive": "6.1"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Not done|No|No": {
+        "cosy": "24% (22%-27%)",
+        "drive": "7.8"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Not done|No|No": {
+        "cosy": "14% (12%-17%)",
+        "drive": "7.8"
+      },
+      "6|Cryptogenic|Immediate|Not done|Normal|No|No": {
+        "cosy": "17% (13%-20%)",
+        "drive": "3.5"
+      },
+      "12|Cryptogenic|Immediate|Not done|Normal|No|No": {
+        "cosy": "9% (7%-12%)",
+        "drive": "3.5"
+      },
+      "6|Cryptogenic|Immediate|Not done|Abnormal|No|No": {
+        "cosy": "18% (15%-21%)",
+        "drive": "4.0"
+      },
+      "12|Cryptogenic|Immediate|Not done|Abnormal|No|No": {
+        "cosy": "10% (7%-13%)",
+        "drive": "4.0"
+      },
+      "6|Cryptogenic|Immediate|Not done|Not done|No|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.1"
+      },
+      "12|Cryptogenic|Immediate|Not done|Not done|No|No": {
+        "cosy": "12% (9%-15%)",
+        "drive": "6.1"
+      },
+      "6|Cryptogenic|Immediate|Normal|Normal|No|Yes": {
+        "cosy": "19% (15%-22%)",
+        "drive": "4.8"
+      },
+      "12|Cryptogenic|Immediate|Normal|Normal|No|Yes": {
+        "cosy": "11% (8%-13%)",
+        "drive": "4.8"
+      },
+      "6|Cryptogenic|Immediate|Normal|Abnormal|No|Yes": {
+        "cosy": "20% (19%-23%)",
+        "drive": "5.7"
+      },
+      "12|Cryptogenic|Immediate|Normal|Abnormal|No|Yes": {
+        "cosy": "11% (9%-14%)",
+        "drive": "5.7"
+      },
+      "6|Cryptogenic|Immediate|Normal|Not done|No|Yes": {
+        "cosy": "23% (20%-26%)",
+        "drive": "7.0"
+      },
+      "12|Cryptogenic|Immediate|Normal|Not done|No|Yes": {
+        "cosy": "14% (11%-16%)",
+        "drive": "7.0"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Normal|No|Yes": {
+        "cosy": "27% (25%-30%)",
+        "drive": "9.2"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Normal|No|Yes": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.2"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Abnormal|No|Yes": {
+        "cosy": "29% (26%-32%)",
+        "drive": "10.0"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Abnormal|No|Yes": {
+        "cosy": "17% (15%-20%)",
+        "drive": "10.0"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Not done|No|Yes": {
+        "cosy": "34 (31 to36)",
+        "drive": "12.5"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Not done|No|Yes": {
+        "cosy": "20% (18%-23%)",
+        "drive": "12.5"
+      },
+      "6|Cryptogenic|Immediate|Not done|Normal|No|Yes": {
+        "cosy": "23% (20%-26%)",
+        "drive": "7.0"
+      },
+      "12|Cryptogenic|Immediate|Not done|Normal|No|Yes": {
+        "cosy": "14% (11%-16%)",
+        "drive": "7.0"
+      },
+      "6|Cryptogenic|Immediate|Not done|Abnormal|No|Yes": {
+        "cosy": "25% (22%-28%)",
+        "drive": "8.2"
+      },
+      "12|Cryptogenic|Immediate|Not done|Abnormal|No|Yes": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.2"
+      },
+      "6|Cryptogenic|Immediate|Not done|Not done|No|Yes": {
+        "cosy": "29% (26%-32%)",
+        "drive": "10.0"
+      },
+      "12|Cryptogenic|Immediate|Not done|Not done|No|Yes": {
+        "cosy": "17% (15%-20%)",
+        "drive": "10.0"
+      },
+      "6|Cryptogenic|Immediate|Normal|Normal|Yes|No": {
+        "cosy": "17% (14%-20%)",
+        "drive": "3.6"
+      },
+      "12|Cryptogenic|Immediate|Normal|Normal|Yes|No": {
+        "cosy": "10% (7%-12%)",
+        "drive": "3.6"
+      },
+      "6|Cryptogenic|Immediate|Normal|Abnormal|Yes|No": {
+        "cosy": "18% (15%-21%)",
+        "drive": "4.8"
+      },
+      "12|Cryptogenic|Immediate|Normal|Abnormal|Yes|No": {
+        "cosy": "10% (8%-13%)",
+        "drive": "4.8"
+      },
+      "6|Cryptogenic|Immediate|Normal|Not done|Yes|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.3"
+      },
+      "12|Cryptogenic|Immediate|Normal|Not done|Yes|No": {
+        "cosy": "12% (10%-15%)",
+        "drive": "6.3"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Normal|Yes|No": {
+        "cosy": "25% (22%-28%)",
+        "drive": "8.7"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Normal|Yes|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Abnormal|Yes|No": {
+        "cosy": "27% (24%-30%)",
+        "drive": "9.2"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Abnormal|Yes|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Not done|Yes|No": {
+        "cosy": "31% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Not done|Yes|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Cryptogenic|Immediate|Not done|Normal|Yes|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.3"
+      },
+      "12|Cryptogenic|Immediate|Not done|Normal|Yes|No": {
+        "cosy": "12% (10%-15%)",
+        "drive": "6.3"
+      },
+      "6|Cryptogenic|Immediate|Not done|Abnormal|Yes|No": {
+        "cosy": "23% (20%-26%)",
+        "drive": "7.0"
+      },
+      "12|Cryptogenic|Immediate|Not done|Abnormal|Yes|No": {
+        "cosy": "13% (11%-16%)",
+        "drive": "7.0"
+      },
+      "6|Cryptogenic|Immediate|Not done|Not done|Yes|No": {
+        "cosy": "27% (24%-30%)",
+        "drive": "9.2"
+      },
+      "12|Cryptogenic|Immediate|Not done|Not done|Yes|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Cryptogenic|Immediate|Normal|Normal|Yes|Yes": {
+        "cosy": "24% (21%-27%)",
+        "drive": "7.7"
+      },
+      "12|Cryptogenic|Immediate|Normal|Normal|Yes|Yes": {
+        "cosy": "14% (11%-17%)",
+        "drive": "7.7"
+      },
+      "6|Cryptogenic|Immediate|Normal|Abnormal|Yes|Yes": {
+        "cosy": "26% (23%-28%)",
+        "drive": "8.8"
+      },
+      "12|Cryptogenic|Immediate|Normal|Abnormal|Yes|Yes": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.8"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Normal|Yes|Yes": {
+        "cosy": "35% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Normal|Yes|Yes": {
+        "cosy": "21% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "23.6"
+      },
+      "6|Cryptogenic|Immediate|Abnormal|Not done|Yes|Yes": {
+        "cosy": "42% (40%-45%)",
+        "drive": "25.1"
+      },
+      "12|Cryptogenic|Immediate|Abnormal|Not done|Yes|Yes": {
+        "cosy": "26% (24%-28%)",
+        "drive": "25.1"
+      },
+      "6|Cryptogenic|Immediate|Not done|Normal|Yes|Yes": {
+        "cosy": "30% (27%-32%)",
+        "drive": "10.7"
+      },
+      "12|Cryptogenic|Immediate|Not done|Normal|Yes|Yes": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.7"
+      },
+      "6|Cryptogenic|Immediate|Not done|Abnormal|Yes|Yes": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Cryptogenic|Immediate|Not done|Abnormal|Yes|Yes": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Cryptogenic|Immediate|Not done|Not done|Yes|Yes": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Cryptogenic|Immediate|Not done|Not done|Yes|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "23.6"
+      },
+      "6|Symptomatic|Immediate|Normal|Normal|No|No": {
+        "cosy": "17% (14%-20%)",
+        "drive": "3.6"
+      },
+      "12|Symptomatic|Immediate|Normal|Normal|No|No": {
+        "cosy": "10% (7%-12%)",
+        "drive": "3.6"
+      },
+      "6|Symptomatic|Immediate|Normal|Abnormal|No|No": {
+        "cosy": "18% (15%-21%)",
+        "drive": "4.8"
+      },
+      "12|Symptomatic|Immediate|Normal|Abnormal|No|No": {
+        "cosy": "10% (8%-13%)",
+        "drive": "4.8"
+      },
+      "6|Symptomatic|Immediate|Normal|Not done|No|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.3"
+      },
+      "12|Symptomatic|Immediate|Normal|Not done|No|No": {
+        "cosy": "12% (10%-15%)",
+        "drive": "6.3"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Normal|No|No": {
+        "cosy": "25% (22%-28%)",
+        "drive": "8.7"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Normal|No|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Abnormal|No|No": {
+        "cosy": "27% (24%-40%)",
+        "drive": "9.2"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Abnormal|No|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Not done|No|No": {
+        "cosy": "31% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Not done|No|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Symptomatic|Immediate|Not done|Normal|No|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.3"
+      },
+      "12|Symptomatic|Immediate|Not done|Normal|No|No": {
+        "cosy": "12% (10%-15%)",
+        "drive": "6.3"
+      },
+      "6|Symptomatic|Immediate|Not done|Abnormal|No|No": {
+        "cosy": "23% (20%-26%)",
+        "drive": "7.0"
+      },
+      "12|Symptomatic|Immediate|Not done|Abnormal|No|No": {
+        "cosy": "13% (11%-16%)",
+        "drive": "7.0"
+      },
+      "6|Symptomatic|Immediate|Not done|Not done|No|No": {
+        "cosy": "27% (24%-30%)",
+        "drive": "9.2"
+      },
+      "12|Symptomatic|Immediate|Not done|Not done|No|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Symptomatic|Immediate|Normal|Normal|No|Yes": {
+        "cosy": "24% (21%-27%)",
+        "drive": "7.7"
+      },
+      "12|Symptomatic|Immediate|Normal|Normal|No|Yes": {
+        "cosy": "14% (11%-17%)",
+        "drive": "7.7"
+      },
+      "6|Symptomatic|Immediate|Normal|Abnormal|No|Yes": {
+        "cosy": "26% (23%-28%)",
+        "drive": "8.8"
+      },
+      "12|Symptomatic|Immediate|Normal|Abnormal|No|Yes": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.8"
+      },
+      "6|Symptomatic|Immediate|Normal|Not done|No|Yes": {
+        "cosy": "30% (27%-33%)",
+        "drive": "10.7"
+      },
+      "12|Symptomatic|Immediate|Normal|Not done|No|Yes": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.7"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Normal|No|Yes": {
+        "cosy": "35% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Normal|No|Yes": {
+        "cosy": "21% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Abnormal|No|Yes": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Abnormal|No|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "23.6"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Not done|No|Yes": {
+        "cosy": "42% (40%-45%)",
+        "drive": "25.1"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Not done|No|Yes": {
+        "cosy": "26% (24%-28%)",
+        "drive": "25.1"
+      },
+      "6|Symptomatic|Immediate|Not done|Normal|No|Yes": {
+        "cosy": "30% (27%-32%)",
+        "drive": "11.7"
+      },
+      "12|Symptomatic|Immediate|Not done|Normal|No|Yes": {
+        "cosy": "18% (15%-20%)",
+        "drive": "11.7"
+      },
+      "6|Symptomatic|Immediate|Not done|Abnormal|No|Yes": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Symptomatic|Immediate|Not done|Abnormal|No|Yes": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Symptomatic|Immediate|Not done|Not done|No|Yes": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Symptomatic|Immediate|Not done|Not done|No|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "23.6"
+      },
+      "6|Symptomatic|Immediate|Normal|Normal|Yes|No": {
+        "cosy": "22% (19%-25%)",
+        "drive": "6.7"
+      },
+      "12|Symptomatic|Immediate|Normal|Normal|Yes|No": {
+        "cosy": "13% (10%-15%)",
+        "drive": "6.7"
+      },
+      "6|Symptomatic|Immediate|Normal|Abnormal|Yes|No": {
+        "cosy": "24% (21%-26%)",
+        "drive": "7.6"
+      },
+      "12|Symptomatic|Immediate|Normal|Abnormal|Yes|No": {
+        "cosy": "14% (11%-16%)",
+        "drive": "7.6"
+      },
+      "6|Symptomatic|Immediate|Normal|Not done|Yes|No": {
+        "cosy": "27% (25%-30%)",
+        "drive": "9.8"
+      },
+      "12|Symptomatic|Immediate|Normal|Not done|Yes|No": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.8"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Normal|Yes|No": {
+        "cosy": "32% (29%-35%)",
+        "drive": "11.8"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Normal|Yes|No": {
+        "cosy": "19% (17%-21%)",
+        "drive": "11.8"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Abnormal|Yes|No": {
+        "cosy": "34% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Abnormal|Yes|No": {
+        "cosy": "20% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Not done|Yes|No": {
+        "cosy": "39% (37%-42%)",
+        "drive": "24.4"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Not done|Yes|No": {
+        "cosy": "24% (22%-26%)",
+        "drive": "24.4"
+      },
+      "6|Symptomatic|Immediate|Not done|Normal|Yes|No": {
+        "cosy": "27% (25%-30%)",
+        "drive": "9.8"
+      },
+      "12|Symptomatic|Immediate|Not done|Normal|Yes|No": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.8"
+      },
+      "6|Symptomatic|Immediate|Not done|Abnormal|Yes|No": {
+        "cosy": "29% (27%-32%)",
+        "drive": "10.0"
+      },
+      "12|Symptomatic|Immediate|Not done|Abnormal|Yes|No": {
+        "cosy": "17% (15%-20%)",
+        "drive": "10.0"
+      },
+      "6|Symptomatic|Immediate|Not done|Not done|Yes|No": {
+        "cosy": "34% (31%-37%)",
+        "drive": "16.3"
+      },
+      "12|Symptomatic|Immediate|Not done|Not done|Yes|No": {
+        "cosy": "20% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Symptomatic|Immediate|Normal|Normal|Yes|Yes": {
+        "cosy": "31% (28%-33%)",
+        "drive": "10.8"
+      },
+      "6|Symptomatic|Immediate|Normal|Abnormal|Yes|Yes": {
+        "cosy": "33% (30%-35%)",
+        "drive": "12.0"
+      },
+      "12|Symptomatic|Immediate|Normal|Abnormal|Yes|Yes": {
+        "cosy": "19% (17%-22%)",
+        "drive": "12.0"
+      },
+      "6|Symptomatic|Immediate|Normal|Not done|Yes|Yes": {
+        "cosy": "38% (35%-40%)",
+        "drive": "24.2"
+      },
+      "12|Symptomatic|Immediate|Normal|Not done|Yes|Yes": {
+        "cosy": "23% (21%-25%)",
+        "drive": "24.2"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Normal|Yes|Yes": {
+        "cosy": "43% (41%-45%)",
+        "drive": "25.5"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Normal|Yes|Yes": {
+        "cosy": "27% (25%-29%)",
+        "drive": "25.5"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "46% (44%-48%)",
+        "drive": "25.6"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "29% (26%-31%)",
+        "drive": "25.6"
+      },
+      "6|Symptomatic|Immediate|Abnormal|Not done|Yes|Yes": {
+        "cosy": "52% (50%-54%)",
+        "drive": "27.0"
+      },
+      "12|Symptomatic|Immediate|Abnormal|Not done|Yes|Yes": {
+        "cosy": "33% (31%-35%)",
+        "drive": "27.0"
+      },
+      "6|Symptomatic|Immediate|Not done|Normal|Yes|Yes": {
+        "cosy": "38% (35%-40%)",
+        "drive": "24.2"
+      },
+      "12|Symptomatic|Immediate|Not done|Normal|Yes|Yes": {
+        "cosy": "23% (21%-25%)",
+        "drive": "24.2"
+      },
+      "6|Symptomatic|Immediate|Not done|Abnormal|Yes|Yes": {
+        "cosy": "40% (38%-42%)",
+        "drive": "24.6"
+      },
+      "12|Symptomatic|Immediate|Not done|Abnormal|Yes|Yes": {
+        "cosy": "24% (22%-27%)",
+        "drive": "24.6"
+      },
+      "6|Symptomatic|Immediate|Not done|Not done|Yes|Yes": {
+        "cosy": "46% (44%-48%)",
+        "drive": "25.6"
+      },
+      "12|Symptomatic|Immediate|Not done|Not done|Yes|Yes": {
+        "cosy": "28% (26%-31%)",
+        "drive": "25.6"
+      },
+      "6|Cryptogenic|Delayed|Normal|Normal|No|No": {
+        "cosy": "16% (12%-19%)",
+        "drive": "3.2"
+      },
+      "12|Cryptogenic|Delayed|Normal|Normal|No|No": {
+        "cosy": "9% (6%-12%)",
+        "drive": "3.2"
+      },
+      "6|Cryptogenic|Delayed|Normal|Abnormal|No|No": {
+        "cosy": "17% (14%-20%)",
+        "drive": "3.6"
+      },
+      "12|Cryptogenic|Delayed|Normal|Abnormal|No|No": {
+        "cosy": "10% (7%-12%)",
+        "drive": "3.6"
+      },
+      "6|Cryptogenic|Delayed|Normal|Not done|No|No": {
+        "cosy": "20% (17%-23%)",
+        "drive": "5.7"
+      },
+      "12|Cryptogenic|Delayed|Normal|Not done|No|No": {
+        "cosy": "11% (9%-14%)",
+        "drive": "5.7"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Normal|No|No": {
+        "cosy": "23% (20%-26%)",
+        "drive": "7.0"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Normal|No|No": {
+        "cosy": "13% (11%-16%)",
+        "drive": "7.0"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Abnormal|No|No": {
+        "cosy": "25% (22%-28%)",
+        "drive": "8.1"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Abnormal|No|No": {
+        "cosy": "14% (12%-17%)",
+        "drive": "8.1"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Not done|No|No": {
+        "cosy": "29% (26%-32%)",
+        "drive": "10.0"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Not done|No|No": {
+        "cosy": "17% (15%-20%)",
+        "drive": "10.0"
+      },
+      "6|Cryptogenic|Delayed|Not done|Normal|No|No": {
+        "cosy": "20% (17%-23%)",
+        "drive": "5.7"
+      },
+      "12|Cryptogenic|Delayed|Not done|Normal|No|No": {
+        "cosy": "11% (9%-14%)",
+        "drive": "5.7"
+      },
+      "6|Cryptogenic|Delayed|Not done|Abnormal|No|No": {
+        "cosy": "21% (18%-24%)",
+        "drive": "6.2"
+      },
+      "12|Cryptogenic|Delayed|Not done|Abnormal|No|No": {
+        "cosy": "12% (10%-15%)",
+        "drive": "6.2"
+      },
+      "6|Cryptogenic|Delayed|Not done|Not done|No|No": {
+        "cosy": "25% (22%-28%)",
+        "drive": "8.1"
+      },
+      "12|Cryptogenic|Delayed|Not done|Not done|No|No": {
+        "cosy": "14% (12%-17%)",
+        "drive": "8.1"
+      },
+      "6|Cryptogenic|Delayed|Normal|Normal|No|Yes": {
+        "cosy": "22% (19%-25%)",
+        "drive": "6.8"
+      },
+      "12|Cryptogenic|Delayed|Normal|Normal|No|Yes": {
+        "cosy": "13% (10%-15%)",
+        "drive": "6.8"
+      },
+      "6|Cryptogenic|Delayed|Normal|Abnormal|No|Yes": {
+        "cosy": "24% (21%-27%)",
+        "drive": "7.6"
+      },
+      "12|Cryptogenic|Delayed|Normal|Abnormal|No|Yes": {
+        "cosy": "14% (11%-16%)",
+        "drive": "7.6"
+      },
+      "6|Cryptogenic|Delayed|Normal|Not done|No|Yes": {
+        "cosy": "28% (25%-30%)",
+        "drive": "9.8"
+      },
+      "12|Cryptogenic|Delayed|Normal|Not done|No|Yes": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.8"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Normal|No|Yes": {
+        "cosy": "32% (30%-35%)",
+        "drive": "11.8"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Normal|No|Yes": {
+        "cosy": "19% (17%-22%)",
+        "drive": "11.8"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Abnormal|No|Yes": {
+        "cosy": "34% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Abnormal|No|Yes": {
+        "cosy": "21% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Not done|No|Yes": {
+        "cosy": "39% (37%-42%)",
+        "drive": "24.4"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Not done|No|Yes": {
+        "cosy": "24% (22%-26%)",
+        "drive": "24.4"
+      },
+      "6|Cryptogenic|Delayed|Not done|Normal|No|Yes": {
+        "cosy": "28% (25%-30%)",
+        "drive": "9.8"
+      },
+      "12|Cryptogenic|Delayed|Not done|Normal|No|Yes": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.8"
+      },
+      "6|Cryptogenic|Delayed|Not done|Abnormal|No|Yes": {
+        "cosy": "29% (27%-32%)",
+        "drive": "10.5"
+      },
+      "12|Cryptogenic|Delayed|Not done|Abnormal|No|Yes": {
+        "cosy": "17% (15%-20%)",
+        "drive": "10.5"
+      },
+      "6|Cryptogenic|Delayed|Not done|Not done|No|Yes": {
+        "cosy": "34% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Cryptogenic|Delayed|Not done|Not done|No|Yes": {
+        "cosy": "20% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Cryptogenic|Delayed|Normal|Normal|Yes|No": {
+        "cosy": "20% (17%-23%)",
+        "drive": "6.0"
+      },
+      "12|Cryptogenic|Delayed|Normal|Normal|Yes|No": {
+        "cosy": "12% (9%-14%)",
+        "drive": "6.0"
+      },
+      "6|Cryptogenic|Delayed|Normal|Abnormal|Yes|No": {
+        "cosy": "22% (19%-25%)",
+        "drive": "6.5"
+      },
+      "12|Cryptogenic|Delayed|Normal|Abnormal|Yes|No": {
+        "cosy": "13% (10%-15%)",
+        "drive": "6.5"
+      },
+      "6|Cryptogenic|Delayed|Normal|Not done|Yes|No": {
+        "cosy": "25% (23%-28%)",
+        "drive": "8.7"
+      },
+      "12|Cryptogenic|Delayed|Normal|Not done|Yes|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Normal|Yes|No": {
+        "cosy": "30% (27%-32%)",
+        "drive": "10.7"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Normal|Yes|No": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.7"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Abnormal|Yes|No": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Abnormal|Yes|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Not done|Yes|No": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Not done|Yes|No": {
+        "cosy": "22% (20%-24%)",
+        "drive": "23.6"
+      },
+      "6|Cryptogenic|Delayed|Not done|Normal|Yes|No": {
+        "cosy": "25% (23%-28%)",
+        "drive": "8.7"
+      },
+      "12|Cryptogenic|Delayed|Not done|Normal|Yes|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Cryptogenic|Delayed|Not done|Abnormal|Yes|No": {
+        "cosy": "27% (24%-30%)",
+        "drive": "9.2"
+      },
+      "12|Cryptogenic|Delayed|Not done|Abnormal|Yes|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Cryptogenic|Delayed|Not done|Not done|Yes|No": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Cryptogenic|Delayed|Not done|Not done|Yes|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Cryptogenic|Delayed|Normal|Normal|Yes|Yes": {
+        "cosy": "28% (26%-31%)",
+        "drive": "10.0"
+      },
+      "12|Cryptogenic|Delayed|Normal|Normal|Yes|Yes": {
+        "cosy": "17% (14%-19%)",
+        "drive": "10.0"
+      },
+      "6|Cryptogenic|Delayed|Normal|Abnormal|Yes|Yes": {
+        "cosy": "30% (28%-33%)",
+        "drive": "10.8"
+      },
+      "12|Cryptogenic|Delayed|Normal|Abnormal|Yes|Yes": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.8"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Normal|Yes|Yes": {
+        "cosy": "40% (38%-43%)",
+        "drive": "24.6"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Normal|Yes|Yes": {
+        "cosy": "25% (22%-27%)",
+        "drive": "24.6"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "43% (41%-45%)",
+        "drive": "25.1"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "26% (24%-29%)",
+        "drive": "25.1"
+      },
+      "6|Cryptogenic|Delayed|Abnormal|Not done|Yes|Yes": {
+        "cosy": "49% (47%-51%)",
+        "drive": "27.0"
+      },
+      "12|Cryptogenic|Delayed|Abnormal|Not done|Yes|Yes": {
+        "cosy": "31% (29%-33%)",
+        "drive": "27.0"
+      },
+      "6|Cryptogenic|Delayed|Not done|Normal|Yes|Yes": {
+        "cosy": "35% (33%-37%)",
+        "drive": "23.4"
+      },
+      "12|Cryptogenic|Delayed|Not done|Normal|Yes|Yes": {
+        "cosy": "21% (19%-23%)",
+        "drive": "23.4"
+      },
+      "6|Cryptogenic|Delayed|Not done|Abnormal|Yes|Yes": {
+        "cosy": "37% (35%-40%)",
+        "drive": "24.1"
+      },
+      "12|Cryptogenic|Delayed|Not done|Abnormal|Yes|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "24.1"
+      },
+      "6|Cryptogenic|Delayed|Not done|Not done|Yes|Yes": {
+        "cosy": "43% (41%-45%)",
+        "drive": "25.1"
+      },
+      "12|Cryptogenic|Delayed|Not done|Not done|Yes|Yes": {
+        "cosy": "26% (24%-29%)",
+        "drive": "25.1"
+      },
+      "6|Symptomatic|Delayed|Normal|Normal|No|No": {
+        "cosy": "20% (17%-23%)",
+        "drive": "6.0"
+      },
+      "12|Symptomatic|Delayed|Normal|Normal|No|No": {
+        "cosy": "12% (9%-14%)",
+        "drive": "6.0"
+      },
+      "6|Symptomatic|Delayed|Normal|Abnormal|No|No": {
+        "cosy": "22% (19%-25%)",
+        "drive": "6.5"
+      },
+      "12|Symptomatic|Delayed|Normal|Abnormal|No|No": {
+        "cosy": "13% (10%-15%)",
+        "drive": "6.5"
+      },
+      "6|Symptomatic|Delayed|Normal|Not done|No|No": {
+        "cosy": "25% (23%-28%)",
+        "drive": "8.7"
+      },
+      "12|Symptomatic|Delayed|Normal|Not done|No|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Normal|No|No": {
+        "cosy": "30% (27%-32%)",
+        "drive": "10.7"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Normal|No|No": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.7"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Abnormal|No|No": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Abnormal|No|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Not done|No|No": {
+        "cosy": "37% (34%-39%)",
+        "drive": "23.6"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Not done|No|No": {
+        "cosy": "22% (20%-24%)",
+        "drive": "23.6"
+      },
+      "6|Symptomatic|Delayed|Not done|Normal|No|No": {
+        "cosy": "25% (23%-28%)",
+        "drive": "8.7"
+      },
+      "12|Symptomatic|Delayed|Not done|Normal|No|No": {
+        "cosy": "15% (12%-17%)",
+        "drive": "8.7"
+      },
+      "6|Symptomatic|Delayed|Not done|Abnormal|No|No": {
+        "cosy": "27% (24%-30%)",
+        "drive": "9.2"
+      },
+      "12|Symptomatic|Delayed|Not done|Abnormal|No|No": {
+        "cosy": "16% (13%-18%)",
+        "drive": "9.2"
+      },
+      "6|Symptomatic|Delayed|Not done|Not done|No|No": {
+        "cosy": "32% (29%-34%)",
+        "drive": "11.3"
+      },
+      "12|Symptomatic|Delayed|Not done|Not done|No|No": {
+        "cosy": "19% (16%-21%)",
+        "drive": "11.3"
+      },
+      "6|Symptomatic|Delayed|Normal|Normal|No|Yes": {
+        "cosy": "28% (26%-31%)",
+        "drive": "10.0"
+      },
+      "12|Symptomatic|Delayed|Normal|Normal|No|Yes": {
+        "cosy": "17% (14%-19%)",
+        "drive": "10.0"
+      },
+      "6|Symptomatic|Delayed|Normal|Abnormal|No|Yes": {
+        "cosy": "30% (28%-33%)",
+        "drive": "10.8"
+      },
+      "12|Symptomatic|Delayed|Normal|Abnormal|No|Yes": {
+        "cosy": "18% (15%-20%)",
+        "drive": "10.8"
+      },
+      "6|Symptomatic|Delayed|Normal|Not done|No|Yes": {
+        "cosy": "35% (33%-38%)",
+        "drive": "23.4"
+      },
+      "12|Symptomatic|Delayed|Normal|Not done|No|Yes": {
+        "cosy": "21% (19%-23%)",
+        "drive": "23.4"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Normal|No|Yes": {
+        "cosy": "40% (38%-43%)",
+        "drive": "24.6"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Normal|No|Yes": {
+        "cosy": "25% (22%-27%)",
+        "drive": "24.6"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Abnormal|No|Yes": {
+        "cosy": "43% (41%-45%)",
+        "drive": "25.1"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Abnormal|No|Yes": {
+        "cosy": "26% (24%-29%)",
+        "drive": "25.1"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Not done|No|Yes": {
+        "cosy": "49% (47%-51%)",
+        "drive": "27.0"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Not done|No|Yes": {
+        "cosy": "31% (29%-33%)",
+        "drive": "27.0"
+      },
+      "6|Symptomatic|Delayed|Not done|Normal|No|Yes": {
+        "cosy": "35% (33%-37%)",
+        "drive": "23.4"
+      },
+      "12|Symptomatic|Delayed|Not done|Normal|No|Yes": {
+        "cosy": "21% (19%-23%)",
+        "drive": "23.4"
+      },
+      "6|Symptomatic|Delayed|Not done|Abnormal|No|Yes": {
+        "cosy": "37% (35%-40%)",
+        "drive": "24.1"
+      },
+      "12|Symptomatic|Delayed|Not done|Abnormal|No|Yes": {
+        "cosy": "22% (20%-25%)",
+        "drive": "24.1"
+      },
+      "6|Symptomatic|Delayed|Not done|Not done|No|Yes": {
+        "cosy": "43% (41%-45%)",
+        "drive": "25.1"
+      },
+      "12|Symptomatic|Delayed|Not done|Not done|No|Yes": {
+        "cosy": "26% (24%-29%)",
+        "drive": "25.1"
+      },
+      "6|Symptomatic|Delayed|Normal|Normal|Yes|No": {
+        "cosy": "26% (23%-29%)",
+        "drive": "8.8"
+      },
+      "12|Symptomatic|Delayed|Normal|Normal|Yes|No": {
+        "cosy": "15% (13%-18%)",
+        "drive": "8.8"
+      },
+      "6|Symptomatic|Delayed|Normal|Abnormal|Yes|No": {
+        "cosy": "28% (25%-31%)",
+        "drive": "9.8"
+      },
+      "12|Symptomatic|Delayed|Normal|Abnormal|Yes|No": {
+        "cosy": "16% (14%-19%)",
+        "drive": "9.8"
+      },
+      "6|Symptomatic|Delayed|Normal|Not done|Yes|No": {
+        "cosy": "32% (30%-35%)",
+        "drive": "12.0"
+      },
+      "12|Symptomatic|Delayed|Normal|Not done|Yes|No": {
+        "cosy": "19% (17%-22%)",
+        "drive": "12.0"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Normal|Yes|No": {
+        "cosy": "37% (35%-40%)",
+        "drive": "24.1"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Normal|Yes|No": {
+        "cosy": "23% (20%-25%)",
+        "drive": "24.1"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Abnormal|Yes|No": {
+        "cosy": "40% (37%-42%)",
+        "drive": "24.6"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Abnormal|Yes|No": {
+        "cosy": "24% (22%-27%)",
+        "drive": "24.6"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Not done|Yes|No": {
+        "cosy": "46% (43%-48%)",
+        "drive": "25.6"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Not done|Yes|No": {
+        "cosy": "28% (26%-30%)",
+        "drive": "25.6"
+      },
+      "6|Symptomatic|Delayed|Not done|Normal|Yes|No": {
+        "cosy": "32% (30%-35%)",
+        "drive": "12.0"
+      },
+      "12|Symptomatic|Delayed|Not done|Normal|Yes|No": {
+        "cosy": "19% (17%-22%)",
+        "drive": "12.0"
+      },
+      "6|Symptomatic|Delayed|Not done|Abnormal|Yes|No": {
+        "cosy": "34% (32%-37%)",
+        "drive": "16.3"
+      },
+      "12|Symptomatic|Delayed|Not done|Abnormal|Yes|No": {
+        "cosy": "21% (18%-23%)",
+        "drive": "16.3"
+      },
+      "6|Symptomatic|Delayed|Not done|Not done|Yes|No": {
+        "cosy": "40% (37%-42%)",
+        "drive": "24.4"
+      },
+      "12|Symptomatic|Delayed|Not done|Not done|Yes|No": {
+        "cosy": "24% (22%-26%)",
+        "drive": "24.4"
+      },
+      "6|Symptomatic|Delayed|Normal|Normal|Yes|Yes": {
+        "cosy": "36% (33%-38%)",
+        "drive": "23.5"
+      },
+      "6|Symptomatic|Delayed|Normal|Abnormal|Yes|Yes": {
+        "cosy": "38% (36%-40%)",
+        "drive": "24.2"
+      },
+      "12|Symptomatic|Delayed|Normal|Abnormal|Yes|Yes": {
+        "cosy": "23% (21%-25%)",
+        "drive": "24.2"
+      },
+      "6|Symptomatic|Delayed|Normal|Not done|Yes|Yes": {
+        "cosy": "44% (42%-46%)",
+        "drive": "25.5"
+      },
+      "12|Symptomatic|Delayed|Normal|Not done|Yes|Yes": {
+        "cosy": "27% (25%-29%)",
+        "drive": "25.5"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Normal|Yes|Yes": {
+        "cosy": "50% (48%-52%)",
+        "drive": "27.0"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Normal|Yes|Yes": {
+        "cosy": "32% (30%-34%)",
+        "drive": "27.0"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "52% (51%-54%)",
+        "drive": "28.8"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Abnormal|Yes|Yes": {
+        "cosy": "34% (32%-35%)",
+        "drive": "28.8"
+      },
+      "6|Symptomatic|Delayed|Abnormal|Not done|Yes|Yes": {
+        "cosy": "59% (57%-61%)",
+        "drive": "55.6"
+      },
+      "12|Symptomatic|Delayed|Abnormal|Not done|Yes|Yes": {
+        "cosy": "39% (37%-41%)",
+        "drive": "55.6"
+      },
+      "6|Symptomatic|Delayed|Not done|Normal|Yes|Yes": {
+        "cosy": "44% (42%-46%)",
+        "drive": "25.5"
+      },
+      "12|Symptomatic|Delayed|Not done|Normal|Yes|Yes": {
+        "cosy": "27% (25%-29%)",
+        "drive": "25.5"
+      },
+      "6|Symptomatic|Delayed|Not done|Abnormal|Yes|Yes": {
+        "cosy": "46% (44%-48%)",
+        "drive": "25.7"
+      },
+      "12|Symptomatic|Delayed|Not done|Abnormal|Yes|Yes": {
+        "cosy": "29% (27%-31%)",
+        "drive": "25.7"
+      },
+      "6|Symptomatic|Delayed|Not done|Not done|Yes|Yes": {
+        "cosy": "52% (51%-54%)",
+        "drive": "28.8"
+      },
+      "12|Symptomatic|Delayed|Not done|Not done|Yes|Yes": {
+        "cosy": "33% (31%-35%)",
+        "drive": "28.8"
+      }
+    },
+    "panel_title": "Chance of a seizure in the next year (COSY)"
+  },
+  "provenance": {
+    "extraction_method": "cff_export_lookup",
+    "source": "export_32 fieldname6 (COSY+95%CI) & fieldname14 (months until annual risk <20%)",
+    "review_status": "unreviewed",
+    "notes": "MESS Part 1: 7-way combination lookup (months 6/12, aetiology, treatment, EEG, CT/MRI, family epilepsy, asleep-only) -> COSY% with 95% CI + months until annual risk <20% (Group 1 driving). 282/288 combinations have data; 6 combos had only malformed source rows and show 'not available'. Verify vs paper (Kim LG et al., Lancet Neurol 2006)."
+  }
+}

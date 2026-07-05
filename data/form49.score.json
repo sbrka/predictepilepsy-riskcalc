@@ -1,0 +1,156 @@
+{
+  "schema_version": "1.0",
+  "id": "form49",
+  "kind": "score",
+  "meta": {
+    "title": "Early Seizure Prediction After CVT",
+    "doi": "10.1016/j.eplepsyres.2021.106820",
+    "cff_info": "<div id=\"fieldInfoCVTNomogram\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Early Seizure Risk Nomogram in Cerebral Venous Thrombosis (CVT)</h4>\n  <p><i>Fang et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1016/j.eplepsyres.2021.106820\" target=\"_blank\">10.1016/j.eplepsyres.2021.106820</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>GCS ≤ 8:</b>\n      <ul>\n        <li>Defined as a Glasgow Coma Scale score of 8 or lower at admission.</li>\n        <li>Odds Ratio: 4.784 (95% CI: 1.640–13.970)</li>\n        <li>Points: 100</li>\n      </ul>\n    </li>\n    <li><b>Frontal Lobe Lesion:</b>\n      <ul>\n        <li>Frontal lobe involvement on CT or MRI at diagnosis.</li>\n        <li>Odds Ratio: 3.179 (95% CI: 1.160–8.714)</li>\n        <li>Points: 74</li>\n      </ul>\n    </li>\n    <li><b>Superior Sagittal Sinus Thrombosis (SSST):</b>\n      <ul>\n        <li>Thrombus in the superior sagittal sinus confirmed by imaging.</li>\n        <li>Odds Ratio: 2.886 (95% CI: 1.090–7.642)</li>\n        <li>Points: 68</li>\n      </ul>\n    </li>\n    <li><b>Hemorrhagic Lesion:</b>\n      <ul>\n        <li>Presence of intracerebral hemorrhage on baseline neuroimaging.</li>\n        <li>Odds Ratio: 2.555 (95% CI: 1.032–6.330)</li>\n        <li>Points: 60</li>\n      </ul>\n    </li>\n    <li><b>Focal Neurological Deficit:</b>\n      <ul>\n        <li>Any focal neurologic sign noted at admission (e.g., hemiparesis, aphasia).</li>\n        <li>Odds Ratio: 2.240 (95% CI: 0.899–5.586)</li>\n        <li>Points: 52</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Estimated early seizure probability based on total nomogram score:</p>\n<table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n  <thead>\n    <tr style=\"background-color: #f2f2f2;\">\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">Total Points</th>\n      <th style=\"border: 1px solid #ddd; padding: 8px;\">Predicted Risk of Early Seizure</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">&lt; 37</td><td style=\"border: 1px solid #ddd; padding: 8px;\">&lt; 10%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">37 – 88</td><td style=\"border: 1px solid #ddd; padding: 8px;\">10–20%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">89 – 122</td><td style=\"border: 1px solid #ddd; padding: 8px;\">20–30%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">123 – 150</td><td style=\"border: 1px solid #ddd; padding: 8px;\">30–40%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">151 – 176</td><td style=\"border: 1px solid #ddd; padding: 8px;\">40–50%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">177 – 202</td><td style=\"border: 1px solid #ddd; padding: 8px;\">50–60%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">203 – 230</td><td style=\"border: 1px solid #ddd; padding: 8px;\">60–70%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">231 – 264</td><td style=\"border: 1px solid #ddd; padding: 8px;\">70–80%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">265 – 317</td><td style=\"border: 1px solid #ddd; padding: 8px;\">80–90%</td></tr>\n    <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">≥ 318</td><td style=\"border: 1px solid #ddd; padding: 8px;\">&gt; 90%</td></tr>\n  </tbody>\n</table>\n  <h4>Clinical Utility</h4>\n  <p>This nomogram enables clinicians to estimate the risk of acute symptomatic seizures in patients with cerebral venous thrombosis based on five readily available clinical and imaging variables.</p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Score Name</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">CVT Early Seizure Risk Nomogram</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">142 patients with confirmed CVT (2013–2018, Tongji Hospital)</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Multivariate logistic regression</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Internal bootstrap validation (200 replicates), GiViTI calibration belt, decision curve analysis</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">C-index: 0.835</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Supports early risk stratification and targeted seizure prevention in CVT patients</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Fang Y, Song G, Lin J, et al.",
+    "journal": "Epilepsy Research",
+    "year": 2021,
+    "outcome": "Predicting the occurrence of early seizures after cerebral venous thrombosis using a comprehensive nomogram"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "GCS ≤ 8 at admission",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 100
+        }
+      ],
+      "assess": "GCS ≤ 8 at admission is included in the model with an odds ratio of 4.784 (95% confidence interval: 1.640–13.970) and contributes approximately 100 points to the nomogram."
+    },
+    {
+      "name": "Frontal lobe lesion",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 74
+        }
+      ],
+      "assess": "Defined as radiologically confirmed involvement of the frontal lobe on initial CT or MRI, as assessed by the attending neuroradiologist. Lesion types included infarction, edema, or hemorrhage affecting the frontal cortex. OR: 3.179 (95% CI: 1.160–8.714) Nomogram contribution: ~74 points"
+    },
+    {
+      "name": "Superior sagittal sinus thrombosis (SSST)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 68
+        }
+      ],
+      "assess": "Defined as presence of thrombus in the superior sagittal sinus, confirmed by imaging (CT venography, MR venography, or DSA). SSST status was determined from radiology reports at diagnosis. OR: 2.886 (95% CI: 1.090–7.642) Nomogram contribution: ~68 points"
+    },
+    {
+      "name": "Hemorrhagic lesion",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 60
+        }
+      ],
+      "assess": "Defined as any hemorrhagic transformation or primary intracerebral hemorrhage visible on baseline imaging (CT or MRI) upon diagnosis of cerebral venous thrombosis (CVT). OR: 2.555 (95% CI: 1.032–6.330) Nomogram contribution: ~60 points"
+    },
+    {
+      "name": "Focal neurological deficit",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 52
+        }
+      ],
+      "assess": "Defined as the presence of any localized neurological impairment documented on clinical examination at admission, including but not limited to hemiparesis, aphasia, or visual field deficits. OR: 2.240 (95% CI: 0.899–5.586) Nomogram contribution: ~52 points"
+    }
+  ],
+  "model": {
+    "score_type": "range",
+    "horizon": "follow-up",
+    "rows": [
+      {
+        "label": "< 10%",
+        "lo": 0,
+        "hi": 36,
+        "pct": 10.0
+      },
+      {
+        "label": "10–20%",
+        "lo": 37,
+        "hi": 88,
+        "pct": 10.0
+      },
+      {
+        "label": "20–30%",
+        "lo": 89,
+        "hi": 122,
+        "pct": 20.0
+      },
+      {
+        "label": "30–40%",
+        "lo": 123,
+        "hi": 150,
+        "pct": 30.0
+      },
+      {
+        "label": "40–50%",
+        "lo": 151,
+        "hi": 176,
+        "pct": 40.0
+      },
+      {
+        "label": "50–60%",
+        "lo": 177,
+        "hi": 202,
+        "pct": 50.0
+      },
+      {
+        "label": "60–70%",
+        "lo": 203,
+        "hi": 230,
+        "pct": 60.0
+      },
+      {
+        "label": "70–80%",
+        "lo": 231,
+        "hi": 264,
+        "pct": 70.0
+      },
+      {
+        "label": "80–90%",
+        "lo": 265,
+        "hi": 317,
+        "pct": 80.0
+      }
+    ]
+  },
+  "provenance": {
+    "extraction_method": "cff_export",
+    "source": "export_49_2026-04-07_172848.cpfm",
+    "review_status": "unreviewed",
+    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  }
+}

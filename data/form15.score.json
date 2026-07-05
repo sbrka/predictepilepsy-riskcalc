@@ -1,0 +1,145 @@
+{
+  "schema_version": "1.0",
+  "id": "form15",
+  "kind": "score",
+  "meta": {
+    "title": "STAMPE2-Score",
+    "doi": "10.1093/neuonc/nov303",
+    "cff_info": "<div id=\"fieldInfoSTAMPE2\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>STAMPE2 Score</h4>\n  <p><i>Wirsching et al., 2016</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1093/neuonc/nov303\" target=\"_blank\">10.1093/neuonc/nov303</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Sensorimotor Deficit:</b> 1 point</li>\n    <li><b>Tumor Progression:</b> 1 point</li>\n    <li><b>Age:</b>\n      <ul>\n        <li><b><55 years:</b> 1 point</li>\n      </ul>\n    </li>\n    <li><b>Major Surgical Complication:</b> 2 points</li>\n    <li><b>Preoperative Epilepsy:</b> 2 points</li>\n    <li><b>Epileptiform Potentials on Postoperative EEG:</b> 2 points</li>\n    <li><b>Edema:</b> 1 point</li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>No specific risk estimates were provided in the source data. However, the authors recommend initiating anti-seizure medication (ASM) at a score of 2 points or higher.</p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 779 patients, Zurich (2000-2013).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Binary logistic regression model.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Odds Ratios (OR) for key variables were provided:\n          <ul>\n            <li><b>Preoperative Epilepsy OR:</b> 3.46 (95% CI: 2.32-5.16)</li>\n            <li><b>CNS Infection OR:</b> 5.89 (95% CI: 1.53-22.61)</li>\n          </ul>\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited by retrospective design).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Guides postoperative anti-seizure medication (ASM) treatment but does not provide specific risk percentages or follow-up periods.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Wirsching H, Morel C, Gmür C, et al.",
+    "journal": "Neuro-Oncology",
+    "year": 2016,
+    "outcome": "Predicting outcome of epilepsy after meningioma resection"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "Sensorimotor Deficit",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Presence of motor or sensory impairments caused by neurological damage."
+    },
+    {
+      "name": "Tumor Progression",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Increase in tumor size or activity after initial treatment."
+    },
+    {
+      "name": "Age < 55 Years",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Younger age at presentation had a higher risk for postoperative epilepsy (OR 1.74)"
+    },
+    {
+      "name": "Major Surgical Complication",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 2
+        }
+      ],
+      "assess": "Includes significant postoperative complications such as hydrocephalus, CNS infection, or recraniotomy."
+    },
+    {
+      "name": "Preoperative Epilepsy",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 2
+        }
+      ],
+      "assess": "Documented epileptic seizures occurring before surgery."
+    },
+    {
+      "name": "Epileptiform Potentials on Postoperative EEG",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 2
+        }
+      ],
+      "assess": "Abnormal EEG findings indicating potential epileptic activity after surgery."
+    },
+    {
+      "name": "Edema",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Edema refers to the swelling around the tumor site, commonly detected as hypodensity on CT scans or T2 hyperintensity on MRI."
+    }
+  ],
+  "model": {
+    "score_type": "points",
+    "score_range": [
+      0,
+      10
+    ],
+    "recommendation": [
+      {
+        "lo": 0,
+        "hi": 1,
+        "text": "Low risk — no immediate action needed",
+        "tone": "low"
+      },
+      {
+        "lo": 2,
+        "hi": 9999,
+        "text": "Initiate anti-seizure medication",
+        "tone": "high"
+      }
+    ]
+  },
+  "provenance": {
+    "extraction_method": "cff_export",
+    "source": "export_15_2026-04-07_172659.cpfm",
+    "review_status": "unreviewed",
+    "notes": "STAMPE2: score sum -> author recommendation at threshold >=2 (Initiate ASM). From CFF export; verify vs live form."
+  }
+}

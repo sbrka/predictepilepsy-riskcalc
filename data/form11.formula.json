@@ -1,0 +1,125 @@
+{
+  "schema_version": "1.0",
+  "id": "form11",
+  "kind": "formula",
+  "meta": {
+    "title": "DIAS3 — remote seizure risk after cerebral venous thrombosis",
+    "doi": "10.1001/jamaneurol.2024.3481",
+    "cff_info": "<div id=\"fieldInfoDIAS3\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>DIAS3 Score</h4>\n  <p><i>Lindgren et al., 2024</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1001/jamaneurol.2024.3481\" target=\"_blank\">10.1001/jamaneurol.2024.3481</a></p>\n  <h4>Factors and Hazard Ratios (HR)</h4>\n  <ul>\n    <li><b>Decompressive hemicraniectomy:</b> HR 2.28 (95% CI: 1.45-3.57), Coefficient: 0.823</li>\n    <li><b>Intracerebral hemorrhage (ICH) at baseline:</b> HR 1.45 (95% CI: 1.11-1.87), Coefficient: 0.368</li>\n    <li><b>Age (per decade):</b> HR 1.01 (95% CI: 0.94-1.09), Coefficient: 0.013; Age: 18–80 years (based on the 1st–99th percentile of the development dataset). For values outside this range, the calculator assigns risk at the nearest percentile and should be used with caution.</li>\n    <li><b>Seizures in acute phase (excluding status epilepticus):</b> HR 1.52 (95% CI: 1.18-1.96), Coefficient: 0.420</li>\n    <li><b>Status epilepticus in acute phase:</b> HR 2.35 (95% CI: 1.65-3.36), Coefficient: 0.856</li>\n    <li><b>Subdural hematoma (SDH) at baseline:</b> HR 1.28 (95% CI: 0.74-2.21), Coefficient: 0.247</li>\n  </ul>\n  <h4>Formula for DIAS3 Score</h4>\n  <p>\n    Individual risk = 1 − (1 − baseline hazard)<sup>exp(A−0.4390308)</sup><br>\n    Where A = 0.823 (if decompressive hemicraniectomy) + 0.368 (if intracerebral hemorrhage) + 0.013 × age (per decade) + 0.420 (if acute seizure) + 0.856 (if status epilepticus) + 0.247 (if subdural hematoma).\n  </p>\n  <p>\n    <b>Baseline Hazards:</b><br>\n    - 1 year = 0.09996527<br>\n    - 3 years = 0.14976\n  </p>\n  <h4>Risk Estimates</h4>\n  <p>Risk at 1 and 3 years based on various scenarios:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Scenario</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">1-Year Risk</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">3-Year Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, No decompressive surgery, No SDH, No acute seizures</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~7%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~10%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, No decompressive surgery, No SDH, Acute seizures excluding status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~10%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~15%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, No decompressive surgery, No SDH, Status epilepticus in acute phase</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~15%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~23%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, No decompressive surgery, No SDH, Acute seizures & status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~22%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~32%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, Decompressive surgery, No SDH, No acute seizures</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~15%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~22%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, Decompressive surgery, No SDH, Acute seizures excluding status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~22%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~31%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, Decompressive surgery, No SDH, Status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~31%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~44%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No ICH, Decompressive surgery, No SDH, Acute seizures & status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~43%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~59%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, No decompressive surgery, No SDH, No acute seizures</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~10%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~15%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, No decompressive surgery, No SDH, Acute seizures excluding status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~14%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~21%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, No decompressive surgery, No SDH, Status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~21%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~31%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, No decompressive surgery, No SDH, Acute seizures & status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~30%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~43%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, Decompressive surgery, No SDH, No acute seizures</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~21%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~30%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, Decompressive surgery, No SDH, Acute seizures excluding status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~29%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~42%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, Decompressive surgery, No SDH, Status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~42%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~56%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">ICH, Decompressive surgery, No SDH, Acute seizures & status epilepticus</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~56%</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~72%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Clinical Utility</h4>\n  <p>\n    The DIAS3 score provides a comprehensive, personalized risk prediction for epilepsy following cerebral venous thrombosis (CVT).\n    It incorporates multiple clinical and imaging factors to guide clinical decision-making for long-term epilepsy management.\n  </p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Score Name</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">DIAS3 Score</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Derivation cohort: 1128 patients (International CVT Consortium)<br>\n          Validation cohorts: 543 (ACTION-CVT) and 556 (Israel CVT study)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Cox proportional hazards regression with multiple imputation and ridge penalty adjustments\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Internal validation with bootstrapping<br>\n          External validation using two independent multicenter cohorts\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          C-statistics for 1- and 3-year follow-up:<br>\n          - Derivation cohort: 0.74<br>\n          - ACTION-CVT cohort: 0.76 (1-year), 0.77 (3-year)<br>\n          - Israel CVT cohort: 0.80 (1- and 3-year)<br>\n          Calibration plots indicated adequate agreement.\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          High (validated internationally across multiple centers with diverse patient cohorts)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Provides personalized epilepsy risk estimates after CVT for up to 3 years, guiding clinical decisions.\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Lindgren E, Shu L, Simaan N, et al.",
+    "journal": "JAMA Neurology",
+    "year": 2024,
+    "clinical_utility": "Importance One of 10 patients develop epilepsy in the late phase after cerebral venous thrombosis (CVT) diagnosis but predicting the individual risk is difficult. Objective To develop and externally validate a prognostic score to estimate the individual risk of post-CVT epilepsy.",
+    "outcome": "Development and Validation of a Clinical Score to Predict Epilepsy After Cerebral Venous Thrombosis"
+  },
+  "predictors": [
+    {
+      "name": "Decompressive Hemicraniectomy",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "coef": 0.823,
+      "assess": "Surgical procedure involving removal of part of the skull to relieve intracranial pressure. Contributes a hazard coefficient of 0.823 to the DIAS3 score."
+    },
+    {
+      "name": "Intracerebral Hemorrhage (ICH)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "coef": 0.368,
+      "assess": "Bleeding within the brain parenchyma at baseline. Contributes a hazard coefficient of 0.368 to the DIAS3 score."
+    },
+    {
+      "name": "Acute Phase Seizures (excluding status epilepticus)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "coef": 0.42,
+      "assess": "Seizures occurring within the first seven days of cerebral venous thrombosis. Contributes a hazard coefficient of 0.420 to the DIAS3 score."
+    },
+    {
+      "name": "Status Epilepticus",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "coef": 0.856,
+      "assess": "Seizures occurring within the first seven days of cerebral venous thrombosis. Contributes a hazard coefficient of 0.420 to the DIAS3 score."
+    },
+    {
+      "name": "Subdural Hematoma (SDH)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "coef": 0.247,
+      "assess": "Blood accumulation between the dura mater and arachnoid membrane at baseline. Contributes a hazard coefficient of 0.247 to the DIAS3 score."
+    },
+    {
+      "name": "Age",
+      "type": "slider",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "unit": "decades",
+      "coef": 0.013,
+      "assess": "Patient age divided by 10, entered as a whole number (e.g. 50 years = 5). Each decade adds a hazard coefficient of 0.013."
+    }
+  ],
+  "model": {
+    "type": "cloglog",
+    "center": 0.4390308,
+    "panel_title": "Predicted remote seizure risk",
+    "outputs": [
+      {
+        "label": "1-year risk",
+        "F0": 0.09996527
+      },
+      {
+        "label": "3-year risk",
+        "F0": 0.14976
+      }
+    ],
+    "note": "Logistic/complementary-log-log model reproduced from the DIAS3 regression coefficients. (The live-site chart is non-functional; this uses the published formula.)"
+  },
+  "provenance": {
+    "extraction_method": "cff_export_regression",
+    "source": "export_11_2026-04-07_172645.cpfm",
+    "review_status": "unreviewed",
+    "notes": "DIAS3: A = 0.823*DHC+0.368*ICH+0.420*APS+0.856*SE+0.247*SDH+0.013*age_decades; risk(t)=1-(1-F0(t))^exp(A-0.4390308), F0(12mo)=0.09996527, F0(36mo)=0.14976. Verify vs paper."
+  }
+}

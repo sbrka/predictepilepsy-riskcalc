@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "id": "form51",
+  "kind": "score",
+  "meta": {
+    "title": "PTE Predictive Nomogram (3)",
+    "doi": "10.1097/SCS.0000000000010300",
+    "cff_info": "<div id=\"fieldInfoPTE_Ou2024\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>PTE Predictive Nomogram (Ou et al., 2024)</h4>\n  <p><i>Development and Validation of a Prognostic Model to Predict Late Seizures After Traumatic Brain Injury</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1097/SCS.0000000000010300\" target=\"_blank\">10.1097/SCS.0000000000010300</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Time Since Injury:</b>\n      <ul>\n        <li>Each year since TBI adds 8.3 points (e.g., 5 years = 41.5 pts)</li>\n        <li>Max: 12 years = 100 points</li>\n      </ul>\n    </li>\n    <li><b>Glasgow Coma Scale (GCS) on Admission:</b>\n      <ul>\n        <li>GCS &lt; 8: 19 points</li>\n        <li>GCS ≥ 8: 0 points</li>\n      </ul>\n    </li>\n    <li><b>Injury Location:</b>\n      <ul>\n        <li>Frontal and/or Temporal lobes: 26.5 points</li>\n        <li>Parietal/Occipital/Other: 0 points</li>\n      </ul>\n    </li>\n    <li><b>Midline Shift on Imaging:</b>\n      <ul>\n        <li>Present: 33 points</li>\n        <li>Absent: 0 points</li>\n      </ul>\n    </li>\n    <li><b>Intracranial Infection:</b>\n      <ul>\n        <li>Yes: 16 points</li>\n        <li>No: 0 points</li>\n      </ul>\n    </li>\n    <li><b>Titanium Mesh Cranioplasty:</b>\n      <ul>\n        <li>Yes: 15 points</li>\n        <li>No: 0 points</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Predicted cumulative PTE risk based on total score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">&lt;50</td><td style=\"border: 1px solid #ddd; padding: 8px;\">0%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">50–68</td><td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">69–77</td><td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">78–85</td><td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">86–94</td><td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">95–102</td><td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">103–111</td><td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">112–121</td><td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">122–137</td><td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td></tr>\n      <tr><td style=\"border: 1px solid #ddd; padding: 8px;\">≥138</td><td style=\"border: 1px solid #ddd; padding: 8px;\">>90%</td></tr>\n    </tbody>\n  </table>\n  <h4>Study Overview</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Aspect</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">475 patients in derivation (Nanning), 485 in validation (10 Guangxi cities)</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Model Type</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Multivariate logistic regression</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC: 0.860 (training), 0.735 (validation)</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Threshold</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Suggested clinical cutoff: 0.381 probability of PTE</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Use</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Risk stratification for seizure follow-up and ASM consideration</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Ou S, Sun L, Lu Y, et al.",
+    "journal": "Journal of Craniofacial Surgery",
+    "year": 2025,
+    "clinical_utility": "Posttraumatic epilepsy (PTE) is considered to be one of the most severe and enduring outcomes that can arise from traumatic brain injury (TBI). The authors’ study aims to create and authenticate a prognostic model for forecasting the PTE occurrence after TBI.",
+    "outcome": "Development and Validation of a Prognostic Model to Predict Late Seizures After Traumatic Brain Injury: A Retrospective Analysis"
+  },
+  "thresholds": {
+    "group1": 20,
+    "group2": 2
+  },
+  "predictors": [
+    {
+      "name": "Glasgow Coma Scale (GCS) on admission",
+      "options": [
+        {
+          "label": "GCS ≥ 8",
+          "points": 0
+        },
+        {
+          "label": "GCS < 8",
+          "points": 19
+        }
+      ],
+      "assess": "Select the patient’s GCS score at hospital admission. A score < 8 (19 points) indicates severe injury and contributes more to PTE risk."
+    },
+    {
+      "name": "Location",
+      "options": [
+        {
+          "label": "Parietal&Occipital",
+          "points": 0
+        },
+        {
+          "label": "Temporal&Frontal",
+          "points": 26
+        }
+      ],
+      "assess": "Choose the primary lobar region affected by TBI. Temporal + frontal lobe injuries carry greater risk than parietal/occipital or other locations (26.5 points)."
+    },
+    {
+      "name": "Midline Shift",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 33
+        }
+      ],
+      "assess": "Indicate whether initial CT or MRI showed any brain midline shift. Presence of a shift reflects more severe injury and higher PTE risk (33 points)."
+    },
+    {
+      "name": "Intracranial infection",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 16
+        }
+      ],
+      "assess": "Select ‘Yes’ if the patient underwent decompressive craniectomy followed by titanium mesh reconstruction; this procedure is linked to elevated PTE risk (15 points)."
+    },
+    {
+      "name": "Titanium mesh cranioplasty",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 15
+        }
+      ],
+      "assess": "Presence of subdural hematoma increases PTE risk significantly (49 points if present)."
+    }
+  ],
+  "model": {
+    "score_type": "range",
+    "horizon": "follow-up",
+    "rows": [
+      {
+        "label": "10%",
+        "lo": 0,
+        "hi": 68,
+        "pct": 10.0
+      },
+      {
+        "label": "20%",
+        "lo": 69,
+        "hi": 77,
+        "pct": 20.0
+      },
+      {
+        "label": "30%",
+        "lo": 78,
+        "hi": 85,
+        "pct": 30.0
+      },
+      {
+        "label": "40%",
+        "lo": 86,
+        "hi": 94,
+        "pct": 40.0
+      },
+      {
+        "label": "50%",
+        "lo": 95,
+        "hi": 102,
+        "pct": 50.0
+      },
+      {
+        "label": "60%",
+        "lo": 103,
+        "hi": 111,
+        "pct": 60.0
+      },
+      {
+        "label": "70%",
+        "lo": 112,
+        "hi": 121,
+        "pct": 70.0
+      },
+      {
+        "label": "80%",
+        "lo": 122,
+        "hi": 137,
+        "pct": 80.0
+      },
+      {
+        "label": ">90%",
+        "lo": 138,
+        "hi": 100000,
+        "pct": 90.0
+      }
+    ]
+  },
+  "provenance": {
+    "extraction_method": "cff_export",
+    "source": "export_51_2026-04-07_172900.cpfm",
+    "review_status": "unreviewed",
+    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  }
+}

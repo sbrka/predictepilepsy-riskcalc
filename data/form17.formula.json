@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0",
+  "id": "form17",
+  "kind": "formula",
+  "meta": {
+    "title": "Postoperative Glioma-Related Epilepsy (PGREM) — risk of remote symptomatic seizures",
+    "doi": "10.1186/s12885-022-10385-x",
+    "cff_info": "<div id=\"fieldInfoGliomaEpilepsy\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Postoperative Glioma-related Epilepsy Model</h4>\n  <p><i>Li et al., 2023</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1186/s12885-022-10385-x\" target=\"_blank\">10.1186/s12885-022-10385-x</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Age:</b>\n      <ul>\n        <li>0 points: Age ≥65 years</li>\n        <li>1 point: Age 50-64 years</li>\n        <li>2 points: Age 30-49 years</li>\n        <li>3 points: Age ≤29 years</li>\n      </ul>\n    </li>\n    <li><b>Temporal Lobe Involvement:</b>\n      <ul>\n        <li>0 points: Non-involved</li>\n        <li>1.5 points: Involved</li>\n      </ul>\n    </li>\n    <li><b>Preoperative GRE (Glioma-Related Epilepsy):</b>\n      <ul>\n        <li>0 points: Non-GRE</li>\n        <li>1 point: GRE present</li>\n      </ul>\n    </li>\n    <li><b>Predictive Genes:</b>\n      <ul>\n        <li>LUZP2, GPNMB, MMD2, GALNT13, IKBKGP1, SLC1A4, RP1</li>\n        <li><b>Risk Score Calculation Formula:</b> Risk score = 0.000646822 * ExpLUZP2 + 0.002348291 * ExpGPNMB + 0.003071414 * ExpMMD2 + 0.005716866 * ExpGALNT13 + 0.014817826 * ExpIKBKGP1 + 0.01969116 * ExpSLC1A4 + 0.019902233 * ExpRP1</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Predicted risk of epilepsy after 2 years based on the score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">1 point</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">2 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~1%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">3 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~2%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">4 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~4%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">5 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~6%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">6 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~11%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">7 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~22%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~35%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">9 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~53%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">10 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~69%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">11 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~83%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">12 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~91%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">13 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">~95%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 166 patients. Validation: 42 patients (Beijing Tiantan Hospital).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">LASSO logistic regression, multivariate logistic regression.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC: 0.878 (training), 0.845 (validation).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (single-center study).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Combines gene-signature and clinical data; identifies high-risk patients. Nomogram is complex but effective.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+    "authors": "Li L, Zhang C, Wang Z, et al.",
+    "journal": "BMC Cancer",
+    "year": 2023,
+    "clinical_utility": "Background This study aimed to develop an integrated model for predicting the occurrence of postoperative seizures in patients with diffuse high-grade gliomas (DHGGs) using clinical and RNA-seq data. Methods Patients with DHGGs, who received prophylactic anti-epileptic drugs (AEDs) for three months following surgery, were enrolled into the study.",
+    "outcome": "Development of an integrated predictive model for postoperative glioma-related epilepsy using gene-signature and clinical data"
+  },
+  "predictors": [
+    {
+      "name": "Age",
+      "coef": 1,
+      "options": [
+        {
+          "label": "≤ 29 years",
+          "points": 3
+        },
+        {
+          "label": "30–49 years",
+          "points": 2
+        },
+        {
+          "label": "50–64 years",
+          "points": 1
+        },
+        {
+          "label": "≥ 65 years",
+          "points": 0
+        }
+      ],
+      "assess": "Younger age correlates with higher seizure risk postoperatively."
+    },
+    {
+      "name": "Temporal Lobe Involvement",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1.5
+        }
+      ],
+      "assess": "Temporal lobe involvement significantly increases seizure risk."
+    },
+    {
+      "name": "Preoperative Glioma-Related Epilepsy (GRE)",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Documented epileptic seizures prior to surgery."
+    },
+    {
+      "name": "Expression level of LUZP2",
+      "type": "number",
+      "coef": 0.000646822,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of GPNMB",
+      "type": "number",
+      "coef": 0.002348291,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of MMD2",
+      "type": "number",
+      "coef": 0.003071414,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of GALNT13",
+      "type": "number",
+      "coef": 0.005716866,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of IKBKGP1",
+      "type": "number",
+      "coef": 0.014817826,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of SLC1A4",
+      "type": "number",
+      "coef": 0.01969116,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    },
+    {
+      "name": "Expression level of RP1",
+      "type": "number",
+      "coef": 0.019902233,
+      "transform": "exp",
+      "default": 0,
+      "step": 0.1,
+      "min": 0,
+      "assess": "Optional. Normalised gene-expression level; leave at 0 if not measured. Contributes coef × exp(value) to the combined score (the gene signature)."
+    }
+  ],
+  "model": {
+    "type": "lookup",
+    "show_lp": true,
+    "lp_label": "Combined score",
+    "panel_title": "Risk of remote symptomatic seizures at 2 years",
+    "bands": [
+      {
+        "lt": 2,
+        "pct": 0
+      },
+      {
+        "lt": 3,
+        "pct": 1
+      },
+      {
+        "lt": 4,
+        "pct": 2
+      },
+      {
+        "lt": 5,
+        "pct": 4
+      },
+      {
+        "lt": 6,
+        "pct": 6
+      },
+      {
+        "lt": 7,
+        "pct": 11
+      },
+      {
+        "lt": 8,
+        "pct": 22
+      },
+      {
+        "lt": 9,
+        "pct": 35
+      },
+      {
+        "lt": 10,
+        "pct": 53
+      },
+      {
+        "lt": 11,
+        "pct": 69
+      },
+      {
+        "lt": 12,
+        "pct": 83
+      },
+      {
+        "lt": 13,
+        "pct": 91
+      },
+      {
+        "lt": 14,
+        "pct": 95
+      }
+    ],
+    "outputs": [
+      {
+        "label": "2-year risk"
+      }
+    ],
+    "note": "Combined score = age + temporal-lobe (1.5) + preoperative GRE (1) + gene signature (Σ coef·exp(expression)); mapped to the published 2-year risk bands. Gene-expression fields are optional (default 0)."
+  },
+  "provenance": {
+    "extraction_method": "cff_export_regression",
+    "source": "export_17_2026-04-07_172702.cpfm",
+    "review_status": "unreviewed",
+    "notes": "PGREM: score=age(≤29=3/30-49=2/50-64=1/≥65=0)+temporal(1.5)+preopGRE(1)+Σ[coef·EXP(gene)]; 2-yr risk lookup <2→~0%…<14→~95%. Gene coefs: LUZP2 .000647, GPNMB .002348, MMD2 .003071, GALNT13 .005717, IKBKGP1 .014818, SLC1A4 .019691, RP1 .019902. Verify vs paper."
+  }
+}
