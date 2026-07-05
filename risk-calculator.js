@@ -32,11 +32,17 @@
       --azure:#1f83e6;--azure-deep:#135ba8;--azure-wash:#eef6fe;--azure-line:#cfe4fb;
       --ink:#0e1c2b;--muted:#5c6b7a;--faint:#8a97a4;--line:#e6ecf2;--line-soft:#eef2f6;
       --page:#f6f9fc;--paper:#fff;--amber:#e0912b;--amber-deep:#b26a06;--red:#b02020;--green:#0f9d6b;
+      --pres-green:#004834;--pres-green2:#33844c;--pres-wash:#eaf3ec;--pres-border:#d6deda;
       --serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      display:block;width:100%;color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+      display:block;width:100%;color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
     *{box-sizing:border-box}
     .sheet{background:var(--paper);min-height:100%;display:flex;flex-direction:column}
+    .banner{background:var(--pres-green);color:#fff;padding:12px 34px}
+    .banner .bwrap{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+    .banner .btitle{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:-.01em}
+    .banner .bdot{opacity:.68;font-weight:400}
+    .banner .btag{font-size:13px;color:#c7ddcf;letter-spacing:.02em}
     .topstrip{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 34px;border-bottom:1px solid var(--line);background:#fbfcfe}
     .backbtn{border:0;background:transparent;color:var(--muted);font-size:13px;font-weight:550;cursor:pointer;font-family:inherit}
     .backbtn:hover{color:var(--azure-deep)}
@@ -47,9 +53,9 @@
     .brandrow{display:flex;gap:14px;align-items:flex-start}
     .mark{width:42px;height:42px;border-radius:12px;background:var(--azure);display:flex;align-items:center;justify-content:center;flex-shrink:0}
     .eyebrow{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--azure-deep);margin:0 0 3px}
-    h1{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.06;text-wrap:balance}
-    .sub{margin:4px 0 0;color:var(--muted);font-size:13.5px}
-    .cite{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.5}
+    h1{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.06;text-wrap:balance}
+    .sub{margin:5px 0 0;color:var(--muted);font-size:15px}
+    .cite{margin:9px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
     .cite a,.foot a,.mbody a{color:var(--azure-deep);text-decoration:none;border-bottom:1px solid var(--azure-line)}
     .cite a:hover,.foot a:hover,.mbody a:hover{border-color:var(--azure)}
     .actions{display:flex;gap:8px;flex-shrink:0}
@@ -61,14 +67,14 @@
     .rail{padding:26px 30px;border-right:1px solid var(--line)}
     .panel{padding:24px 34px 26px;min-width:0}
     .field{margin-bottom:18px}
-    .flabel{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:8px}
+    .flabel{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
     .flabel .code{display:inline-flex;width:19px;height:19px;border-radius:6px;background:var(--azure-wash);color:var(--azure-deep);font-size:11px;font-weight:700;align-items:center;justify-content:center;font-family:var(--serif)}
     .info-dot{width:16px;height:16px;border-radius:50%;border:1px solid var(--line);color:var(--faint);font-size:10px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;background:#fff;font-family:var(--serif);font-style:italic;padding:0;text-transform:none}
     .info-dot:hover,.info-dot:focus-visible{color:var(--azure-deep);border-color:var(--azure);background:var(--azure-wash);outline:none}
     .seg{display:flex;background:#f3f6fa;border:1px solid var(--line);border-radius:11px;padding:3px;gap:3px}
-    .seg button{flex:1;min-width:0;border:0;background:transparent;color:var(--muted);font-family:var(--sans);font-size:12.5px;font-weight:550;padding:8px 6px;border-radius:8px;cursor:pointer;white-space:nowrap}
-    .seg[data-pi] button{white-space:normal;overflow-wrap:break-word;line-height:1.25;hyphens:auto;font-size:11.5px;padding:8px 4px}
-    .cffinfo{font-size:13px;line-height:1.6;color:#33424f;overflow-x:auto}
+    .seg button{flex:1;min-width:0;border:0;background:transparent;color:var(--muted);font-family:var(--sans);font-size:14px;font-weight:550;padding:8px 6px;border-radius:8px;cursor:pointer;white-space:nowrap}
+    .seg[data-pi] button{white-space:normal;overflow-wrap:break-word;line-height:1.3;hyphens:auto;font-size:13px;padding:9px 5px}
+    .cffinfo{font-size:14px;line-height:1.65;color:#33424f;overflow-x:auto}
     .cffinfo *{max-width:100%}
     .cffinfo h1,.cffinfo h2,.cffinfo h3,.cffinfo h4{font-size:14px;font-weight:600;color:var(--ink);margin:14px 0 6px;font-family:var(--sans)}
     .cffinfo table{border-collapse:collapse;width:100%;margin:8px 0;font-size:12.5px}
@@ -79,7 +85,7 @@
     .seg.modeseg button{flex:0 0 auto;white-space:nowrap;padding:8px 15px}
     .belowinfo{border-top:1px solid var(--line);padding:0 34px}
     .belowinfo details{padding:16px 0}
-    .belowinfo summary{font-family:var(--serif);font-size:15px;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;font-weight:600}
+    .belowinfo summary{font-family:var(--serif);font-size:16px;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;font-weight:600}
     .belowinfo summary::-webkit-details-marker{display:none}
     .belowinfo summary::before{content:"▸";color:var(--muted);font-size:12px}
     .belowinfo details[open] summary::before{content:"▾"}
@@ -103,24 +109,24 @@
     input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--azure);box-shadow:0 1px 4px rgba(14,28,43,.2)}
     input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--azure)}
     .scorewrap{display:flex;gap:22px;align-items:flex-end;margin:22px 0 20px;padding-top:20px;border-top:1px solid var(--line)}
-    .metric .k{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-    .metric .v{font-family:var(--serif);font-size:38px;line-height:.92;font-variant-numeric:tabular-nums;color:var(--ink)}
+    .metric .k{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+    .metric .v{font-family:var(--serif);font-size:44px;line-height:.92;font-variant-numeric:tabular-nums;color:var(--ink)}
     .metric.sm .v{font-size:26px;font-weight:600}
     .band{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;margin-top:7px}
     .band .d{width:8px;height:8px;border-radius:50%}
     .verdict{display:flex;flex-direction:column}
-    .vhead{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .vhead{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px}
     .vrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line-soft)}
     .vrow:last-child{border-bottom:0}
-    .vrow .lab{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink)}
+    .vrow .lab{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink)}
     .vrow .lab i{width:9px;height:9px;border-radius:2px;display:inline-block;flex-shrink:0}
     .vrow .lab .lt{display:flex;flex-direction:column;gap:1px}
     .vrow .lab .lt b{font-weight:600}
     .vrow .lab .t{color:var(--muted);font-size:10.5px;line-height:1.2}
-    .vrow .val{font-size:14px;font-weight:650;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+    .vrow .val{font-size:16px;font-weight:650;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
     .vnote{margin-top:10px;font-size:10.5px;line-height:1.5;color:var(--faint)}
     .panelhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px;flex-wrap:wrap}
-    .legend{display:flex;gap:15px;font-size:11.5px;color:var(--muted)}
+    .legend{display:flex;gap:15px;font-size:13px;color:var(--muted)}
     .legend span{display:inline-flex;align-items:center;gap:6px}
     .legend .ln{width:16px;height:0;border-top:2.5px solid var(--azure)}
     .legend .ln.amb{border-top-color:var(--amber)}
@@ -131,13 +137,13 @@
     .tip .d{font-weight:650;font-size:12px;margin-bottom:4px;color:var(--azure-line)}
     .tip .r{display:flex;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums}
     .tip .z{margin-top:5px;font-size:10.5px;font-weight:600;display:inline-block;padding:2px 7px;border-radius:6px}
-    .hint{color:var(--faint);font-size:11.5px;margin:10px 2px 0;text-align:center}
-    .foot{padding:16px 34px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;line-height:1.6}
-    .foot .disclaimer{margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)}
-    .foot .disclaimer b{color:var(--ink);display:block;margin-bottom:5px;font-size:12px;letter-spacing:.02em}
+    .hint{color:var(--faint);font-size:12.5px;margin:10px 2px 0;text-align:center}
+    .foot{padding:18px 34px 26px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.65}
+    .foot .disclaimer{margin-top:16px;padding-top:16px;border-top:2px solid var(--pres-green)}
+    .foot .disclaimer b{color:var(--pres-green);display:block;margin-bottom:6px;font-size:14px;font-family:var(--serif);letter-spacing:.01em}
     .foot .disclaimer p{margin:0 0 7px;max-width:none}
     .foot .disclaimer .copyr{color:var(--faint)}
-    .foot .disclaimer a{color:var(--azure-deep);text-decoration:none}
+    .foot .disclaimer a{color:var(--pres-green2);text-decoration:none;font-weight:600}
     .classicview{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 30px;color:var(--muted)}
     .classicview .h{font-family:var(--serif);font-size:19px;color:var(--ink);margin-bottom:8px}
     .pop{position:fixed;z-index:60;max-width:272px;background:var(--ink);color:#fff;font-size:12px;line-height:1.5;padding:10px 13px;border-radius:11px;box-shadow:0 12px 30px rgba(14,28,43,.32);opacity:0;pointer-events:none;transform:translateY(-100%);transition:opacity .1s}
@@ -184,6 +190,7 @@
       const root = document.createElement("div");
       root.innerHTML = `<style>${CSS}</style>
         <div class="sheet">
+          <div class="banner"><div class="bwrap"><span class="btitle">predictepilepsy<span class="bdot">.com</span></span><span class="btag">Epilepsy prognostic calculators &middot; SeLECT Consortium</span></div></div>
           ${hasNav ? `<div class="topstrip">
             <button class="backbtn" id="back">&#8249;&nbsp;All calculators</button>
             <div class="viewtabs" id="viewtabs"><button class="on" data-view="new">New design</button><button data-view="classic">Classic (CFF)</button></div>
@@ -310,12 +317,12 @@
       const Y = (v) => pT + (1 - Math.min(v, ymax) / ymax) * (H - pT - pB);
       let g = "";
       const ystep = ymax <= 40 ? 10 : 20;
-      for (let y = 0; y <= ymax + .01; y += ystep) { const yy = Y(y); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="#eef2f6"/><text x="${pL - 8}" y="${yy + 3.5}" text-anchor="end" font-size="11" fill="#8a97a4">${y}%</text>`; }
+      for (let y = 0; y <= ymax + .01; y += ystep) { const yy = Y(y); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="#eef2f6"/><text x="${pL - 8}" y="${yy + 3.5}" text-anchor="end" font-size="12.5" fill="#8a97a4">${y}%</text>`; }
       const xstep = xmax <= 24 ? 6 : 12;
-      for (let x = 0; x <= xmax; x += xstep) g += `<text x="${X(x)}" y="${H - pB + 18}" text-anchor="middle" font-size="11" fill="#8a97a4">${x}</text>`;
-      g += `<text x="${(pL + W - pR) / 2}" y="${H - 4}" text-anchor="middle" font-size="11" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
+      for (let x = 0; x <= xmax; x += xstep) g += `<text x="${X(x)}" y="${H - pB + 18}" text-anchor="middle" font-size="12.5" fill="#8a97a4">${x}</text>`;
+      g += `<text x="${(pL + W - pR) / 2}" y="${H - 4}" text-anchor="middle" font-size="13" font-weight="600" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
       const yMid = pT + (H - pT - pB) / 2;
-      g += `<text x="15" y="${yMid}" transform="rotate(-90 15 ${yMid})" text-anchor="middle" font-size="11" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
+      g += `<text x="15" y="${yMid}" transform="rotate(-90 15 ${yMid})" text-anchor="middle" font-size="13" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
       let pa = `M ${X(0)} ${Y(0)}`; arr.forEach((v, mo) => { pa += ` L ${X(mo)} ${Y(v)}`; }); pa += ` L ${X(arr.length - 1)} ${Y(0)} Z`;
       g += `<path d="${pa}" fill="${cosy ? "rgba(224,145,43,.10)" : "rgba(31,131,230,.10)"}"/>`;
       if (cosy) [[th.group1, "#b26a06"], [th.group2, "#b02020"]].forEach(([t, c]) => { if (t > ymax) return; const yy = Y(t); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="${c}" stroke-width="1" stroke-dasharray="4 4"/><text x="${W - pR}" y="${yy - 5}" text-anchor="end" font-size="10.5" fill="${c}">${t}%</text>`; });
@@ -572,7 +579,7 @@
       const bw = W - pL - pR;
       rows.forEach((r, i) => {
         const y = top + i * rowH; const on = r === active; const pct = r.pct != null ? r.pct : 0;
-        g += `<text x="${pL - 8}" y="${y + 16}" text-anchor="end" font-size="12.5" fill="${on ? "#0e1c2b" : "#5c6b7a"}" font-weight="${on ? 600 : 400}">${esc(r.label)}</text>`;
+        g += `<text x="${pL - 8}" y="${y + 16}" text-anchor="end" font-size="13.5" fill="${on ? "#0e1c2b" : "#5c6b7a"}" font-weight="${on ? 600 : 400}">${esc(r.label)}</text>`;
         g += `<rect x="${pL}" y="${y + 5}" width="${bw}" height="16" rx="4" fill="#f1f5f9"/>`;
         g += `<rect x="${pL}" y="${y + 5}" width="${Math.max(2, bw * Math.min(pct, 100) / 100)}" height="16" rx="4" fill="${on ? "#1f83e6" : "#cfe4fb"}"/>`;
         g += `<text x="${pL + bw}" y="${y + 17}" text-anchor="end" font-size="12" fill="${on ? "#135ba8" : "#8a97a4"}" font-weight="600" font-variant-numeric="tabular-nums">${r.pct != null ? fmtPct(r.pct) : "—"}</text>`;
@@ -622,7 +629,7 @@
       modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
       const tabs = root.querySelector("#viewtabs");
       const ext = this.hasAttribute("external-classic");   // page supplies the real CFF form; hide the internal placeholder
-      if (tabs) tabs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; tabs.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); const cl = b.dataset.view === "classic"; root.querySelector("#grid").style.display = cl ? "none" : "grid"; root.querySelector("#classicview").style.display = (cl && !ext) ? "flex" : "none"; const bi2 = root.querySelector("#belowinfo"); if (bi2 && bi2.dataset.has) bi2.style.display = cl ? "none" : "block"; this.dispatchEvent(new CustomEvent("riskcalc:view", { bubbles: true, detail: { view: cl ? "classic" : "new" } })); });
+      if (tabs) tabs.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; tabs.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b)); const cl = b.dataset.view === "classic"; root.querySelector("#grid").style.display = cl ? "none" : "grid"; root.querySelector("#classicview").style.display = (cl && !ext) ? "flex" : "none"; const bi2 = root.querySelector("#belowinfo"); if (bi2 && bi2.dataset.has) bi2.style.display = cl ? "none" : "block"; const ctId = this.getAttribute("classic-target"); const ct = ctId ? document.getElementById(ctId) : null; if (ct) ct.style.display = cl ? "block" : "none"; this.dispatchEvent(new CustomEvent("riskcalc:view", { bubbles: true, detail: { view: cl ? "classic" : "new" } })); });
       const bb = root.querySelector("#back");
       if (bb) bb.onclick = () => { if (back) location.href = back; else history.back(); };
     }
