@@ -394,13 +394,13 @@
       } else if (preds.length) {
         const minPts = preds.map((p) => Math.min(...(p.options || [{ points: 0 }]).map((o) => Number(o.points) || 0)));
         const base = minPts.reduce((a, b) => a + b, 0);
-        const items = preds.map((p, i) => { const o = (p.options || [])[this._predSel[i]] || {}; const contrib = (Number(o.points) || 0) - minPts[i]; return { name: p.name, label: o.label, contrib, on: contrib > 0 }; });
+        const items = preds.map((p, i) => { const o = (p.options || [])[this._predSel[i]] || {}; const contrib = (Number(o.points) || 0) - minPts[i]; return { name: p.name, label: o.label, contrib, on: contrib > 0, wlabel: (contrib >= 0 ? "+" : "") + contrib + " pts" }; });
         const link = (pts) => { const r = rowFor(pts); return r && r.pct != null ? r.pct : 0; };
         const vizInfo = "Each risk factor adds points. The waterfall (left) starts at the baseline risk and steps up as each active factor pushes the total score into a higher risk band; the donut (right) shows those factors as wedges summing to the predicted risk in the centre.";
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk breakdown${m.horizon ? " &middot; at " + esc(m.horizon) : ""} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
-          <div class="fviz" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-            <div style="flex:1 1 320px;min-width:300px"><svg id="fwater" role="img" aria-label="Contribution waterfall"></svg></div>
-            <div style="flex:0 0 210px;text-align:center"><svg id="fdonut" viewBox="0 0 210 224" role="img" aria-label="Risk donut"></svg></div>
+          <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
+            <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
+            <div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>
           </div>`;
         this._drawWaterfall({ base, items }, link);
         this._drawDonut({ base, items }, link);
@@ -439,9 +439,9 @@
       this._rail.innerHTML = rail;
       const vizInfo = m.viz_info || "Each risk factor you select adds a coloured contribution. The waterfall (left) starts from the baseline risk and steps up with each active factor, so you can see which factors drive this patient's risk and by how much. The donut (right) shows the same factors as wedges summing to the total predicted risk in the centre.";
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
-        <div class="fviz" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
-          <div style="flex:1 1 320px;min-width:300px"><svg id="fwater" role="img" aria-label="Contribution waterfall"></svg></div>
-          <div style="flex:0 0 210px;text-align:center"><svg id="fdonut" viewBox="0 0 210 224" role="img" aria-label="Risk donut"></svg></div>
+        <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
+          <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
+          <div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>
         </div>`;
       this._formulaUpdate();
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
@@ -540,7 +540,8 @@
         const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);
         g += `<rect x="${x1}" y="${y}" width="${w}" height="15" rx="2" fill="${up ? PAL[k % PAL.length] : "#b02020"}"/>`;
         g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
-        g += `<text x="${sx(Math.max(before, after)) + 5}" y="${y + 12}" font-size="10" fill="${up ? "#135ba8" : "#b02020"}" font-family="var(--sans)">${up ? "+" : ""}${(after - before).toFixed(1)}</text>`;
+        const wl = c.wlabel != null ? c.wlabel : ((up ? "+" : "") + (after - before).toFixed(1) + "%");
+        g += `<text x="${sx(Math.max(before, after)) + 6}" y="${y + 12}" font-size="11" fill="${(c.wlabel == null && !up) ? "#b02020" : "#135ba8"}" font-family="var(--sans)">${wl}</text>`;
         y += rowH;
       });
       const total = link(cur);
@@ -554,7 +555,7 @@
       const svg = this._panel.querySelector("#fdonut"); if (!svg) return;
       const { base, items } = cb;
       const active = items.filter((c) => c.on);
-      const cx = 105, cy = 104, rad = 66, w = 22;
+      const cx = 150, cy = 132, rad = 98, w = 34;
       const total = link(base + active.reduce((a, c) => a + c.contrib, 0));
       const totContrib = active.reduce((a, c) => a + Math.abs(c.contrib), 0) || 1;
       const fillFrac = total / 100;
@@ -565,9 +566,9 @@
       });
       const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef2f6" stroke-width="${w}"/>`;
       svg.innerHTML = `${track}${segs}
-        <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-family="var(--serif)" font-size="30" fill="#1a2430">${fmtPct(total)}</text>
-        <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="#5b6b7b">predicted risk</text>
-        ${active.length ? "" : `<text x="${cx}" y="${cy + 40}" text-anchor="middle" font-family="var(--sans)" font-size="10" fill="#98a6b5">baseline patient</text>`}`;
+        <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="48" fill="#1a2430">${fmtPct(total)}</text>
+        <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">predicted risk</text>
+        ${active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`}`;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
