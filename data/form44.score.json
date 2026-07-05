@@ -64,11 +64,11 @@
       "options": [
         {
           "label": "Gross Total Resection (GTR)",
-          "points": 0
+          "points": 0.0
         },
         {
           "label": "Non-Gross Total Resection (non-GTR)",
-          "points": 3
+          "points": 3.5
         }
       ],
       "assess": "Classified based on postoperative MRI as Gross Total Resection (GTR: no residual tumor signal) or Non-GTR (incomplete tumor removal). OR for Non-GTR: 2.3 (95% CI: 1.2–4.3, p = 0.012)."
@@ -120,11 +120,11 @@
       "options": [
         {
           "label": ">10%",
-          "points": 0
+          "points": 1.6
         },
         {
           "label": "≤10%",
-          "points": 1
+          "points": 1.6
         }
       ],
       "assess": "A proliferation marker indicating tumor growth. OR for low Ki-67 expression: 1.6 (significant in univariate analysis only, p = 0.042)."

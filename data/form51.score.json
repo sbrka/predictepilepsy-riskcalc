@@ -36,11 +36,11 @@
       "options": [
         {
           "label": "Parietal&Occipital",
-          "points": 0
+          "points": 0.0
         },
         {
           "label": "Temporal&Frontal",
-          "points": 26
+          "points": 26.5
         }
       ],
       "assess": "Choose the primary lobar region affected by TBI. Temporal + frontal lobe injuries carry greater risk than parietal/occipital or other locations (26.5 points)."
@@ -93,8 +93,14 @@
     "horizon": "follow-up",
     "rows": [
       {
-        "label": "10%",
+        "label": "0",
         "lo": 0,
+        "hi": 49,
+        "pct": 0.0
+      },
+      {
+        "label": "10%",
+        "lo": 50,
         "hi": 68,
         "pct": 10.0
       },
@@ -143,7 +149,7 @@
       {
         "label": ">90%",
         "lo": 138,
-        "hi": 100000,
+        "hi": 9999,
         "pct": 90.0
       }
     ]
