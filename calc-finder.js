@@ -92,8 +92,8 @@
     .opt{text-align:left;border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:18px 18px;cursor:pointer;transition:.15s;display:flex;gap:14px;align-items:flex-start}
     .opt:hover{border-color:var(--azure);box-shadow:0 6px 18px rgba(19,91,168,.10);transform:translateY(-1px)}
     .opt .ic{font-size:26px;line-height:1}
-    .opt .ot{font-weight:700;font-size:16px;margin-bottom:3px}
-    .opt .os{color:var(--muted);font-size:13.5px}
+    .opt .ot{display:block;font-weight:700;font-size:16px;margin-bottom:4px}
+    .opt .os{display:block;color:var(--muted);font-size:13.5px}
     .setbtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
     .setbtn{border:1.5px solid var(--azure-line);background:var(--azure-wash);color:var(--azure-deep);font-weight:650;font-size:15px;padding:11px 20px;border-radius:999px;cursor:pointer;transition:.15s}
     .setbtn:hover{background:var(--azure);color:#fff;border-color:var(--azure)}
