@@ -201,7 +201,8 @@
         "label": "2-year risk"
       }
     ],
-    "note": "Combined score = age + temporal-lobe (1.5) + preoperative GRE (1) + gene signature (Σ coef·exp(expression)); mapped to the published 2-year risk bands. Gene-expression fields are optional (default 0)."
+    "note": "Combined score = age + temporal-lobe (1.5) + preoperative GRE (1) + gene signature (Σ coef·exp(expression)); mapped to the published 2-year risk bands. Gene-expression fields are optional (default 0).",
+    "viz_info": "This is an additive risk model. The waterfall (left) begins at the baseline risk for a patient with no risk factors, then each factor you select steps the risk up (blue) or down (red) — the number on each bar is that factor's contribution in percentage points, so you can see which factors dominate. The donut (right) shows the same active factors as coloured wedges that sum to the total predicted risk shown in the centre. Both update live as you change the inputs."
   },
   "provenance": {
     "extraction_method": "cff_export_regression",

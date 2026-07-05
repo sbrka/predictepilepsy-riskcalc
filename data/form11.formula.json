@@ -114,7 +114,8 @@
         "F0": 0.14976
       }
     ],
-    "note": "Logistic/complementary-log-log model reproduced from the DIAS3 regression coefficients. (The live-site chart is non-functional; this uses the published formula.)"
+    "note": "Logistic/complementary-log-log model reproduced from the DIAS3 regression coefficients. (The live-site chart is non-functional; this uses the published formula.)",
+    "viz_info": "This is an additive risk model. The waterfall (left) begins at the baseline risk for a patient with no risk factors, then each factor you select steps the risk up (blue) or down (red) — the number on each bar is that factor's contribution in percentage points, so you can see which factors dominate. The donut (right) shows the same active factors as coloured wedges that sum to the total predicted risk shown in the centre. Both update live as you change the inputs."
   },
   "provenance": {
     "extraction_method": "cff_export_regression",

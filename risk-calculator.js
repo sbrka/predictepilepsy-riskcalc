@@ -98,6 +98,15 @@
     .recrule{display:flex;gap:14px;padding:10px 12px;border-radius:9px;font-size:13px;color:var(--muted)}
     .recrule.on{background:var(--azure-wash);color:var(--ink)}
     .recrule .rk{flex:0 0 96px;font-weight:600;font-variant-numeric:tabular-nums}
+    .scoreviz{display:grid;grid-template-columns:246px 1fr;gap:20px;align-items:start}
+    @media(max-width:760px){.scoreviz{grid-template-columns:1fr}}
+    .vizcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px 16px}
+    .vizcard.grow{min-width:0}
+    .vizh{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+    .dleg{display:flex;flex-wrap:wrap;gap:5px 14px;font-size:12px;color:var(--muted);margin-top:8px}
+    .dleg span{display:inline-flex;align-items:center;gap:6px}
+    .dleg i{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+    .vizcard svg{display:block;max-width:100%;height:auto;margin:0 auto}
     .lookbig{display:flex;align-items:baseline;gap:14px;margin:8px 0 2px}
     .lookbig .lkpct{font-family:var(--serif);font-size:56px;line-height:1;color:var(--amber-deep);font-variant-numeric:tabular-nums}
     .lookbig .lkci{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -382,6 +391,19 @@
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Author recommendation</div></div>
           <div class="reccard" style="border-color:${rec ? recColor(rec.tone) : "var(--line)"};color:${rec ? recColor(rec.tone) : "var(--ink)"}">${rec ? esc(rec.text) : "Enter values to see the recommendation."}</div>
           <div class="recrules">${recs.map((r) => `<div class="recrule${r === rec ? " on" : ""}"><span class="rk">Score ${r.lo}${r.hi >= 9999 ? "+" : "&ndash;" + r.hi}</span><span class="rt">${esc(r.text)}</span></div>`).join("")}</div>`;
+      } else if (preds.length) {
+        const minPts = preds.map((p) => Math.min(...(p.options || [{ points: 0 }]).map((o) => Number(o.points) || 0)));
+        const base = minPts.reduce((a, b) => a + b, 0);
+        const items = preds.map((p, i) => { const o = (p.options || [])[this._predSel[i]] || {}; const contrib = (Number(o.points) || 0) - minPts[i]; return { name: p.name, label: o.label, contrib, on: contrib > 0 }; });
+        const link = (pts) => { const r = rowFor(pts); return r && r.pct != null ? r.pct : 0; };
+        const vizInfo = "Each risk factor adds points. The waterfall (left) starts at the baseline risk and steps up as each active factor pushes the total score into a higher risk band; the donut (right) shows those factors as wedges summing to the predicted risk in the centre.";
+        this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk breakdown${m.horizon ? " &middot; at " + esc(m.horizon) : ""} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
+          <div class="fviz" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+            <div style="flex:1 1 320px;min-width:300px"><svg id="fwater" role="img" aria-label="Contribution waterfall"></svg></div>
+            <div style="flex:0 0 210px;text-align:center"><svg id="fdonut" viewBox="0 0 210 224" role="img" aria-label="Risk donut"></svg></div>
+          </div>`;
+        this._drawWaterfall({ base, items }, link);
+        this._drawDonut({ base, items }, link);
       } else {
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk by group${m.horizon ? " &middot; at " + esc(m.horizon) : ""}</div></div>
           <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${20 + rows.length * 44}" role="img" aria-label="Risk by group"></svg></div>`;
@@ -493,19 +515,20 @@
         cells += outs.map((o, i) => `<div class="metric${(i || m.show_lp) ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v">${o.approx ? "~" : ""}${fmtPct(o.pct)}</div></div>`).join("");
         mroot.innerHTML = cells;
       }
-      this._drawWaterfall();
-      this._drawDonut();
+      const _cb = this._formulaContribs(), _link = (v) => this._linkRisk(v);
+      this._drawWaterfall(_cb, _link);
+      this._drawDonut(_cb, _link);
     }
 
-    _drawWaterfall() {
+    _drawWaterfall(cb, link) {
       const svg = this._panel.querySelector("#fwater"); if (!svg) return;
-      const { base, items } = this._formulaContribs();
+      const { base, items } = cb;
       const active = items.filter((c) => c.on);
       const W = 460, rowH = 26, x0 = 168, plotW = 250, n = active.length + 2, H = 18 + n * rowH + 16;
       const sx = (v) => x0 + (Math.max(0, Math.min(100, v)) / 100) * plotW;
       let g = `<line x1="${x0}" y1="12" x2="${x0}" y2="${H - 20}" stroke="var(--azure-line)"/>`;
       [0, 25, 50, 75, 100].forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${v}%</text>`; });
-      const baseRisk = this._linkRisk(base);
+      const baseRisk = link(base);
       let y = 16, cur = base;
       // baseline row
       g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (baseRisk / 100) * plotW)}" height="15" rx="2" fill="#9fb4c7"/>`;
@@ -513,26 +536,26 @@
       g += `<text x="${sx(baseRisk) + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
       y += rowH;
       active.forEach((c, k) => {
-        const before = this._linkRisk(cur), after = this._linkRisk(cur + c.contrib); cur += c.contrib;
+        const before = link(cur), after = link(cur + c.contrib); cur += c.contrib;
         const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);
         g += `<rect x="${x1}" y="${y}" width="${w}" height="15" rx="2" fill="${up ? PAL[k % PAL.length] : "#b02020"}"/>`;
         g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
         g += `<text x="${sx(Math.max(before, after)) + 5}" y="${y + 12}" font-size="10" fill="${up ? "#135ba8" : "#b02020"}" font-family="var(--sans)">${up ? "+" : ""}${(after - before).toFixed(1)}</text>`;
         y += rowH;
       });
-      const total = this._linkRisk(cur);
+      const total = link(cur);
       g += `<rect x="${x0}" y="${y}" width="${Math.max(1, (total / 100) * plotW)}" height="15" rx="2" fill="#0f7a54"/>`;
       g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="12" fill="#1a2430" font-weight="700" font-family="var(--serif)">Total</text>`;
       g += `<text x="${sx(total) + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPct(total)}</text>`;
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "300px"; svg.innerHTML = g;
     }
 
-    _drawDonut() {
+    _drawDonut(cb, link) {
       const svg = this._panel.querySelector("#fdonut"); if (!svg) return;
-      const { base, items } = this._formulaContribs();
+      const { base, items } = cb;
       const active = items.filter((c) => c.on);
       const cx = 105, cy = 104, rad = 66, w = 22;
-      const total = this._linkRisk(base + active.reduce((a, c) => a + c.contrib, 0));
+      const total = link(base + active.reduce((a, c) => a + c.contrib, 0));
       const totContrib = active.reduce((a, c) => a + Math.abs(c.contrib), 0) || 1;
       const fillFrac = total / 100;
       let ang = -Math.PI / 2, segs = "";
@@ -575,6 +598,41 @@
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return; this._predSel[+seg.dataset.pi] = +b.dataset.oi; this._renderLookup();
       }));
+    }
+
+    /* additive-risk donut + contribution waterfall (nomograms) */
+    _short(n, m) { return (n || "").length > m ? n.slice(0, m - 1) + "…" : n; }
+    _contribViz(active, steps, baselineRisk, totalRisk, subtitle) {
+      const PAL = ["#1f83e6", "#e0912b", "#0f9d6b", "#b02020", "#7b52c9", "#2aa7b8", "#c94f8e", "#5b7b3a", "#d06a1f"];
+      const cx = 110, cy = 110, rad = 66, sw = 27;
+      const totMag = active.reduce((a, c) => a + Math.abs(c.mag), 0) || 1;
+      const fill = Math.max(0, Math.min(1, totalRisk / 100));
+      const arc = (a1, a2, col) => { const x1 = cx + rad * Math.cos(a1), y1 = cy + rad * Math.sin(a1), x2 = cx + rad * Math.cos(a2), y2 = cy + rad * Math.sin(a2); const lg = (a2 - a1) > Math.PI ? 1 : 0; return `<path d="M ${x1} ${y1} A ${rad} ${rad} 0 ${lg} 1 ${x2} ${y2}" fill="none" stroke="${col}" stroke-width="${sw}"/>`; };
+      let ang = -Math.PI / 2, segs = "";
+      active.forEach((c, k) => { const frac = (Math.abs(c.mag) / totMag) * fill; if (frac <= 0) return; const a2 = ang + Math.min(frac, 0.9999) * 2 * Math.PI; segs += arc(ang, a2, PAL[k % PAL.length]); ang = a2; });
+      const donut = `<svg viewBox="0 0 220 220" width="206" height="206"><circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef2f6" stroke-width="${sw}"/>${segs}<text x="${cx}" y="${cy - 1}" text-anchor="middle" style="font-family:ui-serif,Georgia,serif" font-size="37" fill="#0e1c2b">${fmtPct(totalRisk)}</text><text x="${cx}" y="${cy + 21}" text-anchor="middle" font-size="11.5" fill="#5c6b7a">risk${subtitle ? " " + esc(subtitle) : ""}</text></svg>`;
+      const leg = active.length ? active.map((c, k) => `<span><i style="background:${PAL[k % PAL.length]}"></i>${esc(c.name)} (+${c.lab != null ? c.lab : c.mag})</span>`).join("") : `<span style="color:#8a97a4">Baseline &mdash; no risk factors selected</span>`;
+      const rows = [{ name: "Baseline", to: baselineRisk, base: true }].concat(steps.map(s => ({ name: s.name, from: s.from, to: s.to }))).concat([{ name: "Total", to: totalRisk, total: true }]);
+      const W = 560, rowH = 30, lx = 170, plotW = W - lx - 48, top = 10;
+      const H = top + rows.length * rowH + 20;
+      const maxV = 100;
+      const sx = v => lx + (Math.max(0, Math.min(v, maxV)) / maxV) * plotW;
+      let g = "";
+      [0, 25, 50, 75, 100].forEach(v => { g += `<line x1="${sx(v)}" y1="${top}" x2="${sx(v)}" y2="${H - 18}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 5}" text-anchor="middle" font-size="10" fill="#98a6b5">${v}%</text>`; });
+      g += `<line x1="${lx}" y1="${top}" x2="${lx}" y2="${H - 18}" stroke="#e6ecf2"/>`;
+      rows.forEach((r, i) => {
+        const y = top + 5 + i * rowH;
+        const col = r.base ? "#9fb4c7" : r.total ? "#0f9d6b" : "#1f83e6";
+        const x1 = (r.base || r.total) ? sx(0) : sx(r.from), x2 = sx(r.to);
+        g += `<rect x="${Math.min(x1, x2)}" y="${y}" width="${Math.max(2, Math.abs(x2 - x1))}" height="17" rx="3" fill="${col}"/>`;
+        g += `<text x="${lx - 8}" y="${y + 13}" text-anchor="end" font-size="12" fill="${r.base ? "#5c6b7a" : "#0e1c2b"}"${r.total ? ' style="font-family:ui-serif,Georgia,serif" font-weight="700"' : ""}>${esc(this._short(r.name, 24))}</text>`;
+        const lbl = (r.base || r.total) ? fmtPct(r.to) : "+" + fmtPct(r.to - r.from);
+        g += `<text x="${x2 + 6}" y="${y + 13}" font-size="11.5" fill="${r.total ? "#0f9d6b" : r.base ? "#5c6b7a" : "#135ba8"}"${r.total ? ' font-weight="700"' : ""} font-variant-numeric="tabular-nums">${lbl}</text>`;
+      });
+      const water = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Contribution waterfall">${g}</svg>`;
+      const dq = this._panel.querySelector("#viz-donut"); if (dq) dq.innerHTML = donut;
+      const lq = this._panel.querySelector("#viz-dleg"); if (lq) lq.innerHTML = leg;
+      const wq = this._panel.querySelector("#viz-water"); if (wq) wq.innerHTML = water;
     }
 
     _drawBars(rows, active) {
