@@ -72,6 +72,16 @@
         "label": "score 1",
         "score": 1,
         "pct": 13.0
+      },
+      {
+        "label": "score 2",
+        "score": 2,
+        "pct": 46.0
+      },
+      {
+        "label": "score 3",
+        "score": 3,
+        "pct": 46.0
       }
     ]
   },
@@ -79,6 +89,6 @@
     "extraction_method": "cff_export",
     "source": "export_42_2026-04-07_172813.cpfm",
     "review_status": "unreviewed",
-    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form. | score->risk rows re-derived from CFF (QA fix)."
   }
 }
