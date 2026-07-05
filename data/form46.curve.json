@@ -3,14 +3,14 @@
   "id": "form46",
   "kind": "curve",
   "meta": {
-    "title": "Drug Withdrawal",
-    "doi": "10.1016/S1474-4422(17)30114-X",
-    "authors": "Lamberink HJ, Otte WM, Geerts AT, et al.",
-    "journal": "The Lancet Neurology",
-    "year": 2017,
-    "outcome": "Individualised prediction model of seizure recurrence and long-term outcomes after withdrawal of antiepileptic drugs in seizure-free patients: a systematic review and individual participant data meta-analysis",
-    "clinical_utility": "People with epilepsy who became seizure-free while taking antiepileptic drugs might consider discontinuing their medication, with the possibility of increased quality of life because of the elimination of adverse events. The risk with this action, however, is seizure recurrence. The objectives of our study were to identify predictors of seizure recurrence and long-term seizure outcomes and to produce nomograms for estimation of individualised outcomes.",
-    "pmid": "28483337"
+    "title": "ASM Withdrawal after Epilepsy Surgery (WAMS)",
+    "doi": "10.1093/brain/awac437",
+    "cff_info": "<div style=\"margin-top:10px;border:1px solid #ddd;padding:10px;border-radius:5px\"><h4>WAMS — ASM withdrawal after epilepsy surgery</h4><p><i>Ferreira-Atuesta C, de Tisi J, McEvoy AW, &hellip; Galovic M. Brain 2023;146(6):2389&ndash;2398.</i></p><p><b>DOI:</b> <a href=\"https://doi.org/10.1093/brain/awac437\" target=\"_blank\">10.1093/brain/awac437</a> &middot; full individualised tool: <a href=\"https://predictepilepsy.github.io/\" target=\"_blank\">predictepilepsy.github.io (WAMS)</a></p><h4>Model</h4><p>Cox proportional-hazards model of seizure recurrence (other than focal non-motor aware seizures) after starting ASM withdrawal following resective epilepsy surgery in adults. Derivation n=231, external validation n=500; c-statistic 0.67 (0.63&ndash;0.71).</p><h4>Independent predictors (adjusted hazard ratios)</h4><ul><li><b>Focal non-motor aware seizures after surgery &amp; before withdrawal:</b> aHR 5.5 (2.7&ndash;11.1) &mdash; strongest predictor</li><li><b>History of focal-to-bilateral tonic-clonic seizures (FBTCS) before surgery:</b> aHR 1.6 (0.9&ndash;2.8)</li><li><b>Time from surgery to start of withdrawal:</b> aHR 0.9 (0.8&ndash;0.9) per unit</li><li><b>Number of ASMs at time of surgery:</b> aHR 1.2 (0.9&ndash;1.6)</li></ul><p style=\"font-size:12px;color:#666\">The two curves shown approximate absence vs presence of pre-surgical FBTCS (curve separation &asymp;1.6&times;, matching the published aHR). For fully individualised prediction across all four predictors, use the WAMS tool linked above.</p></div>",
+    "authors": "Ferreira-Atuesta C, de Tisi J, McEvoy AW, et al.",
+    "journal": "Brain",
+    "year": 2023,
+    "clinical_utility": "Individualised risk of seizure recurrence after starting antiseizure-medication withdrawal following resective epilepsy surgery in adults; supports counselling on postoperative ASM policy.",
+    "outcome": "Predictive models for starting antiseizure medication withdrawal following epilepsy surgery in adults"
   },
   "thresholds": {
     "group1": 20.0,
@@ -22,11 +22,11 @@
     "month_max_cosy": 12,
     "horizon_months": 12,
     "cosy_axis_max": 40,
-    "selector": "Risk group",
-    "selector_info": "",
+    "selector": "History of FBTCS before surgery",
+    "selector_info": "Focal-to-bilateral tonic-clonic seizures before surgery. The two cumulative-risk curves correspond to absence (No) vs presence (Yes); their separation matches the published aHR of 1.6.",
     "strata": {
-      "Group 1": {
-        "display": "Group 1",
+      "FBTCS before surgery: No": {
+        "display": "FBTCS before surgery: No",
         "cum": {
           "0": 0.0,
           "1": 2.0,
@@ -70,10 +70,11 @@
           "12": 6.6
         },
         "g1": 0,
-        "g2": null
+        "g2": null,
+        "info": "Lower-risk stratum (no pre-surgical focal-to-bilateral tonic-clonic seizures)."
       },
-      "Group 2": {
-        "display": "Group 2",
+      "FBTCS before surgery: Yes": {
+        "display": "FBTCS before surgery: Yes",
         "cum": {
           "0": 0.0,
           "1": 4.0,
@@ -117,14 +118,15 @@
           "12": 15.17
         },
         "g1": 0,
-        "g2": null
+        "g2": null,
+        "info": "Higher-risk stratum (history of pre-surgical focal-to-bilateral tonic-clonic seizures)."
       }
     }
   },
   "provenance": {
-    "extraction_method": "cff_export",
-    "source": "export_46_2026-04-07_172830.cpfm",
+    "extraction_method": "pipeline_test_run",
+    "source": "CFF export_46 curve arrays (real) + metadata corrected via PubMed (PMID 36415957)",
     "review_status": "unreviewed",
-    "notes": "Cumulative+COSY parsed from CFF curve equations; complete meta from paper; verify vs live form."
+    "notes": "CORRECTED 2026-07-05: form46 was mis-attributed to Lamberink 2017; the actual model is Ferreira-Atuesta/Galovic, Brain 2023 (WAMS). Curve arrays retained from CFF; two strata relabelled as FBTCS No/Yes (inferred: curve ratio 1.55 at 24mo ~ published FBTCS aHR 1.6). Focal-non-motor-aware-seizures (dominant aHR 5.5) and the two continuous predictors are NOT selectable here — full 4-variable individualised prediction needs the paper's baseline survival / WAMS nomogram (server-side Shiny; paywalled paper). Documented in cff_info."
   }
 }
