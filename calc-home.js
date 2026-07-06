@@ -41,11 +41,11 @@
   };
 
   var RESOURCES = [
-    { name: "Seizure Prognosis", url: "https://seizureprognosis.info", desc: "Individualised seizure-freedom prediction", ic: "\u{1F4C8}" },
-    { name: "Epilepsy Prediction Tools", url: "http://epilepsypredictiontools.info", desc: "Paediatric ASM-withdrawal nomograms (TimeToStop)", ic: "\u{1F9EE}" },
-    { name: "WAMS", url: "https://predictepilepsy.github.io", desc: "ASM withdrawal after epilepsy surgery", ic: "\u{1F489}" },
-    { name: "Combined model", url: "https://wesleykerr.shinyapps.io/Combined/", desc: "Combined epilepsy-prognosis model", ic: "\u{1F52C}" },
-    { name: "More information", url: "/information/", desc: "About the models, variables & COSY", ic: "\u{2139}\u{FE0F}" },
+    { name: "seizureprognosis.info", url: "https://seizureprognosis.info", desc: "Cumulative seizure-risk and COSY curves from published prognostic studies, by clinical scenario.", ic: "\u{1F4C8}" },
+    { name: "epilepsypredictiontools.info", url: "https://epilepsypredictiontools.info", desc: "Nomograms for epilepsy onset, AED withdrawal, surgery outcome and JME.", ic: "\u{1F9EE}" },
+    { name: "predictepilepsy.github.io", url: "https://predictepilepsy.github.io", desc: "WAMS — individualised risk of ASM withdrawal after epilepsy surgery.", ic: "\u{1F489}" },
+    { name: "wesleykerr.shinyapps.io", url: "https://wesleykerr.shinyapps.io/Combined/", desc: "Combined score for the likelihood of dissociative (functional / PNES) vs epileptic seizures.", ic: "\u{1F52C}" },
+    { name: "More information", url: "https://predictepilepsy.com/information/", desc: "Model background, variables and the COSY concept.", ic: "\u{2139}\u{FE0F}" },
   ];
   var CURVE = '<svg class="crv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
 
