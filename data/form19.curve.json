@@ -430,7 +430,8 @@
         "g1": 5,
         "g2": null
       }
-    }
+    },
+    "selector_info": "Select the subgroup matching the patient. Curves are stratified either by who initiated ASM tapering (patient- vs physician-initiated) or by treatment status (untreated vs treated); each option shows the seizure-recurrence curve reported for that subgroup in EGTCA."
   },
   "provenance": {
     "extraction_method": "cff_export",
