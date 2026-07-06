@@ -34,6 +34,13 @@
       { ab: "Epi-PASS", fs: 15, slug: "calc-epi-pass", name: "Epi-PASS", desc: "Epilepsy after an acute symptomatic seizure" } ] },
   ];
 
+  var RESOURCES = [
+    { name: "Seizure Prognosis", url: "https://seizureprognosis.info", desc: "Individualised seizure-freedom prediction", ic: "\u{1F4C8}" },
+    { name: "Epilepsy Prediction Tools", url: "http://epilepsypredictiontools.info", desc: "Paediatric ASM-withdrawal nomograms (TimeToStop)", ic: "\u{1F9EE}" },
+    { name: "WAMS", url: "https://predictepilepsy.github.io", desc: "ASM withdrawal after epilepsy surgery", ic: "\u{1F489}" },
+    { name: "Combined model", url: "https://wesleykerr.shinyapps.io/Combined/", desc: "Combined epilepsy-prognosis model", ic: "\u{1F52C}" },
+    { name: "More information", url: "/information/", desc: "About the models, variables & COSY", ic: "\u{2139}\u{FE0F}" },
+  ];
   var CURVE = '<svg class="crv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
 
   var CSS = "\
@@ -67,6 +74,14 @@
   .card .nm{font-weight:750;font-size:17px;color:var(--ink)}\
   .card .ds{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4}\
   .card .go{font-size:12.5px;font-weight:650;color:var(--az);margin-top:8px}\
+  .gh2 .rih{font-size:26px}\
+  .rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}\
+  .rcard{display:flex;align-items:center;gap:13px;border:1.5px solid #e6edf4;border-radius:16px;padding:14px 16px;text-decoration:none;color:inherit;background:#fbfdff;transition:.16s}\
+  .rcard:hover{border-color:var(--az);box-shadow:0 8px 20px rgba(19,91,168,.1);transform:translateY(-1px)}\
+  .rcard .ric{font-size:24px;flex:0 0 auto}\
+  .rcard .rtx{min-width:0}.rcard .rn,.rcard .rd{display:block}\
+  .rcard .rn{font-weight:700;font-size:15.5px}.rcard .rd{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}\
+  .rcard .rar{margin-left:auto;color:var(--az);font-weight:700;font-size:16px}\
   .more{text-align:center;margin-top:36px}\
   .more a{color:var(--az);font-weight:650;text-decoration:none;font-size:15px}\
   .more a:hover{text-decoration:underline}\
@@ -93,8 +108,17 @@
           '<h2>' + esc(g.name) + '</h2></div><div class="cards">' + cards + '</div></section>';
       }).join("");
 
+      var resCards = RESOURCES.map(function (r) {
+        var ext = /^https?:/.test(r.url);
+        return '<a class="rcard" href="' + r.url + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + '>' +
+          '<span class="ric">' + r.ic + '</span><span class="rtx"><span class="rn">' + esc(r.name) + '</span>' +
+          '<span class="rd">' + esc(r.desc) + '</span></span><span class="rar">' + (ext ? "↗" : "→") + '</span></a>';
+      }).join("");
+      var resources = '<section class="grp"><div class="gh gh2"><span class="rih">\u{1F517}</span>' +
+        '<h2>Related tools &amp; resources</h2></div><div class="rcards">' + resCards + '</div></section>';
+
       sr.innerHTML = "<style>" + CSS + "</style>" +
-        '<div class="wrap">' + groups +
+        '<div class="wrap">' + groups + resources +
         '<div class="more"><a href="/variables-and-cosy/">Browse all models &amp; the calculator finder &rarr;</a></div></div>';
     }
   }
