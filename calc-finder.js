@@ -24,6 +24,7 @@
     acute_sympt: "Acute symptomatic seizure", first_seizure: "First unprovoked seizure",
     two_seizures: "After two unprovoked seizures", withdrawal: "Stopping antiseizure medication",
     surgery: "After epilepsy surgery",
+    remission: "After a period of remission", drug_resistance: "Predicting drug resistance",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -55,6 +56,8 @@
     ["calc-return-driving-first-seizure", "Return to Driving", "When is it safe to drive after a first-ever seizure?", "g2", "first_seizure"],
     ["calc-epilepsy-first-seizure-dementia", "First Seizure in Dementia", "Epilepsy risk after a first unprovoked seizure in dementia.", "g2", "first_seizure"],
     ["calc-hauser-cosy", "After Two Unprovoked Seizures", "Recurrence risk after two unprovoked seizures (Hauser).", "g2", "two_seizures"],
+    ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
+    ["calc-jme-drug-resistance", "JME Drug-Resistance", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy (Stevelink).", "g2", "drug_resistance"],
 
     ["calc-asm-withdrawal-cosy", "ASM Withdrawal (+ EEG)", "Seizure recurrence after ASM withdrawal, incl. EEG findings.", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
