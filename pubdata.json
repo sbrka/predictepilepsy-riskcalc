@@ -1,0 +1,82 @@
+[
+ {
+  "id":"prognostic-models",
+  "title":"Prognostic models for seizures and epilepsy after stroke, tumors and traumatic brain injury",
+  "authorsShort":"Schubert KM, Schmick A, Stattmann M, Galovic M",
+  "authors":[
+   {"n":"Kai Michael Schubert","a":"Dept. of Neurology, Clinical Neuroscience Center, University Hospital & University of Zurich, Switzerland"},
+   {"n":"Anton Schmick","a":"Dept. of Neurology, Clinical Neuroscience Center, University Hospital & University of Zurich, Switzerland"},
+   {"n":"Miranda Stattmann","a":"Dept. of Neurology, Clinical Neuroscience Center, University Hospital & University of Zurich, Switzerland"},
+   {"n":"Marian Galovic","a":"Dept. of Neurology, Clinical Neuroscience Center, University Hospital & University of Zurich, Switzerland"}
+  ],
+  "journal":"Clinical Neurophysiology Practice","journalShort":"Clin Neurophysiol Pract",
+  "year":2025,"vol":"10","pages":"116–128","type":"Review","oa":true,
+  "doi":"10.1016/j.cnp.2025.02.008","pmid":"40160930","pmcid":"PMC11952856",
+  "abstract":"Epilepsy is a frequent consequence of acute brain injuries, such as stroke, brain tumors, and traumatic brain injury (TBI). Accurate prediction of epilepsy is essential for early intervention and improved patient outcomes. This review evaluates the best-established prognostic models, including the SeLECT and CAVE scores, which estimate the risk of developing seizures and epilepsy following these injuries. The review highlights their clinical applicability, predictive accuracy, and limitations for different etiologies. In addition to providing practical tables for risk estimation, we also offer user-friendly online calculators for these models at www.predictepilepsy.com to facilitate clinical implementation. These tools help identify high-risk patients and support decision-making for follow-up and treatment. Furthermore, we discuss the potential of integrating electrophysiological data, including EEG biomarkers, to further enhance prediction accuracy and patient care. These insights highlight the need for further refinement and validation of predictive models, enabling more personalized treatment strategies and better patient care.",
+  "keyPoints":[
+   "Reviews the best-established prognostic models — including the SeLECT and CAVE scores — for seizures and epilepsy after stroke, brain tumors and TBI.",
+   "Compares their clinical applicability, predictive accuracy and limitations across different etiologies.",
+   "Provides practical risk-estimation tables plus free online calculators at predictepilepsy.com.",
+   "Highlights the potential of EEG biomarkers to further sharpen prediction.",
+   "Calls for continued refinement and external validation to enable personalized care."
+  ],
+  "keywords":["Post-stroke epilepsy","Brain tumor-related epilepsy","Post-traumatic epilepsy","Prognostic model","EEG biomarkers"],
+  "links":{"journal":"https://doi.org/10.1016/j.cnp.2025.02.008","pmc":"https://pmc.ncbi.nlm.nih.gov/articles/PMC11952856/","pdf":"https://pmc.ncbi.nlm.nih.gov/articles/PMC11952856/pdf/"},
+  "video":"https://predictepilepsy.com/wp-content/uploads/2025/04/Schubert_et_al_2025_5-Kopie.mp4",
+  "videoCredit":"Explainer video created by Ms. Kaimi Ito, medical student, Kagoshima University, Japan.",
+  "accent":"#135ba8"
+ },
+ {
+  "id":"driving",
+  "title":"Driving in people with seizures and epilepsy",
+  "authorsShort":"Schubert KM, Specht U, Lawn ND, Mégevand P, Bonnett LJ, Marson AG, Krauss GL, Galovic M",
+  "authors":[
+   {"n":"Kai Michael Schubert","a":"University Hospital & University of Zurich, Switzerland"},
+   {"n":"Ulrich Specht","a":"Krankenhaus Mara, Bethel Epilepsy Centre, Bielefeld, Germany"},
+   {"n":"Nicholas D. Lawn","a":"Western Australian Adult Epilepsy Service, Perth, Australia"},
+   {"n":"Pierre Mégevand","a":"University Hospitals of Geneva, Switzerland"},
+   {"n":"Laura J. Bonnett","a":"University of Liverpool, UK"},
+   {"n":"Anthony G. Marson","a":"University of Liverpool & Walton Centre NHS Foundation Trust, UK"},
+   {"n":"Gregory L. Krauss","a":"Johns Hopkins University, Baltimore, USA"},
+   {"n":"Marian Galovic","a":"University Hospital & University of Zurich, Switzerland"}
+  ],
+  "journal":"The Lancet Neurology","journalShort":"Lancet Neurol",
+  "year":2025,"vol":"24","issue":"6","pages":"486–487","type":"Correspondence","oa":false,
+  "doi":"10.1016/S1474-4422(25)00170-X","pmid":"40409312","erratum":"Erratum in: Lancet Neurol 2025;24(7):e10",
+  "abstract":"",
+  "summary":"A correspondence piece in The Lancet Neurology on driving regulations and individualized seizure-recurrence risk for people with epilepsy — arguing that fixed seizure-free intervals should be complemented by dynamic, model-based estimates of the near-term risk of a seizure while driving.",
+  "keyPoints":[
+   "Driving eligibility for people with epilepsy still relies on fixed, one-size-fits-all seizure-free intervals.",
+   "Argues these should be complemented by individualized, near-term seizure-risk estimates.",
+   "Dynamic, model-based risk (e.g., COSY) can better balance road safety with personal mobility."
+  ],
+  "keywords":["Driving regulations","Seizure recurrence risk","Public safety","Individualized prediction"],
+  "links":{"journal":"https://doi.org/10.1016/S1474-4422(25)00170-X","pmid":"https://pubmed.ncbi.nlm.nih.gov/40409312/"},
+  "accent":"#1b6fc4"
+ },
+ {
+  "id":"dynamic-disease",
+  "title":"Epilepsy as a dynamic disease: Toward actionable, individualized seizure risk prediction",
+  "authorsShort":"Schubert KM, Marson AG, Trinka E, Galovic M",
+  "authors":[
+   {"n":"Kai Michael Schubert","a":"University Hospital & University of Zurich, Switzerland"},
+   {"n":"Anthony G. Marson","a":"University of Liverpool & Walton Centre NHS Foundation Trust, UK"},
+   {"n":"Eugen Trinka","a":"Christian Doppler University Hospital, Paracelsus Medical University, Salzburg, Austria"},
+   {"n":"Marian Galovic","a":"University Hospital & University of Zurich, Switzerland"}
+  ],
+  "journal":"Epilepsia","journalShort":"Epilepsia",
+  "year":2025,"vol":"66","issue":"12","pages":"4654–4666","type":"Review","oa":true,
+  "doi":"10.1111/epi.18602","pmid":"40824375","pmcid":"PMC12779318",
+  "abstract":"The current definition of epilepsy allows diagnosis after a single unprovoked seizure if the estimated 10-year recurrence risk is ≥60%. While this framework is grounded in epidemiological evidence, it does not align with the shorter time horizons that guide many clinical and personal decisions. In acquired epilepsies, such as those following stroke, traumatic brain injury, or CNS infections, most recurrences occur within 1–2 years, with risk declining sharply thereafter. This temporal clustering challenges the use of static, long-term risk thresholds in isolation. Dynamic tools, such as the Chance of an Occurrence of a Seizure in the Next Year (COSY) and validated prognostic models (e.g., SeLECT, CAVE, RISE), offer recalculable, near-term estimates that reflect evolving patient status. These metrics can improve communication, inform treatment thresholds through Number Needed to Treat (NNT) calculations, and enhance clinical trial recruitment by targeting periods of highest risk. However, barriers remain, including limited integration into guidelines, gaps in external validation, and the \"Oedipus effect,\" where probabilistic predictions influence patient behavior, treatment decisions, and research outcomes. Incorporating individualized, time-sensitive risk prediction into clinical frameworks may better align diagnostic definitions with patient needs, reduce overtreatment, and optimize both everyday care and research in epilepsy prevention and management.",
+  "keyPoints":[
+   "The ≥60% 10-year recurrence definition doesn't match the shorter horizons that drive most real clinical and personal decisions.",
+   "In acquired epilepsies, most recurrences occur within 1–2 years, then decline sharply.",
+   "Dynamic tools — COSY and validated models (SeLECT, CAVE, RISE) — give recalculable, near-term risk.",
+   "These enable NNT-based treatment thresholds and better clinical-trial recruitment.",
+   "Barriers remain: guideline integration, external validation, and the probabilistic \"Oedipus effect.\""
+  ],
+  "keywords":["COSY","Acquired epilepsy","Individualized prediction","Number needed to treat","Prognostic models","Seizure recurrence risk"],
+  "links":{"journal":"https://doi.org/10.1111/epi.18602","pmc":"https://pmc.ncbi.nlm.nih.gov/articles/PMC12779318/","pdf":"https://pmc.ncbi.nlm.nih.gov/articles/PMC12779318/pdf/"},
+  "accent":"#0e4a8a"
+ }
+]
