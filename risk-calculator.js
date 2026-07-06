@@ -198,6 +198,7 @@
     _build() {
       const d = this.data, m = d.meta || {};
       const hasNav = this.hasAttribute("nav");
+      const noClassic = this.hasAttribute("no-classic");   // New-Design-only calculators (no CFF form): hide the Classic tab
       const back = this.getAttribute("back-href") || "";
       const root = document.createElement("div");
       root.innerHTML = `<style>${CSS}</style>
@@ -205,7 +206,7 @@
           <div class="banner"><div class="bwrap"><span class="btitle">predictepilepsy<span class="bdot">.com</span></span><span class="btag">Epilepsy prognostic calculators</span></div></div>
           ${hasNav ? `<div class="topstrip">
             <button class="backbtn" id="back">&#8249;&nbsp;All calculators</button>
-            <div class="viewtabs" id="viewtabs"><button class="on" data-view="new">New design</button><button data-view="classic">Classic (CFF)</button></div>
+            ${noClassic ? `` : `<div class="viewtabs" id="viewtabs"><button class="on" data-view="new">New design</button><button data-view="classic">Classic (CFF)</button></div>`}
           </div>` : ``}
           <header class="top">
             <div class="brandrow">
