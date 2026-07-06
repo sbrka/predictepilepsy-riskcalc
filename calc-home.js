@@ -91,8 +91,34 @@
 
   function esc(s){return String(s).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
 
+  var THEME = "\
+  /* modern azure buttons (task 3) */\
+  .elementor-button{background:linear-gradient(150deg,#2472c8,#0e4a8a)!important;color:#fff!important;border:0!important;\
+    border-radius:999px!important;padding:12px 26px!important;font-weight:650!important;letter-spacing:.2px;\
+    box-shadow:0 6px 16px rgba(14,74,138,.24)!important;transition:transform .16s,box-shadow .16s!important}\
+  .elementor-button:hover{transform:translateY(-2px)!important;box-shadow:0 11px 24px rgba(14,74,138,.32)!important;color:#fff!important}\
+  .elementor-button .elementor-button-text{color:#fff!important}\
+  /* disclaimer as a soft card (task 2) */\
+  .elementor-element-578dbb8{background:#f3f8fd!important;border:1px solid #d9e7f6!important;border-radius:20px!important;\
+    max-width:1120px;margin:34px auto 40px!important;padding:24px 28px!important;box-shadow:0 6px 20px rgba(19,91,168,.06)!important}\
+  .elementor-element-578dbb8 .elementor-heading-title{color:#0e4a8a!important;font-size:20px!important;font-weight:750!important;margin-bottom:8px!important}\
+  .elementor-element-578dbb8 .elementor-icon-list-text,.elementor-element-578dbb8 p,.elementor-element-578dbb8 li{color:#5c6b7a!important;font-size:13px!important;line-height:1.6!important}\
+  .elementor-element-578dbb8 .elementor-icon-list-icon svg,.elementor-element-578dbb8 .elementor-icon-list-icon i{color:#9db6d4!important}\
+  /* intro + news polish (task 5) — content unchanged */\
+  .elementor-element-259b348 .elementor-heading-title{color:#0e4a8a!important;letter-spacing:-.2px}\
+  .elementor-element-e8254ca .elementor-heading-title{font-size:26px!important;font-weight:800!important}\
+  .elementor-element-adca1b8{background:#f7fbff;border:1px solid #e6eff8;border-radius:22px;padding:26px 28px!important;box-shadow:0 8px 26px rgba(19,91,168,.06)}\
+  .elementor-element-adca1b8 .elementor-widget-text-editor{color:#3c4a5a;font-size:16px;line-height:1.6}\
+  ";
+  function injectTheme() {
+    if (document.getElementById("pep-theme")) return;
+    var st = document.createElement("style"); st.id = "pep-theme"; st.textContent = THEME;
+    document.head.appendChild(st);
+  }
+
   class CalcHome extends HTMLElement {
     connectedCallback() {
+      injectTheme();
       var sr = this.attachShadow({ mode: "open" });
       var groups = GROUPS.map(function (g) {
         var cards = g.scores.map(function (s) {
