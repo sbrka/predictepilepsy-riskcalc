@@ -69,7 +69,7 @@ class PubShelf extends HTMLElement{
   .m-jrnl{font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;opacity:.95}
   .m-cite{font-size:12.5px;opacity:.85;margin-top:4px}
   .m-title{font-family:Georgia,serif;font-size:24px;line-height:1.22;font-weight:700;margin:12px 0 0;max-width:96%}
-  .m-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.16);
+  .m-close{position:absolute;top:16px;right:16px;z-index:5;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.16);
     color:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;transition:.15s}
   .m-close:hover{background:rgba(255,255,255,.3);transform:rotate(90deg)}
   .m-body{padding:0 30px 30px}
