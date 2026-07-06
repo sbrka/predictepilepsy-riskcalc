@@ -1,113 +1,125 @@
 {
-  "schema_version": "1.0",
-  "id": "form9",
-  "kind": "score",
-  "meta": {
-    "title": "LANE-Score",
-    "doi": "10.1016/j.eplepsyres.2021.106600",
-    "cff_info": "<div id=\"fieldInfoLANE\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>LANE Score</h4>\n  <p><i>Wang et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1016/j.eplepsyres.2021.106600\" target=\"_blank\">10.1016/j.eplepsyres.2021.106600</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Lobar Hemorrhage:</b>\n      <ul>\n        <li>Yes: 1 point</li>\n      </ul>\n    </li>\n    <li><b>Age:</b>\n      <ul>\n        <li><65 years: 1 point</li>\n      </ul>\n    </li>\n    <li><b>NIHSS Score:</b>\n      <ul>\n        <li>≥15: 2 points</li>\n      </ul>\n    </li>\n    <li><b>Seizures:</b>\n      <ul>\n        <li>Early seizures: 2 points</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk by LANE Score</h4>\n  <p>After 2 years:</p>\n  <ul>\n    <li>LANE score ≥ 1: <b>11.9%</b> risk</li>\n    <li>LANE score ≥ 2: <b>29.2%</b> risk</li>\n    <li>LANE score ≥ 3: <b>56.4%</b> risk</li>\n    <li>LANE score ≥ 4: <b>81.8%</b> risk</li>\n    <li>LANE score ≥ 5: <b>100%</b> risk</li>\n    <li>LANE score = 6: <b>No data available</b></li>\n  </ul>\n  <h4>Positive Predictive Value</h4>\n  <p>\n    There are no direct risk estimates for each individual point. Refer to <b>Table 4</b> in the publication for Positive Predictive Value (PPV) based on the cumulative score.\n  </p>\n  <h4>Clinical Utility</h4>\n  <p>\n    The LANE score is a useful tool for identifying patients at higher risk of late seizures following intracerebral hemorrhage (ICH). It supports clinical decision-making for closer monitoring and preventive strategies.\n  </p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Score Name</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">LANE Score</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Derivation: 602 patients, Hospital of Qingdao University (2014-2017)<br>\n          Validation: 521 patients, Qingdao Municipal Hospital (2015-2017)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Cox regression model</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Internal: Retrospective cohort (Affiliated Hospital of Qingdao University)<br>\n          External: Retrospective cohort (Qingdao Municipal Hospital)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          c-statistic: 0.83 (derivation), 0.78 (validation)<br>\n          Risk scores: 10.1% (0 points) to 100% (6 points)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          High (validated in a separate cohort)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Useful for closer monitoring and preventive strategies in patients at higher risk of late seizures.\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
-    "authors": "Wang Y, Li Z, Zhang X, et al.",
-    "journal": "Epilepsy Research",
-    "year": 2021,
-    "outcome": "Development and validation of a clinical score to predict late seizures after intracerebral hemorrhage in Chinese"
-  },
-  "thresholds": {
-    "group1": 20,
-    "group2": 2
-  },
-  "predictors": [
+ "schema_version": "1.0",
+ "id": "form9",
+ "kind": "score",
+ "meta": {
+  "title": "LANE-Score",
+  "doi": "10.1016/j.eplepsyres.2021.106600",
+  "cff_info": "<div id=\"fieldInfoLANE\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>LANE Score</h4>\n  <p><i>Wang et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1016/j.eplepsyres.2021.106600\" target=\"_blank\">10.1016/j.eplepsyres.2021.106600</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Lobar Hemorrhage:</b>\n      <ul>\n        <li>Yes: 1 point</li>\n      </ul>\n    </li>\n    <li><b>Age:</b>\n      <ul>\n        <li><65 years: 1 point</li>\n      </ul>\n    </li>\n    <li><b>NIHSS Score:</b>\n      <ul>\n        <li>≥15: 2 points</li>\n      </ul>\n    </li>\n    <li><b>Seizures:</b>\n      <ul>\n        <li>Early seizures: 2 points</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk by LANE Score</h4>\n  <p>After 2 years:</p>\n  <ul>\n    <li>LANE score ≥ 1: <b>11.9%</b> risk</li>\n    <li>LANE score ≥ 2: <b>29.2%</b> risk</li>\n    <li>LANE score ≥ 3: <b>56.4%</b> risk</li>\n    <li>LANE score ≥ 4: <b>81.8%</b> risk</li>\n    <li>LANE score ≥ 5: <b>100%</b> risk</li>\n    <li>LANE score = 6: <b>No data available</b></li>\n  </ul>\n  <h4>Positive Predictive Value</h4>\n  <p>\n    There are no direct risk estimates for each individual point. Refer to <b>Table 4</b> in the publication for Positive Predictive Value (PPV) based on the cumulative score.\n  </p>\n  <h4>Clinical Utility</h4>\n  <p>\n    The LANE score is a useful tool for identifying patients at higher risk of late seizures following intracerebral hemorrhage (ICH). It supports clinical decision-making for closer monitoring and preventive strategies.\n  </p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Score Name</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">LANE Score</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Derivation: 602 patients, Hospital of Qingdao University (2014-2017)<br>\n          Validation: 521 patients, Qingdao Municipal Hospital (2015-2017)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Cox regression model</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Internal: Retrospective cohort (Affiliated Hospital of Qingdao University)<br>\n          External: Retrospective cohort (Qingdao Municipal Hospital)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          c-statistic: 0.83 (derivation), 0.78 (validation)<br>\n          Risk scores: 10.1% (0 points) to 100% (6 points)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          High (validated in a separate cohort)\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">\n          Useful for closer monitoring and preventive strategies in patients at higher risk of late seizures.\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+  "authors": "Wang Y, Li Z, Zhang X, et al.",
+  "journal": "Epilepsy Research",
+  "year": 2021,
+  "outcome": "Development and validation of a clinical score to predict late seizures after intracerebral hemorrhage in Chinese"
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 2
+ },
+ "predictors": [
+  {
+   "name": "Lobar Hemorrhage (L)",
+   "options": [
     {
-      "name": "Lobar Hemorrhage (L)",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 1
-        }
-      ],
-      "assess": "Lobar hemorrhage refers to bleeding located in the cortical lobes of the brain (frontal, parietal, temporal, or occipital), as opposed to deep brain structures such as the basal ganglia, thalamus, or brainstem. It is a significant predictor of late seizures. The study found an odds ratio (OR) of 2.34, meaning lobar hemorrhage more than doubles the risk compared to non-lobar hemorrhages."
+     "label": "No",
+     "points": 0
     },
     {
-      "name": "Age (A)",
-      "options": [
-        {
-          "label": ">65 years",
-          "points": 0
-        },
-        {
-          "label": "<65 years",
-          "points": 1
-        }
-      ],
-      "assess": "Age is defined as whether the patient is under 65 years at the time of intracerebral hemorrhage (ICH). Patients under 65 have an increased risk of late seizures. The odds ratio (OR) for age <65 years is 2.56, indicating over twice the risk compared to older patients."
-    },
-    {
-      "name": "NIHSS score (N)",
-      "options": [
-        {
-          "label": "<15 points",
-          "points": 0
-        },
-        {
-          "label": "≥15 points",
-          "points": 2
-        }
-      ],
-      "assess": "he NIHSS (National Institutes of Health Stroke Scale) measures stroke severity, with scores ranging from 0 (no symptoms) to 42 (most severe). A score of 15 or higher reflects severe neurological impairment and is associated with significantly increased seizure risk. The study reported an odds ratio (OR) of 3.12, meaning these patients are over three times more likely to develop late seizures."
-    },
-    {
-      "name": "Acute Symptomatic Seizures/ Early Seizures (E)",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 2
-        }
-      ],
-      "assess": "Early seizures are defined as seizures occurring within the first 7 days after the intracerebral hemorrhage (ICH). Early seizures is the strongest predictor of late seizures. The study found an odds ratio (OR) of 4.42, indicating a fourfold increase in risk for patients with early seizures."
+     "label": "Yes",
+     "points": 1
     }
-  ],
-  "model": {
-    "score_type": "points",
-    "horizon": "2 years",
-    "rows": [
-      {
-        "label": "score 1",
-        "score": 1,
-        "pct": 11.9
-      },
-      {
-        "label": "score 2",
-        "score": 2,
-        "pct": 29.2
-      },
-      {
-        "label": "score 3",
-        "score": 3,
-        "pct": 56.4
-      },
-      {
-        "label": "score 4",
-        "score": 4,
-        "pct": 81.8
-      },
-      {
-        "label": "score 5",
-        "score": 5,
-        "pct": 100.0
-      }
-    ]
+   ],
+   "assess": "Lobar hemorrhage refers to bleeding located in the cortical lobes of the brain (frontal, parietal, temporal, or occipital), as opposed to deep brain structures such as the basal ganglia, thalamus, or brainstem. It is a significant predictor of late seizures. The study found an odds ratio (OR) of 2.34, meaning lobar hemorrhage more than doubles the risk compared to non-lobar hemorrhages."
   },
-  "provenance": {
-    "extraction_method": "cff_export",
-    "source": "export_9_2026-04-07_172635.cpfm",
-    "review_status": "unreviewed",
-    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  {
+   "name": "Age (A)",
+   "options": [
+    {
+     "label": ">65 years",
+     "points": 0
+    },
+    {
+     "label": "<65 years",
+     "points": 1
+    }
+   ],
+   "assess": "Age is defined as whether the patient is under 65 years at the time of intracerebral hemorrhage (ICH). Patients under 65 have an increased risk of late seizures. The odds ratio (OR) for age <65 years is 2.56, indicating over twice the risk compared to older patients."
+  },
+  {
+   "name": "NIHSS score (N)",
+   "options": [
+    {
+     "label": "<15 points",
+     "points": 0
+    },
+    {
+     "label": "≥15 points",
+     "points": 2
+    }
+   ],
+   "assess": "he NIHSS (National Institutes of Health Stroke Scale) measures stroke severity, with scores ranging from 0 (no symptoms) to 42 (most severe). A score of 15 or higher reflects severe neurological impairment and is associated with significantly increased seizure risk. The study reported an odds ratio (OR) of 3.12, meaning these patients are over three times more likely to develop late seizures."
+  },
+  {
+   "name": "Acute Symptomatic Seizures/ Early Seizures (E)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Early seizures are defined as seizures occurring within the first 7 days after the intracerebral hemorrhage (ICH). Early seizures is the strongest predictor of late seizures. The study found an odds ratio (OR) of 4.42, indicating a fourfold increase in risk for patients with early seizures."
   }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "2 years",
+  "rows": [
+   {
+    "score": 0,
+    "pct": null,
+    "disp": "No data available",
+    "label": "score 0"
+   },
+   {
+    "label": "score 1",
+    "score": 1,
+    "pct": 11.9
+   },
+   {
+    "label": "score 2",
+    "score": 2,
+    "pct": 29.2
+   },
+   {
+    "label": "score 3",
+    "score": 3,
+    "pct": 56.4
+   },
+   {
+    "label": "score 4",
+    "score": 4,
+    "pct": 81.8
+   },
+   {
+    "label": "score 5",
+    "score": 5,
+    "pct": 100.0
+   },
+   {
+    "score": 6,
+    "pct": null,
+    "disp": "No data available",
+    "label": "score 6"
+   }
+  ]
+ },
+ "provenance": {
+  "extraction_method": "cff_export",
+  "source": "export_9_2026-04-07_172635.cpfm",
+  "review_status": "unreviewed",
+  "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+ }
 }

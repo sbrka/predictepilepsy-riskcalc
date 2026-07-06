@@ -1,199 +1,215 @@
 {
-  "schema_version": "1.0",
-  "id": "form44",
-  "kind": "score",
-  "meta": {
-    "title": "Glioma-Related Epilepsy Predictive Factors",
-    "doi": "10.3171/2020.12.JNS203351",
-    "cff_info": "<div id=\"fieldInfoGliomaPredictiveFactors\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Glioma-Related Epilepsy Predictive Factors</h4>\n  <p><i>Li et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.3171/2020.12.JNS203351\" target=\"_blank\">10.3171/2020.12.JNS203351</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Age:</b>\n      <ul>\n        <li>2.4 points: Age <45 years</li>\n        <li>0 points: Age ≥45 years</li>\n      </ul>\n    </li>\n    <li><b>Functional Deficit:</b>\n      <ul>\n        <li>0.2 points: Absent</li>\n        <li>0 points: Present</li>\n      </ul>\n    </li>\n    <li><b>Preoperative Epilepsy:</b>\n      <ul>\n        <li>10 points: Present</li>\n        <li>0 points: Absent</li>\n      </ul>\n    </li>\n    <li><b>Extent of Resection (EOR):</b>\n      <ul>\n        <li>3.5 points: Non-GTR</li>\n        <li>0 points: GTR</li>\n      </ul>\n    </li>\n    <li><b>Tumor Location (Temporal Lobe Involvement):</b>\n      <ul>\n        <li>4.2 points: Involved</li>\n        <li>0 points: Non-involved</li>\n      </ul>\n    </li>\n    <li><b>WHO Grade:</b>\n      <ul>\n        <li>3.3 points: Grade III</li>\n        <li>0 points: Grade IV</li>\n      </ul>\n    </li>\n    <li><b>IDH Mutation:</b>\n      <ul>\n        <li>1 point: Present</li>\n        <li>0 points: Absent</li>\n      </ul>\n    </li>\n    <li><b>Ki-67 Expression:</b>\n      <ul>\n        <li>1.6 points: ≤10%</li>\n        <li>0 points: >10%</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Cumulative risk of seizure 12 months post-surgery based on total score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">9.6 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">13.7 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">16.5 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">18.8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">20.8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">22.9 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">25.1 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">27.9 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Visualization</h4>\n  <p>Figure 2: A complex nomogram for predicting PTE.</p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">449 patients stratified by IDH mutation and 1p/19q codeletion status.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Multivariate logistic regression and Cox proportional hazards regression.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Retrospective cohort, single-center study.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No AUC or c-statistics reported. Performance is evaluated using odds ratios for specific factors.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited to single-center cohort, specific to glioma-related epilepsy).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Guides AED use and seizure management strategies in glioma patients.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
-    "authors": "Li L, Fang S, Li G, et al.",
-    "journal": "Journal of Neurosurgery",
-    "year": 2022,
-    "clinical_utility": "OBJECTIVE The aim of this study was to investigate the epidemiological characteristics, associated risk factors, and prognostic value of glioma-related epilepsy in patients with diffuse high-grade gliomas (DHGGs) that were diagnosed after the 2016 updated WHO classification was released. METHODS Data from 449 patients with DHGGs were retrospectively collected.",
-    "outcome": "Glioma-related epilepsy in patients with diffuse high-grade glioma after the 2016 WHO update: seizure characteristics, risk factors, and clinical outcomes"
-  },
-  "thresholds": {
-    "group1": 20,
-    "group2": 2
-  },
-  "predictors": [
+ "schema_version": "1.0",
+ "id": "form44",
+ "kind": "score",
+ "meta": {
+  "title": "Glioma-Related Epilepsy Predictive Factors",
+  "doi": "10.3171/2020.12.JNS203351",
+  "cff_info": "<div id=\"fieldInfoGliomaPredictiveFactors\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Glioma-Related Epilepsy Predictive Factors</h4>\n  <p><i>Li et al., 2021</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.3171/2020.12.JNS203351\" target=\"_blank\">10.3171/2020.12.JNS203351</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Age:</b>\n      <ul>\n        <li>2.4 points: Age <45 years</li>\n        <li>0 points: Age ≥45 years</li>\n      </ul>\n    </li>\n    <li><b>Functional Deficit:</b>\n      <ul>\n        <li>0.2 points: Absent</li>\n        <li>0 points: Present</li>\n      </ul>\n    </li>\n    <li><b>Preoperative Epilepsy:</b>\n      <ul>\n        <li>10 points: Present</li>\n        <li>0 points: Absent</li>\n      </ul>\n    </li>\n    <li><b>Extent of Resection (EOR):</b>\n      <ul>\n        <li>3.5 points: Non-GTR</li>\n        <li>0 points: GTR</li>\n      </ul>\n    </li>\n    <li><b>Tumor Location (Temporal Lobe Involvement):</b>\n      <ul>\n        <li>4.2 points: Involved</li>\n        <li>0 points: Non-involved</li>\n      </ul>\n    </li>\n    <li><b>WHO Grade:</b>\n      <ul>\n        <li>3.3 points: Grade III</li>\n        <li>0 points: Grade IV</li>\n      </ul>\n    </li>\n    <li><b>IDH Mutation:</b>\n      <ul>\n        <li>1 point: Present</li>\n        <li>0 points: Absent</li>\n      </ul>\n    </li>\n    <li><b>Ki-67 Expression:</b>\n      <ul>\n        <li>1.6 points: ≤10%</li>\n        <li>0 points: >10%</li>\n      </ul>\n    </li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Cumulative risk of seizure 12 months post-surgery based on total score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">9.6 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">10%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">13.7 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">20%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">16.5 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">30%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">18.8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">40%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">20.8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">50%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">22.9 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">60%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">25.1 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">70%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">27.9 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">80%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Visualization</h4>\n  <p>Figure 2: A complex nomogram for predicting PTE.</p>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">449 patients stratified by IDH mutation and 1p/19q codeletion status.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Multivariate logistic regression and Cox proportional hazards regression.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Validation Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Retrospective cohort, single-center study.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No AUC or c-statistics reported. Performance is evaluated using odds ratios for specific factors.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited to single-center cohort, specific to glioma-related epilepsy).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Guides AED use and seizure management strategies in glioma patients.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+  "authors": "Li L, Fang S, Li G, et al.",
+  "journal": "Journal of Neurosurgery",
+  "year": 2022,
+  "clinical_utility": "OBJECTIVE The aim of this study was to investigate the epidemiological characteristics, associated risk factors, and prognostic value of glioma-related epilepsy in patients with diffuse high-grade gliomas (DHGGs) that were diagnosed after the 2016 updated WHO classification was released. METHODS Data from 449 patients with DHGGs were retrospectively collected.",
+  "outcome": "Glioma-related epilepsy in patients with diffuse high-grade glioma after the 2016 WHO update: seizure characteristics, risk factors, and clinical outcomes"
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 2
+ },
+ "predictors": [
+  {
+   "name": "Age",
+   "options": [
     {
-      "name": "Age",
-      "options": [
-        {
-          "label": "≥45 years",
-          "points": 0
-        },
-        {
-          "label": "<45 years",
-          "points": 2
-        }
-      ],
-      "assess": "Determined at diagnosis. Younger patients (<45 years) are at higher risk of glioma-related epilepsy. OR for <45 years: 2.6 (95% CI: 1.6–4.3, p < 0.001)."
+     "label": "≥45 years",
+     "points": 0
     },
     {
-      "name": "Functional Deficit",
-      "options": [
-        {
-          "label": "Present",
-          "points": 0
-        },
-        {
-          "label": "Absent",
-          "points": 0
-        }
-      ],
-      "assess": "Defined as impairments in sensorimotor, language, or vision functions, including sensory abnormalities, decreased muscle strength, aphasia, and visual field defects. OR for normal neurological function: 3.0 (95% CI: 1.7–5.3, p < 0.001)."
-    },
-    {
-      "name": "Preoperative Epilepsy",
-      "options": [
-        {
-          "label": "Absent",
-          "points": 0
-        },
-        {
-          "label": "Present",
-          "points": 10
-        }
-      ],
-      "assess": "Defined as at least one unprovoked epileptic seizure before surgery. OR for preoperative epilepsy: 7.6 (95% CI: 4.0–14.2, p < 0.001)."
-    },
-    {
-      "name": "Extent of Resection (EOR)",
-      "options": [
-        {
-          "label": "Gross Total Resection (GTR)",
-          "points": 0.0
-        },
-        {
-          "label": "Non-Gross Total Resection (non-GTR)",
-          "points": 3.5
-        }
-      ],
-      "assess": "Classified based on postoperative MRI as Gross Total Resection (GTR: no residual tumor signal) or Non-GTR (incomplete tumor removal). OR for Non-GTR: 2.3 (95% CI: 1.2–4.3, p = 0.012)."
-    },
-    {
-      "name": "Tumor Location (Temporal Lobe Involvement)",
-      "options": [
-        {
-          "label": "Absent",
-          "points": 0
-        },
-        {
-          "label": "Present",
-          "points": 4
-        }
-      ],
-      "assess": "Defined as involvement of the temporal lobe. OR for temporal lobe involvement: 2.0 (95% CI: 1.1–3.6, p = 0.033)."
-    },
-    {
-      "name": "WHO Grade",
-      "options": [
-        {
-          "label": "WHO Grade IV",
-          "points": 0
-        },
-        {
-          "label": "WHO Grade III",
-          "points": 3
-        }
-      ],
-      "assess": "umor classification per WHO standards. Lower-grade tumors (Grade III) are more epileptogenic. OR for Grade III: 2.1 (95% CI: 1.1–4.0, p = 0.021)."
-    },
-    {
-      "name": "IDH Mutation",
-      "options": [
-        {
-          "label": "Wild-Type",
-          "points": 0
-        },
-        {
-          "label": "Mutant",
-          "points": 1
-        }
-      ],
-      "assess": "Mutation in the Isocitrate Dehydrogenase (IDH) gene. OR for IDH mutation: 1.7 (95% CI: 0.9–3.0, not significant in multivariate analysis)."
-    },
-    {
-      "name": "Ki-67 Expression",
-      "options": [
-        {
-          "label": ">10%",
-          "points": 1.6
-        },
-        {
-          "label": "≤10%",
-          "points": 1.6
-        }
-      ],
-      "assess": "A proliferation marker indicating tumor growth. OR for low Ki-67 expression: 1.6 (significant in univariate analysis only, p = 0.042)."
+     "label": "<45 years",
+     "points": 2
     }
-  ],
-  "model": {
-    "score_type": "range",
-    "horizon": "1 year",
-    "rows": [
-      {
-        "label": "Risk < 10%",
-        "lo": 0,
-        "hi": 8,
-        "pct": 10.0
-      },
-      {
-        "label": "10%",
-        "lo": 9,
-        "hi": 12,
-        "pct": 10.0
-      },
-      {
-        "label": "20%",
-        "lo": 13,
-        "hi": 15,
-        "pct": 20.0
-      },
-      {
-        "label": "30%",
-        "lo": 16,
-        "hi": 17,
-        "pct": 30.0
-      },
-      {
-        "label": "40%",
-        "lo": 18,
-        "hi": 19,
-        "pct": 40.0
-      },
-      {
-        "label": "50%",
-        "lo": 20,
-        "hi": 21,
-        "pct": 50.0
-      },
-      {
-        "label": "60%",
-        "lo": 22,
-        "hi": 24,
-        "pct": 60.0
-      },
-      {
-        "label": "70%",
-        "lo": 25,
-        "hi": 26,
-        "pct": 70.0
-      },
-      {
-        "label": "80%",
-        "lo": 27,
-        "hi": 29,
-        "pct": 80.0
-      }
-    ]
+   ],
+   "assess": "Determined at diagnosis. Younger patients (<45 years) are at higher risk of glioma-related epilepsy. OR for <45 years: 2.6 (95% CI: 1.6–4.3, p < 0.001)."
   },
-  "provenance": {
-    "extraction_method": "cff_export",
-    "source": "export_44_2026-04-07_172822.cpfm",
-    "review_status": "unreviewed",
-    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  {
+   "name": "Functional Deficit",
+   "options": [
+    {
+     "label": "Present",
+     "points": 0
+    },
+    {
+     "label": "Absent",
+     "points": 0
+    }
+   ],
+   "assess": "Defined as impairments in sensorimotor, language, or vision functions, including sensory abnormalities, decreased muscle strength, aphasia, and visual field defects. OR for normal neurological function: 3.0 (95% CI: 1.7–5.3, p < 0.001)."
+  },
+  {
+   "name": "Preoperative Epilepsy",
+   "options": [
+    {
+     "label": "Absent",
+     "points": 0
+    },
+    {
+     "label": "Present",
+     "points": 10
+    }
+   ],
+   "assess": "Defined as at least one unprovoked epileptic seizure before surgery. OR for preoperative epilepsy: 7.6 (95% CI: 4.0–14.2, p < 0.001)."
+  },
+  {
+   "name": "Extent of Resection (EOR)",
+   "options": [
+    {
+     "label": "Gross Total Resection (GTR)",
+     "points": 0.0
+    },
+    {
+     "label": "Non-Gross Total Resection (non-GTR)",
+     "points": 3.5
+    }
+   ],
+   "assess": "Classified based on postoperative MRI as Gross Total Resection (GTR: no residual tumor signal) or Non-GTR (incomplete tumor removal). OR for Non-GTR: 2.3 (95% CI: 1.2–4.3, p = 0.012)."
+  },
+  {
+   "name": "Tumor Location (Temporal Lobe Involvement)",
+   "options": [
+    {
+     "label": "Absent",
+     "points": 0
+    },
+    {
+     "label": "Present",
+     "points": 4
+    }
+   ],
+   "assess": "Defined as involvement of the temporal lobe. OR for temporal lobe involvement: 2.0 (95% CI: 1.1–3.6, p = 0.033)."
+  },
+  {
+   "name": "WHO Grade",
+   "options": [
+    {
+     "label": "WHO Grade IV",
+     "points": 0
+    },
+    {
+     "label": "WHO Grade III",
+     "points": 3
+    }
+   ],
+   "assess": "umor classification per WHO standards. Lower-grade tumors (Grade III) are more epileptogenic. OR for Grade III: 2.1 (95% CI: 1.1–4.0, p = 0.021)."
+  },
+  {
+   "name": "IDH Mutation",
+   "options": [
+    {
+     "label": "Wild-Type",
+     "points": 0
+    },
+    {
+     "label": "Mutant",
+     "points": 1
+    }
+   ],
+   "assess": "Mutation in the Isocitrate Dehydrogenase (IDH) gene. OR for IDH mutation: 1.7 (95% CI: 0.9–3.0, not significant in multivariate analysis)."
+  },
+  {
+   "name": "Ki-67 Expression",
+   "options": [
+    {
+     "label": ">10%",
+     "points": 1.6
+    },
+    {
+     "label": "≤10%",
+     "points": 1.6
+    }
+   ],
+   "assess": "A proliferation marker indicating tumor growth. OR for low Ki-67 expression: 1.6 (significant in univariate analysis only, p = 0.042)."
   }
+ ],
+ "model": {
+  "score_type": "range",
+  "horizon": "1 year",
+  "rows": [
+   {
+    "lo": 0,
+    "hi": 9.599,
+    "pct": 5,
+    "disp": "< 10%",
+    "label": "Risk < 10%"
+   },
+   {
+    "lo": 9.6,
+    "hi": 13.699,
+    "pct": 10.0,
+    "disp": "10%",
+    "label": "10%"
+   },
+   {
+    "lo": 13.7,
+    "hi": 16.499,
+    "pct": 20.0,
+    "disp": "20%",
+    "label": "20%"
+   },
+   {
+    "lo": 16.5,
+    "hi": 18.799,
+    "pct": 30.0,
+    "disp": "30%",
+    "label": "30%"
+   },
+   {
+    "lo": 18.8,
+    "hi": 20.799,
+    "pct": 40.0,
+    "disp": "40%",
+    "label": "40%"
+   },
+   {
+    "lo": 20.8,
+    "hi": 22.899,
+    "pct": 50.0,
+    "disp": "50%",
+    "label": "50%"
+   },
+   {
+    "lo": 22.9,
+    "hi": 25.099,
+    "pct": 60.0,
+    "disp": "60%",
+    "label": "60%"
+   },
+   {
+    "lo": 25.1,
+    "hi": 27.899,
+    "pct": 70.0,
+    "disp": "70%",
+    "label": "70%"
+   },
+   {
+    "lo": 27.9,
+    "hi": 29.999,
+    "pct": 80.0,
+    "disp": "80%",
+    "label": "80%"
+   },
+   {
+    "lo": 30.0,
+    "hi": 9999,
+    "pct": 85,
+    "disp": "> 80%",
+    "label": "Risk > 80%"
+   }
+  ]
+ },
+ "provenance": {
+  "extraction_method": "cff_export",
+  "source": "export_44_2026-04-07_172822.cpfm",
+  "review_status": "unreviewed",
+  "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+ }
 }

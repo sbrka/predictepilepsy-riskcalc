@@ -499,7 +499,7 @@
       const rec = recs ? (recs.find((r) => this._score >= (r.lo != null ? r.lo : -1e9) && this._score <= (r.hi != null ? r.hi : 1e9)) || null) : null;
       const recColor = (t) => t === "high" ? "var(--red)" : t === "med" ? "var(--amber-deep)" : "var(--green)";
       rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(preds.length ? "Total score" : "Score")}</div><div class="v" id="scoreN">${this._score}</div>${band ? `<div class="band"><span class="d" style="background:${band.c}"></span><span style="color:${band.c}">${band.n}</span></div>` : ``}</div>
-        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">Risk at ${esc(m.horizon || "horizon")}</div><div class="v" id="riskN">${row && row.pct != null ? fmtPct(row.pct) : "—"}</div></div>`}</div>`;
+        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">Risk at ${esc(m.horizon || "horizon")}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div></div>`}</div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
 
@@ -512,6 +512,7 @@
         const base = minPts.reduce((a, b) => a + b, 0);
         const items = preds.map((p, i) => { const o = (p.options || [])[this._predSel[i]] || {}; const contrib = (Number(o.points) || 0) - minPts[i]; return { name: p.name, label: o.label, contrib, on: contrib > 0, wlabel: (contrib >= 0 ? "+" : "") + contrib + " pts" }; });
         const link = (pts) => { const r = rowFor(pts); return r && r.pct != null ? r.pct : 0; };
+        const dispFn = (pts) => { const r = rowFor(pts); return r ? (r.disp ? r.disp : (r.pct != null ? fmtPct(r.pct) : "—")) : "—"; };
         const vizInfo = "Each risk factor adds points. The waterfall (left) starts at the baseline risk and steps up as each active factor pushes the total score into a higher risk band; the donut (right) shows those factors as wedges summing to the predicted risk in the centre.";
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk breakdown${m.horizon ? " &middot; at " + esc(m.horizon) : ""} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
           <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
@@ -520,7 +521,7 @@
           </div>`;
         const maxScore = preds.reduce((a, p) => a + Math.max(...(p.options || [{ points: 0 }]).map((o) => Number(o.points) || 0)), 0);
         this._drawWaterfall({ base, items }, link, { axis: "points", axisMax: maxScore });
-        this._drawDonut({ base, items }, link);
+        this._drawDonut({ base, items }, link, dispFn);
       } else {
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk by group${m.horizon ? " &middot; at " + esc(m.horizon) : ""}</div></div>
           <div class="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${20 + rows.length * 44}" role="img" aria-label="Risk by group"></svg></div>`;
@@ -679,12 +680,14 @@
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "340px"; svg.innerHTML = g;
     }
 
-    _drawDonut(cb, link) {
+    _drawDonut(cb, link, dispFn) {
       const svg = this._panel.querySelector("#fdonut"); if (!svg) return;
       const { base, items } = cb;
       const active = items.filter((c) => c.on);
       const cx = 150, cy = 132, rad = 98, w = 34;
-      const total = link(base + active.reduce((a, c) => a + c.contrib, 0));
+      const scoreTotal = base + active.reduce((a, c) => a + c.contrib, 0);
+      const total = link(scoreTotal);
+      const centerTxt = dispFn ? dispFn(scoreTotal) : fmtPct(total);
       const totContrib = active.reduce((a, c) => a + Math.abs(c.contrib), 0) || 1;
       const fillFrac = total / 100;
       let ang = -Math.PI / 2, segs = "";
@@ -694,7 +697,7 @@
       });
       const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef2f6" stroke-width="${w}"/>`;
       svg.innerHTML = `${track}${segs}
-        <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="48" fill="#1a2430">${fmtPct(total)}</text>
+        <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="${String(centerTxt).length > 5 ? 30 : 48}" fill="#1a2430">${esc(centerTxt)}</text>
         <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">predicted risk</text>
         ${active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`}`;
     }
