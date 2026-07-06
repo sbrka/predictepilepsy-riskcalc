@@ -136,66 +136,84 @@
     "horizon": "1 year",
     "rows": [
       {
-        "label": "Risk < 10%",
         "lo": 0,
         "hi": 237,
-        "pct": 10.0
+        "pct": 5,
+        "disp": "< 10%",
+        "label": "1-yr PTE risk < 10%"
       },
       {
-        "label": "10%",
         "lo": 238,
         "hi": 290,
-        "pct": 10.0
+        "pct": 10,
+        "disp": "10%",
+        "label": "1-yr PTE risk 10%"
       },
       {
-        "label": "20%",
         "lo": 291,
-        "hi": 325,
-        "pct": 20.0
+        "hi": 324,
+        "pct": 20,
+        "disp": "20%",
+        "label": "1-yr PTE risk 20%"
       },
       {
-        "label": "30%",
-        "lo": 326,
-        "hi": 350,
-        "pct": 30.0
+        "lo": 325,
+        "hi": 349,
+        "pct": 30,
+        "disp": "30%",
+        "label": "1-yr PTE risk 30%"
       },
       {
-        "label": "40%",
-        "lo": 351,
-        "hi": 372,
-        "pct": 40.0
+        "lo": 350,
+        "hi": 371,
+        "pct": 40,
+        "disp": "40%",
+        "label": "1-yr PTE risk 40%"
       },
       {
-        "label": "50%",
-        "lo": 373,
-        "hi": 392,
-        "pct": 50.0
+        "lo": 372,
+        "hi": 391,
+        "pct": 50,
+        "disp": "50%",
+        "label": "1-yr PTE risk 50%"
       },
       {
-        "label": "60%",
-        "lo": 393,
-        "hi": 411,
-        "pct": 60.0
+        "lo": 392,
+        "hi": 410,
+        "pct": 60,
+        "disp": "60%",
+        "label": "1-yr PTE risk 60%"
       },
       {
-        "label": "70%",
-        "lo": 412,
-        "hi": 432,
-        "pct": 70.0
+        "lo": 411,
+        "hi": 431,
+        "pct": 70,
+        "disp": "70%",
+        "label": "1-yr PTE risk 70%"
       },
       {
-        "label": "80%",
-        "lo": 433,
-        "hi": 457,
-        "pct": 80.0
+        "lo": 432,
+        "hi": 456,
+        "pct": 80,
+        "disp": "80%",
+        "label": "1-yr PTE risk 80%"
       },
       {
-        "label": "90%",
-        "lo": 458,
-        "hi": 476,
-        "pct": 90.0
+        "lo": 457,
+        "hi": 475,
+        "pct": 90,
+        "disp": "90%",
+        "label": "1-yr PTE risk 90%"
+      },
+      {
+        "lo": 476,
+        "hi": 9999,
+        "pct": 95,
+        "disp": "≥ 95%",
+        "label": "1-yr PTE risk ≥ 95%"
       }
-    ]
+    ],
+    "note": "Total nomogram points map to the 1-year risk of post-traumatic epilepsy (Wang 2021, Suppl. Table S5). The 5-year risk is higher for the same score (e.g. ~317 pts ≈ 30% at 1 yr, ~45% at 5 yr)."
   },
   "provenance": {
     "extraction_method": "cff_export",
