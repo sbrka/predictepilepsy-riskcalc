@@ -157,8 +157,11 @@
     }
     render() {
       const body = this._tab === "guided" ? this.guided() : this.browse();
+      // when placed under a page banner (attr "plain"), skip the component's own strip
+      var strip = this.hasAttribute("plain") ? "" :
+        `<div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="/">All calculators</a></div>`;
       this.shadowRoot.innerHTML = `<style>${CSS}</style>
-        <div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="/">All calculators</a></div>
+        ${strip}
         <div class="wrap">
           <div class="head"><h1>Find the right calculator</h1><p>Choose a calculator step by step, or browse them by clinical group.</p></div>
           <div class="tabs"><button data-tab="guided"${this._tab === "guided" ? ' class="on"' : ""}>Guided</button><button data-tab="browse"${this._tab === "browse" ? ' class="on"' : ""}>Browse by group</button></div>
