@@ -10,12 +10,13 @@
 
   var GROUPS = [
     { name: "Ischaemic stroke", icon: "ischaemic.png", dot: "#3f7fd0", scores: [
-      { ab: "IsCHEMiA", fs: 15, slug: "calc-ischemia", name: "IsCHEMiA Score", desc: "Late seizures after ischaemic stroke" },
-      { ab: "LEAN", fs: 26, slug: "calc-lean", name: "LEAN Score", desc: "Late seizures after ischaemic stroke" } ] },
+      { ab: "SeLECT", fs: 18, ext: "https://predictapps.github.io/select/", name: "SeLECT Score", desc: "Late seizures after ischaemic stroke" },
+      { ab: "IsCHEMiA", fs: 15, slug: "calc-ischemia", name: "IsCHEMiA Score", desc: "Late seizures after ischaemic stroke" } ] },
     { name: "Intracerebral haemorrhage", icon: "ich.png", dot: "#e0413a", scores: [
       { ab: "CAVE", fs: 25, slug: "calc-cave-score", name: "CAVE Score", desc: "Late seizures after ICH" },
       { ab: "CAVE&sup2;", fs: 22, slug: "calc-cave2-score", name: "CAVE² Score", desc: "Modified CAVE for late seizures after ICH" },
-      { ab: "LANE", fs: 25, slug: "calc-lane-score", name: "LANE Score", desc: "Late seizures after ICH" } ] },
+      { ab: "LANE", fs: 25, slug: "calc-lane-score", name: "LANE Score", desc: "Late seizures after ICH" },
+      { ab: "LEAN", fs: 26, slug: "calc-lean", name: "LEAN Score", desc: "Late seizures after ICH" } ] },
     { name: "Subarachnoid haemorrhage", icon: "sah.png", dot: "#c0322b", scores: [
       { ab: "RISE", fs: 26, slug: "calc-rise", name: "RISE Score", desc: "Epilepsy after aneurysmal SAH" } ] },
     { name: "Cerebral venous thrombosis", icon: "cvt.png", dot: "#5b6fb0", scores: [
@@ -66,7 +67,11 @@
   .card .nm{font-weight:750;font-size:17px;color:var(--ink)}\
   .card .ds{font-size:13px;color:var(--muted);margin-top:3px;line-height:1.4}\
   .card .go{font-size:12.5px;font-weight:650;color:var(--az);margin-top:8px}\
-  @media(max-width:560px){.banner{border-radius:0}.hero h1{font-size:26px}.gh img{width:52px;height:44px}}\
+  .more{text-align:center;margin-top:36px}\
+  .more a{color:var(--az);font-weight:650;text-decoration:none;font-size:15px}\
+  .more a:hover{text-decoration:underline}\
+  .grp:first-child{margin-top:8px}\
+  @media(max-width:560px){.hero h1{font-size:26px}.gh img{width:52px;height:44px}}\
   ";
 
   function esc(s){return String(s).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
@@ -76,24 +81,21 @@
       var sr = this.attachShadow({ mode: "open" });
       var groups = GROUPS.map(function (g) {
         var cards = g.scores.map(function (s) {
-          return '<a class="card" href="/' + s.slug + '/">' +
+          var href = s.ext ? s.ext : "/" + s.slug + "/";
+          var tgt = s.ext ? ' target="_blank" rel="noopener"' : "";
+          return '<a class="card" href="' + href + '"' + tgt + '>' +
             '<span class="badge"><span class="dt" style="background:' + g.dot + '"></span>' +
             '<span class="ab" style="font-size:' + s.fs + 'px">' + s.ab + '</span>' + CURVE + '</span>' +
             '<span class="txt"><span class="nm">' + esc(s.name) + '</span><span class="ds">' + esc(s.desc) + '</span>' +
-            '<span class="go">Open calculator &rarr;</span></span></a>';
+            '<span class="go">' + (s.ext ? "Open tool &rarr;" : "Open calculator &rarr;") + '</span></span></a>';
         }).join("");
         return '<section class="grp"><div class="gh"><img src="' + ICONS + g.icon + '" alt="" loading="lazy">' +
           '<h2>' + esc(g.name) + '</h2></div><div class="cards">' + cards + '</div></section>';
       }).join("");
 
       sr.innerHTML = "<style>" + CSS + "</style>" +
-        '<div class="banner"><span class="bt">predictepilepsy<span class="d">.com</span></span>' +
-        '<a href="/variables-and-cosy/">More models &amp; finder &rarr;</a></div>' +
-        '<div class="wrap"><div class="hero"><h1>Epilepsy prognostic calculators</h1>' +
-        '<p>Individualised seizure-risk tools, grouped by cause.</p></div>' +
-        '<div class="feat"><span class="fi">\u{1F9E0}</span><div class="ft"><b>SeLECT &middot; late seizures after ischaemic stroke</b>' +
-        '<span>The flagship SeLECT prognostic tool</span></div><a href="https://predictapps.github.io/select/" target="_blank" rel="noopener">Open SeLECT &rarr;</a></div>' +
-        groups + "</div>";
+        '<div class="wrap">' + groups +
+        '<div class="more"><a href="/variables-and-cosy/">Browse all models &amp; the calculator finder &rarr;</a></div></div>';
     }
   }
   customElements.define("calc-home", CalcHome);
