@@ -140,7 +140,16 @@
         document.head.appendChild(ht);
       }
       var sr = this.attachShadow({ mode: "open" });
-      var list = pick ? GROUPS.filter(function (g) { return pick.indexOf(g.key) > -1; }) : GROUPS;
+      // optionally drop individual scores by abbreviation or slug (comma-separated)
+      var excl = (this.getAttribute("exclude-scores") || "").toLowerCase().split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+      var list = (pick ? GROUPS.filter(function (g) { return pick.indexOf(g.key) > -1; }) : GROUPS).map(function (g) {
+        if (!excl.length) return g;
+        var kept = g.scores.filter(function (s) {
+          var ab = (s.ab || "").replace(/<[^>]+>/g, "").toLowerCase();
+          return excl.indexOf(ab) === -1 && excl.indexOf((s.slug || "").toLowerCase()) === -1;
+        });
+        var ng = {}; for (var k in g) ng[k] = g[k]; ng.scores = kept; return ng;
+      }).filter(function (g) { return g.scores.length > 0; });
       var groups = list.map(function (g) {
         var cards = g.scores.map(function (s) {
           var href = s.ext ? s.ext : base + "/" + s.slug + "/";
