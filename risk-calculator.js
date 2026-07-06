@@ -292,7 +292,7 @@
       // metrics
       const cumArr = seriesArr(s.cum, ax.cum);
       rail += `<div class="scorewrap">
-        ${preds.length && !m.hide_score ? `<div class="metric"><div class="k">Total score</div><div class="v" id="scoreN">${this._score}</div></div>` : `<div class="metric"><div class="k">${esc(m.selector || "Risk group")}</div><div class="v" style="font-size:${m.hide_score ? "16px;line-height:1.25" : "22px"}">${esc(s.display || key)}</div><div class="v" id="scoreN" hidden>${this._score}</div>${s.info ? `<div class="stratinfo" style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;font-family:var(--sans)">${esc(s.info)}</div>` : ""}</div>`}
+        ${preds.length && !m.hide_score ? `<div class="metric"><div class="k">Total score</div><div class="v" id="scoreN">${fmtScore(this._score)}</div></div>` : `<div class="metric"><div class="k">${esc(m.selector || "Risk group")}</div><div class="v" style="font-size:${m.hide_score ? "16px;line-height:1.25" : "22px"}">${esc(s.display || key)}</div><div class="v" id="scoreN" hidden>${fmtScore(this._score)}</div>${s.info ? `<div class="stratinfo" style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;font-family:var(--sans)">${esc(s.info)}</div>` : ""}</div>`}
         ${s.no_cum ? `<div class="metric sm"><div class="k">COSY at <span id="atmo">${mo}</span> mo seizure-free</div><div class="v" id="cumAt">${fmtPct(seriesArr(s.cosy, ax.cosy)[mo])}</div></div>` : `<div class="metric sm"><div class="k">Cumulative risk at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cumArr[mo])}</div></div>`}</div>`;
       // verdict
       const noCosy = !!s.no_cosy;
@@ -498,7 +498,7 @@
       const recs = m.recommendation || null;
       const rec = recs ? (recs.find((r) => this._score >= (r.lo != null ? r.lo : -1e9) && this._score <= (r.hi != null ? r.hi : 1e9)) || null) : null;
       const recColor = (t) => t === "high" ? "var(--red)" : t === "med" ? "var(--amber-deep)" : "var(--green)";
-      rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(preds.length ? "Total score" : "Score")}</div><div class="v" id="scoreN">${this._score}</div>${band ? `<div class="band"><span class="d" style="background:${band.c}"></span><span style="color:${band.c}">${band.n}</span></div>` : ``}</div>
+      rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(preds.length ? "Total score" : "Score")}</div><div class="v" id="scoreN">${fmtScore(this._score)}</div>${band ? `<div class="band"><span class="d" style="background:${band.c}"></span><span style="color:${band.c}">${band.n}</span></div>` : ``}</div>
         ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">Risk at ${esc(m.horizon || "horizon")}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div></div>`}</div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
@@ -856,6 +856,7 @@
   function esc(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
   function attr(x) { return esc(x).replace(/'/g, "&#39;"); }
   function fmtPct(v) { return (v == null ? 0 : Math.round(v)) + "%"; }
+  function fmtScore(n) { return (typeof n === "number" && isFinite(n)) ? +n.toFixed(3) : n; }   // trims float noise e.g. 26.200000000000003 -> 26.2
   function fmtMo(v) { return v == null ? "not reached" : v <= 0 ? "immediately" : v + " mo"; }
   function firstBelow(arr, thr) { for (let i = 0; i < arr.length; i++) if (arr[i] < thr) return i; return null; }
   function seriesArr(dict, maxMonth) { const out = []; for (let m = 0; m <= maxMonth; m++) { const v = dict ? (dict[m] != null ? dict[m] : dict[String(m)]) : undefined; out.push(v != null ? Number(v) : (out.length ? out[out.length - 1] : 0)); } return out; }
