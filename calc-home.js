@@ -9,30 +9,36 @@
   var ICONS = "https://cdn.jsdelivr.net/gh/sbrka/predictepilepsy-riskcalc@0f90a5df2c3364cd56c1e218dc5d05acc21b60ae/icons/";
 
   var GROUPS = [
-    { name: "Ischaemic stroke", icon: "ischaemic.png", dot: "#3f7fd0", scores: [
+    { key: "ischaemic", name: "Ischaemic stroke", icon: "ischaemic.png", dot: "#3f7fd0", scores: [
       { ab: "SeLECT", fs: 18, ext: "https://predictapps.github.io/select/", name: "SeLECT Score", desc: "Late seizures after ischaemic stroke" },
       { ab: "IsCHEMiA", fs: 15, slug: "calc-ischemia", name: "IsCHEMiA Score", desc: "Late seizures after ischaemic stroke" } ] },
-    { name: "Intracerebral haemorrhage", icon: "ich.png", dot: "#e0413a", scores: [
+    { key: "ich", name: "Intracerebral haemorrhage", icon: "ich.png", dot: "#e0413a", scores: [
       { ab: "CAVE", fs: 25, slug: "calc-cave-score", name: "CAVE Score", desc: "Late seizures after ICH" },
       { ab: "CAVE&sup2;", fs: 22, slug: "calc-cave2-score", name: "CAVE² Score", desc: "Modified CAVE for late seizures after ICH" },
       { ab: "LANE", fs: 25, slug: "calc-lane-score", name: "LANE Score", desc: "Late seizures after ICH" },
       { ab: "LEAN", fs: 26, slug: "calc-lean", name: "LEAN Score", desc: "Late seizures after ICH" } ] },
-    { name: "Subarachnoid haemorrhage", icon: "sah.png", dot: "#c0322b", scores: [
+    { key: "sah", name: "Subarachnoid haemorrhage", icon: "sah.png", dot: "#c0322b", scores: [
       { ab: "RISE", fs: 26, slug: "calc-rise", name: "RISE Score", desc: "Epilepsy after aneurysmal SAH" } ] },
-    { name: "Cerebral venous thrombosis", icon: "cvt.png", dot: "#5b6fb0", scores: [
+    { key: "cvt", name: "Cerebral venous thrombosis", icon: "cvt.png", dot: "#5b6fb0", scores: [
       { ab: "DIAS<span style='font-size:.62em'>3</span>", fs: 23, slug: "calc-dias3", name: "DIAS3", desc: "Remote seizure risk after CVT" } ] },
-    { name: "Traumatic brain injury", icon: "tbi.png", dot: "#f5a623", scores: [
+    { key: "tbi", name: "Traumatic brain injury", icon: "tbi.png", dot: "#f5a623", scores: [
       { ab: "PTE<sup>1</sup>", fs: 22, slug: "calc-pte-nomogram-1", name: "PTE Nomogram 1", desc: "Post-traumatic epilepsy nomogram" },
       { ab: "PTE<sup>2</sup>", fs: 22, slug: "calc-pte-nomogram-2", name: "PTE Nomogram 2", desc: "Post-traumatic epilepsy nomogram" },
       { ab: "PTE<sup>3</sup>", fs: 22, slug: "calc-pte-nomogram-3", name: "PTE Nomogram 3", desc: "Late seizures after TBI" } ] },
-    { name: "Brain tumour", icon: "tumour.png", dot: "#8a54c9", scores: [
+    { key: "tumour", name: "Brain tumour", icon: "tumour.png", dot: "#8a54c9", scores: [
       { ab: "BMERS", fs: 18, slug: "calc-bmers", name: "Brain-Mets Score", desc: "Epilepsy in brain metastases" },
       { ab: "STAMPE&sup2;", fs: 15, slug: "calc-stampe2", name: "STAMPE2 Score", desc: "Epilepsy after meningioma resection" },
       { ab: "Glioma", fs: 17, slug: "calc-glioma-epilepsy", name: "Glioma-Related Epilepsy", desc: "Epilepsy in high-grade glioma" },
       { ab: "PGREM", fs: 18, slug: "calc-pgrem", name: "PGREM", desc: "Post-operative glioma-related epilepsy" } ] },
-    { name: "Acute symptomatic seizure", icon: "acute-symptomatic.png", dot: "#e0691f", scores: [
+    { key: "acute", name: "Acute symptomatic seizure", icon: "acute-symptomatic.png", dot: "#e0691f", scores: [
       { ab: "Epi-PASS", fs: 15, slug: "calc-epi-pass", name: "Epi-PASS", desc: "Epilepsy after an acute symptomatic seizure" } ] },
   ];
+
+  // per-brand palette (default predictepilepsy azure; "select" = SeLECT lime-green)
+  var PALETTES = {
+    default: ":host{--az:#135ba8;--azd:#0e4a8a;--wash:#eef6fe;--badge:linear-gradient(150deg,#2472c8,#0e4a8a);--bsh:rgba(14,74,138,.3);--ghln:#eaf1f8;--hovsh:rgba(19,91,168,.12)}",
+    select:  ":host{--az:#6f8c00;--azd:#1c244b;--wash:#f6f8e9;--badge:linear-gradient(150deg,#accc0c,#7f9600);--bsh:rgba(110,140,0,.32);--ghln:#e8efce;--hovsh:rgba(140,170,0,.2)}"
+  };
 
   var RESOURCES = [
     { name: "Seizure Prognosis", url: "https://seizureprognosis.info", desc: "Individualised seizure-freedom prediction", ic: "\u{1F4C8}" },
@@ -44,7 +50,7 @@
   var CURVE = '<svg class="crv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
 
   var CSS = "\
-  :host{--az:#135ba8;--azd:#0e4a8a;--wash:#eef6fe;--ink:#16222f;--muted:#5c6b7a;display:block;\
+  :host{--ink:#16222f;--muted:#5c6b7a;display:block;\
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}\
   *{box-sizing:border-box} .wrap{max-width:1120px;margin:0 auto;padding:0 20px 56px}\
   .banner{background:var(--az);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:0 0 18px 18px}\
@@ -57,14 +63,14 @@
   .feat .fi{font-size:34px;flex:0 0 auto}.feat .ft{flex:1}.feat .ft b{font-size:20px}.feat .ft span{display:block;opacity:.85;font-size:14px;margin-top:3px}\
   .feat a{background:#fff;color:var(--azd);font-weight:700;font-size:14.5px;padding:11px 20px;border-radius:999px;text-decoration:none;white-space:nowrap}\
   .grp{margin:34px 0 0}\
-  .gh{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid #eaf1f8}\
+  .gh{display:flex;align-items:center;gap:16px;margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--ghln)}\
   .gh img{width:64px;height:52px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(19,60,110,.16))}\
   .gh h2{font-size:22px;margin:0;color:var(--azd);letter-spacing:-.2px}\
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}\
   .card{display:flex;align-items:center;gap:16px;border:1.5px solid #e6edf4;background:#fff;border-radius:18px;padding:16px 18px;text-decoration:none;color:inherit;transition:.16s}\
-  .card:hover{border-color:var(--az);box-shadow:0 10px 26px rgba(19,91,168,.12);transform:translateY(-2px)}\
-  .badge{width:62px;height:62px;flex:0 0 auto;border-radius:16px;background:linear-gradient(150deg,#2472c8,#0e4a8a);\
-    box-shadow:0 6px 16px rgba(14,74,138,.3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}\
+  .card:hover{border-color:var(--az);box-shadow:0 10px 26px var(--hovsh);transform:translateY(-2px)}\
+  .badge{width:62px;height:62px;flex:0 0 auto;border-radius:16px;background:var(--badge);\
+    box-shadow:0 6px 16px var(--bsh);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}\
   .badge .ab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 3px}\
   .badge .ab sup{font-size:.55em;vertical-align:super}\
   .badge .crv{position:absolute;left:0;right:0;bottom:0;height:22px}\
@@ -77,7 +83,7 @@
   .gh2 .rih{font-size:26px}\
   .rcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}\
   .rcard{display:flex;align-items:center;gap:13px;border:1.5px solid #e6edf4;border-radius:16px;padding:14px 16px;text-decoration:none;color:inherit;background:#fbfdff;transition:.16s}\
-  .rcard:hover{border-color:var(--az);box-shadow:0 8px 20px rgba(19,91,168,.1);transform:translateY(-1px)}\
+  .rcard:hover{border-color:var(--az);box-shadow:0 8px 20px var(--hovsh);transform:translateY(-1px)}\
   .rcard .ric{font-size:24px;flex:0 0 auto}\
   .rcard .rtx{min-width:0}.rcard .rn,.rcard .rd{display:block}\
   .rcard .rn{font-weight:700;font-size:15.5px}.rcard .rd{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}\
@@ -120,11 +126,18 @@
 
   class CalcHome extends HTMLElement {
     connectedCallback() {
-      injectTheme();
+      var brand = (this.getAttribute("brand") || "default").toLowerCase();
+      var base = (this.getAttribute("base") || "").replace(/\/+$/, "");
+      var only = this.getAttribute("groups");
+      var pick = only ? only.split(",").map(function (s) { return s.trim(); }) : null;
+      var palette = PALETTES[brand] || PALETTES.default;
+      // only style the host page's Elementor chrome on the native predictepilepsy home
+      if (brand === "default" && !this.hasAttribute("no-theme")) injectTheme();
       var sr = this.attachShadow({ mode: "open" });
-      var groups = GROUPS.map(function (g) {
+      var list = pick ? GROUPS.filter(function (g) { return pick.indexOf(g.key) > -1; }) : GROUPS;
+      var groups = list.map(function (g) {
         var cards = g.scores.map(function (s) {
-          var href = s.ext ? s.ext : "/" + s.slug + "/";
+          var href = s.ext ? s.ext : base + "/" + s.slug + "/";
           var tgt = s.ext ? ' target="_blank" rel="noopener"' : "";
           return '<a class="card" href="' + href + '"' + tgt + '>' +
             '<span class="badge"><span class="dt" style="background:' + g.dot + '"></span>' +
@@ -138,16 +151,17 @@
 
       var resCards = RESOURCES.map(function (r) {
         var ext = /^https?:/.test(r.url);
-        return '<a class="rcard" href="' + r.url + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + '>' +
+        var href = ext ? r.url : base + r.url;
+        return '<a class="rcard" href="' + href + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + '>' +
           '<span class="ric">' + r.ic + '</span><span class="rtx"><span class="rn">' + esc(r.name) + '</span>' +
           '<span class="rd">' + esc(r.desc) + '</span></span><span class="rar">' + (ext ? "↗" : "→") + '</span></a>';
       }).join("");
       var resources = '<section class="grp"><div class="gh gh2"><span class="rih">\u{1F517}</span>' +
         '<h2>Related tools &amp; resources</h2></div><div class="rcards">' + resCards + '</div></section>';
 
-      sr.innerHTML = "<style>" + CSS + "</style>" +
+      sr.innerHTML = "<style>" + CSS + palette + "</style>" +
         '<div class="wrap">' + groups + resources +
-        '<div class="more"><a href="/variables-and-cosy/">Browse all models &amp; the calculator finder &rarr;</a></div></div>';
+        '<div class="more"><a href="' + base + '/variables-and-cosy/">Browse all models &amp; the calculator finder &rarr;</a></div></div>';
     }
   }
   customElements.define("calc-home", CalcHome);
