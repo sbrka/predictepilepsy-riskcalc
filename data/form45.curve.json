@@ -4,13 +4,14 @@
   "kind": "curve",
   "meta": {
     "title": "SeLECT: ASyS vs. RSyS",
-    "doi": "10.1016/S1474-4422(17)30404-0",
-    "authors": "Galovic M, Döhler N, Erdélyi-Canavese B, et al.",
-    "journal": "The Lancet Neurology",
-    "year": 2018,
-    "outcome": "Prediction of late seizures after ischaemic stroke with a novel prognostic model (the SeLECT score): a multivariable prediction model development and validation study",
-    "clinical_utility": "Stroke is one of the leading causes of acquired epilepsy in adults. An instrument to predict whether people are at high risk of developing post-stroke seizures is not available. We aimed to develop and validate a prognostic model of late (>7 days) seizures after ischaemic stroke.",
-    "pmid": "29413315"
+    "doi": "",
+    "authors": "SeLECT Consortium",
+    "journal": "Unpublished — SeLECT Consortium data",
+    "year": null,
+    "outcome": "Risk of a (further) unprovoked seizure by index seizure type (acute symptomatic vs first/second remote symptomatic)",
+    "clinical_utility": "An in-house model developed by the SeLECT consortium from its own (unpublished) data. It estimates the risk of a (further) unprovoked seizure according to the type of index seizure: acute symptomatic (ASyS — occurring within 7 days of the acute brain insult) versus first or second remote symptomatic (RSyS — unprovoked). This is NOT the published SeLECT score for late seizures after ischaemic stroke; it is a separate consortium analysis of acute-symptomatic vs remote-symptomatic seizure recurrence.",
+    "pmid": "29413315",
+    "unpublished": true
   },
   "thresholds": {
     "group1": 20.0,
@@ -1734,6 +1735,6 @@
     "extraction_method": "cff_export",
     "source": "export_45_2026-04-07_172827.cpfm",
     "review_status": "unreviewed",
-    "notes": "Cumulative+COSY parsed from CFF curve equations; complete meta from paper; verify vs live form."
+    "notes": "Cumulative+COSY parsed from CFF curve equations; complete meta from paper; verify vs live form. | 2026-07-06: corrected attribution — was wrongly citing Galovic SeLECT 2018 (10.1016/S1474-4422(17)30404-0); per investigator this is an unpublished in-house SeLECT-consortium model (ASyS vs RSyS), not the published SeLECT score."
   }
 }

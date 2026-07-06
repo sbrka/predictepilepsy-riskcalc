@@ -9,7 +9,7 @@
     "authors": "Li L, Zhang C, Wang Z, et al.",
     "journal": "BMC Cancer",
     "year": 2023,
-    "clinical_utility": "Background This study aimed to develop an integrated model for predicting the occurrence of postoperative seizures in patients with diffuse high-grade gliomas (DHGGs) using clinical and RNA-seq data. Methods Patients with DHGGs, who received prophylactic anti-epileptic drugs (AEDs) for three months following surgery, were enrolled into the study.",
+    "clinical_utility": "Background This study aimed to develop an integrated model for predicting the occurrence of postoperative seizures in patients with diffuse high-grade gliomas (DHGGs) using clinical and RNA-seq data. Methods Patients with DHGGs, who received prophylactic anti-epileptic drugs (AEDs) for three months following surgery, were enrolled into the study. NOTE: research use only — requires quantitative gene-expression values; the point-allocation and risk-band lookup are an approximation of the paper's published logistic nomogram (Li et al. 2023), not exact published values.",
     "outcome": "Development of an integrated predictive model for postoperative glioma-related epilepsy using gene-signature and clinical data"
   },
   "predictors": [
@@ -70,7 +70,6 @@
       "name": "Expression level of LUZP2",
       "type": "number",
       "coef": 0.000646822,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -80,7 +79,6 @@
       "name": "Expression level of GPNMB",
       "type": "number",
       "coef": 0.002348291,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -90,7 +88,6 @@
       "name": "Expression level of MMD2",
       "type": "number",
       "coef": 0.003071414,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -100,7 +97,6 @@
       "name": "Expression level of GALNT13",
       "type": "number",
       "coef": 0.005716866,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -110,7 +106,6 @@
       "name": "Expression level of IKBKGP1",
       "type": "number",
       "coef": 0.014817826,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -120,7 +115,6 @@
       "name": "Expression level of SLC1A4",
       "type": "number",
       "coef": 0.01969116,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -130,7 +124,6 @@
       "name": "Expression level of RP1",
       "type": "number",
       "coef": 0.019902233,
-      "transform": "exp",
       "default": 0,
       "step": 0.1,
       "min": 0,
@@ -201,13 +194,13 @@
         "label": "2-year risk"
       }
     ],
-    "note": "Combined score = age + temporal-lobe (1.5) + preoperative GRE (1) + gene signature (Σ coef·exp(expression)); mapped to the published 2-year risk bands. Gene-expression fields are optional (default 0).",
+    "note": "Combined score = age + temporal-lobe (1.5) + preoperative GRE (1) + gene signature (Σ coef·expression); mapped to the published 2-year risk bands. Gene-expression fields are optional (default 0).",
     "viz_info": "This is an additive risk model. The waterfall (left) begins at the baseline risk for a patient with no risk factors, then each factor you select steps the risk up (blue) or down (red) — the number on each bar is that factor's contribution in percentage points, so you can see which factors dominate. The donut (right) shows the same active factors as coloured wedges that sum to the total predicted risk shown in the centre. Both update live as you change the inputs."
   },
   "provenance": {
     "extraction_method": "cff_export_regression",
     "source": "export_17_2026-04-07_172702.cpfm",
-    "review_status": "unreviewed",
-    "notes": "PGREM: score=age(≤29=3/30-49=2/50-64=1/≥65=0)+temporal(1.5)+preopGRE(1)+Σ[coef·EXP(gene)]; 2-yr risk lookup <2→~0%…<14→~95%. Gene coefs: LUZP2 .000647, GPNMB .002348, MMD2 .003071, GALNT13 .005717, IKBKGP1 .014818, SLC1A4 .019691, RP1 .019902. Verify vs paper."
+    "review_status": "needs_review",
+    "notes": "PGREM: score=age(≤29=3/30-49=2/50-64=1/≥65=0)+temporal(1.5)+preopGRE(1)+Σ[coef·EXP(gene)]; 2-yr risk lookup <2→~0%…<14→~95%. Gene coefs: LUZP2 .000647, GPNMB .002348, MMD2 .003071, GALNT13 .005717, IKBKGP1 .014818, SLC1A4 .019691, RP1 .019902. Verify vs paper. | 2026-07-06 paper check: gene term corrected exp()->linear per Sum(beta*Exp); lookup remains a reconstruction."
   }
 }
