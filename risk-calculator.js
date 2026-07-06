@@ -164,6 +164,8 @@
     .pop{position:fixed;z-index:60;max-width:272px;background:var(--ink);color:#fff;font-size:12px;line-height:1.5;padding:10px 13px;border-radius:11px;box-shadow:0 12px 30px rgba(14,28,43,.32);opacity:0;pointer-events:none;transform:translateY(-100%);transition:opacity .1s}
     .pop.show{opacity:1}
     .pop::after{content:"";position:absolute;left:var(--arrow,50%);bottom:-5px;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--ink);border-bottom:0}
+    .pop.below{transform:translateY(0)}
+    .pop.below::after{bottom:auto;top:-5px;border-top:0;border-bottom:5px solid var(--ink)}
     .modal{position:fixed;inset:0;background:rgba(14,28,43,.44);display:none;align-items:center;justify-content:center;padding:22px;z-index:40}
     .modal.open{display:flex}
     .mcard{background:#fff;border-radius:18px;max-width:540px;width:100%;max-height:88vh;overflow:auto;padding:28px 30px;box-shadow:0 24px 70px rgba(14,28,43,.34);position:relative}
@@ -825,9 +827,12 @@
       const showPop = (el) => {
         const t = el.getAttribute("data-info"); if (!t) return;
         pop.textContent = t; pop.classList.add("show");
-        const r = el.getBoundingClientRect(), pw = pop.offsetWidth || 260, dotC = r.left + r.width / 2;
+        const r = el.getBoundingClientRect(), pw = pop.offsetWidth || 260, ph = pop.offsetHeight || 60, dotC = r.left + r.width / 2;
         const left = Math.max(8, Math.min(dotC - pw / 2, window.innerWidth - pw - 8));
-        pop.style.left = left + "px"; pop.style.top = (r.top - 9) + "px";
+        const below = (r.top - 9 - ph) < 8;   // not enough room above → flip under the dot
+        pop.classList.toggle("below", below);
+        pop.style.left = left + "px";
+        pop.style.top = (below ? r.bottom + 9 : r.top - 9) + "px";
         pop.style.setProperty("--arrow", Math.max(12, Math.min(dotC - left, pw - 12)) + "px");
       };
       const hidePop = () => pop.classList.remove("show");
