@@ -71,7 +71,7 @@
         }
       ],
       "coef": 0.856,
-      "assess": "Seizures occurring within the first seven days of cerebral venous thrombosis. Contributes a hazard coefficient of 0.420 to the DIAS3 score."
+      "assess": "Status epilepticus (a prolonged seizure or repeated seizures without recovery) during the acute phase of cerebral venous thrombosis. Contributes a hazard coefficient of 0.856 to the DIAS3 score."
     },
     {
       "name": "Subdural Hematoma (SDH)",

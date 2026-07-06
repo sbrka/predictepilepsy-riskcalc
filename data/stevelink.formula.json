@@ -10,7 +10,7 @@
     "doi": "10.1016/j.eclinm.2022.101732",
     "pmid": "36467455",
     "outcome": "Individual probability of drug-resistant epilepsy in people with JME",
-    "clinical_utility": "Stevelink et al. (eClinicalMedicine 2022) built an individualised prediction model for drug-resistant juvenile myoclonic epilepsy (JME) from an individual-participant-data meta-analysis. Nine baseline factors each contribute points; the total maps to an individual probability of drug resistance (model AUC ~0.65). This calculator implements the published nomogram (Fig 2A): select each factor to accumulate points and read the predicted drug-resistance risk. Family history of epilepsy and Asian ethnicity (protective) were newly identified predictors specific to JME. Point values are digitized from the nomogram figure and anchored to the paper's worked example (89 points → 90% risk)."
+    "clinical_utility": "Stevelink et al. (eClinicalMedicine 2022) built an individualised prediction model for drug-resistant juvenile myoclonic epilepsy (JME) from an individual-participant-data meta-analysis. Nine baseline factors each contribute points; the total maps to an individual probability of drug resistance (model AUC ~0.70). This calculator implements the published nomogram (Fig 2A): select each factor to accumulate points and read the predicted drug-resistance risk. Family history of epilepsy and Asian ethnicity (protective) were newly identified predictors specific to JME. Point values are digitized from the nomogram figure and anchored to the paper's worked example (89 points → 90% risk)."
   },
   "thresholds": null,
   "predictors": [
