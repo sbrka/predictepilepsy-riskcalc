@@ -65,6 +65,8 @@
     .iconbtn{width:40px;height:40px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none}
     .iconbtn:hover{color:var(--azure-deep);border-color:var(--azure);background:var(--azure-wash)}
     .iconbtn svg{width:19px;height:19px}
+    .paperbtn{width:auto;gap:7px;padding:0 14px;font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--azure-deep);border-color:var(--azure-line)}
+    .paperbtn svg{width:17px;height:17px}
     .grid{display:grid;grid-template-columns:344px 1fr;gap:0;flex:1}
     @media(max-width:820px){.grid{grid-template-columns:1fr}.rail{border-right:0;border-bottom:1px solid var(--line)}}
     .rail{padding:26px 30px;border-right:1px solid var(--line)}
@@ -123,7 +125,7 @@
     .scorewrap{display:flex;gap:22px;align-items:flex-end;margin:22px 0 20px;padding-top:20px;border-top:1px solid var(--line)}
     .metric .k{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
     .metric .v{font-family:var(--serif);font-size:44px;line-height:.92;font-variant-numeric:tabular-nums;color:var(--ink)}
-    .metric.sm .v{font-size:26px;font-weight:600}
+    .metric.sm .v{font-size:40px;font-weight:600}
     .band{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;margin-top:7px}
     .band .d{width:8px;height:8px;border-radius:50%}
     .verdict{display:flex;flex-direction:column}
@@ -176,6 +178,10 @@
   `;
 
   const GEO = { W: 1000, H: 320, pL: 66, pR: 24, pT: 16, pB: 38 };
+  // taller, less-downscaled geometry + bigger fonts on phones so the plot stays readable
+  const GEO_MOBILE = { W: 620, H: 480, pL: 52, pR: 14, pT: 18, pB: 56 };
+  const isPhone = () => (typeof window !== "undefined" && window.matchMedia) ? window.matchMedia("(max-width:560px)").matches : false;
+  const plotGeo = () => isPhone() ? GEO_MOBILE : GEO;
 
   class RiskCalculator extends HTMLElement {
     connectedCallback() {
@@ -203,7 +209,6 @@
       const root = document.createElement("div");
       root.innerHTML = `<style>${CSS}</style>
         <div class="sheet">
-          <div class="banner"><div class="bwrap"><span class="btitle">predictepilepsy<span class="bdot">.com</span></span><span class="btag">Epilepsy prognostic calculators</span></div></div>
           ${hasNav ? `<div class="topstrip">
             <button class="backbtn" id="back">&#8249;&nbsp;All calculators</button>
             ${noClassic ? `` : `<div class="viewtabs" id="viewtabs"><button class="on" data-view="new">New design</button><button data-view="classic">Classic (CFF)</button></div>`}
@@ -219,7 +224,7 @@
             </div>
             <div class="actions">
               <button class="iconbtn" id="btn-info" title="Background &amp; source" aria-label="Information"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></button>
-              ${m.doi ? `<a class="iconbtn" href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener" title="Open the source paper" aria-label="Source paper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-8.5 8.5"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg></a>` : ``}
+              ${m.doi ? `<a class="iconbtn paperbtn" href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener" title="Read the original paper" aria-label="Read the original paper"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6"/><path d="M9 17h6"/></svg><span>Paper</span></a>` : ``}
             </div>
           </header>
           <div class="grid" id="grid"><aside class="rail" id="rail"></aside><section class="panel" id="panel"></section></div>
@@ -241,6 +246,14 @@
       const dispatch = () => { d.kind === "curve" ? this._renderCurve() : d.kind === "cox" ? this._renderCox() : d.kind === "formula" ? this._renderFormula() : d.kind === "lookup" ? this._renderLookup() : this._renderScore(); };
       dispatch();
       this.render = dispatch;
+      // re-render the plot when crossing the phone/desktop breakpoint (e.g. rotating the device)
+      if ((d.kind === "curve" || d.kind === "cox") && !this._rzBound) {
+        this._rzBound = true; this._wasPhone = isPhone();
+        window.addEventListener("resize", () => {
+          clearTimeout(this._rzT);
+          this._rzT = setTimeout(() => { const p = isPhone(); if (p !== this._wasPhone) { this._wasPhone = p; this.render(); } }, 180);
+        });
+      }
     }
 
     /* ---------------- CURVE ---------------- */
@@ -293,8 +306,9 @@
       this._rail.innerHTML = rail;
 
       // panel
+      this._G = plotGeo();
       this._panel.innerHTML = `<div class="panelhead"><div class="seg modeseg" id="mode"></div><div class="legend" id="legend"></div></div>
-        <div class="plotwrap" id="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${GEO.H}" role="img" aria-label="Risk curve by month"></svg><div class="tip" id="tip"></div></div>
+        <div class="plotwrap" id="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${this._G.W} ${this._G.H}" role="img" aria-label="Risk curve by month"></svg><div class="tip" id="tip"></div></div>
         <p class="hint">Move the cursor across the curve to read the risk at any month.</p>`;
 
       // wire
@@ -378,8 +392,9 @@
       this._rail.innerHTML = rail;
 
       // panel
+      this._G = plotGeo();
       this._panel.innerHTML = `<div class="panelhead"><div class="seg modeseg" id="mode"></div><div class="legend" id="legend"></div></div>
-        <div class="plotwrap" id="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${GEO.W} ${GEO.H}" role="img" aria-label="Personalised risk curve by month"></svg><div class="tip" id="tip"></div></div>
+        <div class="plotwrap" id="plotwrap"><svg class="plot" id="plot" viewBox="0 0 ${this._G.W} ${this._G.H}" role="img" aria-label="Personalised risk curve by month"></svg><div class="tip" id="tip"></div></div>
         <p class="hint">Adjust the predictors on the left — the curve recomputes. Move the cursor across it to read any month.</p>`;
 
       // wire
@@ -410,24 +425,28 @@
       const mode = this._mode, cosy = mode === "cosy";
       const arr = seriesArr(cosy ? s.cosy : s.cum, ax[mode]);
       const xmax = ax[mode], ymax = cosy ? cosyMax : 100;
-      const { W, H, pL, pR, pT, pB } = GEO;
+      const G = this._G || GEO, { W, H, pL, pR, pT, pB } = G;
+      const fs = W < 800 ? 1.5 : 1;               // enlarge fonts on the taller phone geometry
+      const f = (n) => (n * fs).toFixed(1);
       const X = (mo) => pL + (mo / xmax) * (W - pL - pR);
       const Y = (v) => pT + (1 - Math.min(v, ymax) / ymax) * (H - pT - pB);
       let g = "";
       const ystep = ymax <= 40 ? 10 : 20;
-      for (let y = 0; y <= ymax + .01; y += ystep) { const yy = Y(y); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="#eef2f6"/><text x="${pL - 8}" y="${yy + 3.5}" text-anchor="end" font-size="12.5" fill="#8a97a4">${y}%</text>`; }
-      const xstep = xmax <= 24 ? 6 : 12;
-      for (let x = 0; x <= xmax; x += xstep) g += `<text x="${X(x)}" y="${H - pB + 18}" text-anchor="middle" font-size="12.5" fill="#8a97a4">${x}</text>`;
-      g += `<text x="${(pL + W - pR) / 2}" y="${H - 4}" text-anchor="middle" font-size="13" font-weight="600" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
+      for (let y = 0; y <= ymax + .01; y += ystep) { const yy = Y(y); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="#eef2f6"/><text x="${pL - 8}" y="${yy + 3.5 * fs}" text-anchor="end" font-size="${f(12.5)}" fill="#8a97a4">${y}%</text>`; }
+      const xstep = xmax <= 24 ? 6 : (fs > 1 ? (xmax <= 72 ? 12 : xmax <= 150 ? 24 : 36) : 12);
+      for (let x = 0; x <= xmax; x += xstep) g += `<text x="${X(x)}" y="${H - pB + 18 * fs}" text-anchor="middle" font-size="${f(12.5)}" fill="#8a97a4">${x}</text>`;
+      g += `<text x="${(pL + W - pR) / 2}" y="${H - 4 * fs}" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
       const yMid = pT + (H - pT - pB) / 2;
-      g += `<text x="15" y="${yMid}" transform="rotate(-90 15 ${yMid})" text-anchor="middle" font-size="13" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
+      g += `<text x="${15 * fs}" y="${yMid}" transform="rotate(-90 ${15 * fs} ${yMid})" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
       let pa = `M ${X(0)} ${Y(0)}`; arr.forEach((v, mo) => { pa += ` L ${X(mo)} ${Y(v)}`; }); pa += ` L ${X(arr.length - 1)} ${Y(0)} Z`;
       g += `<path d="${pa}" fill="${cosy ? "rgba(224,145,43,.10)" : "rgba(31,131,230,.10)"}"/>`;
-      if (cosy) [[th.group1, "#b26a06"], [th.group2, "#b02020"]].forEach(([t, c]) => { if (t > ymax) return; const yy = Y(t); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="${c}" stroke-width="1" stroke-dasharray="4 4"/><text x="${W - pR}" y="${yy - 5}" text-anchor="end" font-size="10.5" fill="${c}">${t}%</text>`; });
+      if (cosy) [[th.group1, "#b26a06"], [th.group2, "#b02020"]].forEach(([t, c]) => { if (t > ymax) return; const yy = Y(t); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="${c}" stroke-width="1" stroke-dasharray="4 4"/><text x="${W - pR}" y="${yy - 5}" text-anchor="end" font-size="${f(10.5)}" fill="${c}">${t}%</text>`; });
       let pc = ""; arr.forEach((v, mo) => { pc += (mo ? " L" : "M") + ` ${X(mo)} ${Y(v)}`; });
-      g += `<path d="${pc}" fill="none" stroke="${cosy ? "#e0912b" : "#1f83e6"}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`;
+      g += `<path d="${pc}" fill="none" stroke="${cosy ? "#e0912b" : "#1f83e6"}" stroke-width="${2.4 * fs}" stroke-linejoin="round" stroke-linecap="round"/>`;
       const mm = Math.min(this._month, xmax);
-      g += `<line x1="${X(mm)}" y1="${pT}" x2="${X(mm)}" y2="${H - pB}" stroke="#c7d3de" stroke-width="1" stroke-dasharray="2 3"/><circle cx="${X(mm)}" cy="${Y(arr[mm])}" r="5" fill="${cosy ? "#e0912b" : "#1f83e6"}" stroke="#fff" stroke-width="2"/>`;
+      g += `<line x1="${X(mm)}" y1="${pT}" x2="${X(mm)}" y2="${H - pB}" stroke="#c7d3de" stroke-width="1" stroke-dasharray="2 3"/><circle cx="${X(mm)}" cy="${Y(arr[mm])}" r="${5 * fs}" fill="${cosy ? "#e0912b" : "#1f83e6"}" stroke="#fff" stroke-width="${2 * fs}"/>`;
+      // hover marker (moves with the cursor; hidden until first hover)
+      g += `<circle id="hovdot" r="${7 * fs}" fill="#ff7a1a" stroke="#fff" stroke-width="${2.5 * fs}" style="display:none;pointer-events:none"/>`;
       this._panel.querySelector("#plot").innerHTML = g;
       const lg = this._panel.querySelector("#legend");
       lg.innerHTML = cosy ? `<span><span class="ln amb"></span>COSY</span><span><span class="ln" style="border-color:#b26a06;border-top-style:dashed"></span>orientation cut-offs</span>` : `<span><span class="ln"></span>cumulative risk</span>`;
@@ -435,21 +454,32 @@
 
     _bindHover(cumArr, cosyArr, ax, th) {
       const wrap = this._panel.querySelector("#plotwrap"), svg = this._panel.querySelector("#plot"), tip = this._panel.querySelector("#tip");
+      const hide = () => { tip.classList.remove("show"); const dot = svg.querySelector("#hovdot"); if (dot) dot.style.display = "none"; };
       const move = (ev) => {
-        const r = svg.getBoundingClientRect(); const scale = r.width / GEO.W;
-        const px = (ev.clientX - r.left) / scale; const xmax = ax[this._mode];
-        const mo = Math.round((px - GEO.pL) / (GEO.W - GEO.pL - GEO.pR) * xmax);
-        if (mo < 0 || mo > xmax) { tip.classList.remove("show"); return; }
+        const G = this._G || GEO;
+        const cx = ev.touches ? (ev.touches[0] && ev.touches[0].clientX) : ev.clientX;
+        const cy = ev.touches ? (ev.touches[0] && ev.touches[0].clientY) : ev.clientY;
+        if (cx == null) return;
+        const r = svg.getBoundingClientRect(); const scale = r.width / G.W;
+        const px = (cx - r.left) / scale; const xmax = ax[this._mode];
+        const mo = Math.round((px - G.pL) / (G.W - G.pL - G.pR) * xmax);
+        if (mo < 0 || mo > xmax) { hide(); return; }
         const cumV = cumArr[Math.min(mo, cumArr.length - 1)], cosyV = cosyArr[Math.min(mo, cosyArr.length - 1)];
         const [zn, zs] = zoneFor(cosyV, th);
         tip.innerHTML = `<div class="d">Month ${mo}</div><div class="r"><span>Cumulative</span><b>${fmtPct(cumV)}</b></div><div class="r"><span>COSY</span><b>${fmtPct(cosyV)}</b></div><div class="z" style="${zs}">${zn}</div>`;
         const ymax = this._mode === "cosy" ? this._cur.cosyMax : 100; const useV = this._mode === "cosy" ? cosyV : cumV;
-        tip.style.left = ((GEO.pL + (mo / xmax) * (GEO.W - GEO.pL - GEO.pR)) * scale) + "px";
-        tip.style.top = ((GEO.pT + (1 - Math.min(useV, ymax) / ymax) * (GEO.H - GEO.pT - GEO.pB)) * scale) + "px";
+        const dx = G.pL + (mo / xmax) * (G.W - G.pL - G.pR);
+        const dy = G.pT + (1 - Math.min(useV, ymax) / ymax) * (G.H - G.pT - G.pB);
+        tip.style.left = (dx * scale) + "px";
+        tip.style.top = (dy * scale) + "px";
         tip.classList.add("show");
+        const dot = svg.querySelector("#hovdot"); if (dot) { dot.setAttribute("cx", dx); dot.setAttribute("cy", dy); dot.style.display = ""; }
+        if (ev.touches) ev.preventDefault();
       };
       wrap.addEventListener("mousemove", move);
-      wrap.addEventListener("mouseleave", () => tip.classList.remove("show"));
+      wrap.addEventListener("mouseleave", hide);
+      wrap.addEventListener("touchstart", move, { passive: false });
+      wrap.addEventListener("touchmove", move, { passive: false });
     }
 
     /* ---------------- SCORE ---------------- */
