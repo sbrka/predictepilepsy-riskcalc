@@ -26,7 +26,7 @@
     },
     {
      "label": "<45 years",
-     "points": 2
+     "points": 2.4
     }
    ],
    "assess": "Determined at diagnosis. Younger patients (<45 years) are at higher risk of glioma-related epilepsy. OR for <45 years: 2.6 (95% CI: 1.6–4.3, p < 0.001)."
@@ -36,7 +36,7 @@
    "options": [
     {
      "label": "Present",
-     "points": 0
+     "points": 0.2
     },
     {
      "label": "Absent",
@@ -64,7 +64,7 @@
    "options": [
     {
      "label": "Gross Total Resection (GTR)",
-     "points": 0.0
+     "points": 0
     },
     {
      "label": "Non-Gross Total Resection (non-GTR)",
@@ -82,7 +82,7 @@
     },
     {
      "label": "Present",
-     "points": 4
+     "points": 4.2
     }
    ],
    "assess": "Defined as involvement of the temporal lobe. OR for temporal lobe involvement: 2.0 (95% CI: 1.1–3.6, p = 0.033)."
@@ -96,7 +96,7 @@
     },
     {
      "label": "WHO Grade III",
-     "points": 3
+     "points": 3.3
     }
    ],
    "assess": "umor classification per WHO standards. Lower-grade tumors (Grade III) are more epileptogenic. OR for Grade III: 2.1 (95% CI: 1.1–4.0, p = 0.021)."
@@ -120,7 +120,7 @@
    "options": [
     {
      "label": ">10%",
-     "points": 1.6
+     "points": 0
     },
     {
      "label": "≤10%",
