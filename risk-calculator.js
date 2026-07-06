@@ -126,6 +126,7 @@
     .metric .k{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
     .metric .v{font-family:var(--serif);font-size:44px;line-height:.92;font-variant-numeric:tabular-nums;color:var(--ink)}
     .metric.sm .v{font-size:40px;font-weight:600}
+    .metric .cisub{font-size:12.5px;color:var(--muted);margin-top:4px;font-weight:600;font-variant-numeric:tabular-nums}
     .band{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;margin-top:7px}
     .band .d{width:8px;height:8px;border-radius:50%}
     .verdict{display:flex;flex-direction:column}
@@ -291,9 +292,11 @@
         <input type="range" id="hz" min="0" max="${xmax}" step="1" value="${mo}"></div>`;
       // metrics
       const cumArr = seriesArr(s.cum, ax.cum);
+      const ciLo = s.cum_lo ? seriesArr(s.cum_lo, ax.cum) : null, ciHi = s.cum_hi ? seriesArr(s.cum_hi, ax.cum) : null;
+      const ciTxt = (mm) => (ciLo && ciHi) ? `95% CI ${fmtPct(ciLo[mm])}–${fmtPct(ciHi[mm])}` : "";
       rail += `<div class="scorewrap">
         ${preds.length && !m.hide_score ? `<div class="metric"><div class="k">Total score</div><div class="v" id="scoreN">${fmtScore(this._score)}</div></div>` : `<div class="metric"><div class="k">${esc(m.selector || "Risk group")}</div><div class="v" style="font-size:${m.hide_score ? "16px;line-height:1.25" : "22px"}">${esc(s.display || key)}</div><div class="v" id="scoreN" hidden>${fmtScore(this._score)}</div>${s.info ? `<div class="stratinfo" style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;font-family:var(--sans)">${esc(s.info)}</div>` : ""}</div>`}
-        ${s.no_cum ? `<div class="metric sm"><div class="k">COSY at <span id="atmo">${mo}</span> mo seizure-free</div><div class="v" id="cumAt">${fmtPct(seriesArr(s.cosy, ax.cosy)[mo])}</div></div>` : `<div class="metric sm"><div class="k">Cumulative risk at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cumArr[mo])}</div></div>`}</div>`;
+        ${s.no_cum ? `<div class="metric sm"><div class="k">COSY at <span id="atmo">${mo}</span> mo seizure-free</div><div class="v" id="cumAt">${fmtPct(seriesArr(s.cosy, ax.cosy)[mo])}</div></div>` : `<div class="metric sm"><div class="k">Cumulative risk at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cumArr[mo])}</div><div class="cisub" id="cumCI">${ciTxt(mo)}</div></div>`}</div>`;
       // verdict
       const noCosy = !!s.no_cosy;
       const cosyArr = seriesArr(s.cosy, ax.cosy);
@@ -327,6 +330,7 @@
         this._rail.querySelector("#hzpill").textContent = mm + " mo";
         this._rail.querySelector("#atmo").textContent = mm;
         this._rail.querySelector("#cumAt").textContent = fmtPct(s.no_cum ? seriesArr(s.cosy, ax.cosy)[mm] : cumArr[mm]);
+        const ciEl = this._rail.querySelector("#cumCI"); if (ciEl) ciEl.textContent = ciTxt(mm);
         this._drawCurve();
       });
       seg2(this._panel.querySelector("#mode"), s.no_cum ? [{ l: "COSY", v: "cosy" }] : (s.no_cosy ? [{ l: "Cumulative risk", v: "cum" }] : [{ l: "Cumulative risk", v: "cum" }, { l: "COSY", v: "cosy" }]), this._mode, (v) => { this._mode = v; this._renderCurve(); });
@@ -438,8 +442,22 @@
       g += `<text x="${(pL + W - pR) / 2}" y="${H - 4 * fs}" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
       const yMid = pT + (H - pT - pB) / 2;
       g += `<text x="${15 * fs}" y="${yMid}" transform="rotate(-90 ${15 * fs} ${yMid})" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
-      let pa = `M ${X(0)} ${Y(0)}`; arr.forEach((v, mo) => { pa += ` L ${X(mo)} ${Y(v)}`; }); pa += ` L ${X(arr.length - 1)} ${Y(0)} Z`;
-      g += `<path d="${pa}" fill="${cosy ? "rgba(224,145,43,.10)" : "rgba(31,131,230,.10)"}"/>`;
+      const hasCI = !cosy && s.cum_lo && s.cum_hi;
+      const loArr = hasCI ? seriesArr(s.cum_lo, ax.cum) : null, hiArr = hasCI ? seriesArr(s.cum_hi, ax.cum) : null;
+      if (hasCI) {
+        // 95% CI band: forward along the upper bound, back along the lower bound
+        const N = arr.length - 1;
+        let ci = `M ${X(0)} ${Y(hiArr[0])}`;
+        for (let mo = 0; mo <= N; mo++) ci += ` L ${X(mo)} ${Y(hiArr[mo])}`;
+        for (let mo = N; mo >= 0; mo--) ci += ` L ${X(mo)} ${Y(loArr[mo])}`;
+        g += `<path d="${ci} Z" fill="rgba(31,131,230,.17)"/>`;
+        let plo = "", phi = "";
+        for (let mo = 0; mo <= N; mo++) { plo += (mo ? " L" : "M") + ` ${X(mo)} ${Y(loArr[mo])}`; phi += (mo ? " L" : "M") + ` ${X(mo)} ${Y(hiArr[mo])}`; }
+        g += `<path d="${plo}" fill="none" stroke="rgba(31,131,230,.5)" stroke-width="${1 * fs}" stroke-dasharray="3 3"/><path d="${phi}" fill="none" stroke="rgba(31,131,230,.5)" stroke-width="${1 * fs}" stroke-dasharray="3 3"/>`;
+      } else {
+        let pa = `M ${X(0)} ${Y(0)}`; arr.forEach((v, mo) => { pa += ` L ${X(mo)} ${Y(v)}`; }); pa += ` L ${X(arr.length - 1)} ${Y(0)} Z`;
+        g += `<path d="${pa}" fill="${cosy ? "rgba(224,145,43,.10)" : "rgba(31,131,230,.10)"}"/>`;
+      }
       if (cosy) [[th.group1, "#b26a06"], [th.group2, "#b02020"]].forEach(([t, c]) => { if (t > ymax) return; const yy = Y(t); g += `<line x1="${pL}" y1="${yy}" x2="${W - pR}" y2="${yy}" stroke="${c}" stroke-width="1" stroke-dasharray="4 4"/><text x="${W - pR}" y="${yy - 5}" text-anchor="end" font-size="${f(10.5)}" fill="${c}">${t}%</text>`; });
       let pc = ""; arr.forEach((v, mo) => { pc += (mo ? " L" : "M") + ` ${X(mo)} ${Y(v)}`; });
       g += `<path d="${pc}" fill="none" stroke="${cosy ? "#e0912b" : "#1f83e6"}" stroke-width="${2.4 * fs}" stroke-linejoin="round" stroke-linecap="round"/>`;
@@ -449,7 +467,7 @@
       g += `<circle id="hovdot" r="${7 * fs}" fill="#ff7a1a" stroke="#fff" stroke-width="${2.5 * fs}" style="display:none;pointer-events:none"/>`;
       this._panel.querySelector("#plot").innerHTML = g;
       const lg = this._panel.querySelector("#legend");
-      lg.innerHTML = cosy ? `<span><span class="ln amb"></span>COSY</span><span><span class="ln" style="border-color:#b26a06;border-top-style:dashed"></span>orientation cut-offs</span>` : `<span><span class="ln"></span>cumulative risk</span>`;
+      lg.innerHTML = cosy ? `<span><span class="ln amb"></span>COSY</span><span><span class="ln" style="border-color:#b26a06;border-top-style:dashed"></span>orientation cut-offs</span>` : `<span><span class="ln"></span>cumulative risk</span>${hasCI ? `<span><span class="ln" style="border:0;width:16px;height:10px;background:rgba(31,131,230,.17)"></span>95% CI</span>` : ""}`;
     }
 
     _bindHover(cumArr, cosyArr, ax, th) {
@@ -466,7 +484,9 @@
         if (mo < 0 || mo > xmax) { hide(); return; }
         const cumV = cumArr[Math.min(mo, cumArr.length - 1)], cosyV = cosyArr[Math.min(mo, cosyArr.length - 1)];
         const [zn, zs] = zoneFor(cosyV, th);
-        tip.innerHTML = `<div class="d">Month ${mo}</div><div class="r"><span>Cumulative</span><b>${fmtPct(cumV)}</b></div><div class="r"><span>COSY</span><b>${fmtPct(cosyV)}</b></div><div class="z" style="${zs}">${zn}</div>`;
+        const _s = this._cur.s, _lo = _s.cum_lo ? seriesArr(_s.cum_lo, ax.cum) : null, _hi = _s.cum_hi ? seriesArr(_s.cum_hi, ax.cum) : null;
+        const ciRow = (_lo && _hi) ? `<div class="r" style="opacity:.8"><span>95% CI</span><b>${fmtPct(_lo[Math.min(mo, _lo.length - 1)])}–${fmtPct(_hi[Math.min(mo, _hi.length - 1)])}</b></div>` : "";
+        tip.innerHTML = `<div class="d">Month ${mo}</div><div class="r"><span>Cumulative</span><b>${fmtPct(cumV)}</b></div>${ciRow}<div class="r"><span>COSY</span><b>${fmtPct(cosyV)}</b></div><div class="z" style="${zs}">${zn}</div>`;
         const ymax = this._mode === "cosy" ? this._cur.cosyMax : 100; const useV = this._mode === "cosy" ? cosyV : cumV;
         const dx = G.pL + (mo / xmax) * (G.W - G.pL - G.pR);
         const dy = G.pT + (1 - Math.min(useV, ymax) / ymax) * (G.H - G.pT - G.pB);
