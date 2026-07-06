@@ -98,6 +98,8 @@
     box-shadow:0 6px 16px rgba(14,74,138,.24)!important;transition:transform .16s,box-shadow .16s!important}\
   .elementor-button:hover{transform:translateY(-2px)!important;box-shadow:0 11px 24px rgba(14,74,138,.32)!important;color:#fff!important}\
   .elementor-button .elementor-button-text{color:#fff!important}\
+  /* kill the odd white card behind adapted buttons in the info box */\
+  .elementor-widget-button .elementor-widget-container,.elementor-widget-button .elementor-button-wrapper{background:transparent!important;box-shadow:none!important;border:0!important}\
   /* disclaimer as a soft card (task 2) */\
   .elementor-element-578dbb8{background:#f3f8fd!important;border:1px solid #d9e7f6!important;border-radius:20px!important;\
     max-width:1120px;margin:34px auto 40px!important;padding:24px 28px!important;box-shadow:0 6px 20px rgba(19,91,168,.06)!important}\
