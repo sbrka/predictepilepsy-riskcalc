@@ -133,6 +133,12 @@
       var palette = PALETTES[brand] || PALETTES.default;
       // only style the host page's Elementor chrome on the native predictepilepsy home
       if (brand === "default" && !this.hasAttribute("no-theme")) injectTheme();
+      // optionally hide the theme's duplicate page title (banner already carries a heading)
+      if (this.hasAttribute("hide-page-title") && !document.getElementById("ch-hidetitle")) {
+        var ht = document.createElement("style"); ht.id = "ch-hidetitle";
+        ht.textContent = ".entry-title,.page-title,.page-header .entry-title{display:none!important}";
+        document.head.appendChild(ht);
+      }
       var sr = this.attachShadow({ mode: "open" });
       var list = pick ? GROUPS.filter(function (g) { return pick.indexOf(g.key) > -1; }) : GROUPS;
       var groups = list.map(function (g) {
