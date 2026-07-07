@@ -62,6 +62,7 @@
     ["calc-asm-withdrawal-cosy", "ASM Withdrawal (+ EEG)", "Seizure recurrence after ASM withdrawal, incl. EEG findings.", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
+    ["calc-slah-score", "SLAH Seizure-Freedom Score", "Chance of seizure freedom after laser ablation (SLAH) for mesial temporal lobe epilepsy.", "g3", "surgery"],
     ["calc-fle-surgery-prognostic", "Frontal Lobe Surgery — Prognostic", "Prognostic factors after frontal-lobe epilepsy surgery.", "g3", "surgery"],
     ["calc-fle-surgery-outcome", "Frontal Lobe Surgery — Outcome", "Seizure outcome after frontal-lobe epilepsy surgery.", "g3", "surgery"],
     ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g3", "surgery"],
