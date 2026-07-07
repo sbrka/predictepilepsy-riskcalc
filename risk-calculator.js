@@ -360,6 +360,20 @@
       for (let mo = 0; mo <= ax.cum; mo++) cum[mo] = 100 * (1 - Sf(mo));
       for (let mo = 0; mo <= ax.cosy; mo++) { const s0 = Sf(mo); cosy[mo] = s0 > 0 ? 100 * (1 - Sf(mo + HZ) / s0) : 0; }
       const s = { cum, cosy };
+      // 95% CI band — complementary-log-log SE model (aligned to the official WAMS app):
+      // SE(t,x)^2 = ci_se_base[t]^2 + Σ ci_var_i·(x_i − ref_i)^2 ; cll(S)=ln(H0(t))+LP
+      if (m.ci_se_base) {
+        const seB = m.ci_se_base, cl = [], ch = [];
+        const varSum = inputs.reduce((a, inp, idx) => a + (inp.ci_var || 0) * Math.pow(Number(this._coxVal[idx]) - (inp.ref || 0), 2), 0);
+        for (let mm2 = 0; mm2 <= ax.cum; mm2++) {
+          const H = Hget(mm2);
+          if (H <= 0) { cl[mm2] = cum[mm2]; ch[mm2] = cum[mm2]; continue; }
+          const cllv = Math.log(H) + LP, SE = Math.sqrt(Math.pow(seB[Math.min(mm2, seB.length - 1)] || 0, 2) + varSum);
+          cl[mm2] = 100 * (1 - Math.exp(-Math.exp(cllv - 1.96 * SE)));   // lower cumulative risk (higher survival)
+          ch[mm2] = 100 * (1 - Math.exp(-Math.exp(cllv + 1.96 * SE)));   // upper cumulative risk
+        }
+        s.cum_lo = cl; s.cum_hi = ch;
+      }
       this._cur = { s, th, ax, cosyMax };
 
       const lbl = this._mode === "cosy" ? "Seizure-free interval" : "Months since withdrawal";
