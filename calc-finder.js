@@ -49,6 +49,7 @@
     ["calc-hs-tle-fse", "HS / TLE after Febrile Status", "Hippocampal sclerosis & temporal-lobe epilepsy after febrile status epilepticus.", "g1", "febrile"],
     ["calc-epi-pass", "EPI-PASS", "Epilepsy after an acute symptomatic seizure.", "g1", "acute_sympt"],
 
+    ["calc-first-seizure-recurrence", "First Unprovoked Seizure — Recurrence", "Recurrence after a first unprovoked seizure by risk factor (EEG, MRI, nocturnal, prior insult).", "g2", "first_seizure"],
     ["calc-mess-part1", "MESS (Part 1)", "Recurrence risk after a first seizure — combination table.", "g2", "first_seizure"],
     ["calc-mess-part2", "MESS (Part 2)", "Prognostic index for recurrence after a single seizure / early epilepsy.", "g2", "first_seizure"],
     ["calc-first-tcs-adults", "First Tonic-Clonic Seizure", "Recurrence after a first tonic-clonic seizure in adults.", "g2", "first_seizure"],
