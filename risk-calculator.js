@@ -535,7 +535,7 @@
       const rec = recs ? (recs.find((r) => this._score >= (r.lo != null ? r.lo : -1e9) && this._score <= (r.hi != null ? r.hi : 1e9)) || null) : null;
       const recColor = (t) => t === "high" ? "var(--red)" : t === "med" ? "var(--amber-deep)" : "var(--green)";
       rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(preds.length ? "Total score" : "Score")}</div><div class="v" id="scoreN">${fmtScore(this._score)}</div>${band ? `<div class="band"><span class="d" style="background:${band.c}"></span><span style="color:${band.c}">${band.n}</span></div>` : ``}</div>
-        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">Risk at ${esc(m.horizon || "horizon")}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div></div>`}</div>`;
+        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">${esc(m.metric_label || ("Risk at " + (m.horizon || "horizon")))}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div></div>`}</div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
 
@@ -549,8 +549,8 @@
         const items = preds.map((p, i) => { const o = (p.options || [])[this._predSel[i]] || {}; const contrib = (Number(o.points) || 0) - minPts[i]; return { name: p.name, label: o.label, contrib, on: contrib > 0, wlabel: (contrib >= 0 ? "+" : "") + contrib + " pts" }; });
         const link = (pts) => { const r = rowFor(pts); return r && r.pct != null ? r.pct : 0; };
         const dispFn = (pts) => { const r = rowFor(pts); return r ? (r.disp ? r.disp : (r.pct != null ? fmtPct(r.pct) : "—")) : "—"; };
-        const vizInfo = "Each risk factor adds points. The waterfall (left) starts at the baseline risk and steps up as each active factor pushes the total score into a higher risk band; the donut (right) shows those factors as wedges summing to the predicted risk in the centre.";
-        this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Risk breakdown${m.horizon ? " &middot; at " + esc(m.horizon) : ""} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
+        const vizInfo = m.viz_info || "Each risk factor adds points. The waterfall (left) starts at the baseline risk and steps up as each active factor pushes the total score into a higher risk band; the donut (right) shows those factors as wedges summing to the predicted risk in the centre.";
+        this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.viz_title || "Risk breakdown")}${m.horizon ? " &middot; at " + esc(m.horizon) : ""} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
           <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
             <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
             <div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>

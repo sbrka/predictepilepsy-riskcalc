@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "id": "slah_score",
+  "kind": "score",
+  "meta": {
+    "title": "Seizure Freedom after Laser Ablation (SLAH) — Ordinal Score",
+    "doi": "10.1002/acn3.52146",
+    "pmid": "39001603",
+    "authors": "Dickey AS, Bullinger KL, Grogan D, et al.",
+    "year": 2024,
+    "journal": "Annals of Clinical and Translational Neurology",
+    "outcome": "Predicted chance of seizure freedom 1 year after stereotactic laser amygdalohippocampotomy (SLAH) for mesial temporal lobe epilepsy",
+    "clinical_utility": "An 8-point ordinal clinical score (Dickey et al. 2024) that predicts the chance of seizure freedom one year after stereotactic laser amygdalohippocampotomy (SLAH / laser ablation) for mesial temporal lobe epilepsy. One point is awarded for each of eight features concordant with mesial temporal lobe epilepsy; a higher score means a higher predicted chance of seizure freedom.",
+    "cff_info": "<p><b>What this shows.</b> An ordinal clinical score (Dickey et&nbsp;al., <i>Ann Clin Transl Neurol</i> 2024) predicting the chance of <b>seizure freedom one year after laser ablation (SLAH)</b> for mesial temporal lobe epilepsy, from 101 patients at Emory University. One point is given for each of eight features typical of mesial temporal lobe epilepsy (0–8 total); more concordant features → higher predicted seizure freedom.</p><h4>Key findings</h4><ul><li>Seizure-freedom chance rises steadily with the score: ~6% at 0 up to ~89% at 8.</li><li>A score ≥6 predicts a good outcome (≥71% seizure free); ≤4 predicts a poor outcome (≤41%).</li><li>The ordinal score out-predicted MTS alone or a full multivariable model (AUC 0.70 vs 0.54–0.62).</li></ul><p>Lateralized findings (IEDs, ictal onset, MTS, PET) score a point only when they are unitemporal and ipsilateral to the planned surgery; bitemporal, contralateral or non-localizing findings score 0. This is a demonstration tool, not a substitute for multidisciplinary presurgical evaluation.</p>"
+  },
+  "thresholds": {},
+  "predictors": [
+    {
+      "name": "History of infantile febrile seizures",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "A documented history of febrile seizures in infancy/early childhood. Present = 1 point."
+    },
+    {
+      "name": "Onset of epilepsy ≤ 16 years",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Age at epilepsy onset 16 years or younger. Yes = 1 point."
+    },
+    {
+      "name": "Rare or no generalized tonic-clonic seizures",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Few or no secondarily generalized tonic-clonic seizures. Yes = 1 point."
+    },
+    {
+      "name": "No auditory, vertiginous or visual aura",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Absence of an auditory, vertiginous or visual aura (these suggest non-mesial/neocortical onset). Absent such aura = 1 point."
+    },
+    {
+      "name": "Ipsilateral temporal interictal discharges (IEDs)",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Interictal epileptiform discharges on scalp EEG. Score 1 only if the finding is unitemporal AND ipsilateral to the planned surgery side; bitemporal, extratemporal, contralateral or non-localizing findings score 0. (Non-localizing or no interictals = 0.)"
+    },
+    {
+      "name": "Ipsilateral temporal ictal onset",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "Scalp/intracranial ictal onset localized to the temporal lobe. Score 1 only if the finding is unitemporal AND ipsilateral to the planned surgery side; bitemporal, extratemporal, contralateral or non-localizing findings score 0."
+    },
+    {
+      "name": "Ipsilateral mesial temporal sclerosis (MTS) on MRI",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "MRI evidence of mesial temporal sclerosis. Score 1 only if the finding is unitemporal AND ipsilateral to the planned surgery side; bitemporal, extratemporal, contralateral or non-localizing findings score 0."
+    },
+    {
+      "name": "Ipsilateral temporal PET hypometabolism",
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1
+        }
+      ],
+      "assess": "FDG-PET hypometabolism in the temporal lobe. Score 1 only if the finding is unitemporal AND ipsilateral to the planned surgery side; bitemporal, extratemporal, contralateral or non-localizing findings score 0."
+    }
+  ],
+  "model": {
+    "score_type": "points",
+    "horizon": "1 year",
+    "panel_title": "Chance of seizure freedom at 1 year",
+    "rows": [
+      {
+        "score": 0,
+        "pct": 6,
+        "disp": "6%",
+        "label": "6% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 1,
+        "pct": 10,
+        "disp": "10%",
+        "label": "10% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 2,
+        "pct": 17,
+        "disp": "17%",
+        "label": "17% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 3,
+        "pct": 28,
+        "disp": "28%",
+        "label": "28% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 4,
+        "pct": 41,
+        "disp": "41%",
+        "label": "41% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 5,
+        "pct": 57,
+        "disp": "57%",
+        "label": "57% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 6,
+        "pct": 71,
+        "disp": "71%",
+        "label": "71% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 7,
+        "pct": 82,
+        "disp": "82%",
+        "label": "82% chance of 1-yr seizure freedom"
+      },
+      {
+        "score": 8,
+        "pct": 89,
+        "disp": "89%",
+        "label": "89% chance of 1-yr seizure freedom"
+      }
+    ],
+    "metric_label": "Seizure freedom at 1 year",
+    "viz_title": "Seizure-freedom breakdown",
+    "viz_info": "Each concordant feature adds one point. The waterfall (left) starts at the baseline chance of seizure freedom and steps up as each feature raises the predicted seizure-freedom; the donut (right) shows the features as wedges summing to the predicted chance of seizure freedom in the centre. Higher score = better predicted outcome."
+  },
+  "provenance": {
+    "extraction_method": "paper_table",
+    "source": "Dickey 2024 Ann Clin Transl Neurol Table 3 (PMID39001603, doi 10.1002/acn3.52146)",
+    "review_status": "human_reviewed",
+    "notes": "8 binary predictors (1pt each, 0-8) from Table 3 / Methods; seizure-freedom %/score from Table 3 (logistic-regression prediction, matches Fig 3 observed). Lateralized vars scored 1 only if unitemporal+ipsilateral. Extracted 2026-07-07."
+  }
+}
