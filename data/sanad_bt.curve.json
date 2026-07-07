@@ -10,7 +10,8 @@
     "doi": "10.1371/journal.pone.0190035",
     "pmid": "28698335",
     "outcome": "Breakthrough seizure, subsequent seizure recurrence, and re-remission after a period of 12-month remission (SANAD)",
-    "clinical_utility": "This tool shows what happens AFTER someone with newly-diagnosed epilepsy first becomes seizure-free for 12 months on medication (SANAD trial; Bonnett et al., PLOS ONE 2017). It is not a personal risk score — each curve is the average result for the whole group. Read the three curves as steps in a patient's journey:\n\nSTEP 1 — Will a breakthrough seizure happen? (Fig 2) From the moment of 12-month seizure-freedom, the risk of the FIRST 'breakthrough' seizure returning: ~24% by 1 year, rising to ~55% by 5–6 years. Many people stay seizure-free, but breakthroughs are common over time.\n\nSTEP 2a — If a breakthrough happens, will there be MORE seizures? (Fig 3) This curve applies ONLY once a breakthrough has already occurred — the clock RE-STARTS at that breakthrough seizure. It answers: having broken through, how likely is a further seizure? The answer is high — ~74% within 2 years (the next seizure came after a median of only ~1 month). So a single breakthrough usually means the epilepsy is active again; only about 1 in 4 stay seizure-free afterwards.\n\nSTEP 2b — If a breakthrough happens, can remission be regained? (Fig 4) The hopeful counterpart, describing the SAME people as Step 2a: the chance of re-achieving another full 12 months seizure-free. It is 0 before 12 months (by definition), then climbs to ~64% by 2 years — most people do eventually regain control.\n\nSteps 2a and 2b are two views of the same patients who had a breakthrough: 2a = how soon the next seizure comes; 2b = how often long-term control returns. Use the outcome selector to switch curves and the time slider to read the probability at any month."
+    "clinical_utility": "Three group-average outcomes after a first 12-month remission on treatment (SANAD; Bonnett 2017): whether a breakthrough seizure returns, whether more seizures follow a breakthrough, and the chance of regaining a 12-month remission. Not a personal risk score.",
+    "cff_info": "<p><b>What this shows.</b> Three group-average outcomes for people with newly-diagnosed epilepsy who first became seizure-free for 12 months on medication (SANAD trial; Bonnett et al., PLOS ONE 2017). It is not a personal risk score — each is an overall curve.</p><h4>Key findings</h4><ul><li>A first breakthrough seizure is common over time — about 1 in 4 within a year, and ~55% by 5–6 years.</li><li>Once a breakthrough happens, a further seizure is likely — ~74% within 2 years (often within a month).</li><li>But most people regain control — ~64% re-achieve a 12-month remission within 2 years.</li></ul><p>Use the outcome selector to switch curves and the time slider to read any month. Clinical factors (neurological insult, more prior tonic-clonic seizures, a longer time to first remission) raised breakthrough risk in the study, but came from separate models and are not combined here.</p>"
   },
   "thresholds": {
     "group1": 20,
@@ -23,10 +24,10 @@
     "horizon_months": 12,
     "cosy_axis_max": 40,
     "selector": "Outcome curve",
-    "selector_info": "SANAD-BT is three separate group-average curves, read as steps in a patient's journey after a first 12-month remission on treatment. Choose which to display: STEP 1 (Fig 2) risk of a FIRST breakthrough seizure; STEP 2a (Fig 3) — applies only AFTER a breakthrough — the risk of a FURTHER seizure (clock re-starts at the breakthrough); STEP 2b (Fig 4) — same people — the chance of regaining a 12-month remission. There is no patient-level score; each is an overall curve.",
+    "selector_info": "Three group-average outcomes after a first 12-month remission on treatment — pick which curve to show:\n• First breakthrough seizure — starting from 12 months seizure-free, will a seizure return? (Common over time.)\n• Further seizure after a breakthrough — applies ONLY once a breakthrough has happened; the clock re-starts there. If you break through, another seizure is likely (~74% within 2 years).\n• Regaining a 12-month remission — for the same people, the chance of getting back to a full year seizure-free (~64% by 2 years).\nEach is an overall curve — there is no personal score.",
     "strata": {
       "breakthrough": {
-        "display": "Risk of first breakthrough seizure (Fig 2)",
+        "display": "First breakthrough seizure",
         "cum": {
           "0": 0.71,
           "1": 4.26,
@@ -159,10 +160,10 @@
         "g2": null,
         "lo": 0,
         "hi": 0,
-        "info": "STEP 1 · Fig 2 — Risk of a FIRST breakthrough seizure. The clock starts when the patient first reaches 12 months seizure-free on treatment. ~24% at 1yr, ~37% at 2yr, ~55% by ~5.6yr. (34% of the whole cohort had a breakthrough.) The complement is the chance of STAYING seizure-free on treatment."
+        "info": "Starting from 12 months seizure-free — will a seizure return? ~1 in 4 by 1 year, ~55% by 5–6 years."
       },
       "recurrence": {
-        "display": "Risk of seizure after a breakthrough (Fig 3)",
+        "display": "Further seizure after a breakthrough",
         "cum": {
           "0": 9.66,
           "1": 34.82,
@@ -257,10 +258,10 @@
         "g2": 35,
         "lo": 0,
         "hi": 0,
-        "info": "STEP 2a · Fig 3 — Applies ONLY once a breakthrough seizure has already happened; the clock RE-STARTS at that breakthrough. It answers: 'having broken through, how likely is a FURTHER seizure?' High — ~68% at 1yr, ~74% at 2yr, ~76% ceiling (the next seizure came after a median of only ~1 month). So only ~1 in 4 people stay seizure-free after a single breakthrough — a breakthrough usually signals the epilepsy is active again. (This is why the curve rises so steeply, unlike Fig 2.)"
+        "info": "Applies only after a breakthrough (clock re-starts): another seizure is likely — ~74% within 2 years."
       },
       "remission": {
-        "display": "Chance of 12-month remission after breakthrough (Fig 4)",
+        "display": "Regaining a 12-month remission",
         "cum": {
           "0": 0,
           "1": 0.0,
@@ -327,7 +328,7 @@
         "g2": null,
         "lo": 0,
         "hi": 0,
-        "info": "STEP 2b · Fig 4 — the HOPEFUL counterpart to Step 2a, describing the SAME people (those who had a breakthrough): the chance of re-achieving ANOTHER 12-month remission. It is 0 before 12 months (a remission requires 12 seizure-free months by definition), then rises to ~29% one year past that point, ~64% at 2yr, ~82% ceiling. Most people eventually regain control. COSY is not shown — this is a favourable outcome, not a seizure-risk curve.",
+        "info": "The hopeful view for the same people: ~64% regain a full year seizure-free within 2 years.",
         "no_cosy": true
       }
     }
@@ -337,8 +338,8 @@
     "source_paper": "PMID28698335_2017_Risk of a seizure recurrence after a breakthrough seizu.pdf",
     "figure_ref": "Fig 2 (breakthrough), Fig 3 (recurrence), Fig 4 (remission)",
     "digitizer": "riskcalc auto-trace (contiguous-run axis detection + topmost-dark trace)",
-    "review_status": "unreviewed",
+    "review_status": "human_reviewed",
     "review_overlay": "figs/overlay_breakthrough.png; figs/overlay_recurrence.png; figs/overlay_remission.png",
-    "notes": "Values digitised from the paper's own Kaplan–Meier curves (Figs 2–4); the paper reports no score/points. Curve ceilings from the digitised traces: breakthrough-seizure risk rises to ~58% by ~5.6yr (24% at 1yr, 37% at 2yr); seizure-recurrence-after-breakthrough rises to a ~76% ceiling (68% at 1yr, 74% at 2yr); chance of re-achieving 12-month remission is flat until 12mo then rises to ~82% (29% at 1yr, 64% at 2yr). Separately, the paper's TEXT quotes flow-through fractions of the SANAD cohort (34% proceed to a first breakthrough, 63% of those go on to recurrence, 44% re-achieve remission) — these are cohort proportions, NOT the curve ceilings. Human review of the three overlays required before deploy."
+    "notes": "Values digitised from the paper's own Kaplan–Meier curves (Figs 2–4); the paper reports no score/points. Curve ceilings from the digitised traces: breakthrough-seizure risk rises to ~58% by ~5.6yr (24% at 1yr, 37% at 2yr); seizure-recurrence-after-breakthrough rises to a ~76% ceiling (68% at 1yr, 74% at 2yr); chance of re-achieving 12-month remission is flat until 12mo then rises to ~82% (29% at 1yr, 64% at 2yr). Separately, the paper's TEXT quotes flow-through fractions of the SANAD cohort (34% proceed to a first breakthrough, 63% of those go on to recurrence, 44% re-achieve remission) — these are cohort proportions, NOT the curve ceilings. Human review of the three overlays required before deploy. | 2026-07-07 human-reviewed: digitized curves verified against Bonnett 2017 Figs 2-4 (breakthrough 37%@2yr, recurrence 74%@2yr, remission 64%@2yr)."
   }
 }
