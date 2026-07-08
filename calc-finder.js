@@ -67,6 +67,7 @@
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
     ["calc-asm-withdrawal-cosy", "ASM Withdrawal (+ EEG)", "Seizure recurrence after ASM withdrawal, incl. EEG findings.", "g3", "withdrawal"],
+    ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
 

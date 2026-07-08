@@ -250,7 +250,7 @@
       bi.innerHTML = this._belowHTML();
       if (bi.innerHTML) bi.dataset.has = "1"; else bi.style.display = "none";
       this._bindChrome(root, back);
-      const dispatch = () => { d.kind === "curve" ? this._renderCurve() : d.kind === "cox" ? this._renderCox() : d.kind === "formula" ? this._renderFormula() : d.kind === "lookup" ? this._renderLookup() : d.kind === "markers" ? this._renderMarkers() : this._renderScore(); };
+      const dispatch = () => { d.kind === "curve" ? this._renderCurve() : d.kind === "cox" ? this._renderCox() : d.kind === "formula" ? this._renderFormula() : d.kind === "lookup" ? this._renderLookup() : d.kind === "markers" ? this._renderMarkers() : d.kind === "multiscore" ? this._renderMultiScore() : this._renderScore(); };
       dispatch();
       this.render = dispatch;
       // re-render the plot when crossing the phone/desktop breakpoint (e.g. rotating the device)
@@ -827,6 +827,78 @@
       g += `<text x="6" y="${y + 14}" font-size="12" font-weight="700" fill="#1a2430" font-family="var(--serif)">Combined relative risk</text>`;
       g += `<text x="${W - 6}" y="${y + 14}" text-anchor="end" font-size="13" font-weight="700" fill="#0f7a54" font-family="var(--serif)">×${rr >= 10 ? rr.toFixed(0) : rr.toFixed(2)}</text>`;
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "420px"; svg.innerHTML = g;
+    }
+
+    /* ---------------- MULTISCORE (two+ nomogram point-totals -> table lookups) ----------------
+       Each predictor contributes points to one or more named totals (m.totals). Categorical
+       options carry pts:{totalId:points}; sliders carry pts_<totalId> arrays indexed by value.
+       Each output looks its total up in a risk table (index = round(total*2)). Used by the
+       Lamberink ASM-withdrawal nomograms (recurrence 2/5yr + long-term freedom). */
+    _renderMultiScore() {
+      const d = this.data, m = d.model, preds = d.predictors || [];
+      if (!this._msSel) this._msSel = preds.map(() => 0);
+      if (!this._msSlider) this._msSlider = preds.map((p) => p.type === "slider" ? (p.default != null ? p.default : (p.min || 0)) : 0);
+      let rail = "";
+      preds.forEach((p, i) => {
+        if (p.type === "slider") {
+          const v = this._msSlider[i], mn = p.min || 0, mx = p.max != null ? p.max : 10;
+          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span><span class="pill" id="ms${i}v">${v}${p.unit ? " " + esc(p.unit) : ""}</span></div>
+            <input type="range" class="mspred" data-si="${i}" min="${mn}" max="${mx}" step="${p.step || 1}" value="${v}" style="--fill:${(v - mn) / (mx - mn) * 100}%"></div>`;
+        } else {
+          rail += `<div class="field"><div class="flabel"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span></div>
+            <div class="seg" data-pi="${i}">${(p.options || []).map((o, oi) => `<button data-oi="${oi}" class="${oi === this._msSel[i] ? "on" : ""}">${esc(o.label)}</button>`).join("")}</div></div>`;
+        }
+      });
+      rail += `<div class="scorewrap" id="msmetrics"></div>`;
+      if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
+      this._rail.innerHTML = rail;
+      this._msUpdate();
+      this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
+        const b = e.target.closest("button"); if (!b) return;
+        this._msSel[+seg.dataset.pi] = +b.dataset.oi;
+        seg.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+        this._msUpdate();
+      }));
+      this._rail.querySelectorAll(".mspred").forEach((sl) => sl.addEventListener("input", (e) => {
+        const i = +e.target.dataset.si, mn = +e.target.min, mx = +e.target.max; this._msSlider[i] = +e.target.value;
+        e.target.style.setProperty("--fill", (this._msSlider[i] - mn) / (mx - mn) * 100 + "%");
+        const p = preds[i]; this._rail.querySelector("#ms" + i + "v").textContent = this._msSlider[i] + (p.unit ? " " + p.unit : "");
+        this._msUpdate();
+      }));
+    }
+
+    _msUpdate() {
+      const d = this.data, m = d.model, preds = d.predictors || [], tids = m.totals || [];
+      const totals = {}, contribs = {};
+      tids.forEach((t) => { totals[t] = 0; contribs[t] = []; });
+      preds.forEach((p, i) => {
+        if (p.type === "slider") {
+          const v = this._msSlider[i];
+          tids.forEach((t) => {
+            const arr = p["pts_" + t]; if (!arr) return;
+            const pts = arr[Math.max(0, Math.min(arr.length - 1, v))] || 0;
+            totals[t] += pts; if (pts) contribs[t].push({ name: p.name, pts });
+          });
+        } else {
+          const opt = (p.options || [])[this._msSel[i]] || {};
+          tids.forEach((t) => { const pts = (opt.pts && opt.pts[t]) || 0; totals[t] += pts; if (pts) contribs[t].push({ name: p.name, pts }); });
+        }
+      });
+      const rnd = m.round || 0.5;
+      tids.forEach((t) => { totals[t] = Math.round(totals[t] / rnd) * rnd; });
+      const lookup = (total, table) => { const idx = Math.round(total * 2); return (idx >= 0 && idx < table.length) ? table[idx] : null; };
+      const outs = (m.outputs || []).map((o) => ({ label: o.label, tone: o.tone, val: lookup(totals[o.total], o.table) }));
+      const fmtV = (v) => v == null ? "—" : (v + "%");
+      const mroot = this._rail.querySelector("#msmetrics");
+      if (mroot) mroot.innerHTML = outs.map((o, i) => `<div class="metric${i ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v"${o.tone === "good" ? ' style="color:var(--green)"' : (o.tone === "risk" ? ' style="color:var(--azure-deep)"' : "")}>${fmtV(o.val)}</div></div>`).join("");
+      const tl = m.total_labels || {};
+      const section = (t) => {
+        const items = contribs[t];
+        return `<div style="margin-bottom:18px"><div class="flabel" style="margin-bottom:8px">${esc(tl[t] || ("Score " + t))}<b style="margin-left:8px;color:var(--azure-deep)">${totals[t]}</b></div>
+          ${items.length ? `<div class="recrules">` + items.map((c) => `<div class="recrule"><span class="rk">${esc(shorten(c.name, 32))}</span><span class="rt" style="color:var(--azure-deep)">+${c.pts} pts</span></div>`).join("") + `</div>` : `<div style="font-size:13px;color:var(--muted);padding:2px 0">No points added by the current selection.</div>`}</div>`;
+      };
+      const vizInfo = m.viz_info || "Each factor adds points to one or both nomogram scores; the totals are looked up in the published risk tables.";
+      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Score breakdown <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this">i</button></div></div>${tids.map(section).join("")}`;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
