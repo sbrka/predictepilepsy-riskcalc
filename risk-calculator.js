@@ -620,6 +620,7 @@
           ${survViz ? `<div id="fdonuts" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>` : ""}
           ${relViz ? `<div id="absrisk"></div>` : ""}
           <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
+          ${relViz ? `<div id="absdots" style="text-align:center;margin-top:4px"></div>` : ""}
           ${(survViz || relViz) ? "" : `<div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>`}
         </div>`;
       this._formulaUpdate();
@@ -845,14 +846,18 @@
       const gW = pad * 2 + cols * cell, gH = pad * 2 + rows * cell;
       const absTxt = abs < 1 ? "<1" : (abs >= 10 ? abs.toFixed(0) : abs.toFixed(1));
       const oneInTxt = isFinite(oneIn) ? oneIn.toLocaleString("en-US") : "—";
+      // Top block: the numeric readouts + caveat.
       box.innerHTML = `
         <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:baseline">
           <div><span style="font-family:var(--serif);font-size:34px;font-weight:800;color:#b23148">${absTxt}</span> <span style="font-size:12px;color:var(--muted)">per 1,000<br>people / year</span></div>
           <div><span style="font-family:var(--serif);font-size:23px;font-weight:700;color:#1a2430">1 in ${oneInTxt}</span> <span style="font-size:12px;color:var(--muted)">per year</span></div>
         </div>
-        <div style="font-size:12.5px;color:#5c6b7a;margin:10px 0 8px">Of <b>1,000 people</b> with this profile, roughly <b>${hi}</b> would be expected to die from SUDEP over a year — versus about <b>${base.toFixed(1)}</b> for an average person with epilepsy (red dots).</div>
-        <svg viewBox="0 0 ${gW} ${gH}" style="width:100%;max-width:440px" role="img" aria-label="About ${hi} in 1,000 per year">${dots}</svg>
         <div class="warn" style="margin-top:10px">${esc(m.baseline_note || "Illustrative only. The model provides a RELATIVE risk; this absolute figure assumes an average SUDEP incidence of ~1.2 per 1,000 people per year, which itself varies widely (~0.9–2.3 in community cohorts, higher in drug-resistant epilepsy). Not an individual prediction of death.")}</div>`;
+      // Bottom block: the 1,000-dot pictograph, centred, below the contribution chart.
+      const dotsBox = this._panel.querySelector("#absdots");
+      if (dotsBox) dotsBox.innerHTML = `
+        <div style="font-size:12.5px;color:#5c6b7a;margin:0 auto 10px;max-width:460px">Of <b>1,000 people</b> with this profile, roughly <b>${hi}</b> would be expected to die from SUDEP over a year — versus about <b>${base.toFixed(1)}</b> for an average person with epilepsy (red dots).</div>
+        <svg viewBox="0 0 ${gW} ${gH}" style="display:block;margin:0 auto;width:100%;max-width:460px" role="img" aria-label="About ${hi} in 1,000 per year">${dots}</svg>`;
     }
 
     _drawLogOR(cb) {
