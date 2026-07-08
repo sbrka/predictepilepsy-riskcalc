@@ -143,13 +143,16 @@
     .chip.norec{background:#fbeaea;color:#b02020}
     .chip.ext{background:#eef6fe;color:var(--azure-deep)}
     .card.norec{opacity:.6}.card.norec:hover{opacity:1}
-    .step h2{font-size:20px;margin:0 0 16px;text-align:center}
+    .step h2{font-size:22px;margin:2px 0 22px;text-align:center;letter-spacing:-.2px}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .opts.large{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;max-width:1160px;margin:0 auto}
-    .opts.large .opt{flex:0 1 330px;max-width:360px;background:#fff;padding:32px 30px;border-radius:22px;gap:22px;border-width:2px;box-shadow:0 6px 20px rgba(19,91,168,.08)}
-    .opts.large .opt:hover{box-shadow:0 14px 34px rgba(19,91,168,.18);transform:translateY(-3px)}
-    .opts.large .opt .ic{font-size:48px}
-    .opts.large .opt .ot{font-size:21px;margin-bottom:8px}
+    .opts.large{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;max-width:1180px;margin:6px auto 0}
+    .opts.large .opt{flex:0 1 330px;max-width:360px;background:linear-gradient(165deg,#ffffff,#f3f8ff);padding:30px 28px;border-radius:24px;gap:20px;border:1.5px solid #e6eef9;box-shadow:0 8px 24px rgba(19,91,168,.09);position:relative;overflow:hidden}
+    .opts.large .opt::before{content:"";position:absolute;top:0;left:-75%;width:55%;height:100%;background:linear-gradient(105deg,transparent,rgba(19,91,168,.10),transparent);transform:skewX(-18deg);pointer-events:none}
+    .opts.large .opt:hover{box-shadow:0 16px 40px rgba(19,91,168,.20);transform:translateY(-4px);border-color:#cfe0f7}
+    .opts.large .opt:hover::before{animation:optShim .9s ease}
+    @keyframes optShim{from{left:-75%}to{left:135%}}
+    .opts.large .opt .ic{font-size:37px;flex:0 0 auto;width:68px;height:68px;border-radius:19px;background:linear-gradient(150deg,#eaf3ff,#d8e9fc);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+    .opts.large .opt .ot{font-size:20px;margin-bottom:7px}
     .opts.large .opt .os{font-size:14.5px}
     .opt{text-align:left;border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:18px 18px;cursor:pointer;transition:.15s;display:flex;gap:14px;align-items:flex-start}
     .opt:hover{border-color:var(--azure);box-shadow:0 6px 18px rgba(19,91,168,.10);transform:translateY(-1px)}
