@@ -772,6 +772,32 @@
       </div>`;
     }
 
+    // Standalone points-waterfall (SVG string) for a single score total: each factor cascades
+    // from 0, ending in a bold Total bar. Used to show a nomogram score building up.
+    _scoreWaterfallSVG(items, total, color) {
+      const rowH = 25, top = 8, labW = 132, plotW = 138, padR = 42, x0 = labW;
+      const W = labW + plotW + padR, rows = items.length + 1, H = top + rows * rowH + 8;
+      let cum = 0, maxCum = Math.max(total, 0.0001);
+      items.forEach((it) => { cum += it.pts; maxCum = Math.max(maxCum, cum); });
+      const axMax = Math.max(1, maxCum);
+      const sx = (v) => x0 + (Math.max(0, Math.min(axMax, v)) / axMax) * plotW;
+      let g = `<line x1="${x0}" y1="${top}" x2="${x0}" y2="${H - 14}" stroke="var(--azure-line)"/>`;
+      let y = top, c = 0;
+      items.forEach((it) => {
+        const x1 = sx(c), x2 = sx(c + it.pts); c += it.pts;
+        const bx = Math.min(x1, x2), bw = Math.max(2, Math.abs(x2 - x1)), up = it.pts >= 0;
+        g += `<rect x="${bx}" y="${y}" width="${bw}" height="14" rx="2" fill="${up ? color : "#b02020"}"/>`;
+        g += `<text x="${x0 - 6}" y="${y + 11}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(it.name, 22))}</text>`;
+        g += `<text x="${x2 + 5}" y="${y + 11}" font-size="10.5" fill="${up ? color : "#b02020"}" font-family="var(--sans)">${up ? "+" : ""}${it.pts}</text>`;
+        y += rowH;
+      });
+      g += `<line x1="0" y1="${y + 1}" x2="${W}" y2="${y + 1}" stroke="#eef2f6"/>`;
+      g += `<rect x="${x0}" y="${y + 5}" width="${Math.max(2, sx(total) - x0)}" height="15" rx="2" fill="#0e4a8a"/>`;
+      g += `<text x="${x0 - 6}" y="${y + 16}" text-anchor="end" font-size="11.5" font-weight="700" fill="#1a2430" font-family="var(--serif)">Total</text>`;
+      g += `<text x="${sx(total) + 5}" y="${y + 16}" font-size="12" font-weight="700" fill="#0e4a8a" font-family="var(--serif)">${total}</text>`;
+      return `<svg viewBox="0 0 ${W} ${H}" style="width:100%" role="img" aria-label="score build-up, total ${total}">${g}</svg>`;
+    }
+
     // Two per-horizon pies for a survival/freedom outcome (green = favourable outcome).
     _drawSurvDonuts(outs) {
       const wrap = this._panel.querySelector("#fdonuts"); if (!wrap) return;
@@ -970,10 +996,12 @@
       const mroot = this._rail.querySelector("#msmetrics");
       if (mroot) mroot.innerHTML = outs.map((o, i) => `<div class="metric${i ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v"${o.tone === "good" ? ' style="color:var(--green)"' : (o.tone === "risk" ? ' style="color:var(--azure-deep)"' : "")}>${fmtV(o.val)}</div></div>`).join("");
       const tl = m.total_labels || {};
-      const section = (t) => {
+      // Each nomogram total gets its own boxed points-waterfall (side by side).
+      const scoreBox = (t) => {
         const items = contribs[t];
-        return `<div style="margin-bottom:18px"><div class="flabel" style="margin-bottom:8px">${esc(tl[t] || ("Score " + t))}<b style="margin-left:8px;color:var(--azure-deep)">${totals[t]}</b></div>
-          ${items.length ? `<div class="recrules">` + items.map((c) => `<div class="recrule"><span class="rk">${esc(shorten(c.name, 32))}</span><span class="rt" style="color:var(--azure-deep)">+${c.pts} pts</span></div>`).join("") + `</div>` : `<div style="font-size:13px;color:var(--muted);padding:2px 0">No points added by the current selection.</div>`}</div>`;
+        return `<div style="flex:1 1 260px;min-width:240px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fbfdff">
+          <div class="flabel" style="margin:0 0 10px">${esc(tl[t] || ("Score " + t))}<b style="margin-left:8px;color:var(--azure-deep)">${totals[t]}</b></div>
+          ${items.length ? this._scoreWaterfallSVG(items, totals[t], "#2472c8") : `<div style="font-size:12.5px;color:var(--muted);padding:2px 0">No points from the current selection (score ${totals[t]}).</div>`}</div>`;
       };
       const vizInfo = m.viz_info || "Each predicted outcome is shown as a pie — the coloured slice is the chance of that outcome, the grey slice its complement. Below, each factor's points are broken down for the two nomogram scores that drive these outcomes.";
       // House-style donuts: one pie per outcome (absolute % it predicts), then the score breakdown.
@@ -993,7 +1021,7 @@
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted outcomes")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this">i</button></div></div>
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:6px 0 20px">${outs.map(donut).join("")}</div>
         <div class="flabel" style="margin:0 0 12px;padding-top:14px;border-top:1px solid var(--line)">How the scores build up</div>
-        ${tids.map(section).join("")}`;
+        <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">${tids.map(scoreBox).join("")}</div>`;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */

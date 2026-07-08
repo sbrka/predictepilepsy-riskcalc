@@ -91,6 +91,10 @@
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  // per-group accent dot on the score badge (matches the old calc-home look)
+  const GROUP_DOT = { g1: "#3f7fd0", g2: "#e0691f", g3: "#7a5ea8", g4: "#0f7a54", g5: "#c0322b" };
+  const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+  const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 9);
 
   const CSS = `
     :host{--azure:#135ba8;--azure-deep:#0e4a8a;--azure-wash:#eef6fe;--azure-line:#cfe4fb;--ink:#16222f;--muted:#5c6b7a;
@@ -161,14 +165,18 @@
     }
     go(slug) { window.location.href = "/" + slug + "/"; }
     card(c) {
-      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, badge}
+      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge}
       const ext = o.ext, norec = o.rec === false;
       const href = ext || ("/" + c[0] + "/");
-      const chips = `<span class="chip">${esc(SETTINGS[c[4]])}</span>` +
+      const ab = o.ab || abbrev(c[1]);
+      const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
+      const dot = GROUP_DOT[c[3]] || "#135ba8";
+      const flags =
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
         (ext ? `<span class="chip ext">external tool ↗</span>` : "");
-      return `<a class="card${norec ? " norec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}"><span class="chiprow">${chips}</span>
-        <div class="cn">${esc(c[1])}</div><div class="cd">${esc(c[2])}</div><div class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</div></a>`;
+      return `<a class="card${norec ? " norec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
+        `<span class="cbadge"><span class="cdt" style="background:${dot}"></span><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
+        `<span class="ctxt">${flags ? `<span class="chiprow">${flags}</span>` : ""}<span class="cn">${esc(c[1])}</span><span class="cd">${esc(c[2])}</span><span class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</span></span></a>`;
     }
     back() {
       if (this._set) {
