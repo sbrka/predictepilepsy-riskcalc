@@ -28,7 +28,24 @@
   const COSY_INFO = "COSY is the chance of occurrence of a seizure in the next year — the probability of a seizure within the next 12 months, given the patient has been seizure-free this long. The month shown is when COSY first falls below the marked value. The 20% and 2% marks are cut-offs used in some jurisdictions as orientation for whether a person who has had a seizure may drive; they are not universally established — local laws and guidelines apply. At long seizure-free intervals COSY rests on few remaining patients and is often unstable — weigh it against the absolute numbers and the cumulative-incidence curve.";
 
   const DISCLAIMER_BODY = "Most of the models featured on this website were not developed by us. For detailed information about each model or calculator, please refer to the links to the original publications. This website provides an overview of selected prognostic models for epilepsy for demonstration purposes only. If you believe a model should be removed, please contact us, and we will address your request promptly. We do not guarantee the accuracy, reliability, or scientific integrity of these calculators. The implementations may contain errors and could produce unreliable results. These prognostic tools are based on scientific research and are intended for demonstration purposes only. The clinical usefulness and robustness of most of these models have not been adequately tested, and they should not be used to guide medical decisions. All liability is excluded.";
-  const DISCLAIMER_INNER = `<b>Disclaimer</b><p>${DISCLAIMER_BODY}</p><p class="copyr">&copy; 2025, SeLECT consortium &middot; <a href="mailto:select@usz.ch">select@usz.ch</a></p>`;
+  const DISCLAIMER_INNER = `<div class="dhead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.35-2.97 8.02-7 9-4.03-.98-7-4.65-7-9V6z"/><path d="M12 8.5v4"/><circle cx="12" cy="16" r=".7" fill="currentColor" stroke="none"/></svg><b>Disclaimer</b></div><p>${DISCLAIMER_BODY}</p><p class="copyr">&copy; 2025, SeLECT consortium &middot; <a href="mailto:select@usz.ch">select@usz.ch</a></p>`;
+
+  // The score badge: gradient tile + abbreviation + risk-curve wave (matches the home cards).
+  const MARK_CURVE = '<svg class="crv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2.4"/></svg>';
+  function deriveAbbrev(t) {
+    if (!t) return "?";
+    // Candidate tokens from the WHOLE title (parens kept, so "(WAMS)"/"(PGREM)" count),
+    // plus the all-caps prefix of a hyphenated token ("CAVE-Score" -> "CAVE").
+    const words = String(t).replace(/[()]/g, " ").split(/\s+/).filter(Boolean);
+    const isAcr = (w) => w.length >= 2 && w.length <= 8 && /^[A-Z0-9][A-Z0-9²³·\-]*$/.test(w) && !/[a-z]/.test(w);
+    for (const w of words) {
+      if (isAcr(w)) return w;
+      if (w.includes("-") && isAcr(w.split("-")[0])) return w.split("-")[0];  // CAVE-Score, LANE-Score…
+    }
+    const s = String(t).replace(/\s*[—:–(].*$/, "").trim();       // else first word before the subtitle
+    return (s.split(/\s+/)[0] || "?").slice(0, 8);
+  }
+  const abbrevFont = (a) => { const L = String(a).length; return L <= 2 ? 18 : L <= 3 ? 16 : L <= 4 ? 14.5 : L <= 5 ? 12.5 : L <= 6 ? 11 : 9.5; };
 
   const CSS = `
     :host{
@@ -54,7 +71,9 @@
     .viewtabs button.on{background:#fff;color:var(--azure-deep);box-shadow:0 1px 2px rgba(14,28,43,.12)}
     .top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:22px 34px 20px;border-bottom:1px solid var(--line)}
     .brandrow{display:flex;gap:14px;align-items:flex-start}
-    .mark{width:42px;height:42px;border-radius:12px;background:var(--azure);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .mark{position:relative;width:46px;height:46px;border-radius:13px;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 6px 16px rgba(14,74,138,.26);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .mark .ab{position:relative;z-index:1;color:#fff;font-family:var(--serif);font-weight:800;line-height:1;text-align:center;letter-spacing:-.02em;padding:0 3px}
+    .mark .crv{position:absolute;left:0;right:0;bottom:0;height:15px}
     .eyebrow{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--azure-deep);margin:0 0 3px}
     h1{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.06;text-wrap:balance}
     .sub{margin:5px 0 0;color:var(--muted);font-size:15px}
@@ -162,10 +181,12 @@
     .tip .z{margin-top:5px;font-size:10.5px;font-weight:600;display:inline-block;padding:2px 7px;border-radius:6px}
     .hint{color:var(--faint);font-size:12.5px;margin:10px 2px 0;text-align:center}
     .foot{padding:18px 34px 26px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.65}
-    .foot .disclaimer{margin-top:16px;padding:15px 18px;background:var(--azure-wash);border:1px solid var(--azure-line);border-radius:12px}
-    .foot .disclaimer b{color:var(--azure-deep);display:block;margin-bottom:6px;font-size:14px;font-family:var(--serif);letter-spacing:.01em}
+    .foot .disclaimer{margin-top:16px;padding:16px 20px 16px 18px;background:var(--azure-wash);border:1px solid var(--azure-line);border-left:3px solid var(--azure-deep);border-radius:14px}
+    .foot .disclaimer .dhead{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+    .foot .disclaimer .dhead svg{width:19px;height:19px;color:var(--azure-deep);flex:0 0 auto}
+    .foot .disclaimer .dhead b{color:var(--azure-deep);font-size:15px;font-family:var(--serif);font-weight:700;letter-spacing:.01em}
     .foot .disclaimer p{margin:0 0 7px;max-width:none}
-    .foot .disclaimer .copyr{color:var(--faint)}
+    .foot .disclaimer .copyr{color:var(--faint);margin-top:10px;padding-top:9px;border-top:1px solid var(--azure-line)}
     .foot .disclaimer a{color:var(--azure-deep);text-decoration:none;font-weight:600}
     .classicview{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 30px;color:var(--muted)}
     .classicview .h{font-family:var(--serif);font-size:19px;color:var(--ink);margin-bottom:8px}
@@ -226,7 +247,7 @@
           </div>` : ``}
           <header class="top">
             <div class="brandrow">
-              <div class="mark" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><g stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M4 6h9"/><path d="M4 12h13"/><path d="M4 18h7"/><path d="M16 3.5l4 2.5-4 2.5M19.5 9.5l4 2.5-4 2.5M14.5 15.5l4 2.5-4 2.5" stroke-linejoin="round"/></g></svg></div>
+              ${(() => { const ab = m.abbrev || deriveAbbrev(m.title || d.id); return `<div class="mark" aria-hidden="true"><span class="ab" style="font-size:${abbrevFont(ab)}px">${esc(ab)}</span>${MARK_CURVE}</div>`; })()}
               <div>
                 <h1>${esc(m.title || d.id)}</h1>
                 ${m.outcome ? `<p class="sub">${esc(m.outcome)}</p>` : ``}
