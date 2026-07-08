@@ -16,7 +16,7 @@
       sub: "Risk of seizure recurrence and driving eligibility after one or two unprovoked seizures." },
     { id: "g3", title: "Stopping antiseizure medication", icon: "💊",
       sub: "Risk of seizure relapse when withdrawing antiseizure medication — including after successful epilepsy surgery." },
-    { id: "g4", title: "Epilepsy surgery", icon: "🩺",
+    { id: "g4", title: "Epilepsy surgery", icon: "🛠️",
       sub: "Presurgical evaluation and prediction of seizure, cognitive and mood outcomes after epilepsy surgery." },
     { id: "g5", title: "SUDEP risk", icon: "❤️",
       sub: "Individual risk of sudden unexpected death in epilepsy (SUDEP)." },
