@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "id": "sudep3",
+  "kind": "score",
+  "meta": {
+    "title": "SUDEP-3 Inventory",
+    "doi": "10.1111/epi.16928",
+    "pmid": "33942294",
+    "authors": "Tarighati Rasekhi R, et al.",
+    "year": 2021,
+    "journal": "Epilepsia",
+    "outcome": "A three-item risk-stratification inventory for sudden unexpected death in epilepsy (SUDEP), scoring generalized tonic-clonic seizure frequency, any recent seizures, and intellectual disability, that outperformed the older SUDEP-7 inventory in a case-control validation.",
+    "cff_info": "<p><b>What this shows.</b> This is the <b>SUDEP-3 inventory</b> of Tarighati&nbsp;Rasekhi et&nbsp;al. (<i>Epilepsia</i> 2021), a short three-item scale for stratifying the risk of <b>sudden unexpected death in epilepsy (SUDEP)</b>. It was derived from the three components of the older seven-item SUDEP-7 inventory that independently predicted SUDEP, and it outperformed SUDEP-7 (AUC 0.75 vs 0.66).</p><h4>The three items</h4><ul><li><b>More than 3 generalized tonic-clonic (GTC) seizures in the last year</b> — 1 point.</li><li><b>Any seizure of any type in the last year</b> — 2 points.</li><li><b>Intellectual disability</b> (IQ &lt;70 or too impaired to test) — 1 point.</li></ul><p>The total score ranges from <b>0 to 4</b>. Higher scores indicate higher relative SUDEP risk — in the validation cohort each additional point raised the odds of SUDEP by about 180%.</p><h4>How to interpret</h4><ul><li>A cut-off of <b>≥2</b> gave the best diagnostic odds (sensitivity 96%, specificity 34%, diagnostic odds ratio 13.9).</li><li>A cut-off of <b>≥3</b> gave the best overall balance of sensitivity and specificity (Youden's J 0.32; sensitivity 57%, specificity 75%).</li><li>Two of the three factors — GTC and overall seizure frequency — are <b>modifiable</b>, so the inventory can direct attention to treatable risk.</li></ul><p><b>Important.</b> This is a <b>relative risk-stratification</b> tool from a small case-control study (28 SUDEP cases, 56 matched controls); it does <b>not</b> give an individual's absolute probability of SUDEP (which is on the order of ~1 per 1000 people with epilepsy per year). It awaits validation in larger population cohorts. Demonstration and counseling aid only — not a substitute for specialist assessment.</p>"
+  },
+  "thresholds": {},
+  "predictors": [
+    {
+      "name": "More than 3 GTC seizures in the last year",
+      "options": [
+        { "label": "No", "points": 0 },
+        { "label": "Yes", "points": 1 }
+      ],
+      "assess": "More than three generalized tonic-clonic (GTC) seizures in the past year. GTC seizure frequency is the strongest single SUDEP risk factor in this and most prior studies (>3 GTCs: SUDEP-3 weight 1 point; univariate OR 4.7, 95% CI 1.8–12.7)."
+    },
+    {
+      "name": "Any seizure in the last year",
+      "options": [
+        { "label": "No", "points": 0 },
+        { "label": "Yes", "points": 2 }
+      ],
+      "assess": "One or more seizures of any type in the past year (excluding pure absence seizures, which do not confer SUDEP risk). Carries the largest weight in the inventory (2 points; univariate OR 13.9, 95% CI 1.7–110.0)."
+    },
+    {
+      "name": "Intellectual disability",
+      "options": [
+        { "label": "No", "points": 0 },
+        { "label": "Yes", "points": 1 }
+      ],
+      "assess": "Intellectual disability, defined as an IQ below 70 or being too impaired to test. A significant, independent SUDEP risk factor (1 point; univariate OR 4.3, 95% CI 1.1–16.4), possibly reflecting a propensity to post-ictal central apnea."
+    }
+  ],
+  "model": {
+    "metric_label": "SUDEP-3 risk tier",
+    "recommendation": [
+      {
+        "lo": 0,
+        "hi": 1,
+        "tone": "low",
+        "text": "Lower SUDEP-3 tier (below the optimal ≥2 cut-off). Note the inventory is highly sensitive — a score of ≥1 still captured 96% of SUDEP cases (specificity 32%) — so a low score is reassuring but does not exclude risk."
+      },
+      {
+        "lo": 2,
+        "hi": 2,
+        "tone": "med",
+        "text": "Meets the optimal SUDEP-3 cut-off (≥2): best diagnostic odds in the validation study (sensitivity 96%, specificity 34%, diagnostic odds ratio 13.9). Elevated relative risk — prioritise treating the modifiable factors (GTC and overall seizure frequency)."
+      },
+      {
+        "lo": 3,
+        "hi": 9999,
+        "tone": "high",
+        "text": "Meets the higher-specificity SUDEP-3 cut-off (≥3): optimal balance of sensitivity and specificity (Youden's J 0.32; sensitivity 57%, specificity 75%). High-risk tier — intensify seizure control and counsel on SUDEP risk reduction."
+      }
+    ],
+    "note": "The SUDEP-3 score (0–4) is a relative risk-stratification inventory, not an absolute probability of SUDEP. Each additional point raised the odds of SUDEP by ~180% in the validation cohort (AUC 0.75).",
+    "viz_title": "SUDEP-3 interpretation"
+  },
+  "provenance": {
+    "extraction_method": "paper_score",
+    "source": "Tarighati Rasekhi et al., Epilepsia 2021;62(7):1536-1545, Table 3 (SUDEP-3 item weightings) and Figure 3 (ROC / cut-off analysis) — doi 10.1111/epi.16928.",
+    "review_status": "human_reviewed",
+    "notes": "Three-item additive inventory (max score 4): >3 GTC seizures/yr = 1pt, any seizure/yr = 2pt, intellectual disability = 1pt (Table 3 weightings, from B-coefficients 0.98/2.13/1.15 rounded to nearest integer). Cut-off operating characteristics from Fig-3 SUDEP-3 analysis: ≥2 sens 0.964/spec 0.339/DOR 13.87 (optimal DOR); ≥3 sens 0.571/spec 0.750/Youden 0.321 (optimal J); ≥4 spec 1.00. AUC 0.75 (vs SUDEP-7 0.66); OR per point ~2.8 (odds +180%). Built as a recommendation-score (no absolute-probability output) because the study is 1:2 case-control (28 SUDEP : 56 controls) and reports no calibrated intercept — an absolute SUDEP probability would be misleading (true SUDEP incidence ~1.2/1000/yr). Extracted 2026-07-08."
+  }
+}

@@ -544,7 +544,7 @@
       if (recs) {
         this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Author recommendation</div></div>
           <div class="reccard" style="border-color:${rec ? recColor(rec.tone) : "var(--line)"};color:${rec ? recColor(rec.tone) : "var(--ink)"}">${rec ? esc(rec.text) : "Enter values to see the recommendation."}</div>
-          <div class="recrules">${recs.map((r) => `<div class="recrule${r === rec ? " on" : ""}"><span class="rk">Score ${r.lo}${r.hi >= 9999 ? "+" : "&ndash;" + r.hi}</span><span class="rt">${esc(r.text)}</span></div>`).join("")}</div>`;
+          <div class="recrules">${recs.map((r) => `<div class="recrule${r === rec ? " on" : ""}"><span class="rk">Score ${r.lo}${r.hi >= 9999 ? "+" : (r.hi === r.lo ? "" : "&ndash;" + r.hi)}</span><span class="rt">${esc(r.text)}</span></div>`).join("")}</div>`;
       } else if (preds.length) {
         const minPts = preds.map((p) => Math.min(...(p.options || [{ points: 0 }]).map((o) => Number(o.points) || 0)));
         const base = minPts.reduce((a, b) => a + b, 0);
