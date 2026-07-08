@@ -277,18 +277,20 @@
     // tapped option is far down the page and the new step would otherwise stay off-screen)
     _scrollUp() {
       try {
-        requestAnimationFrame(() => {
-          const vh = window.innerHeight || 800;
-          const hostTop = this.getBoundingClientRect().top;
-          const step = this.shadowRoot && this.shadowRoot.querySelector(".setbtns, .cards, .step h2");
-          // scroll only when it's actually needed: the finder scrolled above the viewport,
-          // or the freshly-rendered step sits (mostly) below the fold — otherwise leave the page put
-          const stepOffscreen = step ? (step.getBoundingClientRect().top > vh * 0.82) : (hostTop > vh * 0.55);
-          if (hostTop < 6 || stepOffscreen) {
-            if (this.scrollIntoView) this.scrollIntoView({ behavior: "smooth", block: "start" });
-            else window.scrollTo(0, Math.max(0, hostTop + (window.pageYOffset || 0) - 78));
-          }
-        });
+        // ALWAYS bring the calculator box back to the top on a guided selection.
+        // double-rAF so layout has settled after the re-render, then explicit window scroll
+        // (measured target — more reliable across browsers than smooth scrollIntoView).
+        const host = this;
+        const jump = () => {
+          try {
+            let hdr = 0;
+            const h = document.querySelector("#site-header, header.site-header, .site-header, header");
+            if (h) { const cs = getComputedStyle(h); if (cs.position === "fixed" || cs.position === "sticky") hdr = h.offsetHeight || 0; }
+            const y = host.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0) - hdr - 14;
+            window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+          } catch (e) { try { host.scrollIntoView(true); } catch (e2) {} }
+        };
+        requestAnimationFrame(() => requestAnimationFrame(jump));
       } catch (e) {}
     }
     _wireBody() {
