@@ -99,7 +99,12 @@
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // per-group accent dot on the score badge (matches the old calc-home look)
   const GROUP_DOT = { g1: "#3f7fd0", g2: "#e0691f", g3: "#7a5ea8", g4: "#0f7a54", g5: "#c0322b" };
-  const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
+  // per-clinical-group badge gradient (lighter -> deeper) — gives each score's tile the colour of its group
+  const GROUP_GRAD = {
+    g1: ["#4a86d6", "#1f5aa8"], g2: ["#ef8a44", "#c85713"], g3: ["#9074c0", "#5f4790"],
+    g4: ["#22a578", "#0c6647"], g5: ["#d8564a", "#9e2820"],
+  };
+  const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3 L96 34 L0 34 Z" fill="#fff" opacity=".12"/><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".92"/></svg>';
   const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 9);
 
   const CSS = `
@@ -149,10 +154,10 @@
     .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
     .card{border:1.5px solid #e3e9ef;background:#fff;border-radius:16px;padding:16px 16px 15px;cursor:pointer;transition:.15s;display:flex;align-items:flex-start;gap:15px;text-decoration:none;color:inherit}
     .card:hover{border-color:var(--azure);box-shadow:0 8px 22px rgba(19,91,168,.13);transform:translateY(-2px)}
-    .cbadge{width:60px;height:60px;flex:0 0 auto;border-radius:16px;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 6px 16px rgba(14,74,138,.28);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
-    .cbadge .cab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 3px;letter-spacing:-.3px}
-    .cbadge .cdt{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.45)}
-    .cbadge .ccrv{position:absolute;left:0;right:0;bottom:0;height:22px}
+    .cbadge{width:58px;height:58px;flex:0 0 auto;border-radius:15px;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 5px 15px rgba(14,40,74,.24);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+    .cbadge::after{content:"";position:absolute;inset:0;border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,0) 46%);pointer-events:none}
+    .cbadge .cab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 3px;letter-spacing:-.3px;text-shadow:0 1px 2px rgba(0,0,0,.13)}
+    .cbadge .ccrv{position:absolute;left:0;right:0;bottom:0;height:20px}
     .ctxt{display:flex;flex-direction:column;min-width:0;flex:1}
     .card .cn{font-weight:700;font-size:16px;color:var(--azure-deep);margin-bottom:4px}
     .card .cd{color:var(--muted);font-size:13.5px;flex:1}
@@ -192,12 +197,12 @@
       const href = ext || ("/" + c[0] + "/");
       const ab = o.ab || abbrev(c[1]);
       const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
-      const dot = GROUP_DOT[c[3]] || "#135ba8";
+      const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
       const flags =
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
         (ext ? `<span class="chip ext">external tool ↗</span>` : "");
       return `<a class="card${norec ? " norec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
-        `<span class="cbadge"><span class="cdt" style="background:${dot}"></span><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
+        `<span class="cbadge" style="background:linear-gradient(150deg,${grad[0]},${grad[1]})"><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
         `<span class="ctxt">${flags ? `<span class="chiprow">${flags}</span>` : ""}<span class="cn">${esc(c[1])}</span><span class="cd">${esc(c[2])}</span><span class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</span></span></a>`;
     }
     back() {
