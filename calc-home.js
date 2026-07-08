@@ -9,8 +9,6 @@
   var ICONS = "https://cdn.jsdelivr.net/gh/sbrka/predictepilepsy-riskcalc@0f90a5df2c3364cd56c1e218dc5d05acc21b60ae/icons/";
 
   var GROUPS = [
-    { key: "poststroke", name: "Post-stroke seizure — will it recur?", icon: "ischaemic.png", dot: "#0071e3", scores: [
-      { ab: "SeLECT-RS", fs: 12, slug: "calc-post-stroke-recurrence", name: "Recurrence by Timing (SeLECT-RS)", desc: "Risk of a further seizure by WHEN the first post-stroke seizure occurred, across stroke types — revisiting the 7-day cutoff" } ] },
     { key: "ischaemic", name: "Ischaemic stroke", icon: "ischaemic.png", dot: "#3f7fd0", scores: [
       { ab: "SeLECT", fs: 18, ext: "https://predictapps.github.io/select/", name: "SeLECT Score", desc: "Late seizures after ischaemic stroke" },
       { ab: "IsCHEMiA", fs: 15, slug: "calc-ischemia", name: "IsCHEMiA Score", desc: "Late seizures after ischaemic stroke" } ] },
