@@ -86,6 +86,10 @@
     .cffinfo th,.cffinfo td{border:1px solid var(--line);padding:5px 8px;text-align:left}
     .cffinfo a{color:var(--azure-deep);text-decoration:none;border-bottom:1px solid var(--azure-line)}
     .cffinfo img{height:auto}
+    .chipwrap{display:flex;flex-wrap:wrap;gap:7px}
+    .chip{border:1.5px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:7px 13px;font-family:var(--sans);font-size:13px;font-weight:550;cursor:pointer;transition:border-color .14s,background .14s,color .14s;line-height:1.15}
+    .chip:hover{border-color:var(--azure-line);color:var(--ink)}
+    .chip.on{background:var(--azure-wash);border-color:var(--azure);color:var(--azure-deep);font-weight:650;box-shadow:0 1px 3px rgba(14,28,43,.08)}
     .mkhdr{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--line)}
     .mkhdr:first-child{margin-top:0}
     .seg.stack{flex-direction:column;gap:4px}
@@ -582,7 +586,20 @@
       if (!this._predSel) this._predSel = preds.map(() => 0);
       if (!this._slider) this._slider = preds.map((p) => (p.type === "slider" || p.type === "number") ? (p.default != null ? p.default : (p.min || 0)) : 0);
       let rail = "";
-      preds.forEach((p, i) => {
+      for (let i = 0; i < preds.length;) {
+        const p = preds[i];
+        // Chip group: collapse a run of consecutive binary predictors sharing p.chipgroup
+        // into one compact wrap of toggle chips (e.g. medications, comorbidities).
+        if (p.chipgroup) {
+          const g = p.chipgroup, gi = p.group_info, items = [];
+          while (i < preds.length && preds[i].chipgroup === g) { items.push(i); i++; }
+          rail += `<div class="field"><div class="flabel"><span>${esc(g)}${gi ? ` <button class="info-dot" data-info="${attr(gi)}" aria-label="About ${esc(g)}">i</button>` : ""}</span></div>` +
+            `<div class="chipwrap">` + items.map((idx) => {
+              const pp = preds[idx], on = this._predSel[idx] === 1;
+              return `<button class="chip${on ? " on" : ""}" data-ci="${idx}"${(pp.assess || pp.info) ? ` title="${attr(pp.assess || pp.info)}"` : ""}>${esc(pp.chip_label || pp.name)}</button>`;
+            }).join("") + `</div></div>`;
+          continue;
+        }
         if (p.type === "slider") {
           const v = this._slider[i], mn = p.min || 0, mx = p.max != null ? p.max : 10;
           rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${(p.assess || p.info) ? ` <button class="info-dot" data-info="${attr(p.assess || p.info)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span><span class="pill" id="sl${i}v">${v}${p.unit ? " " + esc(p.unit) : ""}</span></div>
@@ -591,21 +608,27 @@
           rail += `<div class="field"><div class="flabel"><span>${esc(p.name)}${(p.assess || p.info) ? ` <button class="info-dot" data-info="${attr(p.assess || p.info)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span></div>
             <input type="number" class="numpred" data-ni="${i}" value="${this._slider[i]}" step="${p.step || "any"}"${p.min != null ? ` min="${p.min}"` : ""} inputmode="decimal"></div>`;
         } else rail += this._predField(p, i);
-      });
+        i++;
+      }
       rail += `<div class="scorewrap" id="fmetrics"></div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
       const vizInfo = m.viz_info || "Each risk factor you select adds a coloured contribution. The waterfall (left) starts from the baseline risk and steps up with each active factor, so you can see which factors drive this patient's risk and by how much. The donut (right) shows the same factors as wedges summing to the total predicted risk in the centre.";
-      const survViz = m.type === "surv";
+      const survViz = m.type === "surv", relViz = m.type === "relrisk";
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
         <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
           ${survViz ? `<div id="fdonuts" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>` : ""}
+          ${relViz ? `<div id="absrisk"></div>` : ""}
           <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
-          ${survViz ? "" : `<div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>`}
+          ${(survViz || relViz) ? "" : `<div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>`}
         </div>`;
       this._formulaUpdate();
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return; this._predSel[+seg.dataset.pi] = +b.dataset.oi; this._renderFormula();
+      }));
+      this._rail.querySelectorAll(".chipwrap .chip[data-ci]").forEach((ch) => ch.addEventListener("click", () => {
+        const idx = +ch.dataset.ci; this._predSel[idx] = this._predSel[idx] === 1 ? 0 : 1;
+        ch.classList.toggle("on", this._predSel[idx] === 1); this._formulaUpdate();
       }));
       this._rail.querySelectorAll(".slpred").forEach((sl) => sl.addEventListener("input", (e) => {
         const i = +e.target.dataset.si, mn = +e.target.min, mx = +e.target.max; this._slider[i] = +e.target.value;
@@ -689,6 +712,7 @@
         const rr = Math.exp(lp - (Number(m.ref_lp) || 0));
         const fmtRR = (r) => "×" + (r >= 10 ? r.toFixed(0) : r.toFixed(2));
         if (mroot) mroot.innerHTML = `<div class="metric"><div class="k">${esc(m.rr_label || "Relative SUDEP risk")}</div><div class="v">${fmtRR(rr)}</div><div class="band"><span style="color:var(--muted);font-weight:600;font-size:11px">${esc(m.rr_ref_label || "vs an average person with epilepsy")}</span></div></div>`;
+        this._drawAbsRisk(rr);
         this._drawLogOR(this._formulaContribs());
         const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = "none";
         return;
@@ -804,6 +828,33 @@
     // Diverging log-odds-ratio chart (mirrors the paper's adjusted-OR forest plot):
     // each selected factor is a bar left (protective, ×<1) or right (risk, ×>1) of the
     // centre, labelled as a multiplicative effect; the combined relative risk is summarised.
+    // Illustrative ABSOLUTE risk for a relative-risk model: multiply an assumed
+    // baseline incidence (per 1,000/yr) by the relative risk, and show it as a
+    // frequency ("about N of 1,000") + a 1,000-dot pictograph so the multiplier means something.
+    _drawAbsRisk(rr) {
+      const box = this._panel.querySelector("#absrisk"); if (!box) return;
+      const m = this.data.model, base = Number(m.baseline_per_1000) || 1.2;
+      const abs = base * rr, oneIn = abs > 0 ? Math.round(1000 / abs) : Infinity;
+      const hi = Math.min(1000, Math.max(1, Math.round(abs)));
+      const cols = 40, rows = 25, cell = 9, r = 2.6, pad = 2;
+      let dots = "";
+      for (let k = 0; k < cols * rows; k++) {
+        const cx = pad + (k % cols) * cell + cell / 2, cy = pad + Math.floor(k / cols) * cell + cell / 2;
+        dots += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${k < hi ? "#d1495b" : "#e6ecf2"}"/>`;
+      }
+      const gW = pad * 2 + cols * cell, gH = pad * 2 + rows * cell;
+      const absTxt = abs < 1 ? "<1" : (abs >= 10 ? abs.toFixed(0) : abs.toFixed(1));
+      const oneInTxt = isFinite(oneIn) ? oneIn.toLocaleString("en-US") : "—";
+      box.innerHTML = `
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:baseline">
+          <div><span style="font-family:var(--serif);font-size:34px;font-weight:800;color:#b23148">${absTxt}</span> <span style="font-size:12px;color:var(--muted)">per 1,000<br>people / year</span></div>
+          <div><span style="font-family:var(--serif);font-size:23px;font-weight:700;color:#1a2430">1 in ${oneInTxt}</span> <span style="font-size:12px;color:var(--muted)">per year</span></div>
+        </div>
+        <div style="font-size:12.5px;color:#5c6b7a;margin:10px 0 8px">Of <b>1,000 people</b> with this profile, roughly <b>${hi}</b> would be expected to die from SUDEP over a year — versus about <b>${base.toFixed(1)}</b> for an average person with epilepsy (red dots).</div>
+        <svg viewBox="0 0 ${gW} ${gH}" style="width:100%;max-width:440px" role="img" aria-label="About ${hi} in 1,000 per year">${dots}</svg>
+        <div class="warn" style="margin-top:10px">${esc(m.baseline_note || "Illustrative only. The model provides a RELATIVE risk; this absolute figure assumes an average SUDEP incidence of ~1.2 per 1,000 people per year, which itself varies widely (~0.9–2.3 in community cohorts, higher in drug-resistant epilepsy). Not an individual prediction of death.")}</div>`;
+    }
+
     _drawLogOR(cb) {
       const svg = this._panel.querySelector("#fwater"); if (!svg) return;
       const active = cb.items.filter((c) => c.on);
