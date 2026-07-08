@@ -277,11 +277,15 @@
     _scrollUp() {
       try {
         requestAnimationFrame(() => {
-          const top = this.getBoundingClientRect().top;
-          // realign only when the finder has scrolled above the viewport or sits well below the fold
-          if (top < 4 || top > (window.innerHeight || 800) * 0.4) {
+          const vh = window.innerHeight || 800;
+          const hostTop = this.getBoundingClientRect().top;
+          const step = this.shadowRoot && this.shadowRoot.querySelector(".setbtns, .cards, .step h2");
+          // scroll only when it's actually needed: the finder scrolled above the viewport,
+          // or the freshly-rendered step sits (mostly) below the fold — otherwise leave the page put
+          const stepOffscreen = step ? (step.getBoundingClientRect().top > vh * 0.82) : (hostTop > vh * 0.55);
+          if (hostTop < 6 || stepOffscreen) {
             if (this.scrollIntoView) this.scrollIntoView({ behavior: "smooth", block: "start" });
-            else window.scrollTo(0, Math.max(0, top + (window.pageYOffset || 0) - 72));
+            else window.scrollTo(0, Math.max(0, hostTop + (window.pageYOffset || 0) - 78));
           }
         });
       } catch (e) {}
