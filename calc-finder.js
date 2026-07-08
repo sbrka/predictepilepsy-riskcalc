@@ -199,19 +199,26 @@
     @media(max-width:560px){.head h1{font-size:24px}.banner{border-radius:0}}
   `;
 
+  // per-brand palette override (default = predictepilepsy azure; "select" = SeLECT Consortium lime-green + navy)
+  const PALETTES = {
+    select: ":host{--azure:#6f8c00;--azure-deep:#1c244b;--azure-wash:#f6f8e9;--azure-line:#dfe8c2}",
+  };
+
   class CalcFinder extends HTMLElement {
     connectedCallback() {
       this._only = this.getAttribute("only") || null;        // "guided" | "browse" -> lock to one tab, hide switcher
       this._tab = this._only || this.getAttribute("default-tab") || "guided";
       this._grp = null; this._set = null; this._q = "";
+      this._base = (this.getAttribute("base") || "").replace(/\/+$/, "");  // e.g. https://predictepilepsy.com for external embeds
+      this._brand = (this.getAttribute("brand") || "").toLowerCase();       // "select" -> lime-green palette
       this.attachShadow({ mode: "open" });
       this.render();
     }
-    go(slug) { window.location.href = "/" + slug + "/"; }
+    go(slug) { window.location.href = this._base + "/" + slug + "/"; }
     card(c) {
       const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge}
       const ext = o.ext, norec = o.rec === false;
-      const href = ext || ("/" + c[0] + "/");
+      const href = ext || (this._base + "/" + c[0] + "/");
       const ab = o.ab || abbrev(c[1]);
       const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
@@ -311,13 +318,13 @@
       const body = this._bodyHTML();
       // when placed under a page banner (attr "plain"), skip the component's own strip
       var strip = this.hasAttribute("plain") ? "" :
-        `<div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="/">All calculators</a></div>`;
+        `<div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="${this._base}/">All calculators</a></div>`;
       const head = this.hasAttribute("no-head") ? "" :
         `<div class="head"><h1>Find the right calculator</h1><p>Choose a calculator step by step, or browse them by clinical group.</p></div>`;
       const searchbox = `<div class="searchbox${this._q.trim() ? " has" : ""}"><span class="si">&#128269;</span><input id="calcsearch" type="search" autocomplete="off" placeholder="Search calculators by name or acronym…" value="${esc(this._q)}"><button class="sclear" id="sclear" aria-label="Clear search" title="Clear search">&times;</button></div>`;
       const tabs = (this._only || this._q.trim()) ? "" :
         `<div class="tabs"><button data-tab="guided"${this._tab === "guided" ? ' class="on"' : ""}>Guided</button><button data-tab="browse"${this._tab === "browse" ? ' class="on"' : ""}>Browse by group</button></div>`;
-      this.shadowRoot.innerHTML = `<style>${CSS}</style>
+      this.shadowRoot.innerHTML = `<style>${CSS}${PALETTES[this._brand] || ""}</style>
         ${strip}
         <div class="wrap">
           ${head}
