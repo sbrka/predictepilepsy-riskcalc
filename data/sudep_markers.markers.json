@@ -1,0 +1,94 @@
+{
+ "schema_version": "1.0",
+ "id": "sudep_markers",
+ "kind": "markers",
+ "meta": {
+  "title": "SUDEP risk markers (Ochoa-Urrea 2025)",
+  "doi": "10.1016/S0140-6736(25)01636-8",
+  "pmid": "",
+  "authors": "Ochoa-Urrea M, Luo X, Vilella L, et al.",
+  "year": 2025,
+  "journal": "The Lancet",
+  "outcome": "Five-year risk of sudden unexpected death in epilepsy (SUDEP) associated with individual risk markers — shown one marker at a time (this study did NOT publish a combined prediction model)",
+  "cff_info": "<p><b>What this shows.</b> A prospective, multicentre cohort study (Ochoa-Urrea et&nbsp;al., <i>Lancet</i> 2025; 2632 patients, 8&nbsp;centres) identified clinical and electroclinical <b>risk markers</b> for <b>SUDEP</b> (sudden unexpected death in epilepsy). For each marker it reports the observed <b>5-year SUDEP risk</b> in patients who had it, versus those who did not, and versus the overall cohort (2.2%).</p><h4>Important — this is not a calculator</h4><ul><li>The study <b>did not build a combined risk model or score</b>; it explicitly frames these markers as a basis for a <b>future</b> validatable SUDEP risk index. Each figure below is an <b>independent (marginal) association</b> — the risks <b>cannot be added or multiplied</b> together.</li><li>The strongest, routinely available markers are <b>living alone</b> (5-yr SUDEP 14.9% vs 2.1%; adjusted HR 8.25) and <b>≥3 generalised tonic–clonic seizures in the past year</b> (4.3% vs 1.4%; HR 2.75).</li><li>The <b>peri-ictal central apnoea</b> markers require in-hospital video-EEG with cardiorespiratory monitoring and were <b>not significant after full adjustment</b>.</li></ul><p>A reference to support SUDEP counselling and decisions about monitoring — not an individual risk prediction.</p>"
+ },
+ "model": {
+  "outcome_label": "SUDEP",
+  "horizon": "5 years",
+  "axis_max": 26,
+  "panel_title": "5-year SUDEP risk, one marker at a time",
+  "baseline": {
+   "label": "overall cohort",
+   "risk": 2.2,
+   "lo": 1.3,
+   "hi": 3.0
+  },
+  "note": "Read one marker at a time. These risks are NOT additive — a patient with two markers does not have their risks combined. Ochoa 2025 identified markers to guide monitoring; it did not publish a validated combined SUDEP score.",
+  "disclaimer": "Independent (marginal) 5-year SUDEP risks from a single prospective cohort (Ochoa-Urrea et al., Lancet 2025). A risk-marker reference to support SUDEP counselling and monitoring — NOT a validated individual risk calculator. The peri-ictal apnoea markers require in-hospital cardiorespiratory monitoring and were not significant after full adjustment.",
+  "viz_info": "Each bar is the 5-year SUDEP risk observed in patients who had that single marker (with its 95% CI whisker). The dashed red line is the overall cohort risk (2.2%). Bars are read one at a time and are never added together. Toggling a marker Yes just highlights it.",
+  "markers": [
+   {
+    "name": "Living alone",
+    "present": {
+     "risk": 14.9,
+     "lo": 4.1,
+     "hi": 24.4
+    },
+    "absent": {
+     "risk": 2.1,
+     "lo": 1.1,
+     "hi": 3.1
+    },
+    "hr": "8.25 (3.4–20.1)",
+    "info": "Whether the patient lives alone (vs with someone). The strongest marker in this cohort — 5-year SUDEP risk 14.9% vs 2.1% (adjusted HR 8.25). Living alone reduces the chance that nocturnal convulsive seizures are witnessed and interrupted."
+   },
+   {
+    "name": "≥3 generalised tonic–clonic seizures in the past year",
+    "present": {
+     "risk": 4.3,
+     "lo": 2.2,
+     "hi": 6.5
+    },
+    "absent": {
+     "risk": 1.4,
+     "lo": 0.5,
+     "hi": 2.3
+    },
+    "hr": "2.75 (1.1–6.9)",
+    "info": "Three or more generalised (focal-to-bilateral) tonic–clonic seizures in the previous year. 5-year SUDEP risk 4.3% vs 1.4% (adjusted HR 2.75). Results were similar using ‘one or more’ GCS or the raw seizure count."
+   },
+   {
+    "name": "Prolonged postictal central apnoea (>14 s)",
+    "emu": true,
+    "present": {
+     "risk": 13.4,
+     "lo": 0.0,
+     "hi": 24.9
+    },
+    "info": "Duration of central apnoea (no airflow, no respiratory effort) AFTER a seizure, measured during a recorded seizure with cardiorespiratory monitoring. Longer than the cohort median (14 s) was associated with 13.4% 5-year SUDEP risk unadjusted, but this was NOT statistically significant after adjusting for other factors. Not obtainable outside an epilepsy monitoring unit."
+   },
+   {
+    "name": "Prolonged ictal central apnoea (>17 s)",
+    "emu": true,
+    "nonsig": true,
+    "present": {
+     "risk": 7.4,
+     "lo": 1.3,
+     "hi": 13.1
+    },
+    "absent": {
+     "risk": 3.7,
+     "lo": 1.3,
+     "hi": 6.1
+    },
+    "info": "Duration of central apnoea DURING a seizure (video-EEG + respiratory monitoring). Longer than the cohort median (17 s) was associated with 7.4% vs 3.7%, but this did NOT reach statistical significance (p=0.11) and was not significant after adjustment. Not obtainable outside an epilepsy monitoring unit."
+   }
+  ]
+ },
+ "provenance": {
+  "extraction_method": "paper_reported_subgroup_risks",
+  "source": "Ochoa-Urrea 2025 Lancet — Kaplan–Meier 5-year SUDEP probabilities per subgroup (Figure 2A–E + Results text) and adjusted HRs (Table 4). doi 10.1016/S0140-6736(25)01636-8",
+  "review_status": "human_reviewed",
+  "notes": "NOT a prediction model — the paper reports risk markers only and explicitly leaves a combined 'validatable SUDEP risk index' to future work. Built as a transparent risk-MARKER reference (new 'markers' component kind): each marker shows its own marginal 5-yr SUDEP risk, never combined. Baseline overall 2.2% (1.3-3.0). Living alone 14.9%(4.1-24.4) vs 2.1%, adj HR 8.25; >=3 GCS/yr 4.3%(2.2-6.5) vs 1.4%, adj HR 2.75; postictal central apnoea >14s 13.4%(0-24.9) EMU, sig unadjusted only; ictal central apnoea >17s 7.4%(1.3-13.1) vs 3.7% EMU, non-significant (p=0.11). Built 2026-07-08."
+ }
+}

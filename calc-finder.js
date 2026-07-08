@@ -86,6 +86,7 @@
     // g5 — SUDEP risk
     ["calc-sudep3", "SUDEP-3 Inventory", "Three-item inventory stratifying the risk of sudden unexpected death in epilepsy (SUDEP).", "g5", "sudep"],
     ["calc-jha-sudep", "SUDEP Personalised Risk (Jha)", "Individualised relative risk of sudden unexpected death in epilepsy (SUDEP) from 22 clinical factors.", "g5", "sudep"],
+    ["calc-sudep-risk-markers", "SUDEP Risk Markers (Ochoa)", "Reference for individual SUDEP risk markers (living alone, frequent tonic–clonic seizures, peri-ictal apnoea) and their 5-year SUDEP risk — markers only, not a combined score.", "g5", "sudep"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
