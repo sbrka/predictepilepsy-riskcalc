@@ -1058,18 +1058,18 @@
       const d = this.data, m = d.model, markers = m.markers || [];
       if (!this._mkSel) this._mkSel = markers.map(() => 0);
       const withI = markers.map((mk, i) => ({ ...mk, _i: i }));
-      const toggle = (o) => `<div class="field"><div class="flabel"><span>${esc(o.name)}${o.emu ? ` <span class="code" title="Requires monitoring">EMU</span>` : ""}${o.nonsig ? ` <span class="code" style="background:#fbeaea;color:#b02020">n.s.</span>` : ""}</span>${o.info ? `<button class="info-dot" data-info="${attr(o.info)}" aria-label="About ${esc(o.name)}">i</button>` : ""}</div>
+      const toggle = (o) => `<div class="field"><div class="flabel"><span>${esc(o.name)}</span>${o.info ? `<button class="info-dot" data-info="${attr(o.info)}" aria-label="About ${esc(o.name)}">i</button>` : ""}</div>
         <div class="seg" data-mi="${o._i}"><button data-v="0" class="${this._mkSel[o._i] === 0 ? "on" : ""}">No</button><button data-v="1" class="${this._mkSel[o._i] === 1 ? "on" : ""}">Yes</button></div></div>`;
       const routine = withI.filter((x) => !x.emu), emu = withI.filter((x) => x.emu);
       let rail = "";
       if (routine.length) rail += `<div class="mkhdr">Routinely available</div>` + routine.map(toggle).join("");
       if (emu.length) rail += `<div class="mkhdr">Requires video-EEG + cardiorespiratory monitoring</div>` + emu.map(toggle).join("");
-      rail += `<div class="scorewrap" id="mkmetrics"></div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
       const vinfo = m.viz_info || "Each row shows the risk observed in patients who HAD that single marker (filled dot, with its 95% CI) versus those who did NOT (hollow dot) — an independent association from one cohort, read one marker at a time. The dashed red line is the overall cohort risk. The rows are NOT added or multiplied together; there is no combined score.";
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Associated risk, one marker at a time")} <button class="info-dot" data-info="${attr(vinfo)}" aria-label="How to read this chart">i</button></div>
           <div class="legend"><span><i style="width:9px;height:9px;border-radius:50%;background:#1f83e6;display:inline-block"></i>if present</span><span><i style="width:9px;height:9px;border-radius:50%;background:#fff;border:1.5px solid #7c8a98;display:inline-block"></i>if absent</span><span><i style="width:14px;height:0;border-top:1.6px dashed #b02020;display:inline-block"></i>cohort</span></div></div>
+        <div id="mkreadout" style="margin:2px 0 16px"></div>
         <div class="plotwrap"><svg class="plot" id="mkplot" role="img" aria-label="Risk by marker"></svg></div>
         <div class="warn" style="margin-top:14px">${esc(m.disclaimer || "These are independent (marginal) associations from a single cohort — not a validated individual predictor. Do not combine markers into one number.")}</div>`;
       this._markersUpdate();
@@ -1083,17 +1083,27 @@
     _markersUpdate() {
       const m = this.data.model, markers = m.markers || [];
       const pf = (v) => v == null ? "—" : (Math.round(v * 10) / 10) + "%";
-      const mr = this._rail.querySelector("#mkmetrics");
-      if (mr) {
+      const ro = this._panel.querySelector("#mkreadout");
+      if (ro) {
         const base = m.baseline || {};
-        let cells = `<div class="metric"><div class="k">${esc(base.label || "cohort")} · ${esc(m.outcome_label || "risk")} at ${esc(m.horizon || "")}</div><div class="v">${pf(base.risk)}</div></div>`;
-        markers.forEach((mk, i) => {
-          if (this._mkSel[i] !== 1) return;
-          const pr = mk.present || {}, ab = mk.absent || null;
-          const dpp = (ab && ab.risk != null && pr.risk != null) ? (pr.risk - ab.risk) : null;
-          cells += `<div class="metric sm"><div class="k">${esc(shorten(mk.name, 30))}</div><div class="v" style="color:var(--azure-deep)">${pf(pr.risk)}</div><div class="band"><span style="color:var(--muted);font-weight:600;font-size:11px">${ab && ab.risk != null ? "vs " + pf(ab.risk) + (dpp != null ? " · Δ " + (dpp >= 0 ? "+" : "") + (Math.round(dpp * 10) / 10) + " pp" : "") : ""}${mk.hr ? " · HR " + esc(mk.hr) : ""}</span></div></div>`;
-        });
-        mr.innerHTML = cells;
+        const on = markers.map((mk, i) => ({ mk, i })).filter((x) => this._mkSel[x.i] === 1);
+        const tags = (mk) => (mk.emu ? ` <span class="code" title="Requires in-hospital monitoring">EMU</span>` : "") + (mk.nonsig ? ` <span class="code" style="background:#fbeaea;color:#b02020">n.s.</span>` : "");
+        let html = `<div class="reccard" style="border-color:var(--azure-line);color:var(--ink);text-align:left">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px"><span style="font-weight:600;color:var(--muted);font-size:13px">${esc(base.label || "Overall cohort")} · ${esc(m.outcome_label || "risk")} at ${esc(m.horizon || "")}</span><span style="font-family:var(--serif);font-size:22px;color:var(--ink)">${pf(base.risk)}</span></div>`;
+        if (on.length) {
+          html += on.map((x) => {
+            const pr = x.mk.present || {}, ab = x.mk.absent || null;
+            const dpp = (ab && ab.risk != null && pr.risk != null) ? (pr.risk - ab.risk) : null;
+            const sub = `${ab && ab.risk != null ? "vs " + pf(ab.risk) + " if absent" : ""}${dpp != null ? " · Δ " + (dpp >= 0 ? "+" : "") + (Math.round(dpp * 10) / 10) + " pp" : ""}${x.mk.hr ? " · adj. HR " + esc(x.mk.hr) : ""}`;
+            return `<div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding-top:9px;margin-top:9px;border-top:1px solid var(--line-soft)">
+              <span style="font-size:13.5px">${esc(x.mk.name)}${tags(x.mk)}</span>
+              <span style="white-space:nowrap;text-align:right"><b style="color:var(--azure-deep);font-size:17px;font-family:var(--serif)">${pf(pr.risk)}</b><br><span style="color:var(--muted);font-size:11.5px">${sub}</span></span></div>`;
+          }).join("");
+        } else {
+          html += `<div style="color:var(--muted);font-size:13px;padding-top:9px;margin-top:9px;border-top:1px solid var(--line-soft)">Toggle a marker on the left to see its associated 5-year SUDEP risk. Read one marker at a time — the risks are <b>not</b> added together.</div>`;
+        }
+        html += `</div>`;
+        ro.innerHTML = html;
       }
       this._drawMarkerBars();
     }
@@ -1121,7 +1131,7 @@
       markers.forEach((mk, i) => {
         const y = top + i * rowH, on = this._mkSel[i] === 1;
         const pr = mk.present || {}, ab = mk.absent || null, ty = y + 30;
-        if (on) g += `<rect x="2" y="${y - 6}" width="${W - 4}" height="${rowH - 10}" rx="9" fill="var(--azure-wash)"/>`;
+        if (on) { g += `<rect x="0" y="${y - 6}" width="${W}" height="${rowH - 10}" rx="9" fill="var(--azure-wash)" opacity="0.55"/>`; g += `<rect x="0" y="${y - 4}" width="3" height="${rowH - 14}" rx="1.5" fill="#1f83e6"/>`; }
         // name (left) + HR (right) on the top line
         g += `<text x="${pL}" y="${y + 10}" font-size="12.5" fill="#0e1c2b" font-weight="${on ? 700 : 600}">${esc(shorten(mk.name, 50))}</text>`;
         let tags = ""; if (mk.emu) tags += " EMU"; if (mk.nonsig) tags += " · n.s.";
