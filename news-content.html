@@ -1,0 +1,94 @@
+<style id="pep-header-fix">#site-header{background:#fff;position:relative}#site-header .custom-logo{width:248px!important;height:auto}#site-header .site-navigation a{color:#1c244b!important}</style>
+<div class="pnews-banner"><h1>News &amp; Updates</h1></div>
+<style>
+.pnews-banner{background:#135ba8;width:100vw;margin-left:calc(50% - 50vw);min-height:19vh;display:flex;align-items:center;justify-content:center;padding:34px 20px}
+.pnews-banner h1{color:#fff;font-size:clamp(34px,6vw,72px);margin:0;letter-spacing:-.02em;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;text-align:center}
+.pnews{--az:#135ba8;--azd:#0e4a8a;--az2:#2b7de0;--wash:#eef6fe;--line:#d7e6f7;--ink:#16222f;--muted:#5c6b7a;
+  max-width:1060px;margin:0 auto;padding:16px 20px 64px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.62;font-size:16px}
+.pnews *{box-sizing:border-box}
+.pnews .kick{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--az);margin:36px 0 10px}
+.pnews .kick .kd{width:7px;height:7px;border-radius:50%;background:var(--az2)}
+.pnews h2.sec{font-size:29px;line-height:1.15;margin:0 0 10px;letter-spacing:-.02em;color:#13233a}
+.pnews .lede{color:var(--muted);font-size:17px;max-width:800px;margin:0 0 4px}
+/* timeline of updates */
+.pnews .feed{position:relative;margin-top:26px}
+.pnews .feed:before{content:"";position:absolute;left:70px;top:16px;bottom:18px;width:3px;background:linear-gradient(var(--az),#c4dbf3);border-radius:3px}
+.pnews .item{position:relative;display:flex;gap:24px;padding-bottom:22px}
+.pnews .item .when{flex:0 0 58px;text-align:right;padding-top:16px}
+.pnews .item .when .mo{font-weight:800;color:var(--azd);font-size:15px;line-height:1.1}
+.pnews .item .when .yr{color:var(--muted);font-size:12.5px}
+.pnews .item .dot{flex:0 0 auto;width:16px;height:16px;border-radius:50%;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 0 0 4px #fff,0 6px 14px rgba(14,74,138,.32);margin-top:20px;position:relative;z-index:1}
+.pnews .item .card{flex:1;min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 22px;box-shadow:0 6px 18px rgba(16,50,90,.07);transition:.18s}
+.pnews .item .card:hover{border-color:#bcd6f2;box-shadow:0 12px 28px rgba(16,50,90,.12);transform:translateY(-2px)}
+.pnews .item .card h4{margin:2px 0 7px;font-size:19px;color:var(--azd);display:flex;align-items:center;gap:11px;letter-spacing:-.01em}
+.pnews .item .card h4 .ic{font-size:22px;line-height:1}
+.pnews .item .card p{margin:0;color:#33465a;font-size:15.5px}
+.pnews .item .card a{color:var(--az);font-weight:600;text-decoration:none}
+.pnews .item .card a:hover{text-decoration:underline}
+/* contact card (same as Information page) */
+.pnews .contact{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 34px rgba(16,50,90,.10);margin-top:22px}
+.pnews .contact .ci{background:center/cover no-repeat;min-height:290px}
+.pnews .contact .cc{padding:34px 36px;display:flex;flex-direction:column;justify-content:center}
+.pnews .contact .kick{margin-top:0}
+.pnews .contact h3{font-size:32px;margin:2px 0 12px;color:#13233a;letter-spacing:-.02em}
+.pnews .contact p{color:#33465a;font-size:16px;margin:0 0 22px}
+.pnews .mail{display:inline-flex;align-items:center;gap:9px;background:var(--az);color:#fff;font-weight:700;font-size:15px;padding:12px 22px;border-radius:999px;text-decoration:none;align-self:flex-start;transition:.15s;box-shadow:0 8px 20px rgba(14,74,138,.24)}
+.pnews .mail:hover{background:var(--azd);transform:translateY(-1px)}
+.pnews .social{display:flex;gap:12px;margin-top:18px}
+.pnews .social a{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--azd);text-decoration:none;background:var(--wash);border:1px solid var(--line);padding:8px 15px;border-radius:999px;transition:.15s}
+.pnews .social a:hover{border-color:#bcd6f2;transform:translateY(-1px)}
+@media(max-width:680px){.pnews .contact{grid-template-columns:1fr}.pnews .contact .ci{min-height:190px}.pnews h2.sec{font-size:24px}.pnews .feed:before{left:54px}.pnews .item{gap:14px}.pnews .item .when{flex-basis:46px}}
+</style>
+<div class="pnews">
+
+  <p class="kick"><span class="kd"></span>Platform</p>
+  <h2 class="sec">News &amp; updates</h2>
+  <p class="lede">predictepilepsy.com is a centralized, freely available platform bringing together commonly used prognostic calculators for epilepsy. This page tracks new calculators, features and improvements. Most calculators were developed by others; we provide their implementation here for ease of access — please see our <a href="https://predictepilepsy.com/information/" style="color:#135ba8;font-weight:600">Disclaimer and methodology</a>.</p>
+
+  <div class="feed">
+
+    <div class="item">
+      <div class="when"><div class="mo">Jul</div><div class="yr">2026</div></div>
+      <div class="dot"></div>
+      <div class="card">
+        <h4><span class="ic">🩺</span>Presurgical &amp; SUDEP toolset added</h4>
+        <p>The library now covers presurgical planning and SUDEP risk: the <b>Jehi nomogram</b> for seizure freedom after epilepsy surgery, the Cleveland Clinic nomograms for <b>naming, verbal-memory and mood decline</b> after temporal-lobe surgery, the <b>5-SENSE</b> score for stereo-EEG focality, and a set of SUDEP tools — the <b>SUDEP-3</b> inventory, a personalised SUDEP relative-risk model, and a SUDEP risk-marker reference. <a href="https://predictepilepsy.com/variables-and-cosy/">Browse all calculators →</a></p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="when"><div class="mo">Jul</div><div class="yr">2026</div></div>
+      <div class="dot"></div>
+      <div class="card">
+        <h4><span class="ic">💊</span>Individualised ASM-withdrawal nomograms</h4>
+        <p>Added the <b>Lamberink</b> individualised prediction model, estimating the risk of seizure recurrence (at 2 and 5 years) and the chance of long-term seizure freedom after withdrawing antiseizure medication in a seizure-free patient. <a href="https://predictepilepsy.com/calc-lamberink/">Open the calculator →</a></p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="when"><div class="mo">2026</div><div class="yr"></div></div>
+      <div class="dot"></div>
+      <div class="card">
+        <h4><span class="ic">🧭</span>Redesigned, guided calculator finder</h4>
+        <p>All prognostic calculators are now organised in a modern, guided finder — grouped by clinical situation (after an acute brain injury, after a first or unprovoked seizure, stopping antiseizure medication, epilepsy surgery, and SUDEP risk) — so you can reach the right tool in a couple of clicks. <a href="https://predictepilepsy.com/">Go to the calculators →</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="kick"><span class="kd"></span>Contact</p>
+  <div class="contact">
+    <div class="ci" style="background-image:url('https://predictepilepsy.com/wp-content/uploads/2025/01/get_in_touch.jpg')"></div>
+    <div class="cc">
+      <p class="kick"><span class="kd"></span>Get in touch</p>
+      <h3>Get in touch!</h3>
+      <p>We are enthusiastic about using evidence-based prognostic models in epilepsy — let us know what you think. If a calculator is missing, or you believe one should be updated or removed, please contact us and we will address your request promptly.</p>
+      <a class="mail" href="mailto:select@usz.ch">✉ select@usz.ch</a>
+      <div class="social">
+        <a href="https://www.instagram.com/predictepilepsy/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://x.com/predictepilepsy" target="_blank" rel="noopener">X / Twitter</a>
+      </div>
+    </div>
+  </div>
+
+</div>
