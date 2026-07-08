@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "id": "mood_decline",
+  "kind": "formula",
+  "meta": {
+    "title": "Mood Decline after Temporal Lobe Surgery",
+    "doi": "10.1111/epi.16800",
+    "pmid": "33368200",
+    "authors": "Doherty C, et al.",
+    "year": 2021,
+    "journal": "Epilepsia",
+    "outcome": "Predicted probability of clinically significant postoperative mood decline (a ≥15% rise in Beck Depression Inventory-II with a postoperative raw score >11) in adults undergoing temporal lobe resection for pharmacoresistant epilepsy, from six preoperative predictors.",
+    "cff_info": "<p><b>What this shows.</b> This calculator reproduces the nomogram of Doherty et&nbsp;al. (<i>Epilepsia</i> 2021) estimating the probability of <b>clinically significant mood decline</b> after temporal lobe resection (TLR) for drug-resistant temporal lobe epilepsy. Mood decline is defined as a <b>≥15% increase in the Beck Depression Inventory-II (BDI-II) with a postoperative raw score &gt;11</b>. It uses six preoperative variables: psychiatric history, side (dominance) of resection, verbal fluency (F-A-S) score, relationship status, age, and presence of a malformation of cortical development (MCD) on MRI.</p><h4>How to read it</h4><ul><li>The result is the <b>percent chance of clinically significant mood decline</b> (0–100) after surgery.</li><li><b>Preoperative psychiatric history is the strongest driver</b> — it roughly triples the odds of decline.</li><li>Being <b>divorced</b> (and not in a new relationship), undergoing a <b>dominant-sided</b> resection, and a <b>higher preoperative verbal fluency</b> score increase risk; younger age increases risk; an MRI malformation of cortical development nudges risk upward.</li></ul><h4>Key findings</h4><ul><li>Developed on 592 patients (492 from the Cleveland Clinic plus 100 from four other North American centers). 14% of the Cleveland cohort and 22% of the external cohort had clinically significant mood decline.</li><li>Discrimination was moderate — optimism-adjusted c-statistic <b>0.70</b> — with good calibration for predicted risks up to 40%; above 40% the model slightly overestimates risk.</li><li>Psychiatric history (OR 2.75), divorced status (OR 2.97 vs single), dominant resection (OR 1.92), and each additional verbal-fluency point (OR 1.04) were the notable predictors; age and MCD were retained to improve model performance.</li><li>Postoperative seizure recurrence and cognitive (auditory immediate memory) decline were also associated with mood worsening but are outcomes, not preoperative inputs, so are not part of this tool.</li></ul><p>Demonstration and counseling aid — not a substitute for a multidisciplinary epilepsy surgery and psychiatric evaluation.</p>"
+  },
+  "predictors": [
+    {
+      "name": "Psychiatric history",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 1.010
+        }
+      ],
+      "assess": "Any preoperative psychiatric diagnosis (e.g. depression, anxiety, substance use), coded from the preoperative psychology/psychiatry notes or medical history. This is the strongest predictor of postoperative mood decline (β = 1.010; OR 2.75, 95% CI 1.60–4.70)."
+    },
+    {
+      "name": "Side of resection",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Nondominant hemisphere",
+          "points": 0
+        },
+        {
+          "label": "Dominant hemisphere",
+          "points": 0.652
+        }
+      ],
+      "assess": "Language-dominant vs nondominant temporal lobe resection, determined by side of surgery plus language lateralization (fMRI/Wada). Dominant-sided resection roughly doubles the odds of mood decline (β = 0.652; OR 1.92, 95% CI 1.19–3.09)."
+    },
+    {
+      "name": "Verbal fluency score",
+      "type": "slider",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "default": 35,
+      "unit": "F-A-S raw score",
+      "coef": 0.036,
+      "assess": "Preoperative phonemic (letter) verbal fluency — total words generated for the letters F, A and S (F-A-S raw score), a measure of executive function. Counter-intuitively, higher preoperative fluency predicts greater risk of mood decline: each additional point raises the odds ~4% (β = 0.036; OR 1.04, 95% CI 1.02–1.06), i.e. ~40% higher odds per 10-point increase."
+    },
+    {
+      "name": "Relationship status",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Widowed",
+          "points": -1.228
+        },
+        {
+          "label": "In a relationship (not married)",
+          "points": -0.543
+        },
+        {
+          "label": "Single",
+          "points": 0
+        },
+        {
+          "label": "Married",
+          "points": 0.326
+        },
+        {
+          "label": "Divorced",
+          "points": 1.090
+        }
+      ],
+      "assess": "Current relationship status (reference = single). Patients coded as divorced or widowed but in a new relationship are counted as 'in a relationship'. Divorced patients not in a new relationship are at highest risk (β = 1.090; OR 2.97 vs single, 95% CI 1.27–6.96); being in a relationship or widowed is protective."
+    },
+    {
+      "name": "Age",
+      "type": "slider",
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "default": 39,
+      "unit": "years",
+      "coef": -0.021,
+      "assess": "Age (years) at the time of surgery. In this cohort younger age increased the risk of mood decline (β = −0.021; OR 0.98 per year), likely because psychiatric history and relationship status act as confounders. Development-cohort median 39 years."
+    },
+    {
+      "name": "Malformation of cortical development on MRI",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Absent",
+          "points": 0
+        },
+        {
+          "label": "Present",
+          "points": 0.569
+        }
+      ],
+      "assess": "Presence of a malformation of cortical development (MCD) on MRI — e.g. focal cortical dysplasia, gray-matter heterotopia, polymicrogyria, schizencephaly. Its presence increases estimated risk (β = 0.569; OR 1.77, 95% CI 0.83–3.75, not independently significant but retained to improve model performance)."
+    }
+  ],
+  "model": {
+    "type": "logistic",
+    "intercept": 0,
+    "panel_title": "Chance of clinically significant mood decline",
+    "outputs": [
+      {
+        "label": "Chance of clinically significant mood decline",
+        "intercept": -3.318
+      }
+    ],
+    "note": "Percent chance of a clinically significant mood decline (≥15% rise in BDI-II with postoperative raw score >11) after temporal lobe resection. Preoperative psychiatric history is the strongest driver. Doherty et al., Epilepsia 2021 (optimism-adjusted c-statistic 0.70).",
+    "viz_info": "Each predictor contributes its published logistic weight (β × value for the age/verbal-fluency sliders; the categorical options add their β). The weights plus the model intercept (−3.318) are summed and passed through a logistic function to give the percent chance of mood decline. The waterfall shows how each factor pushes the estimate up or down; the donut shows the resulting probability. Note: the paper reports the model slightly overestimates risk above ~40%.",
+    "lp_label": "Mood-decline linear predictor",
+    "show_lp": false
+  },
+  "provenance": {
+    "extraction_method": "paper_formula",
+    "source": "Doherty 2021 Epilepsia Table 2 (published logistic coefficients + intercept) and Figure 1 nomogram — PMID 33368200, doi 10.1111/epi.16800.",
+    "review_status": "human_reviewed",
+    "notes": "Logistic model (Firth-penalized): LP = -3.318 + 1.010·[psych history] + 0.652·[dominant] + 0.036·verbal_fluency + [relationship: widowed -1.228 / in-relationship -0.543 / single 0 / married 0.326 / divorced 1.090] - 0.021·age + 0.569·[MCD present]; pct = 100/(1+exp(-LP)). Coefficients & intercept from Table 2; relationship reference = single. Plausibility check: psych-history Yes, dominant, fluency 35, single, age 39, MCD absent → LP -1.215 → 22.9% (consistent with external-cohort 22% base rate). Optimism-adjusted c-statistic 0.70; well calibrated to ~40%, slight overestimation above 40%. Third of the Cleveland Clinic surgical-neuropsych nomogram trio (naming/memory/mood). Extracted 2026-07-08."
+  }
+}
