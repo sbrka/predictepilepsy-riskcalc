@@ -122,12 +122,12 @@
     .card.norec{opacity:.6}.card.norec:hover{opacity:1}
     .step h2{font-size:20px;margin:0 0 16px;text-align:center}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .opts.large{grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:22px;max-width:1140px;margin:0 auto}
-    .opts.large .opt{padding:34px 32px;border-radius:22px;gap:22px;border-width:2px;box-shadow:0 6px 20px rgba(19,91,168,.07)}
-    .opts.large .opt:hover{box-shadow:0 12px 30px rgba(19,91,168,.16);transform:translateY(-3px)}
-    .opts.large .opt .ic{font-size:50px}
-    .opts.large .opt .ot{font-size:22px;margin-bottom:8px}
-    .opts.large .opt .os{font-size:15px}
+    .opts.large{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;max-width:1160px;margin:0 auto}
+    .opts.large .opt{flex:0 1 330px;max-width:360px;background:#fff;padding:32px 30px;border-radius:22px;gap:22px;border-width:2px;box-shadow:0 6px 20px rgba(19,91,168,.08)}
+    .opts.large .opt:hover{box-shadow:0 14px 34px rgba(19,91,168,.18);transform:translateY(-3px)}
+    .opts.large .opt .ic{font-size:48px}
+    .opts.large .opt .ot{font-size:21px;margin-bottom:8px}
+    .opts.large .opt .os{font-size:14.5px}
     .opt{text-align:left;border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:18px 18px;cursor:pointer;transition:.15s;display:flex;gap:14px;align-items:flex-start}
     .opt:hover{border-color:var(--azure);box-shadow:0 6px 18px rgba(19,91,168,.10);transform:translateY(-1px)}
     .opt .ic{font-size:26px;line-height:1}
