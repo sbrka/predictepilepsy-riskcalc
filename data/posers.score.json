@@ -1,0 +1,199 @@
+{
+ "schema_version": "1.0",
+ "id": "posers",
+ "kind": "score",
+ "meta": {
+  "title": "PoSERS — Post-Stroke Epilepsy Risk Scale",
+  "doi": "10.1007/s00415-010-5520-9",
+  "pmid": "20309571",
+  "authors": "Strzelczyk A, Haag A, Raupach H, et al.",
+  "year": 2010,
+  "journal": "Journal of Neurology",
+  "outcome": "Risk of epilepsy after stroke, from a 7-item clinical scale (PoSERS)",
+  "cff_info": "<p><b>What this shows.</b> The <b>Post-Stroke Epilepsy Risk Scale (PoSERS)</b> (Strzelczyk et&nbsp;al., <i>J&nbsp;Neurol</i> 2010) is a points scale for the risk of epilepsy after stroke. Prospective single-centre cohort (264 patients, 10 developed epilepsy; overall 1-year epilepsy risk 3.8%).</p><h4>How to read it</h4><ul><li>Sum the items (range 0–10). The authors defined cut-offs rather than a per-score risk: a score <b>≤5 → low risk</b> (very high negative predictive value); <b>6 → ~56%</b>, <b>7 → ~67%</b>, <b>≥8 → very high</b> probability of epilepsy (positive predictive values).</li></ul><p><b>Caution:</b> these figures come from a <b>small cohort with only 10 epilepsy cases</b>, so the high-score probabilities are unstable (the paper's 100% at the top cut-offs reflects zero false-positives in a tiny sample, not a true 100% risk). Demonstration tool only.</p>"
+ },
+ "thresholds": {
+  "group1": 56,
+  "group2": 10
+ },
+ "predictors": [
+  {
+   "name": "Supratentorial stroke",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Stroke located above the tentorium. 2 points."
+  },
+  {
+   "name": "ICH involving cortical areas",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Intracerebral haemorrhage involving the cortex. 2 points."
+  },
+  {
+   "name": "Late seizure (≥15 days after stroke)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "A seizure 15 days or more after the stroke. 2 points. (Hide this in early bedside use — see note.)"
+  },
+  {
+   "name": "Ischaemia involving cortical / cortical-subcortical areas",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Ischaemic stroke involving cortical or cortico-subcortical territory. 1 point."
+  },
+  {
+   "name": "Ischaemia with ongoing neurological deficit (>24 h)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Persisting deficit beyond 24 hours. 1 point."
+  },
+  {
+   "name": "Neurological deficit with mRS ≥ 3",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Moderate-to-severe disability (modified Rankin ≥3). 1 point."
+  },
+  {
+   "name": "Early seizure (≤14 days after stroke)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "A seizure within 14 days of the stroke. 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "epilepsy",
+  "panel_title": "Post-stroke epilepsy risk (PoSERS)",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 1,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 2,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 3,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 4,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 5,
+    "pct": 4,
+    "disp": "4%",
+    "label": "Low risk · ~4%"
+   },
+   {
+    "score": 6,
+    "pct": 56,
+    "disp": "56%",
+    "label": "Elevated · ~56%"
+   },
+   {
+    "score": 7,
+    "pct": 67,
+    "disp": "67%",
+    "label": "Elevated · ~67%"
+   },
+   {
+    "score": 8,
+    "pct": 90,
+    "disp": ">90%",
+    "label": "Very high (small-sample) · ~90%"
+   },
+   {
+    "score": 9,
+    "pct": 90,
+    "disp": ">90%",
+    "label": "Very high (small-sample) · ~90%"
+   },
+   {
+    "score": 10,
+    "pct": 90,
+    "disp": ">90%",
+    "label": "Very high (small-sample) · ~90%"
+   }
+  ],
+  "note": "Small single-centre cohort (264 patients, 10 epilepsy cases) — risk figures are cut-off positive-predictive-values and are unstable at high scores. ≤5 = low risk (NPV ~100%); 6 ≈ 56%; 7 ≈ 67%; ≥8 = very high (paper reports ~100%, shown here as >90% given the tiny sample). An early-bedside version omits the late-seizure item (range 0–8)."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Strzelczyk 2010 J Neurol Table 1 (items) + Table 3 (cut-off Sn/Sp/PPV/NPV) — doi 10.1007/s00415-010-5520-9, PMID 20309571",
+  "review_status": "human_reviewed",
+  "notes": "PoSERS final scale 0-10: supratentorial 2, ICH-cortical 2, late-seizure(≥15d) 2, ischaemia-cortical 1, ischaemia+deficit 1, mRS≥3 1, early-seizure(≤14d) 1. No published score→risk table; risk approximated from cut-off PPV (≥6→55.6%, ≥7→66.6%, ≥8→100% capped to >90%), ≤5→low via NPV~100%. Small cohort (n=264, 10 events) — WEAK/unstable, flag. base rate 3.8%. Built 2026-07-08."
+ }
+}

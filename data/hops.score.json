@@ -1,0 +1,154 @@
+{
+ "schema_version": "1.0",
+ "id": "hops",
+ "kind": "score",
+ "meta": {
+  "title": "HOPS — seizure freedom after hemispheric surgery (children)",
+  "doi": "10.1111/epi.16861",
+  "pmid": "33713438",
+  "authors": "Weil AG, Lewis EC, Ibrahim GM, et al.",
+  "year": 2021,
+  "journal": "Epilepsia",
+  "outcome": "Chance of seizure freedom (Engel I) 12 months after hemispheric surgery in children, from 5 preoperative factors (Hemispherectomy Outcome Prediction Scale)",
+  "cff_info": "<p><b>What this shows.</b> The <b>HOPS</b> scale (Weil et&nbsp;al., <i>Epilepsia</i> 2021) estimates the chance of <b>seizure freedom 12 months after hemispheric surgery</b> in children, from five preoperative factors. Developed and validated on 1237 children across 32 centres (AUC 0.72).</p><h4>How to read it</h4><ul><li>The score counts <b>risk factors for recurrence</b>, so a <b>higher score means a LOWER chance of seizure freedom</b>: 0–2 excellent (≥92%), 3–4 good (70–83%), 5–6 moderate (51–65%).</li><li>Age at seizure onset can add up to 2 points; the other four factors add 1 point each. Range 0–6.</li></ul><p>Demonstration tool for paediatric epilepsy-surgery counselling.</p>"
+ },
+ "thresholds": {
+  "group1": 85,
+  "group2": 60
+ },
+ "predictors": [
+  {
+   "name": "Age at seizure onset",
+   "options": [
+    {
+     "label": ">3.5 years",
+     "points": 0
+    },
+    {
+     "label": "3 months – 3.5 years",
+     "points": 1
+    },
+    {
+     "label": "<3 months",
+     "points": 2
+    }
+   ],
+   "assess": "Age at which seizures began. Earlier onset = worse prognosis: >3.5 yr = 0, 3 mo–3.5 yr = 1, <3 mo = 2 points."
+  },
+  {
+   "name": "Generalized seizure semiology",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Epileptic spasms, absence, or generalized tonic–clonic seizures. Present = 1 point."
+  },
+  {
+   "name": "Contralateral FDG-PET hypometabolism",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Interictal FDG-PET hypometabolism in the contralateral (non-operated) hemisphere. Present = 1 point."
+  },
+  {
+   "name": "Non-stroke substrate",
+   "options": [
+    {
+     "label": "Stroke / perinatal infarct / porencephaly",
+     "points": 0
+    },
+    {
+     "label": "Non-stroke (dysplasia, HME, Rasmussen, SWS, other)",
+     "points": 1
+    }
+   ],
+   "assess": "Underlying pathology. Stroke/perinatal infarction is the favourable reference (0); any non-stroke substrate = 1 point."
+  },
+  {
+   "name": "Previous resective (non-hemispheric) surgery",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Prior non-hemispheric resective epilepsy surgery. Yes = 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "12 months",
+  "panel_title": "Chance of seizure freedom at 12 months",
+  "metric_label": "Seizure freedom at 12 months",
+  "viz_title": "Seizure-freedom by HOPS score",
+  "viz_info": "Higher HOPS score = more recurrence risk factors = lower chance of seizure freedom. Each bar is the observed 12-month seizure-freedom rate for that score.",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 96.3,
+    "disp": "96%",
+    "label": "96% seizure-free at 12 months"
+   },
+   {
+    "score": 1,
+    "pct": 95.8,
+    "disp": "96%",
+    "label": "96% seizure-free at 12 months"
+   },
+   {
+    "score": 2,
+    "pct": 92.0,
+    "disp": "92%",
+    "label": "92% seizure-free at 12 months"
+   },
+   {
+    "score": 3,
+    "pct": 83.4,
+    "disp": "83%",
+    "label": "83% seizure-free at 12 months"
+   },
+   {
+    "score": 4,
+    "pct": 70.0,
+    "disp": "70%",
+    "label": "70% seizure-free at 12 months"
+   },
+   {
+    "score": 5,
+    "pct": 65.2,
+    "disp": "65%",
+    "label": "65% seizure-free at 12 months"
+   },
+   {
+    "score": 6,
+    "pct": 51.4,
+    "disp": "51%",
+    "label": "51% seizure-free at 12 months"
+   }
+  ],
+  "note": "Higher score = LOWER chance of seizure freedom. 12-month estimates. Score range 0–6."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Weil 2021 Epilepsia Table 3 (points) + Table 4 (score→seizure-freedom %) — doi 10.1111/epi.16861, PMID 33713438",
+  "review_status": "human_reviewed",
+  "notes": "HOPS discrete lookup. 5 items (age-onset 0/1/2; semiology/PET/substrate/prior-surgery 0/1). Seizure-free % at 12mo: 0=96.3,1=95.8,2=92.0,3=83.4,4=70.0,5=65.2,6=51.4. Verified worked examples HOPS 0→96.3% (>95%), HOPS 5→65.2%. AUC 0.715. Built 2026-07-08."
+ }
+}

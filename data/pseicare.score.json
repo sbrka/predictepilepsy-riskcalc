@@ -1,0 +1,235 @@
+{
+ "schema_version": "1.0",
+ "id": "pseicare",
+ "kind": "score",
+ "meta": {
+  "title": "PSEiCARe — 1-year post-stroke epilepsy risk",
+  "doi": "10.2147/CLEP.S168169",
+  "pmid": "30174459",
+  "authors": "Chi NF, Kuan YC, Huang YH, et al.",
+  "year": 2018,
+  "journal": "Clinical Epidemiology",
+  "outcome": "1-year risk group for late post-stroke epilepsy after ischaemic stroke, from 7 clinical factors (PSEiCARe score)",
+  "cff_info": "<p><b>What this shows.</b> The <b>PSEiCARe</b> score (Chi et&nbsp;al., <i>Clin&nbsp;Epidemiol</i> 2018) stratifies the <b>1-year risk of late post-stroke epilepsy</b> after ischaemic stroke into four groups. Developed on 87,068 and validated on 38,689 patients (Harrell's C 0.76–0.79).</p><h4>How to read it</h4><ul><li>Sum the 7 factors (0–16). Groups: <b>Low = 0</b> (~0.6%/yr), <b>Medium = 1–5</b> (~2.6%/yr), <b>High = 6–10</b> (~10%/yr), <b>Very high = ≥11</b> (~28%/yr).</li><li>An early seizure at stroke admission alone scores 6 points → High group.</li></ul><p><b>Note:</b> the values are <b>group-level 1-year incidence rates</b> (per 100 person-years), not individual probabilities. Demonstration tool.</p>"
+ },
+ "thresholds": {
+  "group1": 10,
+  "group2": 2.6
+ },
+ "predictors": [
+  {
+   "name": "Seizure at stroke admission (early seizure)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 6
+    }
+   ],
+   "assess": "A seizure within 7 days of the stroke. Strongest factor = 6 points (HR 5.8)."
+  },
+  {
+   "name": "ICU stay",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 3
+    }
+   ],
+   "assess": "Any intensive-care-unit stay (a stroke-severity proxy). 3 points."
+  },
+  {
+   "name": "Cognitive impairment / dementia",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Pre-existing dementia. 2 points."
+  },
+  {
+   "name": "Atrial fibrillation",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Pre-existing atrial fibrillation. 2 points."
+  },
+  {
+   "name": "Prolonged hospital stay (>2 weeks)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Length of stay over 2 weeks (stroke-severity proxy). 1 point."
+  },
+  {
+   "name": "Age ≥ 80 years",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Age 80 or older. 1 point."
+  },
+  {
+   "name": "Pneumonia on admission",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Respiratory-tract infection / pneumonia at stroke admission. 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "1 year",
+  "panel_title": "1-year post-stroke epilepsy risk group",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 0.64,
+    "disp": "0.64%",
+    "label": "Low risk group · ~0.64%/yr"
+   },
+   {
+    "score": 1,
+    "pct": 2.62,
+    "disp": "2.62%",
+    "label": "Medium risk group · ~2.62%/yr"
+   },
+   {
+    "score": 2,
+    "pct": 2.62,
+    "disp": "2.62%",
+    "label": "Medium risk group · ~2.62%/yr"
+   },
+   {
+    "score": 3,
+    "pct": 2.62,
+    "disp": "2.62%",
+    "label": "Medium risk group · ~2.62%/yr"
+   },
+   {
+    "score": 4,
+    "pct": 2.62,
+    "disp": "2.62%",
+    "label": "Medium risk group · ~2.62%/yr"
+   },
+   {
+    "score": 5,
+    "pct": 2.62,
+    "disp": "2.62%",
+    "label": "Medium risk group · ~2.62%/yr"
+   },
+   {
+    "score": 6,
+    "pct": 10.3,
+    "disp": "10.3%",
+    "label": "High risk group · ~10.3%/yr"
+   },
+   {
+    "score": 7,
+    "pct": 10.3,
+    "disp": "10.3%",
+    "label": "High risk group · ~10.3%/yr"
+   },
+   {
+    "score": 8,
+    "pct": 10.3,
+    "disp": "10.3%",
+    "label": "High risk group · ~10.3%/yr"
+   },
+   {
+    "score": 9,
+    "pct": 10.3,
+    "disp": "10.3%",
+    "label": "High risk group · ~10.3%/yr"
+   },
+   {
+    "score": 10,
+    "pct": 10.3,
+    "disp": "10.3%",
+    "label": "High risk group · ~10.3%/yr"
+   },
+   {
+    "score": 11,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   },
+   {
+    "score": 12,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   },
+   {
+    "score": 13,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   },
+   {
+    "score": 14,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   },
+   {
+    "score": 15,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   },
+   {
+    "score": 16,
+    "pct": 28.2,
+    "disp": "28.2%",
+    "label": "Very high risk group · ~28.2%/yr"
+   }
+  ],
+  "note": "Values are group-level 1-year incidence rates (per 100 person-years), NOT individual probabilities. Groups: Low 0 · Medium 1–5 · High 6–10 · Very high ≥11 (development-cohort rates 0.64 / 2.62 / 10.3 / 28.2%)."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Chi 2018 Clin Epidemiol Table 2 (Schneeweiss points) + Table 3 (risk-group incidence) — doi 10.2147/CLEP.S168169, PMID 30174459",
+  "review_status": "human_reviewed",
+  "notes": "PSEiCARe Schneeweiss 0-16. Points: early-seizure 6, ICU 3, dementia 2, AF 2, LOS>2wk 1, age≥80 1, pneumonia 1. Banded 1-yr incidence (dev): 0=0.64, 1-5=2.62, 6-10=10.3, ≥11=28.2 per 100py. No baseline hazard → group incidence, not individual probability. Harrell C 0.762/0.792. Built 2026-07-08."
+ }
+}

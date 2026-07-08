@@ -1,0 +1,111 @@
+{
+ "schema_version": "1.0",
+ "id": "meningioma_late_sz",
+ "kind": "formula",
+ "meta": {
+  "title": "Late seizures after meningioma surgery (Zhang nomogram)",
+  "doi": "10.1016/j.jocn.2020.06.005",
+  "pmid": "32651139",
+  "authors": "Zhang P, Li Y, Zhang J, et al.",
+  "year": 2020,
+  "journal": "Journal of Clinical Neuroscience",
+  "outcome": "Probability of late postoperative seizures (>7 days after surgery) after meningioma resection, from 5 factors",
+  "cff_info": "<p><b>What this shows.</b> A nomogram (Zhang et&nbsp;al., <i>J&nbsp;Clin&nbsp;Neurosci</i> 2020) estimating the probability of <b>late postoperative seizures</b> (occurring &gt;7 days after surgery) after meningioma resection, from five clinical/tumour factors. Single-centre, 318 patients (late-seizure rate 17.6%; nomogram C-index 0.79).</p><h4>How to read it</h4><ul><li>Each factor present raises the probability. Strongest: tumour <b>recurrence/progression</b> and <b>medical/surgical complications</b>; then <b>size ≥3.5 cm</b>, <b>preoperative seizures</b>, and <b>cerebral convexity location</b>.</li><li>A patient with no factors has ~7% risk; with all five, &gt;90%.</li></ul><p>Single-centre model without external validation — a demonstration/counselling aid.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Preoperative seizures",
+   "coef": 0.837,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Any seizure before surgery. Present raises late-seizure risk (OR 2.31)."
+  },
+  {
+   "name": "Cerebral convexity location",
+   "coef": 0.776,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Tumour at the cerebral convexity (vs skull base / parasagittal / posterior fossa). OR 2.17."
+  },
+  {
+   "name": "Maximum tumour size ≥ 3.5 cm",
+   "coef": 0.943,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Largest tumour diameter ≥3.5 cm. OR 2.57."
+  },
+  {
+   "name": "Medical / surgical complications",
+   "coef": 1.385,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Peri-operative complications (haemorrhage, hydrocephalus, CNS/wound infection, pneumonia, DVT). OR 4.00."
+  },
+  {
+   "name": "Tumour recurrence / progression",
+   "coef": 1.463,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Tumour recurrence or progression during follow-up. OR 4.32 (strongest factor)."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Probability of late postoperative seizures",
+  "outputs": [
+   {
+    "label": "Chance of late postoperative seizures",
+    "intercept": -2.641
+   }
+  ],
+  "note": "Late seizures = >7 days after surgery. Single-centre model (n=318); intercept calibrated to the paper's nomogram worked example (213 points → 63%).",
+  "viz_info": "Each factor present adds its published log-odds (β) to a logistic model; the sum plus a constant gives the probability of late postoperative seizures. The waterfall shows each factor's contribution."
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients+worked_example",
+  "source": "Zhang 2020 J Clin Neurosci Table 2 (β) + Fig 3 nomogram worked example (213 pts→0.632) — doi 10.1016/j.jocn.2020.06.005, PMID 32651139",
+  "review_status": "human_reviewed",
+  "notes": "Logistic: 5 binary β (preop-sz 0.837, convexity 0.776, size≥3.5 0.943, med/surg-compl 1.385, recurrence 1.463); intercept -2.641 recovered from worked example (Σβ 3.182→p 0.632). Verified: all-absent 6.6% (nomogram floor ~0.05), all-present 94.1% (nomogram max 0.94), worked example 63.2%. WHO grade & neuro-complications entered but not retained. C-index 0.785. Built 2026-07-08."
+ }
+}

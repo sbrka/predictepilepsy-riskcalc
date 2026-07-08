@@ -1,0 +1,124 @@
+{
+ "schema_version": "1.0",
+ "id": "sfs",
+ "kind": "score",
+ "meta": {
+  "title": "Seizure Freedom Score (SFS) — after resective epilepsy surgery",
+  "doi": "10.1111/epi.12892",
+  "pmid": "25530458",
+  "authors": "Garcia Gracia C, Yardi R, Kattan MW, et al.",
+  "year": 2015,
+  "journal": "Epilepsia",
+  "outcome": "Chance of seizure freedom (Engel I) at 10 years after resective epilepsy surgery, from 4 routinely available factors",
+  "cff_info": "<p><b>What this shows.</b> The <b>Seizure Freedom Score (SFS)</b> (Garcia&nbsp;Gracia et&nbsp;al., <i>Epilepsia</i> 2015) estimates the chance of <b>seizure freedom at 10 years</b> after resective epilepsy surgery, from four simple preoperative factors. Developed on 466 patients (overall 10-yr seizure freedom 55%).</p><h4>How to read it</h4><ul><li>Each favourable factor scores 1 point (range 0–4). Higher = better: 0 → 37%, 1 → 45%, 2 → 60%, 3–4 → 72% seizure-free at 10 years.</li><li>A <b>lesional (abnormal) MRI</b>, <b>≤20 seizures/month</b>, <b>epilepsy duration &lt;5 years</b>, and <b>no history of generalized tonic–clonic seizures</b> each add a point.</li></ul><p>A <b>modified m-SFS</b> adds invasive-EEG and extratemporal-resection items (0–6); its per-score probabilities were not published numerically (Low/Intermediate/High ≈ 24% / 38–59% / 75–79%). Demonstration tool for surgical counselling.</p>"
+ },
+ "thresholds": {
+  "group1": 60,
+  "group2": 45
+ },
+ "predictors": [
+  {
+   "name": "MRI findings",
+   "options": [
+    {
+     "label": "Normal MRI",
+     "points": 0
+    },
+    {
+     "label": "Abnormal / lesional MRI",
+     "points": 1
+    }
+   ],
+   "assess": "A potentially epileptogenic lesion on MRI (hippocampal sclerosis, malformation of cortical development, tumour, vascular malformation, encephalomalacia). Lesional MRI is favourable = 1 point; normal MRI = 0."
+  },
+  {
+   "name": "Preoperative seizure frequency",
+   "options": [
+    {
+     "label": ">20 seizures / month",
+     "points": 0
+    },
+    {
+     "label": "≤20 seizures / month",
+     "points": 1
+    }
+   ],
+   "assess": "Average monthly seizure frequency before surgery. ≤20/month is favourable = 1 point."
+  },
+  {
+   "name": "Epilepsy duration",
+   "options": [
+    {
+     "label": ">5 years",
+     "points": 0
+    },
+    {
+     "label": "<5 years",
+     "points": 1
+    }
+   ],
+   "assess": "Years of epilepsy before surgery. <5 years is favourable = 1 point."
+  },
+  {
+   "name": "History of generalized tonic–clonic seizures",
+   "options": [
+    {
+     "label": "Yes",
+     "points": 0
+    },
+    {
+     "label": "No",
+     "points": 1
+    }
+   ],
+   "assess": "Any history of (secondarily) generalized tonic–clonic seizures. Absence is favourable = 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "10 years",
+  "panel_title": "Chance of seizure freedom at 10 years",
+  "metric_label": "Seizure freedom at 10 years",
+  "viz_title": "Seizure-freedom by SFS",
+  "viz_info": "Each favourable factor adds a point. Higher SFS = higher chance of seizure freedom at 10 years (Kaplan–Meier estimate).",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 37,
+    "disp": "37%",
+    "label": "37% seizure-free at 10 years"
+   },
+   {
+    "score": 1,
+    "pct": 45,
+    "disp": "45%",
+    "label": "45% seizure-free at 10 years"
+   },
+   {
+    "score": 2,
+    "pct": 60,
+    "disp": "60%",
+    "label": "60% seizure-free at 10 years"
+   },
+   {
+    "score": 3,
+    "pct": 72,
+    "disp": "72%",
+    "label": "72% seizure-free at 10 years"
+   },
+   {
+    "score": 4,
+    "pct": 72,
+    "disp": "72%",
+    "label": "72% seizure-free at 10 years"
+   }
+  ],
+  "note": "Higher score = higher chance of seizure freedom. 10-year Kaplan–Meier estimates; scores 3 and 4 were pooled by the authors (both 72%). Overall cohort 55%."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Garcia Gracia 2015 Epilepsia Table 3 (items) + Results/Fig (SFS→10-yr seizure-freedom) — doi 10.1111/epi.12892, PMID 25530458",
+  "review_status": "human_reviewed",
+  "notes": "SFS 0–4, each favourable indicator +1 (lesional MRI, ≤20 sz/mo, duration <5yr, no GTC). 10-yr seizure-free: 0=37,1=45,2=60,3+=72 (3&4 pooled). m-SFS (adds invasive-EEG, extratemporal) per-score not published numerically. c-index 0.569 (SFS)/0.617 (m-SFS). Built 2026-07-08."
+ }
+}
