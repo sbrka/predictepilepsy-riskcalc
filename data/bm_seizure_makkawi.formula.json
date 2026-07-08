@@ -1,0 +1,81 @@
+{
+ "schema_version": "1.0",
+ "id": "bm_seizure_makkawi",
+ "kind": "formula",
+ "meta": {
+  "title": "Seizures in brain metastases (Makkawi model)",
+  "doi": "10.1016/j.seizure.2025.05.013",
+  "pmid": "40440856",
+  "authors": "Makkawi S, Alqurashi RM, Aljabri A, et al.",
+  "year": 2025,
+  "journal": "Seizure: European Journal of Epilepsy",
+  "outcome": "Probability of developing a seizure in a patient with brain metastases, from 3 factors (single static estimate)",
+  "cff_info": "<p><b>What this shows.</b> A model (Makkawi et&nbsp;al., <i>Seizure</i> 2025) estimating the probability of <b>developing a seizure</b> in a patient with <b>brain metastases</b>, from three factors. Single-centre, 272 patients (overall seizure rate 29%).</p><h4>How to read it</h4><ul><li>Strongest driver by far is a <b>supratentorial cortical metastasis</b>; then <b>leptomeningeal</b> disease and <b>female sex</b>. A patient with none has ~2% risk.</li></ul><p><b>Use with caution.</b> Small single-centre cohort, internally validated only, with very wide confidence intervals (cortical OR 28, 95% CI 9–85) — the estimates are unstable and hypothesis-generating. It gives a single cumulative-risk estimate (no time horizon), and cortical vs leptomeningeal involvement are essentially mutually exclusive. Compare with the BMERS score. Demonstration tool.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Supratentorial cortical metastasis",
+   "coef": 3.3349,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "A metastasis involving the supratentorial cortex. By far the strongest factor (OR 28) — but the estimate is imprecise (wide CI). Essentially mutually exclusive with leptomeningeal disease."
+  },
+  {
+   "name": "Leptomeningeal metastasis",
+   "coef": 2.4159,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Leptomeningeal metastatic disease (OR 11). Essentially mutually exclusive with a parenchymal cortical lesion."
+  },
+  {
+   "name": "Female sex",
+   "coef": 0.9836,
+   "options": [
+    {
+     "label": "No (male)",
+     "points": 0
+    },
+    {
+     "label": "Yes (female)",
+     "points": 1
+    }
+   ],
+   "assess": "Female sex was associated with higher seizure risk (OR 2.7), though it was an unstable predictor on bootstrapping."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Probability of a seizure (brain metastases)",
+  "outputs": [
+   {
+    "label": "Chance of a seizure",
+    "intercept": -3.8047
+   }
+  ],
+  "note": "Single static cumulative-risk estimate (no time horizon). Small single-centre cohort (n=272), internal validation only, wide CIs. Cortical and leptomeningeal involvement are essentially mutually exclusive — selecting both represents a combination barely seen in the data.",
+  "viz_info": "Each factor adds its published log-odds to a logistic model; the sum plus the intercept gives the probability of a seizure."
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients",
+  "source": "Makkawi 2025 Seizure Table 4 (Score-Card model β + intercept -3.8047) + Table 5 (score bands) — doi 10.1016/j.seizure.2025.05.013, PMID 40440856",
+  "review_status": "human_reviewed",
+  "notes": "Logistic intercept -3.8047; β female 0.9836, cortical 3.3349, leptomeningeal 2.4159 (all binary). Verified: all-no 2.2%, female+cortical 62.6%, female+lepto 40.0%. Baseline 29.4%. AUC 0.82. SMALL/FRAGILE: n=272 (dev ~218), cortical OR 28 CI 9-85, female unstable on bootstrap, no external validation, no time horizon. Overlaps BMERS. Built 2026-07-08 on user request; candidate to grey in quality review."
+ }
+}

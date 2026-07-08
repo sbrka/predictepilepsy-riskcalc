@@ -55,6 +55,7 @@
     ["calc-stampe2", "STAMPE² Score", "Epilepsy outcome after meningioma resection.", "g1", "tumour"],
     ["calc-glioma-epilepsy", "Glioma-Related Epilepsy", "Epilepsy in diffuse high-grade glioma.", "g1", "tumour"],
     ["calc-meningioma-seizures", "Meningioma Late Seizures (Zhang)", "Probability of late postoperative seizures after meningioma resection, from 5 factors.", "g1", "tumour"],
+    ["calc-bm-seizures", "Brain Metastases Seizures (Makkawi)", "Probability of a seizure in a patient with brain metastases, from 3 factors (small cohort).", "g1", "tumour"],
     ["calc-ncc-seizure-recurrence", "Neurocysticercosis (adults)", "Seizure recurrence in solitary calcified neurocysticercosis.", "g1", "infection"],
     ["calc-nepc", "NEPC (paediatric NCC)", "6-month seizure-recurrence risk in children with neurocysticercosis (Panda 2023).", "g1", "infection"],
     ["calc-autoimmune-enceph-recurrence", "Autoimmune Encephalitis", "Seizure recurrence in NMDAR / LGI1 / CASPR2 encephalitis.", "g1", "autoimmune"],
