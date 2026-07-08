@@ -272,12 +272,22 @@
       return `<div class="sres"><h2><b>${res.length}</b> calculator${res.length === 1 ? "" : "s"} matching &ldquo;${esc(q)}&rdquo;</h2><div class="cards">${res.map((c) => this.card(c)).join("")}</div></div>`;
     }
     _bodyHTML() { return this._q.trim() ? this.search() : (this._tab === "guided" ? this.guided() : this.browse()); }
+    // after a guided step, bring the finder back into view (esp. on mobile, where the
+    // tapped option is far down the page and the new step would otherwise stay off-screen)
+    _scrollUp() {
+      try {
+        requestAnimationFrame(() => {
+          const y = this.getBoundingClientRect().top + (window.pageYOffset || 0) - 72;
+          if (window.scrollY - y > 40 || y - window.scrollY > 40) window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        });
+      } catch (e) {}
+    }
     _wireBody() {
       const sr = this.shadowRoot;
-      sr.querySelectorAll("[data-grp]").forEach((b) => b.onclick = () => { this._grp = b.dataset.grp; this._set = null; this.render(); });
-      sr.querySelectorAll("[data-set]").forEach((b) => b.onclick = () => { this._set = b.dataset.set; this.render(); });
-      const bk = sr.querySelector("#back"); if (bk) bk.onclick = () => this.back();
-      const rs = sr.querySelector("#reset"); if (rs) rs.onclick = () => { this._grp = null; this._set = null; this.render(); };
+      sr.querySelectorAll("[data-grp]").forEach((b) => b.onclick = () => { this._grp = b.dataset.grp; this._set = null; this.render(); this._scrollUp(); });
+      sr.querySelectorAll("[data-set]").forEach((b) => b.onclick = () => { this._set = b.dataset.set; this.render(); this._scrollUp(); });
+      const bk = sr.querySelector("#back"); if (bk) bk.onclick = () => { this.back(); this._scrollUp(); };
+      const rs = sr.querySelector("#reset"); if (rs) rs.onclick = () => { this._grp = null; this._set = null; this.render(); this._scrollUp(); };
     }
     render() {
       const body = this._bodyHTML();
