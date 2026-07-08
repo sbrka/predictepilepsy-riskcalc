@@ -122,6 +122,12 @@
     .card.norec{opacity:.6}.card.norec:hover{opacity:1}
     .step h2{font-size:20px;margin:0 0 16px;text-align:center}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .opts.large{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:960px;margin:0 auto}
+    .opts.large .opt{padding:26px 26px;border-radius:20px;gap:18px}
+    .opts.large .opt .ic{font-size:40px}
+    .opts.large .opt .ot{font-size:19px;margin-bottom:6px}
+    .opts.large .opt .os{font-size:14.5px}
+    .step h2.lgstep{font-size:24px;margin-bottom:22px}
     .opt{text-align:left;border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:18px 18px;cursor:pointer;transition:.15s;display:flex;gap:14px;align-items:flex-start}
     .opt:hover{border-color:var(--azure);box-shadow:0 6px 18px rgba(19,91,168,.10);transform:translateY(-1px)}
     .opt .ic{font-size:26px;line-height:1}
@@ -147,7 +153,9 @@
 
   class CalcFinder extends HTMLElement {
     connectedCallback() {
-      this._tab = "guided"; this._grp = null; this._set = null;
+      this._only = this.getAttribute("only") || null;        // "guided" | "browse" -> lock to one tab, hide switcher
+      this._tab = this._only || this.getAttribute("default-tab") || "guided";
+      this._grp = null; this._set = null;
       this.attachShadow({ mode: "open" });
       this.render();
     }
@@ -180,7 +188,7 @@
       }
       h += `<div class="crumbs">${path.length ? path.map((p) => `<span class="c">${esc(p)}</span>`).join('<span class="sep">›</span>') : '<span style="opacity:.7">Start by choosing the clinical situation</span>'}</div>`;
       if (!this._grp) {
-        h += `<div class="step"><h2>What is the clinical situation?</h2><div class="opts">` +
+        h += `<div class="step"><h2>What is the clinical situation?</h2><div class="opts${this.hasAttribute("large") ? " large" : ""}">` +
           GROUPS.map((g) => `<button class="opt" data-grp="${g.id}"><span class="ic">${g.icon}</span><span><span class="ot">${esc(g.title)}</span><span class="os">${esc(g.sub)}</span></span></button>`).join("") +
           `</div></div>`;
       } else if (!this._set) {
@@ -210,11 +218,15 @@
       // when placed under a page banner (attr "plain"), skip the component's own strip
       var strip = this.hasAttribute("plain") ? "" :
         `<div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="/">All calculators</a></div>`;
+      const head = this.hasAttribute("no-head") ? "" :
+        `<div class="head"><h1>Find the right calculator</h1><p>Choose a calculator step by step, or browse them by clinical group.</p></div>`;
+      const tabs = this._only ? "" :
+        `<div class="tabs"><button data-tab="guided"${this._tab === "guided" ? ' class="on"' : ""}>Guided</button><button data-tab="browse"${this._tab === "browse" ? ' class="on"' : ""}>Browse by group</button></div>`;
       this.shadowRoot.innerHTML = `<style>${CSS}</style>
         ${strip}
         <div class="wrap">
-          <div class="head"><h1>Find the right calculator</h1><p>Choose a calculator step by step, or browse them by clinical group.</p></div>
-          <div class="tabs"><button data-tab="guided"${this._tab === "guided" ? ' class="on"' : ""}>Guided</button><button data-tab="browse"${this._tab === "browse" ? ' class="on"' : ""}>Browse by group</button></div>
+          ${head}
+          ${tabs}
           <div id="body">${body}</div>
         </div>`;
       const sr = this.shadowRoot;
