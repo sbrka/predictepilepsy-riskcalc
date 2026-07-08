@@ -50,9 +50,10 @@
   var CURVE = '<svg class="crv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3 V34 H0 Z" fill="#fff" opacity=".14"/><path d="M0 30 C22 30 30 16 48 12 66 8 74 4 96 3" fill="none" stroke="#fff" stroke-width="2"/></svg>';
 
   var CSS = "\
-  :host{--ink:#16222f;--muted:#5c6b7a;display:block;\
+  :host{--ink:#16222f;--muted:#5c6b7a;display:block;max-width:100%;color-scheme:light;\
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}\
-  *{box-sizing:border-box} .wrap{max-width:1120px;margin:0 auto;padding:0 20px 56px}\
+  *{box-sizing:border-box;min-width:0} img,svg{max-width:100%} .wrap,.cards,.card,.grp{max-width:100%;overflow-wrap:anywhere} .wrap{max-width:1120px;margin:0 auto;padding:0 20px 56px}\
+  @media(max-width:560px){.wrap{padding:0 14px 44px}.cards{grid-template-columns:1fr!important}}\
   .banner{background:var(--az);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:0 0 18px 18px}\
   .bt{font-weight:750;font-size:20px;letter-spacing:.2px}.bt .d{opacity:.72;font-weight:400}\
   .banner a{color:#fff;text-decoration:none;font-size:14px;background:rgba(255,255,255,.16);padding:8px 15px;border-radius:999px}\
@@ -126,6 +127,7 @@
 
   class CalcHome extends HTMLElement {
     connectedCallback() {
+      try { document.documentElement.style.colorScheme = "light"; } catch (e) {}
       var brand = (this.getAttribute("brand") || "default").toLowerCase();
       var base = (this.getAttribute("base") || "").replace(/\/+$/, "");
       var only = this.getAttribute("groups");

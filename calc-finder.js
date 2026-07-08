@@ -123,8 +123,10 @@
 
   const CSS = `
     :host{--azure:#135ba8;--azure-deep:#0e4a8a;--azure-wash:#eef6fe;--azure-line:#cfe4fb;--ink:#16222f;--muted:#5c6b7a;
-      display:block;scroll-margin-top:78px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.5}
-    *{box-sizing:border-box}
+      display:block;max-width:100%;scroll-margin-top:78px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.5;color-scheme:light}
+    *{box-sizing:border-box;min-width:0}
+    .wrap,.opts,.cards,.card,.opt{max-width:100%;overflow-wrap:anywhere}
+    svg,img{max-width:100%}
     .wrap{max-width:1080px;margin:0 auto;padding:0 18px 48px}
     .banner{background:var(--azure);color:#fff;padding:14px 22px;border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
     .btitle{font-weight:750;font-size:19px;letter-spacing:.2px}.btitle .dot{opacity:.72;font-weight:400}
@@ -196,7 +198,7 @@
     .searchbox.has .sclear{display:block}
     .sres h2{font-size:18px;margin:6px 0 16px;text-align:center;color:var(--ink);font-weight:650}
     .sres h2 b{color:var(--azure-deep)}
-    @media(max-width:560px){.head h1{font-size:24px}.banner{border-radius:0}}
+    @media(max-width:560px){.head h1{font-size:24px}.banner{border-radius:0}.cards{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.wrap{padding:0 14px 40px}.crumbs{flex-wrap:wrap}}
   `;
 
   // per-brand palette override (default = predictepilepsy azure; "select" = SeLECT Consortium lime-green + navy)

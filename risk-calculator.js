@@ -55,8 +55,11 @@
       --pres-green:#004834;--pres-green2:#33844c;--pres-wash:#eaf3ec;--pres-border:#d6deda;
       --serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
       --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      display:block;width:100%;color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased}
-    *{box-sizing:border-box}
+      display:block;width:100%;max-width:100%;color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased;
+      color-scheme:light}
+    *{box-sizing:border-box;min-width:0}
+    :host,.sheet,.wrap,.grid,.panel,.rail{max-width:100%;overflow-wrap:anywhere}
+    svg,img,table,canvas{max-width:100%}
     .sheet{background:var(--paper);min-height:100%;display:flex;flex-direction:column}
     .banner{background:var(--azure-deep);color:#fff;padding:12px 34px}
     .banner .bwrap{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
@@ -129,6 +132,12 @@
     .recrule .rk{flex:0 0 96px;font-weight:600;font-variant-numeric:tabular-nums}
     .scoreviz{display:grid;grid-template-columns:246px 1fr;gap:20px;align-items:start}
     @media(max-width:760px){.scoreviz{grid-template-columns:1fr}}
+    @media(max-width:560px){
+      .topstrip{padding:10px 16px}.top{padding:16px 16px 14px;gap:12px}.panel{padding:18px 16px 20px}.rail{padding:20px 16px}.foot{padding:16px 16px 22px}
+      .top h1{font-size:23px}.brandrow{gap:11px}
+      .fviz{gap:18px}#fdonuts{gap:10px}
+      .msbox{min-width:0!important;flex-basis:100%!important}
+    }
     .vizcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px 16px}
     .vizcard.grow{min-width:0}
     .vizh{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
@@ -217,6 +226,9 @@
 
   class RiskCalculator extends HTMLElement {
     connectedCallback() {
+      // Force the whole page to light rendering (disables Chrome auto-dark-mode inversion,
+      // which breaks the calculator's contrast on phones set to dark mode).
+      try { document.documentElement.style.colorScheme = "light"; } catch (e) {}
       this.attachShadow({ mode: "open" });
       this._mode = "cum"; this._month = 12;
       this._load().then((d) => { this.data = d; this._build(); })
@@ -999,7 +1011,7 @@
       // Each nomogram total gets its own boxed points-waterfall (side by side).
       const scoreBox = (t) => {
         const items = contribs[t];
-        return `<div style="flex:1 1 260px;min-width:240px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fbfdff">
+        return `<div class="msbox" style="flex:1 1 260px;min-width:240px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:#fbfdff">
           <div class="flabel" style="margin:0 0 10px">${esc(tl[t] || ("Score " + t))}<b style="margin-left:8px;color:var(--azure-deep)">${totals[t]}</b></div>
           ${items.length ? this._scoreWaterfallSVG(items, totals[t], "#2472c8") : `<div style="font-size:12.5px;color:var(--muted);padding:2px 0">No points from the current selection (score ${totals[t]}).</div>`}</div>`;
       };
