@@ -32,12 +32,13 @@
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
+    ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/" }],
     ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-select-asys-rsys", "SeLECT (ASyS vs RSyS)", "Acute- vs remote-symptomatic seizure risk after ischaemic stroke.", "g1", "stroke_isch"],
-    ["calc-lean", "LEAN Score", "Clinical score for late seizures after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-cave-score", "CAVE Score", "Late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
     ["calc-cave2-score", "CAVE² Score", "Modified CAVE score for late seizures after ICH.", "g1", "ich"],
     ["calc-lane-score", "LANE Score", "Clinical score for late seizures after ICH.", "g1", "ich"],
+    ["calc-lean", "LEAN Score", "Clinical score for late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
     ["calc-rise", "RISE Score", "Epilepsy after aneurysmal subarachnoid haemorrhage.", "g1", "sah"],
     ["calc-dias3", "DIAS3", "Remote seizure / epilepsy risk after cerebral venous thrombosis.", "g1", "cvt"],
     ["calc-early-seizure-cvt", "Early Seizures after CVT", "Early seizure risk after cerebral venous thrombosis.", "g1", "cvt"],
@@ -66,7 +67,6 @@
     ["calc-jme-drug-resistance", "JME Drug-Resistance", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy (Stevelink).", "g2", "drug_resistance"],
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
-    ["calc-asm-withdrawal-cosy", "ASM Withdrawal (+ EEG)", "Seizure recurrence after ASM withdrawal, incl. EEG findings.", "g3", "withdrawal"],
     ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
@@ -111,6 +111,15 @@
     .crumbs .c{background:var(--azure-wash);color:var(--azure-deep);border:1px solid var(--azure-line);padding:4px 12px;border-radius:999px;font-weight:600}
     .crumbs .sep{opacity:.5}
     .crumbs .reset{margin-left:auto;color:var(--azure);cursor:pointer;text-decoration:underline;background:none;border:0;font-size:14px}
+    .navrow{display:flex;gap:10px;align-items:center;margin:0 0 14px}
+    .navbtn{border:1.5px solid var(--azure-line);background:#fff;color:var(--azure-deep);font-weight:650;font-size:14.5px;padding:10px 20px;border-radius:999px;cursor:pointer;transition:.15s}
+    .navbtn:hover{background:var(--azure-wash)}
+    .navbtn.reset{color:var(--muted);border-color:#e3e9ef;margin-left:auto}
+    .navbtn.reset:hover{background:#f6f8fa;color:var(--ink)}
+    .chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+    .chip.norec{background:#fbeaea;color:#b02020}
+    .chip.ext{background:#eef6fe;color:var(--azure-deep)}
+    .card.norec{opacity:.6}.card.norec:hover{opacity:1}
     .step h2{font-size:20px;margin:0 0 16px;text-align:center}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
     .opt{text-align:left;border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:18px 18px;cursor:pointer;transition:.15s;display:flex;gap:14px;align-items:flex-start}
@@ -144,15 +153,32 @@
     }
     go(slug) { window.location.href = "/" + slug + "/"; }
     card(c) {
-      return `<a class="card" href="/${c[0]}/" data-slug="${c[0]}"><span class="chip">${esc(SETTINGS[c[4]])}</span>
-        <div class="cn">${esc(c[1])}</div><div class="cd">${esc(c[2])}</div><div class="go">Open calculator &rarr;</div></a>`;
+      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, badge}
+      const ext = o.ext, norec = o.rec === false;
+      const href = ext || ("/" + c[0] + "/");
+      const chips = `<span class="chip">${esc(SETTINGS[c[4]])}</span>` +
+        (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
+        (ext ? `<span class="chip ext">external tool ↗</span>` : "");
+      return `<a class="card${norec ? " norec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}"><span class="chiprow">${chips}</span>
+        <div class="cn">${esc(c[1])}</div><div class="cd">${esc(c[2])}</div><div class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</div></a>`;
+    }
+    back() {
+      if (this._set) {
+        const sets = [...new Set(CALCS.filter((c) => c[3] === this._grp).map((c) => c[4]))];
+        if (sets.length > 1) this._set = null;            // → back to setting choice
+        else { this._grp = null; this._set = null; }      // single-setting group → back to groups
+      } else if (this._grp) { this._grp = null; }
+      this.render();
     }
     guided() {
       let h = "";
       const path = [];
       if (this._grp) path.push(GROUPS.find((g) => g.id === this._grp).title);
       if (this._set) path.push(SETTINGS[this._set]);
-      h += `<div class="crumbs">${path.length ? path.map((p) => `<span class="c">${esc(p)}</span>`).join('<span class="sep">›</span>') : '<span style="opacity:.7">Start by choosing the clinical situation</span>'}${path.length ? '<button class="reset" id="reset">start over</button>' : ""}</div>`;
+      if (path.length) {
+        h += `<div class="navrow"><button class="navbtn back" id="back">&lsaquo; Back</button><button class="navbtn reset" id="reset">&#8635; Start over</button></div>`;
+      }
+      h += `<div class="crumbs">${path.length ? path.map((p) => `<span class="c">${esc(p)}</span>`).join('<span class="sep">›</span>') : '<span style="opacity:.7">Start by choosing the clinical situation</span>'}</div>`;
       if (!this._grp) {
         h += `<div class="step"><h2>What is the clinical situation?</h2><div class="opts">` +
           GROUPS.map((g) => `<button class="opt" data-grp="${g.id}"><span class="ic">${g.icon}</span><span><span class="ot">${esc(g.title)}</span><span class="os">${esc(g.sub)}</span></span></button>`).join("") +
@@ -195,6 +221,7 @@
       sr.querySelectorAll(".tabs button").forEach((b) => b.onclick = () => { this._tab = b.dataset.tab; if (this._tab === "guided") { this._grp = null; this._set = null; } this.render(); });
       sr.querySelectorAll("[data-grp]").forEach((b) => b.onclick = () => { this._grp = b.dataset.grp; this._set = null; this.render(); });
       sr.querySelectorAll("[data-set]").forEach((b) => b.onclick = () => { this._set = b.dataset.set; this.render(); });
+      const bk = sr.querySelector("#back"); if (bk) bk.onclick = () => this.back();
       const rs = sr.querySelector("#reset"); if (rs) rs.onclick = () => { this._grp = null; this._set = null; this.render(); };
       // cards are real <a> links; nothing else to wire
     }
