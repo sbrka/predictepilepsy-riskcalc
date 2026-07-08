@@ -27,7 +27,7 @@
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
     cvt: "Cerebral venous thrombosis", tbi: "Traumatic brain injury", tumour: "Brain tumour",
     infection: "CNS infection", autoimmune: "Autoimmune encephalitis", febrile: "Febrile status epilepticus",
-    acute_sympt: "Acute symptomatic seizure", critical_eeg: "Critically ill (EEG monitoring)", first_seizure: "First unprovoked seizure",
+    post_stroke_recur: "Recurrence after a post-stroke seizure", acute_sympt: "Acute symptomatic seizure", critical_eeg: "Critically ill (EEG monitoring)", first_seizure: "First unprovoked seizure",
     two_seizures: "After two unprovoked seizures", withdrawal: "Withdrawing antiseizure medication",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance", pregnancy: "Seizures in pregnancy",
     seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
@@ -35,6 +35,7 @@
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
     ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/" }],
+    ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred, by stroke aetiology — revisiting the 7-day cutoff.", "g1", "post_stroke_recur"],
     ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-select-asys-rsys", "SeLECT (ASyS vs RSyS)", "Acute- vs remote-symptomatic seizure risk after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-pseicare", "PSEiCARe (post-stroke epilepsy)", "1-year late post-stroke epilepsy risk group from 7 clinical factors (Chi 2018).", "g1", "stroke_isch"],
