@@ -140,13 +140,18 @@
     .setbtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
     .setbtn{border:1.5px solid var(--azure-line);background:var(--azure-wash);color:var(--azure-deep);font-weight:650;font-size:15px;padding:11px 20px;border-radius:999px;cursor:pointer;transition:.15s}
     .setbtn:hover{background:var(--azure);color:#fff;border-color:var(--azure)}
-    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-    .card{border:1.5px solid #e3e9ef;background:#fff;border-radius:14px;padding:16px 16px 15px;cursor:pointer;transition:.15s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
-    .card:hover{border-color:var(--azure);box-shadow:0 6px 18px rgba(19,91,168,.10);transform:translateY(-1px)}
-    .card .cn{font-weight:700;font-size:16px;color:var(--azure-deep);margin-bottom:5px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+    .card{border:1.5px solid #e3e9ef;background:#fff;border-radius:16px;padding:16px 16px 15px;cursor:pointer;transition:.15s;display:flex;align-items:flex-start;gap:15px;text-decoration:none;color:inherit}
+    .card:hover{border-color:var(--azure);box-shadow:0 8px 22px rgba(19,91,168,.13);transform:translateY(-2px)}
+    .cbadge{width:60px;height:60px;flex:0 0 auto;border-radius:16px;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 6px 16px rgba(14,74,138,.28);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+    .cbadge .cab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 3px;letter-spacing:-.3px}
+    .cbadge .cdt{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(255,255,255,.45)}
+    .cbadge .ccrv{position:absolute;left:0;right:0;bottom:0;height:22px}
+    .ctxt{display:flex;flex-direction:column;min-width:0;flex:1}
+    .card .cn{font-weight:700;font-size:16px;color:var(--azure-deep);margin-bottom:4px}
     .card .cd{color:var(--muted);font-size:13.5px;flex:1}
-    .card .go{margin-top:11px;font-size:13px;font-weight:650;color:var(--azure)}
-    .card .chip{align-self:flex-start;font-size:11.5px;font-weight:600;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 9px;margin-bottom:9px}
+    .card .go{margin-top:10px;font-size:13px;font-weight:650;color:var(--azure)}
+    .card .chip{font-size:11px;font-weight:600;color:var(--muted);background:#f1f5f9;border-radius:999px;padding:2px 9px}
     .grp{margin:0 0 30px}
     .grp .gh{display:flex;align-items:center;gap:12px;margin:0 0 6px}
     .grp .gh .gi{font-size:24px}.grp .gh h2{font-size:21px;margin:0}
