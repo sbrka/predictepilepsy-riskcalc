@@ -1,0 +1,373 @@
+{
+  "schema_version": "1.0",
+  "id": "jha_sudep",
+  "kind": "formula",
+  "meta": {
+    "title": "SUDEP Personalised Risk (Jha)",
+    "doi": "10.1212/WNL.0000000000011849",
+    "pmid": "33910938",
+    "authors": "Jha A, et al.",
+    "year": 2021,
+    "journal": "Neurology",
+    "outcome": "Relative risk of sudden unexpected death in epilepsy (SUDEP) for an individual, combining 22 routine clinical factors, expressed as a multiple of the risk of an average person with epilepsy (Bayesian logistic model of Jha et al., reproduced from the published adjusted odds ratios).",
+    "cff_info": "<p><b>What this shows.</b> This tool reproduces the 22-factor Bayesian logistic model of Jha et&nbsp;al. (<i>Neurology</i> 2021), developed on 1,273 people (287 SUDEP cases, 986 controls) from four cohorts. It combines many routine clinical factors \u2014 not just convulsion frequency \u2014 into a single estimate of an individual's <b>relative</b> risk of SUDEP.</p><h4>How to read it</h4><ul><li>The result is a <b>relative risk multiplier</b> (e.g. \u00d73) compared with a baseline/average person with epilepsy \u2014 <b>not</b> an absolute probability of death.</li><li>The chart shows each selected factor's multiplicative effect (right/blue = raises risk, left/green = lowers it), mirroring the paper's adjusted odds-ratio figure; the factors combine to the overall relative risk.</li><li>The strongest modifiable factors are <b>generalized tonic-clonic and focal seizure frequency</b> and <b>poor medication adherence</b>. Younger age at onset, alcohol excess, male sex and a family history also raise the estimate.</li></ul><h4>Important limitations</h4><ul><li><b>Relative, not absolute.</b> The published data give the adjusted odds ratios but not the intercept/population-risk offset, so an absolute SUDEP probability (per person-year) cannot be reproduced here. As a rough anchor, average SUDEP incidence is on the order of ~1 per 1,000 people with epilepsy per year.</li><li>The model has moderate discrimination (AUROC 0.72) and the authors emphasise that risk is a <b>probability distribution with wide uncertainty</b>, and recommend the tool be used by <b>clinical researchers</b> pending further external validation.</li><li>Medication associations are adjusted and almost certainly <b>non-causal</b> (markers of severe/refractory epilepsy) \u2014 never change treatment based on this tool.</li></ul><p>Demonstration and research-communication aid only \u2014 not a substitute for specialist assessment or an individual prediction of death.</p>"
+  },
+  "predictors": [
+    {
+      "name": "Epilepsy aetiology",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Symptomatic",
+          "points": 0.0
+        },
+        {
+          "label": "Idiopathic",
+          "points": -0.15
+        },
+        {
+          "label": "Cryptogenic",
+          "points": -0.44
+        },
+        {
+          "label": "Undetermined / unknown",
+          "points": 0.58
+        }
+      ],
+      "assess": "Underlying cause of the epilepsy (harmonised across the source studies; reference = symptomatic). Adjusted log-ORs: idiopathic \u22120.15, cryptogenic \u22120.44, undetermined/unknown +0.58. Aetiology estimates are uncertain and anticorrelated (poor identifiability)."
+    },
+    {
+      "name": "Age at epilepsy onset",
+      "type": "slider",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "default": 18,
+      "unit": "years",
+      "spline": [
+        [
+          18,
+          0.0
+        ],
+        [
+          70,
+          -1.321
+        ]
+      ],
+      "assess": "Age (years) at epilepsy onset. Younger onset carries higher SUDEP risk. Modelled on its natural scale from the paper's Figure 3 (adjusted per-SD log-OR \u22120.34; \u2248 \u22120.025 per year), referenced to the cohort-average onset age (~18 years, relative risk 1 there)."
+    },
+    {
+      "name": "Current age",
+      "type": "slider",
+      "min": 16,
+      "max": 85,
+      "step": 1,
+      "default": 35,
+      "unit": "years",
+      "spline": [
+        [
+          35,
+          0.0
+        ],
+        [
+          85,
+          0.615
+        ]
+      ],
+      "assess": "Current age / age at endpoint (years). Older current age carries slightly higher risk once onset age is held constant. Natural-scale slope from Figure 3 (adjusted per-SD log-OR +0.15; \u2248 +0.012 per year), referenced to the cohort-average age (~35 years)."
+    },
+    {
+      "name": "Sex",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Female",
+          "points": 0
+        },
+        {
+          "label": "Male",
+          "points": 0.24
+        }
+      ],
+      "assess": "Biological sex. Male sex is associated with slightly higher SUDEP risk (adjusted log-OR +0.24; reference = female)."
+    },
+    {
+      "name": "Family history of epilepsy",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.66
+        }
+      ],
+      "assess": "First-degree relative with epilepsy. Associated with higher SUDEP risk (adjusted log-OR +0.66); present in ~4% of the cohort."
+    },
+    {
+      "name": "Respiratory comorbidity",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": -0.57
+        }
+      ],
+      "assess": "Documented respiratory comorbidity (e.g. asthma, COPD). Associated with LOWER modelled risk (adjusted log-OR \u22120.57) \u2014 likely a competing-risk or confounding artefact rather than protection; interpret with caution."
+    },
+    {
+      "name": "Cardiac comorbidity",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": -0.56
+        }
+      ],
+      "assess": "Documented cardiac comorbidity (heart disease). Associated with LOWER modelled risk (adjusted log-OR \u22120.56) \u2014 probably confounded (e.g. deaths reclassified as cardiac, or MRI misclassification); not evidence of protection."
+    },
+    {
+      "name": "Learning disability",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.11
+        }
+      ],
+      "assess": "Learning disability / intellectual disability (IQ<70 or too impaired to test). Small positive association after adjustment (adjusted log-OR +0.11) \u2014 much weaker than in unadjusted analyses once seizure frequency is accounted for."
+    },
+    {
+      "name": "Previous epilepsy surgery",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": -0.49
+        }
+      ],
+      "assess": "History of neurosurgery to treat the epilepsy. Associated with lower modelled risk (adjusted log-OR \u22120.49), consistent with a protective role of successful surgery."
+    },
+    {
+      "name": "Alcohol or drug excess",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.59
+        }
+      ],
+      "assess": "Documented alcohol excess/abuse or drug abuse. A modifiable factor associated with higher risk (adjusted log-OR +0.59)."
+    },
+    {
+      "name": "GTCS frequency",
+      "type": "slider",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "per month",
+      "coef": 0.061,
+      "assess": "Frequency of generalized tonic-clonic seizures (incl. focal-to-bilateral tonic-clonic), seizures per month. The single strongest modifiable driver (adjusted log-OR +0.61 per 10/month). At 30 GTCS/month the relative risk is \u22486\u00d7 (matches the paper's Figure 3)."
+    },
+    {
+      "name": "Focal seizure frequency",
+      "type": "slider",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 0,
+      "unit": "per month",
+      "coef": 0.062,
+      "assess": "Frequency of focal-onset seizures without progression to bilateral tonic-clonic, seizures per month. Independently associated with higher risk (adjusted log-OR +0.62 per 10/month) \u2014 a novel finding of this model, that non-convulsive seizure burden also matters."
+    },
+    {
+      "name": "ASM adherence",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Poor / unknown",
+          "points": 0
+        },
+        {
+          "label": "Good",
+          "points": -1.03
+        }
+      ],
+      "assess": "Adherence to antiseizure medication. GOOD adherence is associated with substantially lower SUDEP risk (adjusted log-OR \u22121.03) \u2014 one of the two strongest modifiable factors alongside seizure frequency. Reference = poor/unknown adherence."
+    },
+    {
+      "name": "Phenytoin",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.33
+        }
+      ],
+      "assess": "Currently prescribed phenytoin at the endpoint (mono- or polytherapy). Adjusted log-OR +0.33 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Carbamazepine",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.66
+        }
+      ],
+      "assess": "Currently prescribed carbamazepine at the endpoint (mono- or polytherapy). Adjusted log-OR +0.66 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Valproate",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.19
+        }
+      ],
+      "assess": "Currently prescribed valproate at the endpoint (mono- or polytherapy). Adjusted log-OR +0.19 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Benzodiazepines",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.54
+        }
+      ],
+      "assess": "Currently prescribed benzodiazepines at the endpoint (mono- or polytherapy). Adjusted log-OR +0.54 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Barbiturates",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.12
+        }
+      ],
+      "assess": "Currently prescribed barbiturates at the endpoint (mono- or polytherapy). Adjusted log-OR +0.12 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Lamotrigine",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.66
+        }
+      ],
+      "assess": "Currently prescribed lamotrigine at the endpoint (mono- or polytherapy). Adjusted log-OR +0.66 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Vigabatrin",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.84
+        }
+      ],
+      "assess": "Currently prescribed vigabatrin at the endpoint (mono- or polytherapy). Adjusted log-OR +0.84 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Topiramate",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.41
+        }
+      ],
+      "assess": "Currently prescribed topiramate at the endpoint (mono- or polytherapy). Adjusted log-OR +0.41 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    },
+    {
+      "name": "Gabapentin",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No",
+          "points": 0
+        },
+        {
+          "label": "Yes",
+          "points": 0.38
+        }
+      ],
+      "assess": "Currently prescribed gabapentin at the endpoint (mono- or polytherapy). Adjusted log-OR +0.38 in the model. NB associations between individual ASMs and SUDEP are adjusted for seizure frequency and adherence and are almost certainly non-causal \u2014 they likely mark treatment-resistant epilepsy or drug side-effects, not a harmful drug effect. Do NOT stop or change medication on the basis of this tool."
+    }
+  ],
+  "model": {
+    "type": "relrisk",
+    "intercept": 0,
+    "ref_lp": 0,
+    "panel_title": "How each factor changes SUDEP risk",
+    "rr_label": "Relative SUDEP risk",
+    "rr_ref_label": "vs an average person with epilepsy",
+    "note": "Relative risk only (a multiple of average SUDEP risk), NOT an absolute probability of death. Average SUDEP incidence is roughly 1 per 1,000 people with epilepsy per year. Research/education aid \u2014 the authors advise use by clinical researchers pending further validation.",
+    "viz_info": "Each factor you select contributes a multiplicative effect to SUDEP risk (the adjusted odds ratio from the model): bars to the right (blue) raise risk, bars to the left (green) lower it. Multiplying them together gives the combined relative risk versus a baseline person with epilepsy. Continuous factors (ages, seizure frequencies) are shown on their natural scale from the paper's Figure 3."
+  },
+  "provenance": {
+    "extraction_method": "paper_formula",
+    "source": "Jha et al., Neurology 2021;96(21):e2627-e2638 (doi 10.1212/WNL.0000000000011849) \u2014 22 posterior adjusted log-odds-ratios from Dryad Additional Material Table e5 (Full model, priors N(0,1)); continuous-factor natural scales from paper Figure 3; means from supplement Table e1.",
+    "review_status": "human_reviewed",
+    "notes": "Relative-risk reproduction. RR = exp(\u03a3 \u03b2j\u00b7xj) vs a reference profile (symptomatic aetiology, cohort-mean ages ~18/35, zero seizures, female, no comorbidity/surgery/alcohol/family-history, poor adherence, no listed ASM), which gives RR=1. Coefficients (Table e5, \u03c3=1): aetiology idiopathic \u22120.15/symptomatic 0/cryptogenic \u22120.44/unknown +0.58; age-onset \u22120.34/SD; age-endpoint +0.15/SD; male +0.24; family-hx +0.66; respiratory \u22120.57; cardiac \u22120.56; learning-dis +0.11; surgery \u22120.49; alcohol +0.59; GTCS +0.61 per (per-month/10); focal +0.62 per (per-month/10); good-adherence \u22121.03; phenytoin +0.33; carbamazepine +0.66; valproate +0.19; benzodiazepines +0.54; barbiturates +0.12; lamotrigine +0.66; vigabatrin +0.84; topiramate +0.41; gabapentin +0.38. Continuous predictors modelled on natural scale: frequencies as coef/10 per month (validated vs Fig 3: 30/mo \u2192 RR \u22486.2); ages via 2-point splines anchored at cohort-mean (onset slope \u22120.0254/yr, current-age slope +0.0123/yr, derived from Fig 3 crossovers/endpoints with means from Table e1). ABSOLUTE risk NOT reproducible: Dryad supplement gives coefficients only, not the center intercepts or the population-risk offset (background 1.2/1000 py) needed for Fig-4 absolute risk. AUROC 0.72. Authors restrict to clinical researchers pending external validation. Extracted 2026-07-08 from user-provided Dryad Additional Material PDF."
+  }
+}

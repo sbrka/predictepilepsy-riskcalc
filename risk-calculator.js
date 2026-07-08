@@ -681,6 +681,16 @@
       const { lp, outs } = this._formulaCompute();
       const m = this.data.model;
       const mroot = this._rail.querySelector("#fmetrics");
+      // Relative-risk model: output is a multiplier exp(lp - ref_lp) vs a reference profile,
+      // not an absolute probability. Used when only adjusted (log) odds ratios are available.
+      if (m.type === "relrisk") {
+        const rr = Math.exp(lp - (Number(m.ref_lp) || 0));
+        const fmtRR = (r) => "×" + (r >= 10 ? r.toFixed(0) : r.toFixed(2));
+        if (mroot) mroot.innerHTML = `<div class="metric"><div class="k">${esc(m.rr_label || "Relative SUDEP risk")}</div><div class="v">${fmtRR(rr)}</div><div class="band"><span style="color:var(--muted);font-weight:600;font-size:11px">${esc(m.rr_ref_label || "vs an average person with epilepsy")}</span></div></div>`;
+        this._drawLogOR(this._formulaContribs());
+        const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = "none";
+        return;
+      }
       if (mroot) {
         let cells = "";
         if (m.show_lp) cells += `<div class="metric"><div class="k">${esc(m.lp_label || "Combined value")}</div><div class="v">${lp.toFixed(1)}</div></div>`;
@@ -787,6 +797,34 @@
         <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="${String(centerTxt).length > 5 ? 30 : 48}" fill="#1a2430">${esc(centerTxt)}</text>
         <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">predicted risk</text>
         ${active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`}`;
+    }
+
+    // Diverging log-odds-ratio chart (mirrors the paper's adjusted-OR forest plot):
+    // each selected factor is a bar left (protective, ×<1) or right (risk, ×>1) of the
+    // centre, labelled as a multiplicative effect; the combined relative risk is summarised.
+    _drawLogOR(cb) {
+      const svg = this._panel.querySelector("#fwater"); if (!svg) return;
+      const active = cb.items.filter((c) => c.on);
+      const total = active.reduce((a, c) => a + c.contrib, 0);
+      const maxAbs = Math.max(0.3, ...active.map((c) => Math.abs(c.contrib)), Math.abs(total));
+      const W = 470, rowH = 25, xMid = 300, half = 140, n = active.length + 1, H = 20 + n * rowH + 18;
+      const sx = (v) => xMid + (Math.max(-maxAbs, Math.min(maxAbs, v)) / maxAbs) * half;
+      let g = `<line x1="${xMid}" y1="10" x2="${xMid}" y2="${H - 24}" stroke="var(--azure-line)"/>`;
+      [-maxAbs, 0, maxAbs].forEach((v) => { g += `<text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${v === 0 ? "×1" : "×" + Math.exp(v).toFixed(v > 0 ? 1 : 2)}</text>`; });
+      if (!active.length) g += `<text x="${xMid}" y="34" text-anchor="middle" font-size="11" fill="#98a6b5" font-family="var(--sans)">Baseline profile — select factors to see their effect</text>`;
+      let y = 16;
+      active.forEach((c, k) => {
+        const up = c.contrib >= 0, x1 = Math.min(sx(0), sx(c.contrib)), w = Math.max(2, Math.abs(sx(c.contrib) - sx(0)));
+        g += `<rect x="${x1}" y="${y}" width="${w}" height="14" rx="2" fill="${up ? "#135ba8" : "#0f7a54"}"/>`;
+        g += `<text x="6" y="${y + 11}" font-size="10" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 24))}</text>`;
+        g += `<text x="${up ? sx(c.contrib) + 5 : sx(c.contrib) - 5}" y="${y + 11}" text-anchor="${up ? "start" : "end"}" font-size="10" fill="${up ? "#135ba8" : "#0f7a54"}" font-family="var(--sans)">×${Math.exp(c.contrib).toFixed(2)}</text>`;
+        y += rowH;
+      });
+      const rr = Math.exp(total);
+      g += `<line x1="6" y1="${y + 1}" x2="${W - 6}" y2="${y + 1}" stroke="#eef2f6"/>`;
+      g += `<text x="6" y="${y + 14}" font-size="12" font-weight="700" fill="#1a2430" font-family="var(--serif)">Combined relative risk</text>`;
+      g += `<text x="${W - 6}" y="${y + 14}" text-anchor="end" font-size="13" font-weight="700" fill="#0f7a54" font-family="var(--serif)">×${rr >= 10 ? rr.toFixed(0) : rr.toFixed(2)}</text>`;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "420px"; svg.innerHTML = g;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
