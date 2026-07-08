@@ -1041,51 +1041,88 @@
       let rail = "";
       if (routine.length) rail += `<div class="mkhdr">Routinely available</div>` + routine.map(toggle).join("");
       if (emu.length) rail += `<div class="mkhdr">Requires video-EEG + cardiorespiratory monitoring</div>` + emu.map(toggle).join("");
+      rail += `<div class="scorewrap" id="mkmetrics"></div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
-      const vinfo = m.viz_info || "Each bar is the risk observed in patients who had that single marker — an independent association from one cohort, read one marker at a time. The bars are NOT added or multiplied together, and there is no combined score.";
-      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Associated risk, one marker at a time")} <button class="info-dot" data-info="${attr(vinfo)}" aria-label="How to read this chart">i</button></div></div>
+      const vinfo = m.viz_info || "Each row shows the risk observed in patients who HAD that single marker (filled dot, with its 95% CI) versus those who did NOT (hollow dot) — an independent association from one cohort, read one marker at a time. The dashed red line is the overall cohort risk. The rows are NOT added or multiplied together; there is no combined score.";
+      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Associated risk, one marker at a time")} <button class="info-dot" data-info="${attr(vinfo)}" aria-label="How to read this chart">i</button></div>
+          <div class="legend"><span><i style="width:9px;height:9px;border-radius:50%;background:#1f83e6;display:inline-block"></i>if present</span><span><i style="width:9px;height:9px;border-radius:50%;background:#fff;border:1.5px solid #7c8a98;display:inline-block"></i>if absent</span><span><i style="width:14px;height:0;border-top:1.6px dashed #b02020;display:inline-block"></i>cohort</span></div></div>
         <div class="plotwrap"><svg class="plot" id="mkplot" role="img" aria-label="Risk by marker"></svg></div>
         <div class="warn" style="margin-top:14px">${esc(m.disclaimer || "These are independent (marginal) associations from a single cohort — not a validated individual predictor. Do not combine markers into one number.")}</div>`;
-      this._drawMarkerBars();
+      this._markersUpdate();
       this._rail.querySelectorAll(".seg[data-mi]").forEach((seg) => seg.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return; const i = +seg.dataset.mi;
         this._mkSel[i] = +b.dataset.v;
         seg.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-        this._drawMarkerBars();
+        this._markersUpdate();
       }));
     }
+    _markersUpdate() {
+      const m = this.data.model, markers = m.markers || [];
+      const pf = (v) => v == null ? "—" : (Math.round(v * 10) / 10) + "%";
+      const mr = this._rail.querySelector("#mkmetrics");
+      if (mr) {
+        const base = m.baseline || {};
+        let cells = `<div class="metric"><div class="k">${esc(base.label || "cohort")} · ${esc(m.outcome_label || "risk")} at ${esc(m.horizon || "")}</div><div class="v">${pf(base.risk)}</div></div>`;
+        markers.forEach((mk, i) => {
+          if (this._mkSel[i] !== 1) return;
+          const pr = mk.present || {}, ab = mk.absent || null;
+          const dpp = (ab && ab.risk != null && pr.risk != null) ? (pr.risk - ab.risk) : null;
+          cells += `<div class="metric sm"><div class="k">${esc(shorten(mk.name, 30))}</div><div class="v" style="color:var(--azure-deep)">${pf(pr.risk)}</div><div class="band"><span style="color:var(--muted);font-weight:600;font-size:11px">${ab && ab.risk != null ? "vs " + pf(ab.risk) + (dpp != null ? " · Δ " + (dpp >= 0 ? "+" : "") + (Math.round(dpp * 10) / 10) + " pp" : "") : ""}${mk.hr ? " · HR " + esc(mk.hr) : ""}</span></div></div>`;
+        });
+        mr.innerHTML = cells;
+      }
+      this._drawMarkerBars();
+    }
+    // Forest / dumbbell chart: for each marker, risk-if-present (filled dot + 95% CI) vs
+    // risk-if-absent (hollow dot), against the cohort baseline. CIs clamped inside the plot.
     _drawMarkerBars() {
       const m = this.data.model, markers = m.markers || [];
       const svg = this._panel.querySelector("#mkplot"); if (!svg) return;
-      const { W, pL, pR } = GEO, rowH = 52, top = 22, bw = W - pL - pR;
-      const pf = (v) => (v == null ? 0 : Math.round(v * 10) / 10) + "%";   // 1-decimal for small risks
-      const axMax = m.axis_max || Math.ceil(Math.max(...markers.map((k) => (k.present && k.present.hi) || (k.present && k.present.risk) || 0), (m.baseline && m.baseline.risk) || 0) / 5) * 5 || 30;
-      const sx = (v) => pL + Math.min(Math.max(v, 0), axMax) / axMax * bw;
+      const pf = (v) => (v == null ? 0 : Math.round(v * 10) / 10) + "%";
+      const W = 680, pL = 18, pR = 18, rowH = 78, top = 30, axisH = 22, plotW = W - pL - pR;
+      const hiVals = markers.map((k) => (k.present && k.present.hi) || (k.present && k.present.risk) || 0);
+      const axMax = m.axis_max || Math.max(5, Math.ceil(Math.max(...hiVals, (m.baseline && m.baseline.hi) || 0) / 5) * 5);
+      const sx = (v) => pL + Math.min(Math.max(v, 0), axMax) / axMax * plotW;
+      const rowsTop = top, rowsBot = top + markers.length * rowH, H = rowsBot + axisH;
       let g = "";
-      const H = top + markers.length * rowH + 26;
-      const ticks = []; for (let t = 0; t <= axMax; t += (axMax > 20 ? 10 : 5)) ticks.push(t);
-      ticks.forEach((t) => { g += `<line x1="${sx(t)}" y1="${top - 6}" x2="${sx(t)}" y2="${top + markers.length * rowH - 10}" stroke="#eef2f6"/><text x="${sx(t)}" y="${top - 10}" text-anchor="middle" font-size="11" fill="#98a6b5">${t}%</text>`; });
+      // faint vertical gridlines + x-axis ticks (bottom)
+      const step = axMax > 20 ? 5 : (axMax > 10 ? 5 : 2);
+      for (let t = 0; t <= axMax; t += step) { g += `<line x1="${sx(t)}" y1="${rowsTop - 6}" x2="${sx(t)}" y2="${rowsBot - 12}" stroke="#f4f7fa"/><text x="${sx(t)}" y="${rowsBot + 12}" text-anchor="middle" font-size="10" fill="#98a6b5">${t}%</text>`; }
+      // cohort baseline dashed line + label (top margin, avoids axis labels)
       if (m.baseline && m.baseline.risk != null) {
         const bx = sx(m.baseline.risk);
-        g += `<line x1="${bx}" y1="${top - 6}" x2="${bx}" y2="${top + markers.length * rowH - 10}" stroke="#b02020" stroke-dasharray="4 3" stroke-width="1.3"/>`;
-        g += `<text x="${bx}" y="${top + markers.length * rowH + 8}" text-anchor="middle" font-size="10.5" fill="#b02020">${esc(m.baseline.label || "cohort")} ${pf(m.baseline.risk)}</text>`;
+        g += `<line x1="${bx}" y1="${rowsTop - 6}" x2="${bx}" y2="${rowsBot - 12}" stroke="#b02020" stroke-dasharray="4 3" stroke-width="1.2"/>`;
+        g += `<text x="${Math.min(bx, W - 60)}" y="${rowsTop - 12}" text-anchor="middle" font-size="10" fill="#b02020">${esc(m.baseline.label || "cohort")} ${pf(m.baseline.risk)}</text>`;
       }
       markers.forEach((mk, i) => {
         const y = top + i * rowH, on = this._mkSel[i] === 1;
-        const pr = mk.present || {}, risk = pr.risk || 0;
-        g += `<text x="${pL - 8}" y="${y + 13}" text-anchor="end" font-size="12.5" fill="${on ? "#0e1c2b" : "#5c6b7a"}" font-weight="${on ? 650 : 400}">${esc(shorten(mk.name, 24))}</text>`;
-        g += `<rect x="${pL}" y="${y + 3}" width="${bw}" height="16" rx="4" fill="#f1f5f9"/>`;
-        g += `<rect x="${pL}" y="${y + 3}" width="${Math.max(2, sx(risk) - pL)}" height="16" rx="4" fill="${on ? "#1f83e6" : "#cfe4fb"}"/>`;
-        if (pr.lo != null && pr.hi != null) {
-          g += `<line x1="${sx(pr.lo)}" x2="${sx(pr.hi)}" y1="${y + 11}" y2="${y + 11}" stroke="#7c8a98" stroke-width="1.2"/>`;
-          g += `<line x1="${sx(pr.lo)}" x2="${sx(pr.lo)}" y1="${y + 7}" y2="${y + 15}" stroke="#7c8a98"/><line x1="${sx(pr.hi)}" x2="${sx(pr.hi)}" y1="${y + 7}" y2="${y + 15}" stroke="#7c8a98"/>`;
+        const pr = mk.present || {}, ab = mk.absent || null, ty = y + 30;
+        if (on) g += `<rect x="2" y="${y - 6}" width="${W - 4}" height="${rowH - 10}" rx="9" fill="var(--azure-wash)"/>`;
+        // name (left) + HR (right) on the top line
+        g += `<text x="${pL}" y="${y + 10}" font-size="12.5" fill="#0e1c2b" font-weight="${on ? 700 : 600}">${esc(shorten(mk.name, 50))}</text>`;
+        let tags = ""; if (mk.emu) tags += " EMU"; if (mk.nonsig) tags += " · n.s.";
+        if (mk.hr) g += `<text x="${W - pR}" y="${y + 10}" text-anchor="end" font-size="11" fill="#5c6b7a">adj. HR ${esc(mk.hr)}${esc(tags)}</text>`;
+        else if (tags) g += `<text x="${W - pR}" y="${y + 10}" text-anchor="end" font-size="11" fill="#8a97a4">${esc(tags.replace(/^ · /, ""))}</text>`;
+        // dumbbell track
+        g += `<line x1="${pL}" x2="${pL + plotW}" y1="${ty}" y2="${ty}" stroke="#eef2f6" stroke-width="2"/>`;
+        // 95% CI band for the present estimate (clamped inside plot)
+        if (pr.lo != null && pr.hi != null) g += `<line x1="${sx(pr.lo)}" x2="${sx(pr.hi)}" y1="${ty}" y2="${ty}" stroke="${on ? "#9cc3ef" : "#dcebfb"}" stroke-width="7" stroke-linecap="round"/>`;
+        // dumbbell connector + absent (hollow) dot
+        if (ab && ab.risk != null) {
+          g += `<line x1="${sx(ab.risk)}" x2="${sx(pr.risk)}" y1="${ty}" y2="${ty}" stroke="${on ? "#1f83e6" : "#c4d8ee"}" stroke-width="1.5" stroke-dasharray="2 2"/>`;
+          g += `<circle cx="${sx(ab.risk)}" cy="${ty}" r="5" fill="#fff" stroke="#7c8a98" stroke-width="1.5"/>`;
         }
-        g += `<text x="${pL + bw}" y="${y + 15}" text-anchor="end" font-size="12" fill="${on ? "#135ba8" : "#8a97a4"}" font-weight="600" font-variant-numeric="tabular-nums">${pf(risk)}${pr.lo != null ? ` (${pf(pr.lo)}–${pf(pr.hi)})` : ""}</text>`;
-        const sub = `if present · ${mk.absent && mk.absent.risk != null ? "vs " + pf(mk.absent.risk) + " if absent" : ""}${mk.hr ? ` · adj. HR ${mk.hr}` : ""}${mk.nonsig ? " · not significant" : ""}`;
-        g += `<text x="${pL}" y="${y + 36}" font-size="10.5" fill="#8a97a4">${esc(sub)}</text>`;
+        // present (filled) dot
+        g += `<circle cx="${sx(pr.risk)}" cy="${ty}" r="6.5" fill="${on ? "#135ba8" : "#1f83e6"}"/>`;
+        // numbers line (own line, never overlaps the plot)
+        const dpp = (ab && ab.risk != null && pr.risk != null) ? (pr.risk - ab.risk) : null;
+        let num = `Present ${pf(pr.risk)}${pr.lo != null ? ` (95% CI ${pf(pr.lo)}–${pf(pr.hi)})` : ""}`;
+        if (ab && ab.risk != null) num += `   ·   Absent ${pf(ab.risk)}`;
+        if (dpp != null) num += `   ·   Δ ${dpp >= 0 ? "+" : ""}${Math.round(dpp * 10) / 10} pp`;
+        g += `<text x="${pL}" y="${y + 54}" font-size="11" fill="#5c6b7a" font-variant-numeric="tabular-nums">${esc(num)}</text>`;
       });
-      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.innerHTML = g;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = (H + 40) + "px"; svg.innerHTML = g;
     }
 
     /* ---------------- shared ---------------- */
