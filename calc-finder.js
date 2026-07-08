@@ -157,6 +157,17 @@
     .grp .gh .gi{font-size:24px}.grp .gh h2{font-size:21px;margin:0}
     .grp .gsub{color:var(--muted);font-size:14.5px;margin:0 0 16px}
     .none{color:var(--muted);text-align:center;padding:20px}
+    .searchbox{position:relative;max-width:540px;margin:20px auto 6px}
+    .searchbox .si{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.5;pointer-events:none}
+    .searchbox input{width:100%;border:1.5px solid var(--azure-line);background:#fff;border-radius:999px;padding:13px 44px;font-size:15.5px;color:var(--ink);outline:none;transition:.15s;box-shadow:0 4px 14px rgba(19,91,168,.06);-webkit-appearance:none}
+    .searchbox input:focus{border-color:var(--azure);box-shadow:0 0 0 4px var(--azure-wash)}
+    .searchbox input::placeholder{color:#93a3b3}
+    .searchbox input::-webkit-search-cancel-button{-webkit-appearance:none}
+    .searchbox .sclear{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:#eef2f6;color:var(--muted);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px;line-height:1;display:none}
+    .searchbox .sclear:hover{background:#e1e8ef;color:var(--ink)}
+    .searchbox.has .sclear{display:block}
+    .sres h2{font-size:18px;margin:6px 0 16px;text-align:center;color:var(--ink);font-weight:650}
+    .sres h2 b{color:var(--azure-deep)}
     @media(max-width:560px){.head h1{font-size:24px}.banner{border-radius:0}}
   `;
 
@@ -164,7 +175,7 @@
     connectedCallback() {
       this._only = this.getAttribute("only") || null;        // "guided" | "browse" -> lock to one tab, hide switcher
       this._tab = this._only || this.getAttribute("default-tab") || "guided";
-      this._grp = null; this._set = null;
+      this._grp = null; this._set = null; this._q = "";
       this.attachShadow({ mode: "open" });
       this.render();
     }
@@ -226,29 +237,60 @@
           <p class="gsub">${esc(g.sub)}</p><div class="cards">${list.map((c) => this.card(c)).join("")}</div></div>`;
       }).join("");
     }
+    // --- search by calculator name / acronym ---
+    _matches(q) {
+      const ql = q.toLowerCase(), toks = ql.split(/\s+/).filter(Boolean);
+      return CALCS
+        .filter((c) => { const hay = (c[1] + " " + c[2] + " " + abbrev(c[1])).toLowerCase(); return toks.every((t) => hay.includes(t)); })
+        .sort((a, b) => (b[1].toLowerCase().includes(ql) ? 1 : 0) - (a[1].toLowerCase().includes(ql) ? 1 : 0));
+    }
+    search() {
+      const q = this._q.trim(), res = this._matches(q);
+      if (!res.length) return `<p class="none">No calculator matches &ldquo;${esc(q)}&rdquo;. Try another name or acronym (e.g. SeLECT, CAVE, SUDEP, Lamberink).</p>`;
+      return `<div class="sres"><h2><b>${res.length}</b> calculator${res.length === 1 ? "" : "s"} matching &ldquo;${esc(q)}&rdquo;</h2><div class="cards">${res.map((c) => this.card(c)).join("")}</div></div>`;
+    }
+    _bodyHTML() { return this._q.trim() ? this.search() : (this._tab === "guided" ? this.guided() : this.browse()); }
+    _wireBody() {
+      const sr = this.shadowRoot;
+      sr.querySelectorAll("[data-grp]").forEach((b) => b.onclick = () => { this._grp = b.dataset.grp; this._set = null; this.render(); });
+      sr.querySelectorAll("[data-set]").forEach((b) => b.onclick = () => { this._set = b.dataset.set; this.render(); });
+      const bk = sr.querySelector("#back"); if (bk) bk.onclick = () => this.back();
+      const rs = sr.querySelector("#reset"); if (rs) rs.onclick = () => { this._grp = null; this._set = null; this.render(); };
+    }
     render() {
-      const body = this._tab === "guided" ? this.guided() : this.browse();
+      const body = this._bodyHTML();
       // when placed under a page banner (attr "plain"), skip the component's own strip
       var strip = this.hasAttribute("plain") ? "" :
         `<div class="banner"><span class="btitle">predictepilepsy<span class="dot">.com</span></span><a href="/">All calculators</a></div>`;
       const head = this.hasAttribute("no-head") ? "" :
         `<div class="head"><h1>Find the right calculator</h1><p>Choose a calculator step by step, or browse them by clinical group.</p></div>`;
-      const tabs = this._only ? "" :
+      const searchbox = `<div class="searchbox${this._q.trim() ? " has" : ""}"><span class="si">&#128269;</span><input id="calcsearch" type="search" autocomplete="off" placeholder="Search calculators by name or acronym…" value="${esc(this._q)}"><button class="sclear" id="sclear" aria-label="Clear search" title="Clear search">&times;</button></div>`;
+      const tabs = (this._only || this._q.trim()) ? "" :
         `<div class="tabs"><button data-tab="guided"${this._tab === "guided" ? ' class="on"' : ""}>Guided</button><button data-tab="browse"${this._tab === "browse" ? ' class="on"' : ""}>Browse by group</button></div>`;
       this.shadowRoot.innerHTML = `<style>${CSS}</style>
         ${strip}
         <div class="wrap">
           ${head}
+          ${searchbox}
           ${tabs}
           <div id="body">${body}</div>
         </div>`;
       const sr = this.shadowRoot;
-      sr.querySelectorAll(".tabs button").forEach((b) => b.onclick = () => { this._tab = b.dataset.tab; if (this._tab === "guided") { this._grp = null; this._set = null; } this.render(); });
-      sr.querySelectorAll("[data-grp]").forEach((b) => b.onclick = () => { this._grp = b.dataset.grp; this._set = null; this.render(); });
-      sr.querySelectorAll("[data-set]").forEach((b) => b.onclick = () => { this._set = b.dataset.set; this.render(); });
-      const bk = sr.querySelector("#back"); if (bk) bk.onclick = () => this.back();
-      const rs = sr.querySelector("#reset"); if (rs) rs.onclick = () => { this._grp = null; this._set = null; this.render(); };
-      // cards are real <a> links; nothing else to wire
+      sr.querySelectorAll(".tabs button").forEach((b) => b.onclick = () => { this._q = ""; this._tab = b.dataset.tab; if (this._tab === "guided") { this._grp = null; this._set = null; } this.render(); });
+      this._wireBody();
+      // search input — update only the body + tabs on keystroke so the field keeps focus
+      const inp = sr.querySelector("#calcsearch"), clr = sr.querySelector("#sclear"), box = sr.querySelector(".searchbox");
+      const refresh = () => {
+        box.classList.toggle("has", !!this._q.trim());
+        sr.querySelector("#body").innerHTML = this._bodyHTML();
+        this._wireBody();
+        const t = sr.querySelector(".tabs"); if (t) t.style.display = this._q.trim() ? "none" : "";
+      };
+      if (inp) {
+        inp.oninput = () => { this._q = inp.value; refresh(); };
+        inp.onkeydown = (e) => { if (e.key === "Enter") { const r = this._matches(this._q.trim()); if (this._q.trim() && r.length === 1) this.go(r[0][0]); } };
+      }
+      if (clr) clr.onclick = () => { this._q = ""; if (inp) { inp.value = ""; inp.focus(); } refresh(); };
     }
   }
   customElements.define("calc-finder", CalcFinder);
