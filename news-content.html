@@ -33,12 +33,13 @@
 .pnews .item .card p+p{margin-top:8px}
 /* publications guide */
 .pnews .pubs{display:grid;gap:12px;margin-top:20px}
-.pnews .pub{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;box-shadow:0 5px 16px rgba(16,50,90,.06);transition:.18s}
+.pnews .pub{position:relative;display:flex;gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;box-shadow:0 5px 16px rgba(16,50,90,.06);transition:.18s}
 .pnews .pub:hover{border-color:#bcd6f2;transform:translateY(-2px);box-shadow:0 12px 26px rgba(16,50,90,.11)}
+.pnews .pub .pub-link{position:absolute;inset:0;border-radius:14px;z-index:2}
 .pnews .pub .yb{flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:var(--wash);color:var(--azd);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;border:1px solid var(--line)}
 .pnews .pub .pt{flex:1;min-width:0}
-.pnews .pub .pt .tt{font-weight:700;color:#13233a;font-size:15.5px;line-height:1.35;margin:0 0 3px}
-.pnews .pub .pt .me{color:var(--muted);font-size:13px}
+.pnews .pub .pt .tt{display:block;font-weight:700;color:#13233a;font-size:15.5px;line-height:1.35;margin:0 0 3px}
+.pnews .pub .pt .me{display:block;color:var(--muted);font-size:13px}
 .pnews .pub .pt .me .oa{color:#0f7a54;font-weight:700}
 .pnews .pub .go{align-self:center;color:var(--az);font-weight:700;text-decoration:none;white-space:nowrap;font-size:14px}
 /* contact card */
@@ -138,21 +139,9 @@
   <h3 class="sub">Read the science behind the calculators</h3>
   <p class="lede">These peer-reviewed papers describe the models and the conditional-risk framework used across the tools.</p>
   <div class="pubs">
-    <a class="pub" href="https://doi.org/10.1016/j.cnp.2025.02.008" target="_blank" rel="noopener">
-      <div class="yb">2025</div>
-      <div class="pt"><p class="tt">Prognostic models for seizures and epilepsy after stroke, tumors and traumatic brain injury</p><p class="me">Schubert KM, Schmick A, Stattmann M, Galovic M · <i>Clin Neurophysiol Pract</i> · Review · <span class="oa">Open access</span></p></div>
-      <span class="go">DOI →</span>
-    </a>
-    <a class="pub" href="https://doi.org/10.1016/S1474-4422(25)00170-X" target="_blank" rel="noopener">
-      <div class="yb">2025</div>
-      <div class="pt"><p class="tt">Driving in people with seizures and epilepsy</p><p class="me">Schubert KM, Specht U, Lawn ND, Mégevand P, Bonnett LJ, Marson AG, Krauss GL, Galovic M · <i>Lancet Neurology</i> · Correspondence</p></div>
-      <span class="go">DOI →</span>
-    </a>
-    <a class="pub" href="https://doi.org/10.1111/epi.18602" target="_blank" rel="noopener">
-      <div class="yb">2025</div>
-      <div class="pt"><p class="tt">Epilepsy as a dynamic disease: Toward actionable, individualized seizure risk prediction</p><p class="me">Schubert KM, Marson AG, Trinka E, Galovic M · <i>Epilepsia</i> · Review · <span class="oa">Open access</span></p></div>
-      <span class="go">DOI →</span>
-    </a>
+    <div class="pub"><a class="pub-link" href="https://doi.org/10.1016/j.cnp.2025.02.008" target="_blank" rel="noopener" aria-label="Open DOI for: Prognostic models for seizures and epilepsy after stroke, tumors and traumatic brain injury"></a><div class="yb">2025</div><div class="pt"><span class="tt">Prognostic models for seizures and epilepsy after stroke, tumors and traumatic brain injury</span><span class="me">Schubert KM, Schmick A, Stattmann M, Galovic M · <i>Clin Neurophysiol Pract</i> · Review · <span class="oa">Open access</span></span></div><span class="go">DOI →</span></div>
+    <div class="pub"><a class="pub-link" href="https://doi.org/10.1016/S1474-4422(25)00170-X" target="_blank" rel="noopener" aria-label="Open DOI for: Driving in people with seizures and epilepsy"></a><div class="yb">2025</div><div class="pt"><span class="tt">Driving in people with seizures and epilepsy</span><span class="me">Schubert KM, Specht U, Lawn ND, Mégevand P, Bonnett LJ, Marson AG, Krauss GL, Galovic M · <i>Lancet Neurology</i> · Correspondence</span></div><span class="go">DOI →</span></div>
+    <div class="pub"><a class="pub-link" href="https://doi.org/10.1111/epi.18602" target="_blank" rel="noopener" aria-label="Open DOI for: Epilepsy as a dynamic disease"></a><div class="yb">2025</div><div class="pt"><span class="tt">Epilepsy as a dynamic disease: Toward actionable, individualized seizure risk prediction</span><span class="me">Schubert KM, Marson AG, Trinka E, Galovic M · <i>Epilepsia</i> · Review · <span class="oa">Open access</span></span></div><span class="go">DOI →</span></div>
   </div>
   <p style="margin-top:14px"><a class="tlink" href="https://predictepilepsy.com/publications/">See all publications, abstracts &amp; key points →</a></p>
 
