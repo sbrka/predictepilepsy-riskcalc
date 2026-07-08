@@ -117,7 +117,7 @@
 
   const CSS = `
     :host{--azure:#135ba8;--azure-deep:#0e4a8a;--azure-wash:#eef6fe;--azure-line:#cfe4fb;--ink:#16222f;--muted:#5c6b7a;
-      display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.5}
+      display:block;scroll-margin-top:78px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.5}
     *{box-sizing:border-box}
     .wrap{max-width:1080px;margin:0 auto;padding:0 18px 48px}
     .banner{background:var(--azure);color:#fff;padding:14px 22px;border-radius:0 0 16px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -277,8 +277,12 @@
     _scrollUp() {
       try {
         requestAnimationFrame(() => {
-          const y = this.getBoundingClientRect().top + (window.pageYOffset || 0) - 72;
-          if (window.scrollY - y > 40 || y - window.scrollY > 40) window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+          const top = this.getBoundingClientRect().top;
+          // realign only when the finder has scrolled above the viewport or sits well below the fold
+          if (top < 4 || top > (window.innerHeight || 800) * 0.4) {
+            if (this.scrollIntoView) this.scrollIntoView({ behavior: "smooth", block: "start" });
+            else window.scrollTo(0, Math.max(0, top + (window.pageYOffset || 0) - 72));
+          }
         });
       } catch (e) {}
     }
