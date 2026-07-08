@@ -1,0 +1,167 @@
+{
+ "schema_version": "1.0",
+ "id": "2helps2b",
+ "kind": "score",
+ "meta": {
+  "title": "2HELPS2B — seizure risk on continuous EEG",
+  "doi": "10.1001/jamaneurol.2017.2459",
+  "pmid": "29052706",
+  "authors": "Struck AF, Ustun B, Rodriguez Ruiz A, et al.",
+  "year": 2017,
+  "journal": "JAMA Neurology",
+  "outcome": "Probability of an electrographic seizure during continuous EEG (cEEG) monitoring in acutely ill / hospitalised patients, from six EEG and clinical features",
+  "cff_info": "<p><b>What this shows.</b> The <b>2HELPS2B</b> score (Struck et&nbsp;al., <i>JAMA Neurology</i> 2017) estimates the probability that a <b>critically ill / hospitalised patient on continuous EEG (cEEG)</b> will have an electrographic seizure, from six routinely reported EEG/clinical features. Developed on 5,427 cEEG sessions across three centres (AUC 0.82, well calibrated).</p><h4>How to read it</h4><ul><li>Score 0–7. Seizure risk rises steeply: <b>0 → 5%</b>, 1 → 12%, 2 → 27%, 3 → 50%, 4 → 73%, 5 → 88%, <b>≥6 → &gt;95%</b>.</li><li>It is used to guide <b>how long to monitor</b>: a score of 0 (5% risk) suggests a short screening cEEG may suffice, while higher scores warrant prolonged monitoring. Apply it at the initial reading (first ~30&nbsp;min) and re-score at 6–8 h if new patterns emerge.</li><li>Brief (ictal) rhythmic discharges (BIRDs) count <b>2 points</b>; the other five features count 1 point each.</li></ul><p>Demonstration tool — an aid to cEEG interpretation, not a substitute for expert review.</p>"
+ },
+ "thresholds": {
+  "group1": 50,
+  "group2": 12
+ },
+ "predictors": [
+  {
+   "name": "Brief (ictal) rhythmic discharges — B(I)RDs",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "Brief potentially ictal rhythmic discharges (BIRDs) on EEG. Present = 2 points (the strongest single feature)."
+  },
+  {
+   "name": "LPDs, LRDA, or BIPDs",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Lateralized periodic discharges (LPDs), lateralized rhythmic delta activity (LRDA), or bilateral independent periodic discharges (BIPDs). Any present = 1 point."
+  },
+  {
+   "name": "Any periodic/rhythmic pattern > 2 Hz",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Frequency greater than 2.0 Hz for any periodic or rhythmic pattern (GRDA/LRDA/LPDs/BIPDs/GPDs). Present = 1 point."
+  },
+  {
+   "name": "“Plus” features",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Superimposed rhythmic, sharp, or fast activity ('plus' features) on a periodic/rhythmic pattern. Present = 1 point."
+  },
+  {
+   "name": "Sporadic epileptiform discharges",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Sporadic (non-periodic, non-rhythmic) epileptiform discharges (spikes/sharp waves). Present = 1 point."
+  },
+  {
+   "name": "Prior seizure",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Any history of seizure before the EEG — acute or remote. Present = 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "during cEEG",
+  "panel_title": "Probability of a seizure on continuous EEG",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 5,
+    "disp": "5%",
+    "label": "5% probability of a seizure on cEEG"
+   },
+   {
+    "score": 1,
+    "pct": 12,
+    "disp": "12%",
+    "label": "12% probability of a seizure on cEEG"
+   },
+   {
+    "score": 2,
+    "pct": 27,
+    "disp": "27%",
+    "label": "27% probability of a seizure on cEEG"
+   },
+   {
+    "score": 3,
+    "pct": 50,
+    "disp": "50%",
+    "label": "50% probability of a seizure on cEEG"
+   },
+   {
+    "score": 4,
+    "pct": 73,
+    "disp": "73%",
+    "label": "73% probability of a seizure on cEEG"
+   },
+   {
+    "score": 5,
+    "pct": 88,
+    "disp": "88%",
+    "label": "88% probability of a seizure on cEEG"
+   },
+   {
+    "score": 6,
+    "pct": 95,
+    "disp": ">95%",
+    "label": "more than 95% probability of a seizure on cEEG"
+   },
+   {
+    "score": 7,
+    "pct": 95,
+    "disp": ">95%",
+    "label": "more than 95% probability of a seizure on cEEG"
+   }
+  ],
+  "note": "Predicts electrographic seizures on cEEG in acutely ill patients. Max score 7 (no patients scored 7 in the cohort). Use to guide cEEG duration; re-score if new EEG patterns emerge."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Struck 2017 JAMA Neurol Table 2 (probable risk by score) + abstract/text (point assignments) — doi 10.1001/jamaneurol.2017.2459, PMID 29052706",
+  "review_status": "human_reviewed",
+  "notes": "2HELPS2B RiskSLIM score. 6 binary features: BIRDs 2pts; (LPDs/LRDA/BIPDs) 1; freq>2Hz 1; plus-features 1; sporadic epileptiform discharges 1; prior seizure 1. Probable seizure risk by total score (Table 2): 0=5,1=12,2=27,3=50,4=73,5=88,>=6=>95%. AUC 0.819. Built 2026-07-08."
+ }
+}
