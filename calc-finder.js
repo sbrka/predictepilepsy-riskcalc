@@ -101,6 +101,7 @@
     // g6 — established / chronic epilepsy
     ["calc-jme-drug-resistance", "JME Drug-Resistance (Stevelink)", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy.", "g6", "drug_resistance"],
     ["calc-pse-dre", "Post-Stroke Epilepsy — Drug Resistance (Lattanzi)", "Probability of drug-resistant epilepsy in people with post-stroke epilepsy, from 5 factors.", "g6", "drug_resistance"],
+    ["calc-pte-dre", "Post-Traumatic Epilepsy — Drug Resistance (Yu)", "Probability of drug-resistant epilepsy in people with post-traumatic epilepsy, from 4 factors.", "g6", "drug_resistance"],
     ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors (Allotey 2019).", "g6", "pregnancy"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));

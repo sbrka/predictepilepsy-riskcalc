@@ -1,0 +1,100 @@
+{
+ "schema_version": "1.0",
+ "id": "pte_dre",
+ "kind": "formula",
+ "meta": {
+  "title": "Drug-resistant epilepsy in post-traumatic epilepsy (Yu nomogram)",
+  "doi": "10.1111/cns.13897",
+  "pmid": "35822252",
+  "authors": "Yu T, Liu X, Sun L, et al.",
+  "year": 2022,
+  "journal": "CNS Neuroscience & Therapeutics",
+  "outcome": "Probability of developing drug-resistant epilepsy (DRE) in people with post-traumatic epilepsy, from 4 factors",
+  "cff_info": "<p><b>What this shows.</b> A nomogram (Yu et&nbsp;al., <i>CNS Neurosci Ther</i> 2022) estimating the probability of <b>drug-resistant epilepsy (DRE)</b> in people with <b>post-traumatic epilepsy</b>. Developed on 2023 and internally validated on 807 patients (overall DRE 21%; C-index ~0.66–0.69).</p><h4>How to read it</h4><ul><li>Drivers: <b>status epilepticus</b> in the early course, <b>focal or mixed</b> seizure onset, <b>epileptiform EEG</b>, and <b>younger age</b> at the first post-traumatic seizure.</li></ul><p>Single-centre, internally validated only, moderate discrimination — a demonstration tool.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Status epilepticus (early course)",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.289
+    }
+   ],
+   "assess": "Status epilepticus during the first years of the post-traumatic epilepsy course. Present raises DRE risk (OR 3.63)."
+  },
+  {
+   "name": "Seizure onset type",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Generalized onset",
+     "points": 0
+    },
+    {
+     "label": "Focal onset",
+     "points": 0.551
+    },
+    {
+     "label": "Mixed onset",
+     "points": 0.85
+    }
+   ],
+   "assess": "Predominant seizure onset type (ILAE 2017). Focal (OR 1.74) and mixed (OR 2.34) carry higher DRE risk than generalized."
+  },
+  {
+   "name": "Interictal EEG",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Normal",
+     "points": 0
+    },
+    {
+     "label": "Abnormal background (no epileptiform discharges)",
+     "points": 0.287
+    },
+    {
+     "label": "Epileptiform discharges",
+     "points": 0.469
+    }
+   ],
+   "assess": "Single interictal outpatient EEG. Epileptiform discharges raise DRE risk (OR 1.60)."
+  },
+  {
+   "name": "Age at first post-traumatic seizure",
+   "coef": -0.015,
+   "type": "slider",
+   "min": 1,
+   "max": 90,
+   "step": 1,
+   "default": 40,
+   "unit": "yr",
+   "assess": "Age (years) at the first late post-traumatic seizure. Younger age carries higher DRE risk (OR 0.985 per year)."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Probability of drug-resistant epilepsy",
+  "outputs": [
+   {
+    "label": "Chance of drug-resistant epilepsy",
+    "intercept": -1.695
+   }
+  ],
+  "note": "DRE = ILAE 2009 definition (failure of ≥2 tolerated, appropriately used ASMs). Post-traumatic epilepsy population. Single-centre (n=2830), internal validation only, C-index ~0.66–0.69.",
+  "viz_info": "Each factor adds its published log-odds to a logistic model; the sum plus the intercept gives the probability of drug-resistant epilepsy."
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients",
+  "source": "Yu 2022 CNS Neurosci Ther Table 3 (β + intercept -1.695) — doi 10.1111/cns.13897, PMID 35822252",
+  "review_status": "human_reviewed",
+  "notes": "Logistic intercept -1.695; β: age -0.015/yr, focal 0.551/mixed 0.850 (ref generalized), status-epilepticus 1.289, EEG abnormal-bg 0.287/epileptiform 0.469 (ref normal). Verified: age20/focal/SE/epileptiform 57.8%, age40/generalized/none/normal 9.2%. DRE rate 21%. C-index 0.66-0.69, single-centre. Built 2026-07-08."
+ }
+}
