@@ -1,0 +1,148 @@
+{
+ "schema_version": "1.0",
+ "id": "empire",
+ "kind": "formula",
+ "meta": {
+  "title": "EMPiRE — seizure risk in pregnancy (women with epilepsy)",
+  "doi": "10.1371/journal.pmed.1002802",
+  "pmid": "31083654",
+  "authors": "Allotey J, Fernandez-Felix BM, Zamora J, et al.",
+  "year": 2019,
+  "journal": "PLOS Medicine",
+  "outcome": "Probability of at least one epileptic seizure during pregnancy (to 6 weeks postpartum) in a woman with epilepsy, assessed at the antenatal booking visit",
+  "cff_info": "<p><b>What this shows.</b> The <b>EMPiRE</b> model (Allotey et&nbsp;al., <i>PLOS Medicine</i> 2019) estimates the probability of <b>at least one seizure during pregnancy</b> (through 6 weeks postpartum) in a woman with epilepsy, from factors known at the antenatal booking visit. Developed on 399 and externally validated on 128 pregnancies (C-statistic 0.79/0.76).</p><h4>How to read it</h4><ul><li>Strongest drivers: a <b>tonic-clonic seizure in the 3 months before pregnancy</b>, non-tonic-clonic seizure type, higher <b>lamotrigine</b> dose, and a learning difficulty / mental-health disorder. Older age at first seizure is protective.</li></ul><p>Applies to women on lamotrigine, carbamazepine, phenytoin or levetiracetam. Demonstration tool for antenatal counselling.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Tonic–clonic seizure in the 3 months before pregnancy",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.97
+    }
+   ],
+   "assess": "Any tonic–clonic (convulsive) seizure in the 3 months before pregnancy. Strongest factor (OR 7.2)."
+  },
+  {
+   "name": "Non-tonic–clonic seizure in the 3 months before pregnancy",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.66
+    }
+   ],
+   "assess": "Any non-tonic–clonic seizure in the 3 months before pregnancy (OR 1.94)."
+  },
+  {
+   "name": "Baseline seizure classification",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Tonic–clonic",
+     "points": 0
+    },
+    {
+     "label": "Non-tonic–clonic",
+     "points": 0.75
+    },
+    {
+     "label": "Unspecified",
+     "points": 0.61
+    }
+   ],
+   "assess": "Predominant seizure type at the booking visit (tonic–clonic = reference)."
+  },
+  {
+   "name": "Learning difficulty or mental-health disorder",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.67
+    }
+   ],
+   "assess": "A learning difficulty or mental-health disorder (OR 1.96)."
+  },
+  {
+   "name": "Admitted to hospital for seizures in a previous pregnancy",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.17
+    }
+   ],
+   "assess": "Hospital admission for seizures in a previous pregnancy (OR 1.19)."
+  },
+  {
+   "name": "Age at first seizure",
+   "coef": -0.02,
+   "type": "slider",
+   "min": 0,
+   "max": 50,
+   "step": 1,
+   "default": 20,
+   "unit": "yr",
+   "assess": "Age (years) at the first-ever seizure. Older onset is protective (OR 0.98 per year)."
+  },
+  {
+   "name": "Lamotrigine dose",
+   "coef": 0.0029,
+   "type": "slider",
+   "min": 0,
+   "max": 800,
+   "step": 25,
+   "default": 0,
+   "unit": "mg/day",
+   "assess": "Baseline lamotrigine dose (mg/day); 0 if not taking it. Higher dose = higher risk (OR 1.34 per 100 mg)."
+  },
+  {
+   "name": "Levetiracetam dose",
+   "coef": 0.0002,
+   "type": "slider",
+   "min": 0,
+   "max": 4000,
+   "step": 250,
+   "default": 0,
+   "unit": "mg/day",
+   "assess": "Baseline levetiracetam dose (mg/day); 0 if not taking it (OR 1.02 per 100 mg)."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Chance of a seizure during pregnancy",
+  "outputs": [
+   {
+    "label": "Chance of ≥1 seizure during pregnancy",
+    "intercept": -1.39
+   }
+  ],
+  "note": "Outcome = ≥1 epileptic seizure from the antenatal booking visit through 6 weeks postpartum. Enter ASM doses in mg/day (0 if not taking). Only lamotrigine and levetiracetam carry dose terms in the model.",
+  "viz_info": "Each factor adds its published log-odds to a logistic model; the sum plus the intercept gives the probability of a seizure during pregnancy."
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients",
+  "source": "Allotey 2019 PLOS Med — published logistic equation (intercept -1.39 + 9 terms) + Table 2 ORs — doi 10.1371/journal.pmed.1002802, PMID 31083654",
+  "review_status": "human_reviewed",
+  "notes": "EMPiRE logistic, intercept -1.39. β: age-first-seizure -0.02/yr; classification non-TC 0.75/unspecified 0.61 (ref TC); TC-in-3mo-pre-preg 1.97; nonTC-in-3mo 0.66; LTG 0.29/100mg (0.0029/mg); LEV 0.02/100mg (0.0002/mg); learning/mental 0.67; prev-pregnancy-admission 0.17. Verified worked example (age25,nonTC,LEV3000,LTG400,nonTC-pre,prev-adm)→81% (nomogram 80%). C 0.79/0.76. Built 2026-07-08."
+ }
+}

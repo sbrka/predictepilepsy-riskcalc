@@ -20,6 +20,8 @@
       sub: "Presurgical evaluation and prediction of seizure, cognitive and mood outcomes after epilepsy surgery." },
     { id: "g5", title: "SUDEP risk", icon: "❤️",
       sub: "Individual risk of sudden unexpected death in epilepsy (SUDEP)." },
+    { id: "g6", title: "Established / chronic epilepsy", icon: "🧬",
+      sub: "Predicting drug resistance, and managing epilepsy in special situations such as pregnancy." },
   ];
   const SETTINGS = {
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
@@ -27,7 +29,7 @@
     infection: "CNS infection", autoimmune: "Autoimmune encephalitis", febrile: "Febrile status epilepticus",
     acute_sympt: "Acute symptomatic seizure", critical_eeg: "Critically ill (EEG monitoring)", first_seizure: "First unprovoked seizure",
     two_seizures: "After two unprovoked seizures", withdrawal: "Withdrawing antiseizure medication",
-    remission: "After a period of remission", drug_resistance: "Predicting drug resistance",
+    remission: "After a period of remission", drug_resistance: "Predicting drug resistance", pregnancy: "Seizures in pregnancy",
     seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
@@ -42,6 +44,7 @@
     ["calc-lane-score", "LANE Score", "Clinical score for late seizures after ICH.", "g1", "ich"],
     ["calc-lean", "LEAN Score", "Clinical score for late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
     ["calc-rise", "RISE Score", "Epilepsy after aneurysmal subarachnoid haemorrhage.", "g1", "sah"],
+    ["calc-safari", "SAFARI (acute SAH seizures)", "Risk of a convulsive seizure during admission for aneurysmal subarachnoid haemorrhage (Jaja 2018).", "g1", "sah"],
     ["calc-dias3", "DIAS3", "Remote seizure / epilepsy risk after cerebral venous thrombosis.", "g1", "cvt"],
     ["calc-early-seizure-cvt", "Early Seizures after CVT", "Early seizure risk after cerebral venous thrombosis.", "g1", "cvt"],
     ["calc-pte-nomogram-1", "PTE after TBI (Wang 2021)", "Post-traumatic epilepsy nomogram after traumatic brain injury.", "g1", "tbi"],
@@ -52,7 +55,8 @@
     ["calc-stampe2", "STAMPE² Score", "Epilepsy outcome after meningioma resection.", "g1", "tumour"],
     ["calc-glioma-epilepsy", "Glioma-Related Epilepsy", "Epilepsy in diffuse high-grade glioma.", "g1", "tumour"],
     ["calc-meningioma-seizures", "Meningioma Late Seizures (Zhang)", "Probability of late postoperative seizures after meningioma resection, from 5 factors.", "g1", "tumour"],
-    ["calc-ncc-seizure-recurrence", "Neurocysticercosis", "Seizure recurrence in solitary calcified neurocysticercosis.", "g1", "infection"],
+    ["calc-ncc-seizure-recurrence", "Neurocysticercosis (adults)", "Seizure recurrence in solitary calcified neurocysticercosis.", "g1", "infection"],
+    ["calc-nepc", "NEPC (paediatric NCC)", "6-month seizure-recurrence risk in children with neurocysticercosis (Panda 2023).", "g1", "infection"],
     ["calc-autoimmune-enceph-recurrence", "Autoimmune Encephalitis", "Seizure recurrence in NMDAR / LGI1 / CASPR2 encephalitis.", "g1", "autoimmune"],
     ["calc-hs-tle-fse", "HS / TLE after Febrile Status", "Hippocampal sclerosis & temporal-lobe epilepsy after febrile status epilepticus.", "g1", "febrile"],
     ["calc-epi-pass", "EPI-PASS", "Epilepsy after an acute symptomatic seizure.", "g1", "acute_sympt"],
@@ -68,7 +72,6 @@
     ["calc-epilepsy-first-seizure-dementia", "First Seizure in Dementia", "Epilepsy risk after a first unprovoked seizure in dementia.", "g2", "first_seizure"],
     ["calc-hauser-cosy", "After Two Unprovoked Seizures", "Recurrence risk after two unprovoked seizures (Hauser).", "g2", "two_seizures"],
     ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
-    ["calc-jme-drug-resistance", "JME Drug-Resistance", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy (Stevelink).", "g2", "drug_resistance"],
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
     ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
@@ -94,6 +97,11 @@
     ["calc-sudep3", "SUDEP-3 Inventory", "Three-item inventory stratifying the risk of sudden unexpected death in epilepsy (SUDEP).", "g5", "sudep"],
     ["calc-jha-sudep", "SUDEP Personalised Risk (Jha)", "Individualised relative risk of sudden unexpected death in epilepsy (SUDEP) from 22 clinical factors.", "g5", "sudep"],
     ["calc-sudep-risk-markers", "SUDEP Risk Markers (Ochoa)", "Reference for individual SUDEP risk markers (living alone, frequent tonic–clonic seizures, peri-ictal apnoea) and their 5-year SUDEP risk — markers only, not a combined score.", "g5", "sudep"],
+
+    // g6 — established / chronic epilepsy
+    ["calc-jme-drug-resistance", "JME Drug-Resistance (Stevelink)", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy.", "g6", "drug_resistance"],
+    ["calc-pse-dre", "Post-Stroke Epilepsy — Drug Resistance (Lattanzi)", "Probability of drug-resistant epilepsy in people with post-stroke epilepsy, from 5 factors.", "g6", "drug_resistance"],
+    ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors (Allotey 2019).", "g6", "pregnancy"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));

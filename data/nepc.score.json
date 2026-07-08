@@ -1,0 +1,121 @@
+{
+ "schema_version": "1.0",
+ "id": "nepc",
+ "kind": "score",
+ "meta": {
+  "title": "NEPC — seizure recurrence in paediatric neurocysticercosis",
+  "doi": "10.1016/j.eplepsyres.2023.107239",
+  "pmid": "37862917",
+  "authors": "Panda PK, Elwadhi A, Gupta D, et al.",
+  "year": 2023,
+  "journal": "Epilepsy Research",
+  "outcome": "Risk of seizure recurrence over 6 months in children with parenchymal neurocysticercosis on antiseizure monotherapy, from 4 factors (NEPC score)",
+  "cff_info": "<p><b>What this shows.</b> The <b>NEPC</b> score (Panda et&nbsp;al., <i>Epilepsy Research</i> 2023) estimates the 6-month risk of <b>seizure recurrence</b> in children with parenchymal neurocysticercosis on antiseizure monotherapy. Single-centre, 161 children (overall recurrence 14%; AUC 0.89).</p><h4>How to read it</h4><ul><li>Score 0–4 (each factor 1 point). Observed recurrence: 0–1 → 0%, 2 → 45%, 3 → 53%, 4 → 85%. Optimal high-risk threshold: score ≥4.</li></ul><p>Single-centre, internally validated, 6-month horizon, ages 4–18. Small per-score numbers (0% reflects 0 events in the low-score groups). Demonstration tool.</p>"
+ },
+ "thresholds": {
+  "group1": 45,
+  "group2": 45
+ },
+ "predictors": [
+  {
+   "name": ">5 NCC lesions (calcified / viable parenchymal)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "More than 5 neurocysticercosis lesions on imaging. 1 point."
+  },
+  {
+   "name": "Perilesional edema >2 cm (maximum dimension)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Perilesional oedema exceeding 2 cm in maximum dimension. 1 point."
+  },
+  {
+   "name": "Epileptiform abnormalities on EEG",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Epileptiform discharges on EEG. 1 point."
+  },
+  {
+   "name": "Cluster of seizures before presentation",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "More than 2 convulsive seizures within 24 hours before presentation. 1 point."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "6 months",
+  "panel_title": "6-month seizure-recurrence risk",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 0,
+    "disp": "0%",
+    "label": "0% observed 6-month recurrence"
+   },
+   {
+    "score": 1,
+    "pct": 0,
+    "disp": "0%",
+    "label": "0% observed 6-month recurrence"
+   },
+   {
+    "score": 2,
+    "pct": 45,
+    "disp": "45%",
+    "label": "45% observed 6-month recurrence"
+   },
+   {
+    "score": 3,
+    "pct": 53,
+    "disp": "53%",
+    "label": "53% observed 6-month recurrence"
+   },
+   {
+    "score": 4,
+    "pct": 85,
+    "disp": "85%",
+    "label": "85% observed 6-month recurrence"
+   }
+  ],
+  "note": "Observed 6-month recurrence by score (single centre, n=161). Scores 0–1 had 0 recurrences (0/85 and 0/34). Optimal high-risk cut-off ≥4."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Panda 2023 Epilepsy Research Table 5 (points) + Table 6 (score→recurrence) — doi 10.1016/j.eplepsyres.2023.107239, PMID 37862917",
+  "review_status": "human_reviewed",
+  "notes": "NEPC 0-4, 4 items each +1 (>5 lesions, edema>2cm, epileptiform EEG, seizure cluster). Observed recurrence 0=0,1=0,2=45,3=53,4=85%. AUC 0.891. Small single-centre. Built 2026-07-08."
+ }
+}

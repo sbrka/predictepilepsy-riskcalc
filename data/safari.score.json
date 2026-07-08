@@ -1,0 +1,127 @@
+{
+ "schema_version": "1.0",
+ "id": "safari",
+ "kind": "score",
+ "meta": {
+  "title": "SAFARI — convulsive seizure risk during aneurysmal SAH admission",
+  "doi": "10.1093/neuros/nyx334",
+  "pmid": "28973169",
+  "authors": "Jaja BNR, Schweizer TA, Claassen J, et al.",
+  "year": 2018,
+  "journal": "Neurosurgery",
+  "outcome": "Risk of a convulsive seizure during hospital admission for aneurysmal subarachnoid haemorrhage (in patients on seizure prophylaxis), from 4 factors",
+  "cff_info": "<p><b>What this shows.</b> The <b>SAFARI</b> score (Jaja et&nbsp;al., <i>Neurosurgery</i> 2018; SAHIT collaborators) stratifies the risk of a <b>convulsive seizure during admission</b> for aneurysmal subarachnoid haemorrhage. Developed on 1500 and validated on 852 patients (all on seizure prophylaxis).</p><h4>How to read it</h4><ul><li>Score 0–5: <b>Low 0–1</b> (3–5%), <b>Moderate 2–3</b> (7–8%), <b>High 4–5</b> (17–22%).</li><li>An onset seizure counts 2 points; age ≥60, hydrocephalus and anterior-circulation aneurysm count 1 each.</li></ul><p>Predicts <b>in-hospital acute convulsive seizures</b> (not late epilepsy); risk %s are from the validation cohort. Demonstration tool.</p>"
+ },
+ "thresholds": {
+  "group1": 16,
+  "group2": 7
+ },
+ "predictors": [
+  {
+   "name": "Onset seizure (before/at hospitalisation)",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2
+    }
+   ],
+   "assess": "A seizure at the onset of the SAH or before hospital admission. 2 points (strongest factor, OR 5.75)."
+  },
+  {
+   "name": "Age ≥ 60 years",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Age 60 or older. 1 point (OR 2.68)."
+  },
+  {
+   "name": "Hydrocephalus requiring CSF diversion",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Enlarged ventricles treated with an external ventricular drain or serial lumbar puncture. 1 point (OR 2.46)."
+  },
+  {
+   "name": "Aneurysm location",
+   "options": [
+    {
+     "label": "Posterior circulation",
+     "points": 0
+    },
+    {
+     "label": "Anterior circulation (ACA/AComm, ICA, MCA)",
+     "points": 1
+    }
+   ],
+   "assess": "Ruptured-aneurysm location. Anterior circulation = 1 point (OR 2.77)."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "during admission",
+  "panel_title": "Convulsive seizure risk during SAH admission",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 3.2,
+    "disp": "3.2%",
+    "label": "Low risk · 3.2%"
+   },
+   {
+    "score": 1,
+    "pct": 4.8,
+    "disp": "4.8%",
+    "label": "Low risk · 4.8%"
+   },
+   {
+    "score": 2,
+    "pct": 7.0,
+    "disp": "7.0%",
+    "label": "Moderate risk · 7.0%"
+   },
+   {
+    "score": 3,
+    "pct": 7.6,
+    "disp": "7.6%",
+    "label": "Moderate risk · 7.6%"
+   },
+   {
+    "score": 4,
+    "pct": 16.7,
+    "disp": "16.7%",
+    "label": "High risk · 16.7%"
+   },
+   {
+    "score": 5,
+    "pct": 22.2,
+    "disp": "22.2%",
+    "label": "High risk · 22.2%"
+   }
+  ],
+  "note": "In-hospital convulsive seizure risk (patients on prophylaxis). Risk %s from the validation cohort. Groups: Low 0–1 · Moderate 2–3 · High 4–5."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Jaja 2018 Neurosurgery Table 4 (points) + validation risk-per-score (text) — doi 10.1093/neuros/nyx334, PMID 28973169",
+  "review_status": "human_reviewed",
+  "notes": "SAFARI 0-5: onset-seizure 2, age≥60 1, hydrocephalus 1, anterior-circulation 1. Validation risk: 0=3.2,1=4.8,2=7.0,3=7.6,4=16.7,5=22.2%. AUC dev 0.77/val 0.65. No logistic intercept → discrete lookup. Built 2026-07-08."
+ }
+}

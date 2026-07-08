@@ -1,0 +1,111 @@
+{
+ "schema_version": "1.0",
+ "id": "pse_dre",
+ "kind": "formula",
+ "meta": {
+  "title": "Drug resistance in post-stroke epilepsy (Lattanzi nomogram)",
+  "doi": "10.3390/jcm12113610",
+  "pmid": "37297805",
+  "authors": "Lattanzi S, Meletti S, Trinka E, et al.",
+  "year": 2023,
+  "journal": "Journal of Clinical Medicine",
+  "outcome": "Probability of drug-resistant epilepsy (ILAE definition) in people with post-stroke epilepsy, from 5 factors",
+  "cff_info": "<p><b>What this shows.</b> A nomogram (Lattanzi et&nbsp;al., <i>J&nbsp;Clin&nbsp;Med</i> 2023) estimating the probability of <b>drug-resistant epilepsy</b> (ILAE 2010 definition) in people with <b>post-stroke epilepsy</b>. Single-centre, 164 patients (drug-resistance rate 20%; AUC 0.89).</p><h4>How to read it</h4><ul><li>Strongest driver: a <b>short latency</b> from stroke to first seizure (0–6 months). Also: <b>status epilepticus</b> at onset, <b>intracerebral haemorrhage</b> (vs ischaemic), <b>severe stroke</b> (NIHSS ≥16); older age is protective.</li></ul><p>Single-centre model without external validation. Note: the source paper's printed equation accidentally omitted the status-epilepticus term — it is included here (β 2.648, as listed in the paper's own coefficient table). Demonstration tool.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Latency from stroke to first seizure",
+   "coef": 1,
+   "options": [
+    {
+     "label": ">12 months",
+     "points": 0
+    },
+    {
+     "label": "7–12 months",
+     "points": 1.506
+    },
+    {
+     "label": "0–6 months",
+     "points": 4.596
+    }
+   ],
+   "assess": "Time from the stroke to the first unprovoked seizure. Shorter latency strongly raises drug-resistance risk (0–6 mo: OR ~99 vs >12 mo)."
+  },
+  {
+   "name": "Status epilepticus at epilepsy onset",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 2.648
+    }
+   ],
+   "assess": "Status epilepticus at the onset of post-stroke epilepsy. Present raises risk (OR 14.1)."
+  },
+  {
+   "name": "Stroke type",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Ischaemic stroke",
+     "points": 0
+    },
+    {
+     "label": "Intracerebral haemorrhage",
+     "points": 1.839
+    }
+   ],
+   "assess": "Haemorrhagic (ICH) vs ischaemic stroke. ICH raises risk (OR 6.29)."
+  },
+  {
+   "name": "Severe stroke (NIHSS ≥ 16)",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.553
+    }
+   ],
+   "assess": "Baseline stroke severity NIHSS ≥16. Present raises risk (OR 4.73)."
+  },
+  {
+   "name": "Age at stroke onset",
+   "coef": -0.061,
+   "type": "slider",
+   "min": 18,
+   "max": 95,
+   "step": 1,
+   "default": 65,
+   "unit": "yr",
+   "assess": "Age at the stroke (years). Older age is protective (OR 0.94 per year)."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Probability of drug-resistant epilepsy",
+  "outputs": [
+   {
+    "label": "Chance of drug-resistant epilepsy",
+    "intercept": -1.088
+   }
+  ],
+  "note": "Post-stroke epilepsy = ≥1 unprovoked seizure >7 days after ischaemic stroke or ICH. Single-centre (n=164). The status-epilepticus term (β 2.648), erroneously dropped from the paper's printed formula, is included.",
+  "viz_info": "Each factor adds its published log-odds to a logistic model; the sum plus the intercept gives the probability of drug-resistant epilepsy."
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients",
+  "source": "Lattanzi 2023 J Clin Med Table 3 (β, intercept) — doi 10.3390/jcm12113610, PMID 37297805; SE term re-added (paper's printed formula omitted it)",
+  "review_status": "human_reviewed",
+  "notes": "Logistic intercept -1.088; β: age -0.061/yr, ICH 1.839, severe(NIHSS≥16) 1.553, latency 7-12mo 1.506 / 0-6mo 4.596 (ref >12mo), status-epilepticus 2.648. NB paper's printed equation dropped the SE term — re-added per its own coef table. Ref patient (ischaemic/non-severe/>12mo/no-SE/age57)→1.0%. AUC 0.894. Built 2026-07-08."
+ }
+}
