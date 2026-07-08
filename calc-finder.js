@@ -14,20 +14,21 @@
       sub: "Risk of epilepsy or late seizures after stroke, haemorrhage, trauma, tumour, infection or encephalitis." },
     { id: "g2", title: "After a first or unprovoked seizure", icon: "⚡",
       sub: "Risk of seizure recurrence and driving eligibility after one or two unprovoked seizures." },
-    { id: "g3", title: "After epilepsy surgery or drug withdrawal", icon: "💊",
-      sub: "Risk of relapse when withdrawing antiseizure medication or after epilepsy surgery." },
-    { id: "g4", title: "Surgery planning & SUDEP risk", icon: "🩺",
-      sub: "Presurgical evaluation (SEEG focality, cognitive/mood outcomes) and sudden unexpected death in epilepsy (SUDEP)." },
+    { id: "g3", title: "Stopping antiseizure medication", icon: "💊",
+      sub: "Risk of seizure relapse when withdrawing antiseizure medication — including after successful epilepsy surgery." },
+    { id: "g4", title: "Epilepsy surgery", icon: "🩺",
+      sub: "Presurgical evaluation and prediction of seizure, cognitive and mood outcomes after epilepsy surgery." },
+    { id: "g5", title: "SUDEP risk", icon: "❤️",
+      sub: "Individual risk of sudden unexpected death in epilepsy (SUDEP)." },
   ];
   const SETTINGS = {
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
     cvt: "Cerebral venous thrombosis", tbi: "Traumatic brain injury", tumour: "Brain tumour",
     infection: "CNS infection", autoimmune: "Autoimmune encephalitis", febrile: "Febrile status epilepticus",
     acute_sympt: "Acute symptomatic seizure", first_seizure: "First unprovoked seizure",
-    two_seizures: "After two unprovoked seizures", withdrawal: "Stopping antiseizure medication",
-    surgery: "After epilepsy surgery",
+    two_seizures: "After two unprovoked seizures", withdrawal: "Withdrawing antiseizure medication",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance",
-    seeg: "SEEG / seizure-onset zone", surg_outcome: "Seizure-freedom after surgery", surg_neuropsych: "Cognitive / mood outcome of surgery", sudep: "SUDEP risk",
+    seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -64,22 +65,26 @@
     ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
     ["calc-jme-drug-resistance", "JME Drug-Resistance", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy (Stevelink).", "g2", "drug_resistance"],
 
+    // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
     ["calc-asm-withdrawal-cosy", "ASM Withdrawal (+ EEG)", "Seizure recurrence after ASM withdrawal, incl. EEG findings.", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
-    ["calc-slah-score", "SLAH Seizure-Freedom Score", "Chance of seizure freedom after laser ablation (SLAH) for mesial temporal lobe epilepsy.", "g3", "surgery"],
-    ["calc-fle-surgery-prognostic", "Frontal Lobe Surgery — Prognostic", "Prognostic factors after frontal-lobe epilepsy surgery.", "g3", "surgery"],
-    ["calc-fle-surgery-outcome", "Frontal Lobe Surgery — Outcome", "Seizure outcome after frontal-lobe epilepsy surgery.", "g3", "surgery"],
-    ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g3", "surgery"],
-    ["calc-frontal-lgg-seizure", "Frontal Low-Grade Tumour", "Seizure outcome after resection of frontal low-grade tumours.", "g3", "surgery"],
-    ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g3", "surgery"],
 
+    // g4 — epilepsy surgery: planning (SEEG) + seizure outcome + cognitive/mood outcome
     ["calc-5-sense", "5-SENSE (SEEG focality)", "Chance that stereo-EEG will find a focal seizure-onset zone, from 5 non-invasive findings.", "g4", "seeg"],
     ["calc-jehi-nomogram", "Jehi Nomogram (seizure freedom)", "Chance of complete seizure freedom at 2 and 5 years after resective epilepsy surgery, from six presurgical characteristics.", "g4", "surg_outcome"],
+    ["calc-slah-score", "SLAH Seizure-Freedom Score", "Chance of seizure freedom after laser ablation (SLAH) for mesial temporal lobe epilepsy.", "g4", "surg_outcome"],
+    ["calc-fle-surgery-prognostic", "Frontal Lobe Surgery — Prognostic", "Prognostic factors after frontal-lobe epilepsy surgery.", "g4", "surg_outcome"],
+    ["calc-fle-surgery-outcome", "Frontal Lobe Surgery — Outcome", "Seizure outcome after frontal-lobe epilepsy surgery.", "g4", "surg_outcome"],
+    ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g4", "surg_outcome"],
+    ["calc-frontal-lgg-seizure", "Frontal Low-Grade Tumour", "Seizure outcome after resection of frontal low-grade tumours.", "g4", "surg_outcome"],
+    ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g4", "surg_outcome"],
     ["calc-naming-decline", "Naming Decline (TLE surgery)", "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).", "g4", "surg_neuropsych"],
     ["calc-memory-decline", "Verbal Memory Decline (TLR)", "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).", "g4", "surg_neuropsych"],
     ["calc-mood-decline", "Mood Decline (TLE surgery)", "Risk of clinically significant mood (depression) decline after temporal-lobe epilepsy surgery (Doherty nomogram).", "g4", "surg_neuropsych"],
-    ["calc-sudep3", "SUDEP-3 Inventory", "Three-item inventory stratifying the risk of sudden unexpected death in epilepsy (SUDEP).", "g4", "sudep"],
+
+    // g5 — SUDEP risk
+    ["calc-sudep3", "SUDEP-3 Inventory", "Three-item inventory stratifying the risk of sudden unexpected death in epilepsy (SUDEP).", "g5", "sudep"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
