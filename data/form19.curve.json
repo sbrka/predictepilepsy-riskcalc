@@ -239,8 +239,8 @@
       "Treatment Status (Untreated vs. Treated): Untreated": {
         "display": "Treatment Status (Untreated vs. Treated): Untreated",
         "cum": {
-          "0": -0.134,
-          "1": -0.089,
+          "0": 0.0,
+          "1": 0.0,
           "2": 12.516,
           "3": 18.851,
           "4": 22.07,
@@ -335,7 +335,7 @@
       "Treatment Status (Untreated vs. Treated): Treated": {
         "display": "Treatment Status (Untreated vs. Treated): Treated",
         "cum": {
-          "0": -0.038,
+          "0": 0.0,
           "1": 2.077,
           "2": 5.004,
           "3": 7.712,
