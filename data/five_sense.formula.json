@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "id": "five_sense",
+  "kind": "formula",
+  "meta": {
+    "title": "5-SENSE Score — chance of a focal seizure-onset zone on SEEG",
+    "doi": "10.1001/jamaneurol.2021.4405",
+    "pmid": "34870697",
+    "authors": "Astner-Rohracher A, Zimmermann G, Avigdor T, et al.",
+    "year": 2022,
+    "journal": "JAMA Neurology",
+    "outcome": "Predicted probability that stereo-EEG (SEEG) will identify a FOCAL seizure-onset zone, from 5 non-invasive presurgical findings",
+    "cff_info": "<p><b>What this shows.</b> The <b>5-SENSE score</b> (Astner-Rohracher et&nbsp;al., <i>JAMA Neurology</i> 2022) estimates the probability that invasive <b>stereo-EEG (SEEG)</b> will reveal a <b>focal seizure-onset zone</b>, using five routinely available non-invasive findings. It helps decide whether SEEG is likely to be informative before implanting electrodes. Developed on 128 and externally validated on 207 patients (AUC 0.83).</p><h4>How to read it</h4><ul><li>The score is the <b>percent chance of a focal seizure-onset zone</b> (0–100).</li><li><b>Above 37.6</b> → a focal zone is likely to be found on SEEG (favourable for focused implantation/resection). <b>Below 37.6</b> → a focal zone is unlikely (sensitivity 83%, specificity 76%).</li><li>Strongest drivers: a focal MRI lesion and a focal/lobar ictal EEG onset raise the score; no lesion, bilateral-independent IEDs, or a diffuse ictal onset lower it.</li></ul><p>Demonstration tool — an aid to presurgical discussion, not a substitute for the epilepsy surgery conference.</p>"
+  },
+  "predictors": [
+    {
+      "name": "Lesion extent on MRI",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Focal lesion",
+          "points": 0
+        },
+        {
+          "label": "No lesion",
+          "points": -2.2636
+        },
+        {
+          "label": "Multilobar / other lesion",
+          "points": -2.1494
+        }
+      ],
+      "assess": "Extent of a lesion on presurgical MRI. A focal lesion strongly favours a focal seizure-onset zone; no lesion or a multilobar/extensive lesion argues against it."
+    },
+    {
+      "name": "Interictal EEG (IEDs) extent",
+      "coef": 1,
+      "options": [
+        {
+          "label": "No IEDs",
+          "points": 1.8056
+        },
+        {
+          "label": "Bilateral independent",
+          "points": 0
+        },
+        {
+          "label": "All others",
+          "points": 1.1807
+        }
+      ],
+      "assess": "Extent of interictal epileptiform discharges (IEDs) on scalp EEG. 'No IEDs' and non–bilateral-independent patterns favour focality; bilateral-independent IEDs argue against it."
+    },
+    {
+      "name": "Neuropsychological deficit",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Localizing",
+          "points": 0
+        },
+        {
+          "label": "Not localizing (diffuse)",
+          "points": -0.2554
+        },
+        {
+          "label": "No deficit",
+          "points": 1.155
+        }
+      ],
+      "assess": "Localizing value of the neuropsychological deficit. A localizing deficit — or, paradoxically, no deficit — favours focality; a non-localizing (diffuse) deficit argues against it."
+    },
+    {
+      "name": "Localizing semiology",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Strongly localizing",
+          "points": 0.8489
+        },
+        {
+          "label": "Weak or not localizing",
+          "points": 0
+        }
+      ],
+      "assess": "Localizing value of the seizure semiology. Strongly localizing semiology favours a focal seizure-onset zone."
+    },
+    {
+      "name": "Ictal EEG onset extent",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Focal or lobar",
+          "points": 0.8442
+        },
+        {
+          "label": "Bilateral synchronous",
+          "points": 0
+        },
+        {
+          "label": "None / multilobar / diffuse",
+          "points": -0.8124
+        }
+      ],
+      "assess": "Extent of the ictal EEG onset on scalp EEG. A focal/lobar onset favours focality; bilateral-synchronous or none/multilobar/diffuse onset argues against it."
+    }
+  ],
+  "model": {
+    "type": "logistic",
+    "intercept": 0,
+    "panel_title": "Chance of a focal seizure-onset zone",
+    "outputs": [
+      {
+        "label": "Chance of a focal seizure-onset zone (SEEG)",
+        "intercept": -0.3135
+      }
+    ],
+    "note": "Score >37.6 → a focal seizure-onset zone is likely on SEEG; <37.6 → unlikely (optimal cutoff, Astner-Rohracher 2022).",
+    "viz_info": "Each of the five findings adds or subtracts a weight (the published model coefficient). Their sum (plus a constant) is passed through a logistic function to give the percent chance of a focal seizure-onset zone. The waterfall shows how each finding pushes the estimate up or down; the donut shows the resulting probability.",
+    "lp_label": "5-SENSE linear predictor",
+    "show_lp": false
+  },
+  "provenance": {
+    "extraction_method": "paper_formula",
+    "source": "Astner-Rohracher 2022 JAMA Neurol Fig 2A (coefficients) + Fig 3 (formula & worked examples) — PMID34870697, doi 10.1001/jamaneurol.2021.4405, PMC8649918",
+    "review_status": "human_reviewed",
+    "notes": "Logistic model: score=100·exp(Σcoef−0.3135)/(1+exp(...)). Coefficients from Fig 2A; formula+constant−0.3135 & cutoff 37.6 from Fig 3. Verified vs both worked examples (patient A 0.61→57.4%, patient B −1.556→13.4%). Extracted 2026-07-07."
+  }
+}

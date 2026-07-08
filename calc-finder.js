@@ -16,6 +16,8 @@
       sub: "Risk of seizure recurrence and driving eligibility after one or two unprovoked seizures." },
     { id: "g3", title: "After epilepsy surgery or drug withdrawal", icon: "💊",
       sub: "Risk of relapse when withdrawing antiseizure medication or after epilepsy surgery." },
+    { id: "g4", title: "Surgery planning & SUDEP risk", icon: "🩺",
+      sub: "Presurgical evaluation (SEEG focality, cognitive/mood outcomes) and sudden unexpected death in epilepsy (SUDEP)." },
   ];
   const SETTINGS = {
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
@@ -25,6 +27,7 @@
     two_seizures: "After two unprovoked seizures", withdrawal: "Stopping antiseizure medication",
     surgery: "After epilepsy surgery",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance",
+    seeg: "SEEG / seizure-onset zone", surg_neuropsych: "Cognitive / mood outcome of surgery", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -70,6 +73,8 @@
     ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g3", "surgery"],
     ["calc-frontal-lgg-seizure", "Frontal Low-Grade Tumour", "Seizure outcome after resection of frontal low-grade tumours.", "g3", "surgery"],
     ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g3", "surgery"],
+
+    ["calc-5-sense", "5-SENSE (SEEG focality)", "Chance that stereo-EEG will find a focal seizure-onset zone, from 5 non-invasive findings.", "g4", "seeg"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
