@@ -612,13 +612,27 @@
       }));
     }
 
+    // Per-predictor additive contribution to the linear predictor.
+    // Supports: plain linear (coef*value / coef*points), transform:"exp",
+    // spline (piecewise-linear anchors [[x,lp],...]), and coef_by/coefs
+    // (a slider whose coefficient is selected by another choice predictor -> interaction).
+    _predLpContrib(p, i) {
+      if (Array.isArray(p.spline) && (p.type === "slider" || p.type === "number")) {
+        const v = this._slider[i], a = p.spline;
+        if (v <= a[0][0]) return a[0][1] + (v - a[0][0]) * (a[1][1] - a[0][1]) / (a[1][0] - a[0][0]);
+        for (let k = 1; k < a.length; k++) if (v <= a[k][0]) { const p0 = a[k - 1], p1 = a[k]; return p0[1] + (p1[1] - p0[1]) * (v - p0[0]) / (p1[0] - p0[0]); }
+        const n = a.length, p0 = a[n - 2], p1 = a[n - 1]; return p1[1] + (p1[1] - p0[1]) * (v - p1[0]) / (p1[0] - p0[0]);
+      }
+      const raw = (p.type === "slider" || p.type === "number") ? this._slider[i] : Number(((p.options || [])[this._predSel[i]] || {}).points || 0);
+      const term = p.transform === "exp" ? Math.exp(raw) : raw;
+      let coef = Number(p.coef) || 0;
+      if (Array.isArray(p.coefs) && p.coef_by != null) coef = Number(p.coefs[this._predSel[p.coef_by]] || 0);
+      return coef * term;
+    }
+
     _formulaCompute() {
       const m = this.data.model, preds = this.data.predictors || [];
-      const lp = preds.reduce((a, p, i) => {
-        const v = (p.type === "slider" || p.type === "number") ? this._slider[i] : Number(((p.options || [])[this._predSel[i]] || {}).points || 0);
-        const term = p.transform === "exp" ? Math.exp(v) : v;
-        return a + (Number(p.coef) || 0) * term;
-      }, Number(m.intercept) || 0);
+      const lp = preds.reduce((a, p, i) => a + this._predLpContrib(p, i), Number(m.intercept) || 0);
       let outs;
       if (m.type === "lookup") {
         const bands = m.bands || [];
@@ -629,6 +643,7 @@
         outs = (m.outputs || []).map((o) => {
           let pct;
           if (m.type === "cloglog") pct = (1 - Math.pow(1 - o.F0, Math.exp(lp - (m.center || 0)))) * 100;
+          else if (m.type === "surv") pct = Math.pow(1 - (o.F0 || 0), Math.exp(lp - (m.center || 0))) * 100;
           else if (m.type === "logistic") pct = 100 / (1 + Math.exp(-(lp + (o.intercept || 0))));
           else pct = lp;
           return { label: o.label, pct: Math.max(0, Math.min(100, pct)) };
@@ -641,6 +656,7 @@
     _linkRisk(lp) {
       const m = this.data.model, o = (m.outputs || [{}])[0] || {};
       if (m.type === "cloglog") return Math.max(0, Math.min(100, (1 - Math.pow(1 - (o.F0 || 0), Math.exp(lp - (m.center || 0)))) * 100));
+      if (m.type === "surv") return Math.max(0, Math.min(100, Math.pow(1 - (o.F0 || 0), Math.exp(lp - (m.center || 0))) * 100));
       if (m.type === "logistic") return Math.max(0, Math.min(100, 100 / (1 + Math.exp(-(lp + (o.intercept || 0))))));
       if (m.type === "lookup") { const b = (m.bands || []).find((x) => lp < x.lt); return b ? b.pct : ((m.bands || []).length ? m.bands[m.bands.length - 1].pct : 0); }
       return Math.max(0, Math.min(100, lp));
@@ -650,10 +666,8 @@
       const m = this.data.model, preds = this.data.predictors || [];
       const base = Number(m.intercept) || 0;
       const items = preds.map((p, i) => {
-        const raw = (p.type === "slider" || p.type === "number") ? this._slider[i] : Number(((p.options || [])[this._predSel[i]] || {}).points || 0);
-        const term = p.transform === "exp" ? Math.exp(raw) : raw;
-        const contrib = (Number(p.coef) || 0) * term;
-        const optLabel = (p.type === "slider" || p.type === "number") ? (raw + (p.unit ? " " + p.unit : "")) : (((p.options || [])[this._predSel[i]] || {}).label || "");
+        const contrib = this._predLpContrib(p, i);
+        const optLabel = (p.type === "slider" || p.type === "number") ? (this._slider[i] + (p.unit ? " " + p.unit : "")) : (((p.options || [])[this._predSel[i]] || {}).label || "");
         return { name: p.name, label: optLabel, contrib, on: Math.abs(contrib) > 1e-9 };
       });
       return { base, items };
@@ -670,8 +684,12 @@
         mroot.innerHTML = cells;
       }
       const _cb = this._formulaContribs(), _link = (v) => this._linkRisk(v);
-      this._drawWaterfall(_cb, _link);
-      this._drawDonut(_cb, _link);
+      const wopts = m.lp_points ? { axis: "points", baseLabel: m.wf_base || "Baseline patient", ptsScale: m.pts_scale || 1, ptsUnit: m.pts_unit || "pts" }
+        : (m.type === "surv" ? { baseLabel: m.wf_base || "Baseline patient" } : undefined);
+      this._drawWaterfall(_cb, _link, wopts);
+      const donut = this._panel.querySelector("#fdonut");
+      if (m.type === "surv") { if (donut) donut.style.display = "none"; }
+      else { if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
     }
 
     _drawWaterfall(cb, link, opts) {
@@ -679,18 +697,20 @@
       const { base, items } = cb;
       const active = items.filter((c) => c.on);
       const pmode = !!(opts && opts.axis === "points");   // bars sized by points (nomogram) vs by risk change
+      const psc = (opts && opts.ptsScale) || 1, punit = (opts && opts.ptsUnit) || "pts";
+      const fmtPts = (v) => (v >= 0 ? "+" : "−") + Math.round(Math.abs(v) * psc) + " " + punit;
       const totalAdd = base + active.reduce((a, c) => a + c.contrib, 0);
       const axisMax = pmode ? Math.max(opts.axisMax || totalAdd, totalAdd, 1) : 100;
       const W = 460, rowH = 26, x0 = 168, plotW = 250, n = active.length + 2, H = 18 + n * rowH + 16;
       const sx = (v) => x0 + (Math.max(0, Math.min(axisMax, v)) / axisMax) * plotW;
       let g = `<line x1="${x0}" y1="12" x2="${x0}" y2="${H - 20}" stroke="var(--azure-line)"/>`;
       const ticks = pmode ? [0, axisMax / 4, axisMax / 2, 3 * axisMax / 4, axisMax] : [0, 25, 50, 75, 100];
-      ticks.forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${pmode ? Math.round(v) : v + "%"}</text>`; });
+      ticks.forEach((v) => { g += `<line x1="${sx(v)}" y1="12" x2="${sx(v)}" y2="${H - 26}" stroke="#f0f3f7"/><text x="${sx(v)}" y="${H - 8}" text-anchor="middle" font-size="9" fill="#98a6b5" font-family="var(--sans)">${pmode ? Math.round(v * psc) : v + "%"}</text>`; });
       const baseRisk = link(base);
       let y = 16, cur = base;
       const baseEnd = pmode ? sx(base) : sx(baseRisk);
       g += `<rect x="${x0}" y="${y}" width="${Math.max(pmode ? 0 : 1, baseEnd - x0)}" height="15" rx="2" fill="#9fb4c7"/>`;
-      g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#5b6b7b" font-family="var(--sans)">Baseline risk</text>`;
+      g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#5b6b7b" font-family="var(--sans)">${esc((opts && opts.baseLabel) || "Baseline risk")}</text>`;
       g += `<text x="${baseEnd + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
       y += rowH;
       active.forEach((c, k) => {
@@ -698,7 +718,7 @@
           const x1 = sx(cur), x2 = sx(cur + c.contrib); cur += c.contrib;
           g += `<rect x="${x1}" y="${y}" width="${Math.max(2, x2 - x1)}" height="15" rx="2" fill="${PAL[k % PAL.length]}"/>`;
           g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#1a2430" font-family="var(--sans)">${esc(shorten(c.name, 22))}</text>`;
-          g += `<text x="${x2 + 6}" y="${y + 12}" font-size="10.5" fill="#135ba8" font-family="var(--sans)">${c.wlabel != null ? c.wlabel : ("+" + c.contrib + " pts")}</text>`;
+          g += `<text x="${x2 + 6}" y="${y + 12}" font-size="10.5" fill="#135ba8" font-family="var(--sans)">${c.wlabel != null ? c.wlabel : fmtPts(c.contrib)}</text>`;
         } else {
           const before = link(cur), after = link(cur + c.contrib); cur += c.contrib;
           const up = after >= before, x1 = sx(Math.min(before, after)), w = Math.max(1.5, Math.abs(after - before) / 100 * plotW);

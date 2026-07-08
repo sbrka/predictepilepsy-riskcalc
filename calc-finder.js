@@ -27,7 +27,7 @@
     two_seizures: "After two unprovoked seizures", withdrawal: "Stopping antiseizure medication",
     surgery: "After epilepsy surgery",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance",
-    seeg: "SEEG / seizure-onset zone", surg_neuropsych: "Cognitive / mood outcome of surgery", sudep: "SUDEP risk",
+    seeg: "SEEG / seizure-onset zone", surg_outcome: "Seizure-freedom after surgery", surg_neuropsych: "Cognitive / mood outcome of surgery", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -75,6 +75,9 @@
     ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g3", "surgery"],
 
     ["calc-5-sense", "5-SENSE (SEEG focality)", "Chance that stereo-EEG will find a focal seizure-onset zone, from 5 non-invasive findings.", "g4", "seeg"],
+    ["calc-jehi-nomogram", "Jehi Nomogram (seizure freedom)", "Chance of complete seizure freedom at 2 and 5 years after resective epilepsy surgery, from six presurgical characteristics.", "g4", "surg_outcome"],
+    ["calc-naming-decline", "Naming Decline (TLE surgery)", "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).", "g4", "surg_neuropsych"],
+    ["calc-memory-decline", "Verbal Memory Decline (TLR)", "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).", "g4", "surg_neuropsych"],
   ];
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));

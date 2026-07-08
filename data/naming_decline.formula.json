@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "id": "naming_decline",
+  "kind": "formula",
+  "meta": {
+    "title": "Naming Decline after Temporal Lobe Surgery",
+    "doi": "10.1212/WNL.0000000000006629",
+    "pmid": "30404781",
+    "authors": "Busch RM, et al.",
+    "year": 2018,
+    "journal": "Neurology",
+    "outcome": "Predicted probability of clinically relevant postoperative naming decline (a drop of ≥5 raw points on the 60-item Boston Naming Test) in adults undergoing temporal lobe resection for pharmacoresistant epilepsy, from 5 easily obtained preoperative predictors.",
+    "cff_info": "<p><b>What this shows.</b> This calculator reproduces the primary nomogram of Busch et&nbsp;al. (<i>Neurology</i> 2018) estimating the probability of <b>clinically relevant naming decline</b> — a decline of <b>≥5 raw points on the Boston Naming Test (BNT)</b> — after temporal lobe resection (TLR) for drug-resistant temporal lobe epilepsy. It uses five preoperative variables that are routinely available in most epilepsy surgery centers: side of resection, age at epilepsy onset, age at surgery, sex, and years of education.</p><h4>How to read it</h4><ul><li>The result is the <b>percent chance of a ≥5-point BNT decline</b> (0–100) after surgery.</li><li><b>Dominant-hemisphere (typically left) resection is by far the strongest driver</b> — it raises the odds of decline roughly 14-fold; naming decline after nondominant resection is uncommon.</li><li>Older age at epilepsy onset and older age at surgery increase the estimated risk; more years of education slightly decrease it; female sex nudges it upward.</li></ul><h4>Key findings</h4><ul><li>Developed on 719 patients (Cleveland Clinic) and externally validated on 138 patients from 3 US centers; 26% of the development cohort had clinically relevant naming decline.</li><li>Discrimination was excellent — c-statistic <b>0.83</b> in development and <b>0.81</b> in external validation, with excellent calibration.</li><li>Dominant-sided resection (OR 14.07, 95% CI 8.48–23.34) and each year older at epilepsy onset (OR 1.05, 95% CI 1.03–1.07) were the significant predictors; age at surgery, sex, and education were retained to sharpen discrimination.</li><li>Worked nomogram example: onset age 15, dominant resection, age 60 at surgery, female, 10 years education → ≈58% predicted risk (this calculator returns 58.4%).</li></ul><p>A separate second model (side of surgery, age at epilepsy onset, preoperative BNT score) predicts moderate-to-severe decline (≥11 points; c = 0.84) and is not implemented here.</p><p>Demonstration and counseling aid — not a substitute for a multidisciplinary epilepsy surgery evaluation.</p>"
+  },
+  "predictors": [
+    {
+      "name": "Side of resection",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Nondominant hemisphere",
+          "points": 0
+        },
+        {
+          "label": "Dominant hemisphere",
+          "points": 2.644
+        }
+      ],
+      "assess": "Language-dominant vs nondominant temporal lobe resection, determined by fMRI or Wada testing (in right-handers, left = dominant). Dominant-sided resection is the strongest predictor of naming decline (β = 2.644; OR 14.07)."
+    },
+    {
+      "name": "Age at epilepsy onset",
+      "type": "slider",
+      "min": 0,
+      "max": 70,
+      "step": 1,
+      "default": 14,
+      "unit": "years",
+      "coef": 0.048,
+      "assess": "Age (years) at onset of epilepsy. Later onset predicts greater risk of naming decline — each additional year raises the odds ~5% (β = 0.048; OR 1.05). Development-cohort median 14 years."
+    },
+    {
+      "name": "Age at surgery",
+      "type": "slider",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "default": 36,
+      "unit": "years",
+      "coef": 0.015,
+      "assess": "Age (years) at the time of temporal lobe resection. Older age at surgery modestly increases risk (β = 0.015; OR 1.02, not independently significant but improves discrimination). Development-cohort mean 36 years."
+    },
+    {
+      "name": "Sex",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Male",
+          "points": 0
+        },
+        {
+          "label": "Female",
+          "points": 0.367
+        }
+      ],
+      "assess": "Patient sex. Female sex is associated with a slightly higher estimated risk (β = 0.367; OR 1.44, not independently significant but retained to improve discrimination)."
+    },
+    {
+      "name": "Years of education",
+      "type": "slider",
+      "min": 0,
+      "max": 25,
+      "step": 1,
+      "default": 13,
+      "unit": "years",
+      "coef": -0.049,
+      "assess": "Total years of formal education. More education is associated with a slightly lower estimated risk of naming decline (β = −0.049; OR 0.95, not independently significant). Development-cohort mean ~13 years."
+    }
+  ],
+  "model": {
+    "type": "logistic",
+    "intercept": 0,
+    "panel_title": "Chance of clinically relevant naming decline",
+    "outputs": [
+      {
+        "label": "Chance of ≥5-point BNT naming decline",
+        "intercept": -3.802
+      }
+    ],
+    "note": "Percent chance of a clinically relevant (≥5-point BNT) naming decline after temporal lobe resection. Dominant-sided resection is the dominant driver; nondominant resections rarely cause decline. Busch et al., Neurology 2018 (c-statistic 0.81–0.83).",
+    "viz_info": "Each predictor contributes its published logistic weight (β × value for the age/education sliders; the side and sex options add their β when the higher-risk category is chosen). The weights plus the model intercept (−3.802) are summed and passed through a logistic function to give the percent chance of naming decline. The waterfall shows how each factor pushes the estimate up or down; the donut shows the resulting probability.",
+    "lp_label": "Naming-decline linear predictor",
+    "show_lp": false
+  },
+  "provenance": {
+    "extraction_method": "paper_formula",
+    "source": "Busch 2018 Neurology Table 3 (published logistic coefficients + intercept, clinically-relevant ≥5-point model) and Figure 3 nomogram (worked example) — PMID 30404781, doi 10.1212/WNL.0000000000006629.",
+    "review_status": "human_reviewed",
+    "notes": "Logistic model, ≥5-point BNT decline: LP = -3.802 + 0.048·onset_age + 2.644·[dominant] + 0.015·age_surgery + 0.367·[female] - 0.049·education; pct = 100/(1+exp(-LP)). Coefficients & intercept from Table 3. Verified vs Figure 3 worked example (onset 15, dominant, age 60, female, education 10 → LP 0.339 → 58.4%, paper ≈58%). c-statistic 0.83 (development) / 0.81 (external validation). Second model (≥11-point moderate-severe decline: intercept -6.545, onset 0.045, dominant 2.772, baseline BNT 0.03; c=0.84) not implemented. Extracted 2026-07-08."
+  }
+}

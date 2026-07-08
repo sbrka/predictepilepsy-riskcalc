@@ -1,0 +1,79 @@
+{
+  "schema_version": "1.0",
+  "id": "memory_decline",
+  "kind": "formula",
+  "meta": {
+    "title": "Verbal Memory Decline after Temporal Lobe Resection",
+    "doi": "10.1212/WNL.0000000000012221",
+    "pmid": "34011574",
+    "authors": "Busch RM, et al.",
+    "year": 2021,
+    "journal": "Neurology",
+    "outcome": "Predicted probability of clinically significant delayed verbal-memory decline after temporal lobe resection (TLR) for epilepsy. This calculator implements the RAVLT Delay model (word-list learning; c = 0.81), the strongest of the three models in Busch 2021.",
+    "cff_info": "<p><b>What this shows.</b> This tool estimates the probability of a <b>clinically significant decline in delayed verbal memory</b> after <b>temporal lobe resection (TLR)</b> for epilepsy, using preoperative variables available in most surgical centers (Busch RM et al., <i>Neurology</i> 2021). Models were developed in 359 adults at the Cleveland Clinic and externally validated in 290 adults across 5 US/Canadian centers.</p><h4>Key findings</h4><ul><li>Busch 2021 built <b>three</b> models, one per delayed-memory measure: <b>RAVLT Delay</b> (Rey Auditory Verbal Learning Test word list; c&nbsp;=&nbsp;0.81), <b>Logical Memory / LM Delay</b> (WMS-III story recall; c&nbsp;=&nbsp;0.76) and <b>Verbal Paired Associates / VPA Delay</b> (WMS-III word pairs; c&nbsp;=&nbsp;0.78).</li><li>Across all three measures, <b>surgery in the dominant (usually left) hemisphere</b> and a <b>higher preoperative memory score</b> raised the odds of postoperative decline.</li><li>The <b>RAVLT</b> model additionally included <b>hippocampal resection</b> (resected → higher risk); the <b>LM</b> and <b>VPA</b> models additionally included <b>years of education</b> (more education → lower risk).</li><li>Overall, <b>29%</b> of the development cohort and <b>26%</b> of the validation cohort declined on at least one measure. Calibration was very good (no systematic over- or under-estimation).</li></ul><h4>What this calculator implements</h4><p>This calculator implements the <b>RAVLT Delay</b> model — the most discriminating of the three (c&nbsp;=&nbsp;0.81) — with predictors <b>surgery side</b>, <b>baseline RAVLT Delay raw score</b> and <b>hippocampal resection</b>. The LM and VPA models (which instead use baseline score, surgery side and education) are described above but not computed here.</p><h4>How to read it</h4><ul><li>The result is the <b>percent probability</b> of a clinically significant RAVLT delayed-recall decline (a raw drop of &ge;4 points on retest, per published reliable-change indices).</li><li>Higher baseline memory, dominant-hemisphere surgery and hippocampal resection each push the probability up.</li></ul><p>Demonstration tool for preoperative counseling — an aid to shared decision-making, not a substitute for formal neuropsychological evaluation.</p>"
+  },
+  "predictors": [
+    {
+      "name": "Surgery side",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Nondominant hemisphere",
+          "points": 0
+        },
+        {
+          "label": "Dominant hemisphere",
+          "points": 2.635
+        }
+      ],
+      "assess": "Side of temporal lobe resection relative to language dominance (dominant is usually the left hemisphere, established by fMRI and/or Wada). Dominant-hemisphere resection markedly raises the risk of verbal-memory decline (RAVLT model coefficient 2.635; OR 13.94)."
+    },
+    {
+      "name": "Baseline RAVLT Delay score",
+      "type": "slider",
+      "min": 0,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "words recalled",
+      "coef": 0.246,
+      "assess": "Preoperative Rey Auditory Verbal Learning Test (RAVLT) delayed-recall raw score — number of words recalled after the 30-minute delay, from a 15-word list (range 0-15). A higher preoperative score means more memory to lose and raises the odds of decline (coefficient 0.246 per point; OR 1.28)."
+    },
+    {
+      "name": "Hippocampal resection",
+      "coef": 1,
+      "options": [
+        {
+          "label": "Spared",
+          "points": 0
+        },
+        {
+          "label": "Resected",
+          "points": 2.160
+        }
+      ],
+      "assess": "Whether the hippocampus was resected (vs spared) at surgery. Hippocampal resection substantially increases the risk of delayed verbal-memory decline (RAVLT model coefficient 2.160; OR 8.67)."
+    }
+  ],
+  "model": {
+    "type": "logistic",
+    "intercept": 0,
+    "panel_title": "Probability of delayed verbal-memory decline (RAVLT)",
+    "outputs": [
+      {
+        "label": "Probability of RAVLT Delay decline",
+        "intercept": -7.068
+      }
+    ],
+    "note": "RAVLT Delay logistic model (Busch 2021, Table 2; c = 0.81): logit = -7.068 + 0.246·(baseline RAVLT Delay) + 2.635·(dominant surgery) + 2.160·(hippocampus resected). The companion LM Delay (c = 0.76) and VPA Delay (c = 0.78) models use baseline score, surgery side and education instead (see About) and are not computed here.",
+    "viz_info": "Each preoperative factor adds a weight (the published model coefficient) to a running total. Their sum plus the model constant is passed through a logistic function to give the percent probability of delayed verbal-memory decline. The waterfall shows how each factor pushes the estimate up or down; the donut shows the resulting probability.",
+    "lp_label": "RAVLT model linear predictor",
+    "show_lp": false
+  },
+  "provenance": {
+    "extraction_method": "paper_formula",
+    "source": "Busch RM et al. 2021 Neurology 97:e263-e274 — Table 2 (Model Coefficients and ORs: published logistic coefficients + intercepts for RAVLT, LM, VPA). doi 10.1212/WNL.0000000000012221, PMID 34011574.",
+    "review_status": "human_reviewed",
+    "notes": "RAVLT Delay model implemented (primary; highest c = 0.81). Coefficients from Table 2: baseline score 0.246, dominant surgery 2.635, hippocampus resected 2.160, intercept -7.068. Continuous baseline RAVLT delayed-recall raw score (0-15 word list). LM (intercept -2.123; baseline 0.357, dominant 1.339, education -0.256) and VPA (intercept -3.398; baseline 0.310, dominant 1.663, education -0.145) models NOT encoded because their predictor coefficients differ from RAVLT and the single-coef-per-predictor logistic form cannot carry per-output betas; described in About text. Sanity checks: nondominant/spared/low-baseline -> ~0.2%; dominant+resected+baseline 8 -> ~42%; dominant+resected+baseline 12 -> ~66%; directions match paper. Extracted 2026-07-08."
+  }
+}

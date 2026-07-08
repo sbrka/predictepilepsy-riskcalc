@@ -1,0 +1,172 @@
+{
+ "schema_version": "1.0",
+ "id": "jehi_nomogram",
+ "kind": "formula",
+ "meta": {
+  "title": "Jehi nomogram — chance of seizure freedom after epilepsy surgery",
+  "doi": "10.1016/S1474-4422(14)70325-4",
+  "pmid": "25638640",
+  "authors": "Jehi L, Yardi R, Chagin K, et al.",
+  "year": 2015,
+  "journal": "Lancet Neurology",
+  "outcome": "Predicted chance of COMPLETE freedom from seizure recurrence at 2 and 5 years after resective epilepsy surgery, from six routinely available presurgical characteristics",
+  "cff_info": "<p><b>What this shows.</b> The <b>Jehi nomogram</b> (Jehi et&nbsp;al., <i>Lancet Neurology</i> 2015) gives an individualised estimate of the chance of <b>complete freedom from seizure recurrence</b> at <b>2 and 5 years</b> after resective epilepsy surgery, from six easily obtained presurgical characteristics. It was developed on 846 patients at the Cleveland Clinic and externally validated on 604 patients (concordance ~0.60).</p><h4>How to read it</h4><ul><li>The two figures are the <b>percent chance of being completely seizure-free</b> (Engel-equivalent, isolated auras not counted) at 2 and 5 years.</li><li>Longer time from seizure onset to surgery worsens the outlook for <b>frontal</b> and <b>posterior-quadrant</b> resections but has little effect for <b>temporal</b> resections; a history of <b>generalised tonic–clonic seizures</b>, higher <b>preoperative seizure frequency</b>, and temporal or posterior (vs frontal) surgery lower the chance.</li><li>The waterfall shows how each factor moves this patient's estimate up or down from a baseline patient.</li></ul><p>Demonstration tool reproducing the published nomogram — an aid to presurgical counselling, not a substitute for the epilepsy surgery conference.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Sex",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Female",
+     "points": 0
+    },
+    {
+     "label": "Male",
+     "points": 0.1715
+    }
+   ],
+   "assess": "Patient sex. Male sex slightly lowers the chance of seizure freedom in the model (women = reference)."
+  },
+  {
+   "name": "Type of surgery",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Frontal lobe",
+     "points": 0
+    },
+    {
+     "label": "Posterior cortex / quadrant",
+     "points": 0.3057
+    },
+    {
+     "label": "Temporal lobe",
+     "points": 0.6972
+    }
+   ],
+   "assess": "Resection type. Frontal is the reference; temporal and posterior-quadrant resections carry a higher baseline recurrence hazard. This choice also sets how strongly epilepsy duration matters (see below)."
+  },
+  {
+   "name": "Time from seizure onset to surgery",
+   "unit": "yr",
+   "type": "slider",
+   "min": 0,
+   "max": 65,
+   "step": 1,
+   "default": 10,
+   "coef_by": 1,
+   "coefs": [
+    0.0306,
+    0.0181,
+    -0.0039
+   ],
+   "assess": "Years between age at first seizure and age at surgery (epilepsy duration). Longer duration reduces the chance of seizure freedom for frontal and posterior-quadrant resections, but has essentially no effect for temporal resections (an interaction built into the model)."
+  },
+  {
+   "name": "Generalised tonic–clonic seizures",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.2493
+    }
+   ],
+   "assess": "History of secondarily generalised (focal-to-bilateral) tonic–clonic seizures. Their presence lowers the chance of seizure freedom."
+  },
+  {
+   "name": "Cause of seizures",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Malformation of cortical development (MCD)",
+     "points": 0
+    },
+    {
+     "label": "Mesial temporal sclerosis (MTS)",
+     "points": -0.185
+    },
+    {
+     "label": "Tumour",
+     "points": -0.1937
+    },
+    {
+     "label": "Stroke",
+     "points": -0.1175
+    },
+    {
+     "label": "Other / unknown",
+     "points": 0.2294
+    }
+   ],
+   "assess": "Pathological cause (from histology or MRI). MCD is the reference; tumour, MTS and stroke are somewhat more favourable, an 'other/unknown' cause less favourable."
+  },
+  {
+   "name": "Preoperative seizures per month",
+   "unit": "/mo",
+   "type": "slider",
+   "min": 0,
+   "max": 100,
+   "step": 1,
+   "default": 4,
+   "spline": [
+    [
+     0,
+     0.0
+    ],
+    [
+     10,
+     0.1409
+    ],
+    [
+     20,
+     0.2582
+    ],
+    [
+     30,
+     0.3554
+    ],
+    [
+     50,
+     0.4945
+    ],
+    [
+     100,
+     0.6187
+    ]
+   ],
+   "assess": "Average monthly seizure frequency before surgery. Higher frequency lowers the chance of seizure freedom, with a diminishing (spline-shaped) effect at high counts. Range shown 0–100/month covers essentially all patients."
+  }
+ ],
+ "model": {
+  "type": "surv",
+  "intercept": 0,
+  "center": 1.0,
+  "panel_title": "Chance of complete seizure freedom",
+  "wf_base": "Baseline patient",
+  "outputs": [
+   {
+    "label": "Complete seizure freedom · 2 years",
+    "F0": 0.43
+   },
+   {
+    "label": "Complete seizure freedom · 5 years",
+    "F0": 0.6
+   }
+  ],
+  "note": "Predicts COMPLETE freedom from seizure recurrence (isolated auras and single early-postoperative or provoked seizures not counted). Baseline chance at the model mean is 57% (2 yr) / 40% (5 yr). Reproduces the published worked example (58% / 41%).",
+  "viz_info": "Each characteristic adds or subtracts a weight (the published Cox coefficient) to a linear predictor, which is turned into the chance of remaining seizure-free at 2 and 5 years. The waterfall starts from a baseline patient and shows how each factor raises (green) or lowers (red) this patient's chance of seizure freedom.",
+  "lp_label": "Linear predictor",
+  "show_lp": false
+ },
+ "provenance": {
+  "extraction_method": "paper_coefficients+figure_digitisation",
+  "source": "Jehi 2015 Lancet Neurol Table 2 (Cox coefficients) + Figure 3 nomogram (seizures/month spline axis, scale calibration) + Figure 5 worked example — doi 10.1016/S1474-4422(14)70325-4",
+  "review_status": "human_reviewed",
+  "notes": "Cox model, complete-seizure-freedom nomogram (Fig 3). Linear predictor from Table 2 coefficients: sex Men +0.1715; surgery Frontal 0/Posterior +0.3057/Temporal +0.6972; time-to-surgery slope by surgery type Frontal +0.0306, Posterior +0.0181 (=0.0306-0.0125), Temporal -0.0039 (=0.0306-0.0345) per year; GTCS +0.2493; cause MCD 0/MTS -0.1850/Tumour -0.1937/Stroke -0.1175/Other +0.2294; seizures/month via restricted-cubic-spline axis digitised from Fig 3 (pts/LP=50). Chance of freedom = S0^exp(LP-C), S0(2yr)=0.57, S0(5yr)=0.40, C=1.00 (centering fixed to the Fig 5 worked example). Nomogram scale confirmed: categorical point-spans match coefficients to <2px; freq near-0 slope 0.0141 = coef 0.0143. Digitised & built 2026-07-08."
+ }
+}
