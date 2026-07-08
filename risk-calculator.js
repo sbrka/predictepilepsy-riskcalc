@@ -732,32 +732,33 @@
       else { const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
     }
 
-    // Two per-horizon pies for a survival/freedom outcome: green arc = chance of the
-    // favourable outcome (e.g. seizure freedom), grey remainder = its complement.
+    // House-style risk donut (shared): arc = `pct`% of the ring in `color`, grey remainder.
+    // Big centre value + coloured sub-word, a serif caption, and a muted footnote (the complement).
+    _donutSVG({ pct, disp, centerSub, caption, footnote, color }) {
+      const cx = 96, cy = 96, rad = 74, w = 24, frac = Math.max(0, Math.min(100, pct)) / 100;
+      const a0 = -Math.PI / 2, a1 = a0 + frac * 2 * Math.PI;
+      const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#e7edf3" stroke-width="${w}"/>`;
+      const arc = frac > 0.9999 ? `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="${color}" stroke-width="${w}"/>` : (frac > 0 ? arcPath(cx, cy, rad, a0, a1, color, w) : "");
+      const dispTxt = String(disp), fs = dispTxt.length > 3 ? 30 : 38;
+      return `<div style="text-align:center">
+        <svg viewBox="0 0 192 192" style="width:100%;max-width:180px" role="img" aria-label="${esc(caption || "")}: ${esc(dispTxt)} ${esc(centerSub || "")}">
+          ${track}${arc}
+          <text x="${cx}" y="${centerSub ? cy - 2 : cy + 12}" text-anchor="middle" font-family="var(--serif)" font-size="${fs}" fill="#1a2430">${esc(dispTxt)}</text>
+          ${centerSub ? `<text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="${color}" font-weight="650">${esc(centerSub)}</text>` : ""}
+        </svg>
+        ${caption ? `<div style="font-family:var(--serif);font-size:15px;font-weight:700;color:#1a2430;margin-top:2px">${esc(caption)}</div>` : ""}
+        ${footnote ? `<div style="font-family:var(--sans);font-size:11.5px;color:#7c8a98">${esc(footnote)}</div>` : ""}
+      </div>`;
+    }
+
+    // Two per-horizon pies for a survival/freedom outcome (green = favourable outcome).
     _drawSurvDonuts(outs) {
       const wrap = this._panel.querySelector("#fdonuts"); if (!wrap) return;
-      const m = this.data.model;
-      const compLabel = m.complement_label || "recurrence";
-      const freeLabel = m.free_label || "seizure-free";
-      const pie = (o) => {
-        const pct = Math.max(0, Math.min(100, o.pct));
-        const cx = 96, cy = 96, rad = 74, w = 24, frac = pct / 100;
-        const a0 = -Math.PI / 2, a1 = a0 + frac * 2 * Math.PI;
-        const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#e7edf3" stroke-width="${w}"/>`;
-        const arc = frac > 0.9999 ? `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#0f7a54" stroke-width="${w}"/>` : (frac > 0 ? arcPath(cx, cy, rad, a0, a1, "#0f7a54", w) : "");
-        // split the o.label into a short caption (the part after the middot, e.g. "2 years")
-        const cap = (o.label.split("·").pop() || o.label).trim();
-        return `<div style="text-align:center">
-          <svg viewBox="0 0 192 192" style="width:100%;max-width:190px" role="img" aria-label="${esc(cap)}: ${Math.round(pct)}% ${esc(freeLabel)}">
-            ${track}${arc}
-            <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-family="var(--serif)" font-size="40" fill="#1a2430">${Math.round(pct)}%</text>
-            <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="#0f7a54" font-weight="650">${esc(freeLabel)}</text>
-          </svg>
-          <div style="font-family:var(--serif);font-size:15px;font-weight:700;color:#1a2430;margin-top:2px">${esc(cap)}</div>
-          <div style="font-family:var(--sans);font-size:11.5px;color:#7c8a98">${Math.round(100 - pct)}% ${esc(compLabel)}</div>
-        </div>`;
-      };
-      wrap.innerHTML = (outs || []).map(pie).join("");
+      const m = this.data.model, compLabel = m.complement_label || "recurrence", freeLabel = m.free_label || "seizure-free";
+      wrap.innerHTML = (outs || []).map((o) => {
+        const pct = Math.max(0, Math.min(100, o.pct)), cap = (o.label.split("·").pop() || o.label).trim();
+        return this._donutSVG({ pct, disp: Math.round(pct) + "%", centerSub: freeLabel, caption: cap, footnote: Math.round(100 - pct) + "% " + compLabel, color: "#0f7a54" });
+      }).join("");
     }
 
     _drawWaterfall(cb, link, opts) {
@@ -953,8 +954,25 @@
         return `<div style="margin-bottom:18px"><div class="flabel" style="margin-bottom:8px">${esc(tl[t] || ("Score " + t))}<b style="margin-left:8px;color:var(--azure-deep)">${totals[t]}</b></div>
           ${items.length ? `<div class="recrules">` + items.map((c) => `<div class="recrule"><span class="rk">${esc(shorten(c.name, 32))}</span><span class="rt" style="color:var(--azure-deep)">+${c.pts} pts</span></div>`).join("") + `</div>` : `<div style="font-size:13px;color:var(--muted);padding:2px 0">No points added by the current selection.</div>`}</div>`;
       };
-      const vizInfo = m.viz_info || "Each factor adds points to one or both nomogram scores; the totals are looked up in the published risk tables.";
-      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">Score breakdown <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this">i</button></div></div>${tids.map(section).join("")}`;
+      const vizInfo = m.viz_info || "Each predicted outcome is shown as a pie — the coloured slice is the chance of that outcome, the grey slice its complement. Below, each factor's points are broken down for the two nomogram scores that drive these outcomes.";
+      // House-style donuts: one pie per outcome (absolute % it predicts), then the score breakdown.
+      const riskWord = m.risk_word || "recurrence", freeWord = m.free_word || "seizure-free";
+      const capOf = (lab) => { const mo = lab.match(/(\d+)\s*(?:-?\s*year|yr)/i); return mo ? mo[1] + " years" : lab; };
+      const donut = (o) => {
+        const good = o.tone === "good", color = good ? "#0f7a54" : "#d1495b";
+        const sub = good ? freeWord : riskWord, v = o.val;
+        let arc, disp, comp;
+        if (v == null) { arc = 0; disp = "—"; comp = ""; }
+        else if (typeof v === "number") { arc = v; disp = v + "%"; comp = (100 - v) + "% " + (good ? "relapse" : freeWord); }
+        else if (/^<\s*\d/.test(v)) { const n = parseInt(v.replace(/\D/g, "")); arc = Math.max(4, n * 0.7); disp = v + "%"; comp = ">" + (100 - n) + "% " + (good ? "relapse" : freeWord); }
+        else if (/^>\s*\d/.test(v)) { const n = parseInt(v.replace(/\D/g, "")); arc = Math.min(96, n + 3); disp = v + "%"; comp = "<" + (100 - n) + "% " + (good ? "relapse" : freeWord); }
+        else { arc = 0; disp = String(v); comp = ""; }
+        return this._donutSVG({ pct: arc, disp, centerSub: sub, caption: capOf(o.label), footnote: comp, color });
+      };
+      this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted outcomes")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this">i</button></div></div>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:6px 0 20px">${outs.map(donut).join("")}</div>
+        <div class="flabel" style="margin:0 0 12px;padding-top:14px;border-top:1px solid var(--line)">How the scores build up</div>
+        ${tids.map(section).join("")}`;
     }
 
     /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
