@@ -86,6 +86,8 @@
     .cffinfo th,.cffinfo td{border:1px solid var(--line);padding:5px 8px;text-align:left}
     .cffinfo a{color:var(--azure-deep);text-decoration:none;border-bottom:1px solid var(--azure-line)}
     .cffinfo img{height:auto}
+    .seg.stack{flex-direction:column;gap:4px}
+    .seg.stack button{flex:0 0 auto;width:100%;text-align:left;white-space:normal;overflow-wrap:break-word;line-height:1.3;padding:10px 12px;font-size:13.5px}
     .seg.modeseg{max-width:none;width:auto;flex:0 0 auto}
     .seg.modeseg button{flex:0 0 auto;white-space:nowrap;padding:8px 15px}
     .belowinfo{border-top:1px solid var(--line);padding:0 34px}
@@ -592,10 +594,12 @@
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
       const vizInfo = m.viz_info || "Each risk factor you select adds a coloured contribution. The waterfall (left) starts from the baseline risk and steps up with each active factor, so you can see which factors drive this patient's risk and by how much. The donut (right) shows the same factors as wedges summing to the total predicted risk in the centre.";
+      const survViz = m.type === "surv";
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
         <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
+          ${survViz ? `<div id="fdonuts" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>` : ""}
           <div style="width:100%"><svg id="fwater" role="img" aria-label="Contribution waterfall" style="width:100%"></svg></div>
-          <div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>
+          ${survViz ? "" : `<div style="text-align:center"><svg id="fdonut" viewBox="0 0 300 292" style="max-width:330px" role="img" aria-label="Risk donut"></svg></div>`}
         </div>`;
       this._formulaUpdate();
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
@@ -687,9 +691,36 @@
       const wopts = m.lp_points ? { axis: "points", baseLabel: m.wf_base || "Baseline patient", ptsScale: m.pts_scale || 1, ptsUnit: m.pts_unit || "pts" }
         : (m.type === "surv" ? { baseLabel: m.wf_base || "Baseline patient" } : undefined);
       this._drawWaterfall(_cb, _link, wopts);
-      const donut = this._panel.querySelector("#fdonut");
-      if (m.type === "surv") { if (donut) donut.style.display = "none"; }
-      else { if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
+      if (m.type === "surv") { this._drawSurvDonuts(outs); }
+      else { const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
+    }
+
+    // Two per-horizon pies for a survival/freedom outcome: green arc = chance of the
+    // favourable outcome (e.g. seizure freedom), grey remainder = its complement.
+    _drawSurvDonuts(outs) {
+      const wrap = this._panel.querySelector("#fdonuts"); if (!wrap) return;
+      const m = this.data.model;
+      const compLabel = m.complement_label || "recurrence";
+      const freeLabel = m.free_label || "seizure-free";
+      const pie = (o) => {
+        const pct = Math.max(0, Math.min(100, o.pct));
+        const cx = 96, cy = 96, rad = 74, w = 24, frac = pct / 100;
+        const a0 = -Math.PI / 2, a1 = a0 + frac * 2 * Math.PI;
+        const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#e7edf3" stroke-width="${w}"/>`;
+        const arc = frac > 0.9999 ? `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#0f7a54" stroke-width="${w}"/>` : (frac > 0 ? arcPath(cx, cy, rad, a0, a1, "#0f7a54", w) : "");
+        // split the o.label into a short caption (the part after the middot, e.g. "2 years")
+        const cap = (o.label.split("·").pop() || o.label).trim();
+        return `<div style="text-align:center">
+          <svg viewBox="0 0 192 192" style="width:100%;max-width:190px" role="img" aria-label="${esc(cap)}: ${Math.round(pct)}% ${esc(freeLabel)}">
+            ${track}${arc}
+            <text x="${cx}" y="${cy - 2}" text-anchor="middle" font-family="var(--serif)" font-size="40" fill="#1a2430">${Math.round(pct)}%</text>
+            <text x="${cx}" y="${cy + 22}" text-anchor="middle" font-family="var(--sans)" font-size="12.5" fill="#0f7a54" font-weight="650">${esc(freeLabel)}</text>
+          </svg>
+          <div style="font-family:var(--serif);font-size:15px;font-weight:700;color:#1a2430;margin-top:2px">${esc(cap)}</div>
+          <div style="font-family:var(--sans);font-size:11.5px;color:#7c8a98">${Math.round(100 - pct)}% ${esc(compLabel)}</div>
+        </div>`;
+      };
+      wrap.innerHTML = (outs || []).map(pie).join("");
     }
 
     _drawWaterfall(cb, link, opts) {
@@ -844,7 +875,8 @@
       if (!this._predSel) this._predSel = (this.data.predictors || []).map(() => 0);
       const info = p.assess || p.info || "";
       const opts = (p.options || []).map((o, oi) => `<button data-oi="${oi}" class="${oi === this._predSel[i] ? "on" : ""}">${esc(o.label)}</button>`).join("");
-      return `<div class="field"><div class="flabel">${p.abbrev ? `<span class="code">${esc(p.abbrev)}</span>` : ""}${esc(p.name)}${info ? `<button class="info-dot" data-info="${attr(info)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</div><div class="seg" data-pi="${i}">${opts}</div></div>`;
+      const segCls = "seg" + (p.layout === "stack" ? " stack" : "");
+      return `<div class="field"><div class="flabel">${p.abbrev ? `<span class="code">${esc(p.abbrev)}</span>` : ""}${esc(p.name)}${info ? `<button class="info-dot" data-info="${attr(info)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</div><div class="${segCls}" data-pi="${i}">${opts}</div></div>`;
     }
 
     _footHTML() {

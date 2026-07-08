@@ -103,7 +103,8 @@
      "points": 0.2294
     }
    ],
-   "assess": "Pathological cause (from histology or MRI). MCD is the reference; tumour, MTS and stroke are somewhat more favourable, an 'other/unknown' cause less favourable."
+   "assess": "Pathological cause (from histology or MRI). MCD is the reference; tumour, MTS and stroke are somewhat more favourable, an 'other/unknown' cause less favourable.",
+   "layout": "stack"
   },
   {
    "name": "Preoperative seizures per month",
@@ -159,9 +160,11 @@
    }
   ],
   "note": "Predicts COMPLETE freedom from seizure recurrence (isolated auras and single early-postoperative or provoked seizures not counted). Baseline chance at the model mean is 57% (2 yr) / 40% (5 yr). Reproduces the published worked example (58% / 41%).",
-  "viz_info": "Each characteristic adds or subtracts a weight (the published Cox coefficient) to a linear predictor, which is turned into the chance of remaining seizure-free at 2 and 5 years. The waterfall starts from a baseline patient and shows how each factor raises (green) or lowers (red) this patient's chance of seizure freedom.",
+  "viz_info": "Two pies show the predicted chance of complete seizure freedom at 2 and 5 years (green = seizure-free, grey = recurrence). The waterfall below starts from a baseline patient and shows how each characteristic raises (green) or lowers (red) this patient's chance of seizure freedom — the running total matches the 2-year pie.",
   "lp_label": "Linear predictor",
-  "show_lp": false
+  "show_lp": false,
+  "free_label": "seizure-free",
+  "complement_label": "recurrence"
  },
  "provenance": {
   "extraction_method": "paper_coefficients+figure_digitisation",
