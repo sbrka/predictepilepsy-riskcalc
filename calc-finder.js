@@ -287,7 +287,9 @@
             let hdr = 0;
             const h = document.querySelector("#site-header, header.site-header, .site-header, header");
             if (h) { const cs = getComputedStyle(h); if (cs.position === "fixed" || cs.position === "sticky") hdr = h.offsetHeight || 0; }
-            const y = host.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0) - hdr - 14;
+            // target the calculator BOX (the panel that wraps the finder) so its top edge lands just below the header
+            const box = (host.closest && host.closest("#pe-calc-panel, .rc-wrap, .pnews")) || host;
+            const y = box.getBoundingClientRect().top + (window.pageYOffset || window.scrollY || 0) - hdr - 12;
             window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
           } catch (e) { try { host.scrollIntoView(true); } catch (e2) {} }
         };
