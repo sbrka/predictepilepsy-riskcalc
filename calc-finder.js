@@ -267,9 +267,12 @@
       }
       return h;
     }
+    // A calc may be listed under several settings (e.g. one tool across IS/ICH/SAH/CVT) so the
+    // GUIDED drill-down surfaces it per aetiology — but list each slug only ONCE in browse/search.
+    _dedup(arr) { const seen = new Set(); return arr.filter((c) => seen.has(c[0]) ? false : seen.add(c[0])); }
     browse() {
       return GROUPS.map((g) => {
-        const list = CALCS.filter((c) => c[3] === g.id);
+        const list = this._dedup(CALCS.filter((c) => c[3] === g.id));
         return `<div class="grp"><div class="gh"><span class="gi">${g.icon}</span><h2>${esc(g.title)}</h2></div>
           <p class="gsub">${esc(g.sub)}</p><div class="cards">${list.map((c) => this.card(c)).join("")}</div></div>`;
       }).join("");
@@ -277,8 +280,8 @@
     // --- search by calculator name / acronym ---
     _matches(q) {
       const ql = q.toLowerCase(), toks = ql.split(/\s+/).filter(Boolean);
-      return CALCS
-        .filter((c) => { const hay = (c[1] + " " + c[2] + " " + abbrev(c[1])).toLowerCase(); return toks.every((t) => hay.includes(t)); })
+      return this._dedup(CALCS
+        .filter((c) => { const hay = (c[1] + " " + c[2] + " " + abbrev(c[1])).toLowerCase(); return toks.every((t) => hay.includes(t)); }))
         .sort((a, b) => (b[1].toLowerCase().includes(ql) ? 1 : 0) - (a[1].toLowerCase().includes(ql) ? 1 : 0));
     }
     search() {
