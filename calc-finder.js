@@ -34,16 +34,16 @@
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
-    ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/" }],
+    ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/", ec: true, ecwhy: "Editor's choice for late seizures after ischaemic stroke — the most extensively externally validated model for this question (alongside IsCHEMiA)." }],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "stroke_isch"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "ich"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "sah"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "cvt"],
-    ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch"],
+    ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch", { ec: true, ecwhy: "Editor's choice for late seizures after ischaemic stroke — tier A: largest derivation cohort (n=1436) with external validation (alongside SeLECT)." }],
     ["calc-select-asys-rsys", "SeLECT (ASyS vs RSyS)", "Acute- vs remote-symptomatic seizure risk after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-pseicare", "PSEiCARe (post-stroke epilepsy)", "1-year late post-stroke epilepsy risk group from 7 clinical factors (Chi 2018).", "g1", "stroke_isch"],
     ["calc-posers", "PoSERS (post-stroke epilepsy)", "Post-Stroke Epilepsy Risk Scale — 7-item clinical score (Strzelczyk 2010).", "g1", "stroke_isch"],
-    ["calc-cave-score", "CAVE Score", "Late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
+    ["calc-cave-score", "CAVE Score", "Late seizures after intracerebral haemorrhage (ICH).", "g1", "ich", { ec: true, ecwhy: "Editor's choice for late seizures after ICH — tier A, largest externally validated derivation cohort (n=993) among CAVE/LEAN/LANE/CAVE²." }],
     ["calc-cave2-score", "CAVE² Score", "Modified CAVE score for late seizures after ICH.", "g1", "ich"],
     ["calc-lane-score", "LANE Score", "Clinical score for late seizures after ICH.", "g1", "ich"],
     ["calc-lean", "LEAN Score", "Clinical score for late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
@@ -51,7 +51,7 @@
     ["calc-safari", "SAFARI (acute SAH seizures)", "Risk of a convulsive seizure during admission for aneurysmal subarachnoid haemorrhage (Jaja 2018).", "g1", "sah"],
     ["calc-dias3", "DIAS3", "Remote seizure / epilepsy risk after cerebral venous thrombosis.", "g1", "cvt"],
     ["calc-early-seizure-cvt", "Early Seizures after CVT", "Early seizure risk after cerebral venous thrombosis.", "g1", "cvt"],
-    ["calc-pte-nomogram-1", "PTE after TBI (Wang 2021)", "Post-traumatic epilepsy nomogram after traumatic brain injury.", "g1", "tbi"],
+    ["calc-pte-nomogram-1", "PTE after TBI (Wang 2021)", "Post-traumatic epilepsy nomogram after traumatic brain injury.", "g1", "tbi", { ec: true, ecwhy: "Editor's choice for post-traumatic epilepsy after TBI — tier A, largest derivation cohort (n=1301) with external validation." }],
     ["calc-pte-nomogram-2", "PTE after Cerebral Contusion (Lin 2022)", "Post-traumatic epilepsy nomogram after cerebral contusion.", "g1", "tbi"],
     ["calc-pte-nomogram-3", "PTE — Late Seizures (Ou 2025)", "Prognostic model for late seizures after traumatic brain injury.", "g1", "tbi"],
     ["calc-epilepsy-first-pts", "First Post-traumatic Seizure", "Epilepsy risk after a first post-traumatic seizure.", "g1", "tbi"],
@@ -150,6 +150,8 @@
     .chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
     .chip.norec{background:#fbeaea;color:#b02020}
     .chip.ext{background:#eef6fe;color:var(--azure-deep)}
+    .chip.ec{background:#fff6e2;color:#8a5a00;border:1px solid #f1ddb0;font-weight:700}
+    .card.ec{border-color:#f1ddb0;box-shadow:0 2px 10px rgba(180,140,40,.10)}
     .card.norec{opacity:.6}.card.norec:hover{opacity:1}
     .step h2{font-size:22px;margin:2px 0 22px;text-align:center;letter-spacing:-.2px}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -218,16 +220,18 @@
     }
     go(slug) { window.location.href = this._base + "/" + slug + "/"; }
     card(c) {
-      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge}
-      const ext = o.ext, norec = o.rec === false;
+      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ec:true, ecwhy, ab, badge}
+      const ext = o.ext, norec = o.rec === false, ec = o.ec === true;
       const href = ext || (this._base + "/" + c[0] + "/");
       const ab = o.ab || abbrev(c[1]);
       const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
+      // ★ Editor's choice: only where several tools answer the SAME question in the SAME population.
       const flags =
+        (ec ? `<span class="chip ec" title="${esc(o.ecwhy || "Best-evidence choice among the tools answering this same question")}">&#9733; Editor&rsquo;s choice</span>` : "") +
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
         (ext ? `<span class="chip ext">external tool ↗</span>` : "");
-      return `<a class="card${norec ? " norec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
+      return `<a class="card${norec ? " norec" : ""}${ec ? " ec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
         `<span class="cbadge" style="background:linear-gradient(150deg,${grad[0]},${grad[1]})"><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
         `<span class="ctxt">${flags ? `<span class="chiprow">${flags}</span>` : ""}<span class="cn">${esc(c[1])}</span><span class="cd">${esc(c[2])}</span><span class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</span></span></a>`;
     }
