@@ -34,16 +34,16 @@
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
-    ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/", ec: true, ecwhy: "Editor's choice for late seizures after ischaemic stroke — the most extensively externally validated model for this question (alongside IsCHEMiA)." }],
+    ["select-score", "SeLECT Score", "The flagship SeLECT score — risk of late (unprovoked) seizures after ischaemic stroke.", "g1", "stroke_isch", { ext: "https://predictapps.github.io/select/" }],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "stroke_isch"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "ich"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "sah"],
     ["calc-post-stroke-recurrence", "Post-Stroke Seizure Recurrence (SeLECT-RS)", "Risk of a further seizure by WHEN the first post-stroke seizure occurred — revisiting the 7-day cutoff.", "g1", "cvt"],
-    ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch", { ec: true, ecwhy: "Editor's choice for late seizures after ischaemic stroke — tier A: largest derivation cohort (n=1436) with external validation (alongside SeLECT)." }],
+    ["calc-ischemia", "IsCHEMiA Score", "Imaging-based risk of late seizures after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-select-asys-rsys", "SeLECT (ASyS vs RSyS)", "Acute- vs remote-symptomatic seizure risk after ischaemic stroke.", "g1", "stroke_isch"],
     ["calc-pseicare", "PSEiCARe (post-stroke epilepsy)", "1-year late post-stroke epilepsy risk group from 7 clinical factors (Chi 2018).", "g1", "stroke_isch"],
     ["calc-posers", "PoSERS (post-stroke epilepsy)", "Post-Stroke Epilepsy Risk Scale — 7-item clinical score (Strzelczyk 2010).", "g1", "stroke_isch"],
-    ["calc-cave-score", "CAVE Score", "Late seizures after intracerebral haemorrhage (ICH).", "g1", "ich", { ec: true, ecwhy: "Editor's choice for late seizures after ICH — tier A, largest externally validated derivation cohort (n=993) among CAVE/LEAN/LANE/CAVE²." }],
+    ["calc-cave-score", "CAVE Score", "Late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
     ["calc-cave2-score", "CAVE² Score", "Modified CAVE score for late seizures after ICH.", "g1", "ich"],
     ["calc-lane-score", "LANE Score", "Clinical score for late seizures after ICH.", "g1", "ich"],
     ["calc-lean", "LEAN Score", "Clinical score for late seizures after intracerebral haemorrhage (ICH).", "g1", "ich"],
@@ -51,7 +51,7 @@
     ["calc-safari", "SAFARI (acute SAH seizures)", "Risk of a convulsive seizure during admission for aneurysmal subarachnoid haemorrhage (Jaja 2018).", "g1", "sah"],
     ["calc-dias3", "DIAS3", "Remote seizure / epilepsy risk after cerebral venous thrombosis.", "g1", "cvt"],
     ["calc-early-seizure-cvt", "Early Seizures after CVT", "Early seizure risk after cerebral venous thrombosis.", "g1", "cvt"],
-    ["calc-pte-nomogram-1", "PTE after TBI (Wang 2021)", "Post-traumatic epilepsy nomogram after traumatic brain injury.", "g1", "tbi", { ec: true, ecwhy: "Editor's choice for post-traumatic epilepsy after TBI — tier A, largest derivation cohort (n=1301) with external validation." }],
+    ["calc-pte-nomogram-1", "PTE after TBI (Wang 2021)", "Post-traumatic epilepsy nomogram after traumatic brain injury.", "g1", "tbi"],
     ["calc-pte-nomogram-2", "PTE after Cerebral Contusion (Lin 2022)", "Post-traumatic epilepsy nomogram after cerebral contusion.", "g1", "tbi"],
     ["calc-pte-nomogram-3", "PTE — Late Seizures (Ou 2025)", "Prognostic model for late seizures after traumatic brain injury.", "g1", "tbi"],
     ["calc-epilepsy-first-pts", "First Post-traumatic Seizure", "Epilepsy risk after a first post-traumatic seizure.", "g1", "tbi"],
@@ -109,6 +109,44 @@
     ["calc-pte-dre", "Post-Traumatic Epilepsy — Drug Resistance (Yu)", "Probability of drug-resistant epilepsy in people with post-traumatic epilepsy, from 4 factors.", "g6", "drug_resistance"],
     ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors (Allotey 2019).", "g6", "pregnancy"],
   ];
+  // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
+  // "ec" = Editor's choice (strongest evidence for that clinical question)
+  // "rec" = Recommended (clinically useful, good evidence). Unlisted = no badge (weaker evidence).
+  const BADGE = {
+    "calc-2helps2b": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=5427, externally validated)."],
+    "calc-5-sense": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=128, externally validated)."],
+    "calc-autoimmune-enceph-recurrence": ["rec", "Recommended — clinically useful with good evidence (tier B, n=981)."],
+    "calc-bmers": ["rec", "Recommended — clinically useful with good evidence (tier B, n=799)."],
+    "calc-cave-score": ["ec", "Editor's choice — best of CAVE / LEAN / LANE / CAVE²: tier A, n=993, externally validated."],
+    "calc-dias3": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=1128, externally validated)."],
+    "calc-drug-withdrawal": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=231, externally validated)."],
+    "calc-empire": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=399, externally validated)."],
+    "calc-epilepsy-first-pts": ["rec", "Recommended — clinically useful with good evidence (tier B, n=2286)."],
+    "calc-epilepsy-first-seizure-dementia": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1039)."],
+    "calc-first-seizure-driving": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1714)."],
+    "calc-hops": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1267)."],
+    "calc-ischemia": ["ec", "Editor's choice — best of the post-ischaemic-stroke seizure models: tier A, n=1436, externally validated (alongside SeLECT)."],
+    "calc-jehi-nomogram": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=846, externally validated)."],
+    "calc-jha-sudep": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1273)."],
+    "calc-jme-drug-resistance": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=2518, externally validated)."],
+    "calc-lamberink": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=1769, externally validated)."],
+    "calc-lane-score": ["rec", "Recommended — tier A evidence (n=602, externally validated). CAVE is the editor's choice for this same question."],
+    "calc-lean": ["rec", "Recommended — tier A evidence (n=781, externally validated). CAVE is the editor's choice for this same question."],
+    "calc-memory-decline": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=359, externally validated)."],
+    "calc-mess-part1": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1443)."],
+    "calc-mess-part2": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1443)."],
+    "calc-mood-decline": ["rec", "Recommended — clinically useful with good evidence (tier B, n=592)."],
+    "calc-naming-decline": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=719, externally validated)."],
+    "calc-pseicare": ["rec", "Recommended — clinically useful with good evidence (tier B, cohort n/a)."],
+    "calc-pte-nomogram-1": ["ec", "Editor's choice — best of the PTE nomograms after TBI: tier A, n=1301, externally validated."],
+    "calc-pte-nomogram-3": ["rec", "Recommended — tier B evidence (n=475, externally validated). PTE after TBI (Wang 2021) is the editor's choice for this same question."],
+    "calc-return-driving-first-seizure": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1386)."],
+    "calc-rise": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=419, externally validated)."],
+    "calc-safari": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1500, externally validated)."],
+    "calc-sanad-bt": ["rec", "Recommended — clinically useful with good evidence (tier B, cohort n/a)."],
+    "calc-sfs": ["rec", "Recommended — clinically useful with good evidence (tier B, n=466)."],
+    "select-score": ["ec", "Editor's choice — the most extensively externally validated model for late seizures after ischaemic stroke (alongside IsCHEMiA)."],
+  };
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // per-group accent dot on the score badge (matches the old calc-home look)
@@ -150,8 +188,12 @@
     .chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
     .chip.norec{background:#fbeaea;color:#b02020}
     .chip.ext{background:#eef6fe;color:var(--azure-deep)}
-    .chip.ec{background:#fff6e2;color:#8a5a00;border:1px solid #f1ddb0;font-weight:700}
-    .card.ec{border-color:#f1ddb0;box-shadow:0 2px 10px rgba(180,140,40,.10)}
+    .chip.ec{background:#fdefd0;color:#7a4d00;border:1px solid #e0b25f;font-weight:750;letter-spacing:.01em}
+    .chip.rec{background:#e7f4ec;color:#0f6b45;border:1px solid #bfe3ce;font-weight:650}
+    .card.ec{border:2px solid #e0b25f;background:linear-gradient(180deg,#fffcf3 0%,#fff 60%);box-shadow:0 6px 20px rgba(190,140,40,.18)}
+    .card.ec:hover{border-color:#c9932f;box-shadow:0 10px 26px rgba(190,140,40,.26);transform:translateY(-2px)}
+    .card.rec{border:1.5px solid #bfe3ce;background:linear-gradient(180deg,#fbfefc 0%,#fff 60%)}
+    .card.rec:hover{border-color:#5aa87f;box-shadow:0 8px 22px rgba(20,120,80,.14)}
     .card.norec{opacity:.6}.card.norec:hover{opacity:1}
     .step h2{font-size:22px;margin:2px 0 22px;text-align:center;letter-spacing:-.2px}
     .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -220,18 +262,20 @@
     }
     go(slug) { window.location.href = this._base + "/" + slug + "/"; }
     card(c) {
-      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ec:true, ecwhy, ab, badge}
-      const ext = o.ext, norec = o.rec === false, ec = o.ec === true;
+      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge}
+      const ext = o.ext, norec = o.rec === false;
+      const b = BADGE[c[0]] || null;              // ["ec"|"rec", why] from the evidence table
+      const ec = !!b && b[0] === "ec", recd = !!b && b[0] === "rec";
       const href = ext || (this._base + "/" + c[0] + "/");
       const ab = o.ab || abbrev(c[1]);
       const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
-      // ★ Editor's choice: only where several tools answer the SAME question in the SAME population.
       const flags =
-        (ec ? `<span class="chip ec" title="${esc(o.ecwhy || "Best-evidence choice among the tools answering this same question")}">&#9733; Editor&rsquo;s choice</span>` : "") +
+        (ec ? `<span class="chip ec" title="${esc(b[1])}">&#9733; Editor&rsquo;s choice</span>` : "") +
+        (recd ? `<span class="chip rec" title="${esc(b[1])}">&#10003; Recommended</span>` : "") +
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
         (ext ? `<span class="chip ext">external tool ↗</span>` : "");
-      return `<a class="card${norec ? " norec" : ""}${ec ? " ec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
+      return `<a class="card${norec ? " norec" : ""}${ec ? " ec" : recd ? " rec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
         `<span class="cbadge" style="background:linear-gradient(150deg,${grad[0]},${grad[1]})"><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
         `<span class="ctxt">${flags ? `<span class="chiprow">${flags}</span>` : ""}<span class="cn">${esc(c[1])}</span><span class="cd">${esc(c[2])}</span><span class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</span></span></a>`;
     }
