@@ -68,6 +68,7 @@
     ["calc-2helps2b", "2HELPS2B (cEEG seizure risk)", "Probability of an electrographic seizure on continuous EEG in critically ill patients, from 6 EEG/clinical features.", "g1", "critical_eeg"],
 
     ["calc-first-seizure-driving", "First Seizure & Driving", "Recurrence risk (COSY) after a first-ever seizure by aetiology, and when driving thresholds are met.", "g2", "first_seizure"],
+    ["calc-fsc-childhood-epilepsy", "First Consultation — Children (FSC)", "Probability of an epilepsy diagnosis in a child after one or more paroxysmal events, from 11 clinical features + EEG (van Diessen 2018, UMC Utrecht).", "g2", "first_seizure"],
     ["calc-first-seizure-recurrence", "First Unprovoked Seizure — Recurrence", "Recurrence after a first unprovoked seizure by risk factor (EEG, MRI, nocturnal, prior insult).", "g2", "first_seizure"],
     ["calc-mess-part1", "MESS (Part 1)", "Recurrence risk after a first seizure — combination table.", "g2", "first_seizure"],
     ["calc-mess-part2", "MESS (Part 2)", "Prognostic index for recurrence after a single seizure / early epilepsy.", "g2", "first_seizure"],

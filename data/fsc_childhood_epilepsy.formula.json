@@ -1,0 +1,208 @@
+{
+ "schema_version": "1.0",
+ "id": "fsc_childhood_epilepsy",
+ "kind": "formula",
+ "meta": {
+  "title": "First Consultation (FSC) — childhood epilepsy after paroxysmal events",
+  "doi": "10.1542/peds.2018-0931",
+  "pmid": "30442770",
+  "authors": "van Diessen E, Lamberink HJ, Otte WM, Doornebal N, Brouwer OF, Jansen FE, Braun KPJ",
+  "year": 2018,
+  "journal": "Pediatrics",
+  "outcome": "Probability that a child presenting after one or more paroxysmal events will be diagnosed with epilepsy, from 11 clinical features and the interictal EEG available at the first consultation",
+  "cff_info": "<p><b>What this shows.</b> The <b>First Consultation (FSC)</b> model (van Diessen et&nbsp;al., <i>Pediatrics</i> 2018) estimates the probability that a child who presents after <b>one or more paroxysmal events</b> will be diagnosed with epilepsy, using only information available at the <b>first outpatient consultation</b>: 11 clinical features plus the interictal EEG. Developed at the UMC Utrecht paediatric-neurology outpatient department and validated on a similar cohort from the Martini Hospital, Groningen.</p><h4>How to read it</h4><ul><li>The result is the <b>percent probability of an epilepsy diagnosis</b>.</li><li>The <b>EEG</b> is by far the strongest single driver (generalised epileptiform &rarr; large increase), followed by <b>automatisms</b> and a <b>history of neurological disorder</b>.</li><li>Intended to support — not replace — the clinical judgement at that first visit.</li></ul><p><b>Source &amp; acknowledgement.</b> This calculator is a faithful re-implementation of the <b>First Consultation (FSC)</b> tool from <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>, developed at <b>UMC Utrecht</b> (Braun / Otte group). The model coefficients were ported verbatim from the authors' own open-source implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0), reproduced here with the authors' permission. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the original tool.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Sex",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Female",
+     "points": 0
+    },
+    {
+     "label": "Male",
+     "points": 0.65583
+    }
+   ],
+   "assess": "Patient sex. Male sex slightly increases the estimated probability of an epilepsy diagnosis (female = reference)."
+  },
+  {
+   "name": "Age at first event",
+   "unit": "years",
+   "type": "slider",
+   "min": 0,
+   "max": 18,
+   "step": 1,
+   "default": 6,
+   "coef": 0.0466,
+   "assess": "Age at the first paroxysmal event, in years (model range 0–18; values are clamped to this range). Older age at onset slightly increases the probability."
+  },
+  {
+   "name": "Bilateral shaking or jerking",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.58519
+    }
+   ],
+   "assess": "Event description: was there bilateral shaking or jerking?"
+  },
+  {
+   "name": "Stiffening / tonic posturing",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.65431
+    }
+   ],
+   "assess": "Event description: was there stiffening or tonic posturing?"
+  },
+  {
+   "name": "Lateralisation of symptoms",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.76494
+    }
+   ],
+   "assess": "Event description: were the symptoms lateralised (clearly one-sided)?"
+  },
+  {
+   "name": "Weakness / loss of muscle tone",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.12028
+    }
+   ],
+   "assess": "Event description: was there weakness or loss of muscle tone?"
+  },
+  {
+   "name": "Automatisms",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.62695
+    }
+   ],
+   "assess": "Event description: were there automatisms? One of the strongest clinical predictors in the model."
+  },
+  {
+   "name": "History of neurological disorder",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1.33676
+    }
+   ],
+   "assess": "History of a neurological disorder — i.e. birth asphyxia, congenital or acquired brain lesion, head trauma, CNS infection, or migraine."
+  },
+  {
+   "name": "History of psychiatric disorder",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.21355
+    }
+   ],
+   "assess": "History of a psychiatric disorder — i.e. autism, attention-deficit (hyperactivity) disorder, or other."
+  },
+  {
+   "name": "Known syndrome",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.79069
+    }
+   ],
+   "assess": "A known genetic or metabolic syndrome."
+  },
+  {
+   "name": "EEG result",
+   "coef": 1,
+   "layout": "stack",
+   "options": [
+    {
+     "label": "Normal",
+     "points": 0
+    },
+    {
+     "label": "Generalised epileptiform",
+     "points": 3.80806
+    },
+    {
+     "label": "Localised epileptiform",
+     "points": 3.20263
+    },
+    {
+     "label": "Hypofunctional",
+     "points": 1.27371
+    }
+   ],
+   "assess": "Interictal EEG at first consultation. The dominant predictor: generalised or localised epileptiform activity raises the probability of an epilepsy diagnosis substantially; 'hypofunctional' = focal/diffuse slowing without epileptiform discharges."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": -3.79076,
+  "panel_title": "Probability of an epilepsy diagnosis",
+  "outputs": [
+   {
+    "label": "Probability of an epilepsy diagnosis",
+    "intercept": 0
+   }
+  ],
+  "note": "Population-level logistic regression from children seen after one or more paroxysmal events. Complements, does not replace, clinical judgement. Original tool: epilepsypredictiontools.info (UMC Utrecht).",
+  "viz_info": "Each clinical feature and the EEG add a weight (the published logistic-regression coefficient) to a linear predictor, which is turned into the probability of an epilepsy diagnosis. The waterfall starts from a baseline child (all features absent, normal EEG) and shows how each finding raises (red) or lowers (green) the probability.",
+  "lp_label": "Linear predictor",
+  "show_lp": false
+ },
+ "provenance": {
+  "extraction_method": "authors_reference_implementation",
+  "source": "Ported verbatim from the authors' own open-source implementation docs/js/fsc-calc.js at github.com/wmotte/epilepsypredictiontools (Apache-2.0), the code behind epilepsypredictiontools.info. Primary paper: van Diessen 2018 Pediatrics, doi 10.1542/peds.2018-0931.",
+  "review_status": "human_reviewed",
+  "notes": "Logistic: logodds = -3.79076 + 0.65583*male + 0.04660*age(0-18, clamped) + 0.58519*bilateral + 0.65431*tonic + 0.76494*lateralisation + 1.12028*loss-of-tone + 1.62695*automatisms + 1.33676*neuro-history + 0.21355*psych-history + 0.79069*syndrome + EEG(normal 0 / generalised 3.80806 / localised 3.20263 / hypofunctional 1.27371); p=100*odds/(1+odds). Coefficients copied exactly from the authors' fsc-calc.js. Added per partner request (Braun/Galovic, Jul 2026) WITH acknowledgement + link to epilepsypredictiontools.info. Built 2026-07-08."
+ }
+}
