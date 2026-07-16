@@ -282,8 +282,10 @@
       const rest = list.filter((c) => !pop(c));
       const cards = (l) => `<div class="cards">${l.map((c) => this.card(c)).join("")}</div>`;
       if (!paed.length || paed.length === list.length) return cards(list);   // nothing to separate
+      // Untagged models lead, unlabelled — heading them "not age-specific" would push a niche
+      // age-tagged tool above the flagship ones. Only the age-specific sets get a heading.
       const sec = (title, l) => l.length ? `<div class="popsec"><div class="poph">${title}</div>${cards(l)}</div>` : "";
-      return sec("Adults", adult) + sec("Not age-specific", rest) + sec("Children", paed);
+      return (rest.length ? cards(rest) : "") + sec("Adults", adult) + sec("Children", paed);
     }
     card(c) {
       const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge, pop}
