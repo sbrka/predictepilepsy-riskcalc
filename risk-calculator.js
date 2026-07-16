@@ -976,7 +976,7 @@
             <input type="range" class="mspred" data-si="${i}" min="${mn}" max="${mx}" step="${p.vals ? 1 : (p.step || 1)}" value="${v}" style="--fill:${(v - mn) / (mx - mn) * 100}%"></div>`;
         } else {
           rail += `<div class="field"><div class="flabel"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span></div>
-            <div class="seg" data-pi="${i}">${(p.options || []).map((o, oi) => `<button data-oi="${oi}" class="${oi === this._msSel[i] ? "on" : ""}">${esc(o.label)}</button>`).join("")}</div></div>`;
+            <div class="seg${p.layout === "stack" ? " stack" : ""}" data-pi="${i}">${(p.options || []).map((o, oi) => `<button data-oi="${oi}" class="${oi === this._msSel[i] ? "on" : ""}">${esc(o.label)}</button>`).join("")}</div></div>`;
         }
       });
       rail += `<div class="scorewrap" id="msmetrics"></div>`;
