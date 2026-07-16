@@ -1,0 +1,387 @@
+{
+ "schema_version": "1.0",
+ "id": "cloppenborg_dq50",
+ "kind": "formula",
+ "meta": {
+  "title": "Post-operative DQ > 50 after paediatric epilepsy surgery (Cloppenborg)",
+  "doi": "10.1212/WNL.0000000000013065",
+  "pmid": "34795046",
+  "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
+  "year": 2022,
+  "journal": "Neurology",
+  "outcome": "Probability of post-operative DQ > 50",
+  "cff_info": "<p><b>What this shows.</b> The probability that a child <b>with developmental delay</b> will have a developmental quotient <b>above 50</b> two years after paediatric epilepsy surgery, from the pre-surgical DQ and the aetiology group.</p><p><b>Validation.</b> Developed from 492 children with IQ/DQ measured before and 2 years after surgery (IQ n=365, DQ n=127). The IQ models were developed in the Bielefeld (Bethel) cohort (n=258) and externally validated in the Utrecht cohort (n=102): accuracy 0.82 (IQ&gt;85) and 0.84 (IQ&gt;70), with excellent discrimination (AUC 0.90 and 0.92). The DQ model was developed in the Bethel cohort with 10-fold cross-validation (correct classification 76%). Notably, the risk of cognitive deterioration after surgery was very low (IQ: 37.3% improved vs 6.6% deteriorated).</p><p><b>Source &amp; acknowledgement.</b> This calculator reproduces the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> model developed jointly by <b>Universitätsklinik OWL (Bielefeld)</b> and <b>UMC Utrecht</b>. The published look-up tables were taken from the authors' own reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0) and re-expressed exactly as the underlying additive logistic model. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tools.</p>",
+  "citation": "Neurology 2022;98(3):e225–e235"
+ },
+ "predictors": [
+  {
+   "name": "Pre-surgical DQ",
+   "type": "slider",
+   "min": 1,
+   "max": 80,
+   "step": 1,
+   "default": 50,
+   "unit": "DQ",
+   "assess": "Developmental quotient measured before surgery (1–80). This model applies to children with developmental delay. Pre-surgical DQ is the strongest predictor of the post-operative DQ.",
+   "spline": [
+    [
+     1,
+     -4.488353
+    ],
+    [
+     2,
+     -4.372757
+    ],
+    [
+     3,
+     -4.25716
+    ],
+    [
+     4,
+     -4.141564
+    ],
+    [
+     5,
+     -4.025967
+    ],
+    [
+     6,
+     -3.91037
+    ],
+    [
+     7,
+     -3.794774
+    ],
+    [
+     8,
+     -3.679177
+    ],
+    [
+     9,
+     -3.563581
+    ],
+    [
+     10,
+     -3.447984
+    ],
+    [
+     11,
+     -3.332388
+    ],
+    [
+     12,
+     -3.216791
+    ],
+    [
+     13,
+     -3.101195
+    ],
+    [
+     14,
+     -2.985598
+    ],
+    [
+     15,
+     -2.870002
+    ],
+    [
+     16,
+     -2.754405
+    ],
+    [
+     17,
+     -2.638809
+    ],
+    [
+     18,
+     -2.523212
+    ],
+    [
+     19,
+     -2.407616
+    ],
+    [
+     20,
+     -2.292019
+    ],
+    [
+     21,
+     -2.176423
+    ],
+    [
+     22,
+     -2.060826
+    ],
+    [
+     23,
+     -1.94523
+    ],
+    [
+     24,
+     -1.829633
+    ],
+    [
+     25,
+     -1.714036
+    ],
+    [
+     26,
+     -1.59844
+    ],
+    [
+     27,
+     -1.482843
+    ],
+    [
+     28,
+     -1.367247
+    ],
+    [
+     29,
+     -1.25165
+    ],
+    [
+     30,
+     -1.136054
+    ],
+    [
+     31,
+     -1.020457
+    ],
+    [
+     32,
+     -0.904861
+    ],
+    [
+     33,
+     -0.789264
+    ],
+    [
+     34,
+     -0.673668
+    ],
+    [
+     35,
+     -0.558071
+    ],
+    [
+     36,
+     -0.442475
+    ],
+    [
+     37,
+     -0.326878
+    ],
+    [
+     38,
+     -0.211282
+    ],
+    [
+     39,
+     -0.095685
+    ],
+    [
+     40,
+     0.019911
+    ],
+    [
+     41,
+     0.135508
+    ],
+    [
+     42,
+     0.251104
+    ],
+    [
+     43,
+     0.366701
+    ],
+    [
+     44,
+     0.482298
+    ],
+    [
+     45,
+     0.597894
+    ],
+    [
+     46,
+     0.713491
+    ],
+    [
+     47,
+     0.829087
+    ],
+    [
+     48,
+     0.944684
+    ],
+    [
+     49,
+     1.06028
+    ],
+    [
+     50,
+     1.175877
+    ],
+    [
+     51,
+     1.291473
+    ],
+    [
+     52,
+     1.40707
+    ],
+    [
+     53,
+     1.522666
+    ],
+    [
+     54,
+     1.638263
+    ],
+    [
+     55,
+     1.753859
+    ],
+    [
+     56,
+     1.869456
+    ],
+    [
+     57,
+     1.985052
+    ],
+    [
+     58,
+     2.100649
+    ],
+    [
+     59,
+     2.216245
+    ],
+    [
+     60,
+     2.331842
+    ],
+    [
+     61,
+     2.447438
+    ],
+    [
+     62,
+     2.563035
+    ],
+    [
+     63,
+     2.678632
+    ],
+    [
+     64,
+     2.794228
+    ],
+    [
+     65,
+     2.909825
+    ],
+    [
+     66,
+     3.025421
+    ],
+    [
+     67,
+     3.141018
+    ],
+    [
+     68,
+     3.256614
+    ],
+    [
+     69,
+     3.372211
+    ],
+    [
+     70,
+     3.487807
+    ],
+    [
+     71,
+     3.603404
+    ],
+    [
+     72,
+     3.719
+    ],
+    [
+     73,
+     3.834597
+    ],
+    [
+     74,
+     3.950193
+    ],
+    [
+     75,
+     4.06579
+    ],
+    [
+     76,
+     4.181386
+    ],
+    [
+     77,
+     4.296983
+    ],
+    [
+     78,
+     4.412579
+    ],
+    [
+     79,
+     4.528176
+    ],
+    [
+     80,
+     4.643772
+    ]
+   ]
+  },
+  {
+   "name": "MCD, vascular or encephalitis aetiology",
+   "type": "choice",
+   "coef": 1,
+   "assess": "Aetiology group. MCD = all subtypes of focal cortical dysplasia except those in the context of tuberous sclerosis complex; vascular = perinatal infarction and porencephaly, arteriovenous malformations and cavernoma; encephalitis = infection-related and autoimmune, such as Rasmussen encephalitis.",
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": -1.39746
+    }
+   ]
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Developmental outcome 2 years after paediatric epilepsy surgery",
+  "outputs": [
+   {
+    "label": "Probability of post-operative DQ > 50",
+    "intercept": 0
+   }
+  ],
+  "note": "Population-level estimate from a 2-year post-surgical outcome model. Always apply clinical judgement.",
+  "viz_info": "The pie shows the predicted probability of a post-operative DQ > 50. Below, each factor's contribution to the log-odds is broken down.",
+  "lp_label": "Log-odds",
+  "show_lp": false
+ },
+ "provenance": {
+  "extraction_method": "authors_reference_implementation",
+  "source": "Cloppenborg et al., Neurology 2022;98(3):e225-e235 (doi 10.1212/WNL.0000000000013065, PMID 34795046). Published look-up table taken verbatim from the authors' reference implementation at github.com/wmotte/epilepsypredictiontools (Apache-2.0), as published at epilepsypredictiontools.info. The table is a materialisation of an additive logistic model: inverting the logit recovers the model exactly (category effects are constant across the whole axis to <3e-4 on the log-odds scale, i.e. rounding of the published 9-decimal probabilities). Reproduced here as a spline on the pre-operative score plus constant category effects.",
+  "review_status": "human_reviewed",
+  "notes": "Additive logistic model recovered by inverting the authors' published probability table. Spline = logit p at the reference profile (no MCD/vascular/encephalitis) across DQ 1-80; the aetiology group enters as a constant log-odds offset."
+ }
+}

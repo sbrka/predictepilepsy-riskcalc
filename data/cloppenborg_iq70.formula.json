@@ -1,0 +1,467 @@
+{
+ "schema_version": "1.0",
+ "id": "cloppenborg_iq70",
+ "kind": "formula",
+ "meta": {
+  "title": "Post-operative IQ > 70 after paediatric epilepsy surgery (Cloppenborg)",
+  "doi": "10.1212/WNL.0000000000013065",
+  "pmid": "34795046",
+  "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
+  "year": 2022,
+  "journal": "Neurology",
+  "outcome": "Probability of post-operative IQ > 70",
+  "cff_info": "<p><b>What this shows.</b> The probability that a child will have an intelligence quotient <b>above 70</b> two years after paediatric epilepsy surgery, from pre-surgical IQ and the extent of the resection. Unlike the IQ&nbsp;&gt;&nbsp;85 model, invasive diagnostics are not part of this model.</p><p><b>Validation.</b> Developed from 492 children with IQ/DQ measured before and 2 years after surgery (IQ n=365, DQ n=127). The IQ models were developed in the Bielefeld (Bethel) cohort (n=258) and externally validated in the Utrecht cohort (n=102): accuracy 0.82 (IQ&gt;85) and 0.84 (IQ&gt;70), with excellent discrimination (AUC 0.90 and 0.92). The DQ model was developed in the Bethel cohort with 10-fold cross-validation (correct classification 76%). Notably, the risk of cognitive deterioration after surgery was very low (IQ: 37.3% improved vs 6.6% deteriorated).</p><p><b>Source &amp; acknowledgement.</b> This calculator reproduces the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> model developed jointly by <b>Universitätsklinik OWL (Bielefeld)</b> and <b>UMC Utrecht</b>. The published look-up tables were taken from the authors' own reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0) and re-expressed exactly as the underlying additive logistic model. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tools.</p>",
+  "citation": "Neurology 2022;98(3):e225–e235"
+ },
+ "predictors": [
+  {
+   "name": "Pre-surgical IQ",
+   "type": "slider",
+   "min": 41,
+   "max": 140,
+   "step": 1,
+   "default": 85,
+   "unit": "IQ",
+   "assess": "Intelligence quotient measured before surgery (41–140). The strongest predictor of post-operative IQ; modelled as a spline because the effect is non-linear.",
+   "spline": [
+    [
+     41,
+     -3.325971
+    ],
+    [
+     42,
+     -3.157893
+    ],
+    [
+     43,
+     -2.989815
+    ],
+    [
+     44,
+     -2.821737
+    ],
+    [
+     45,
+     -2.653659
+    ],
+    [
+     46,
+     -2.485581
+    ],
+    [
+     47,
+     -2.317503
+    ],
+    [
+     48,
+     -2.149425
+    ],
+    [
+     49,
+     -1.981347
+    ],
+    [
+     50,
+     -1.813269
+    ],
+    [
+     51,
+     -1.64519
+    ],
+    [
+     52,
+     -1.477112
+    ],
+    [
+     53,
+     -1.309034
+    ],
+    [
+     54,
+     -1.140956
+    ],
+    [
+     55,
+     -0.972878
+    ],
+    [
+     56,
+     -0.8048
+    ],
+    [
+     57,
+     -0.636722
+    ],
+    [
+     58,
+     -0.468644
+    ],
+    [
+     59,
+     -0.300566
+    ],
+    [
+     60,
+     -0.132488
+    ],
+    [
+     61,
+     0.03559
+    ],
+    [
+     62,
+     0.203668
+    ],
+    [
+     63,
+     0.371746
+    ],
+    [
+     64,
+     0.539824
+    ],
+    [
+     65,
+     0.707902
+    ],
+    [
+     66,
+     0.87598
+    ],
+    [
+     67,
+     1.044058
+    ],
+    [
+     68,
+     1.212136
+    ],
+    [
+     69,
+     1.380214
+    ],
+    [
+     70,
+     1.548292
+    ],
+    [
+     71,
+     1.71637
+    ],
+    [
+     72,
+     1.884448
+    ],
+    [
+     73,
+     2.052527
+    ],
+    [
+     74,
+     2.220605
+    ],
+    [
+     75,
+     2.388683
+    ],
+    [
+     76,
+     2.556761
+    ],
+    [
+     77,
+     2.724839
+    ],
+    [
+     78,
+     2.892917
+    ],
+    [
+     79,
+     3.060995
+    ],
+    [
+     80,
+     3.229073
+    ],
+    [
+     81,
+     3.397151
+    ],
+    [
+     82,
+     3.565229
+    ],
+    [
+     83,
+     3.733307
+    ],
+    [
+     84,
+     3.901385
+    ],
+    [
+     85,
+     4.069463
+    ],
+    [
+     86,
+     4.237541
+    ],
+    [
+     87,
+     4.405619
+    ],
+    [
+     88,
+     4.573697
+    ],
+    [
+     89,
+     4.741775
+    ],
+    [
+     90,
+     4.909853
+    ],
+    [
+     91,
+     5.077931
+    ],
+    [
+     92,
+     5.246009
+    ],
+    [
+     93,
+     5.414087
+    ],
+    [
+     94,
+     5.582166
+    ],
+    [
+     95,
+     5.750243
+    ],
+    [
+     96,
+     5.918321
+    ],
+    [
+     97,
+     6.0864
+    ],
+    [
+     98,
+     6.254478
+    ],
+    [
+     99,
+     6.422556
+    ],
+    [
+     100,
+     6.590634
+    ],
+    [
+     101,
+     6.758712
+    ],
+    [
+     102,
+     6.92679
+    ],
+    [
+     103,
+     7.094868
+    ],
+    [
+     104,
+     7.262945
+    ],
+    [
+     105,
+     7.431025
+    ],
+    [
+     106,
+     7.599103
+    ],
+    [
+     107,
+     7.767181
+    ],
+    [
+     108,
+     7.935257
+    ],
+    [
+     109,
+     8.103335
+    ],
+    [
+     110,
+     8.271414
+    ],
+    [
+     111,
+     8.439493
+    ],
+    [
+     112,
+     8.60757
+    ],
+    [
+     113,
+     8.775648
+    ],
+    [
+     114,
+     8.943723
+    ],
+    [
+     115,
+     9.111807
+    ],
+    [
+     116,
+     9.279887
+    ],
+    [
+     117,
+     9.44796
+    ],
+    [
+     118,
+     9.616034
+    ],
+    [
+     119,
+     9.78412
+    ],
+    [
+     120,
+     9.952189
+    ],
+    [
+     121,
+     10.120261
+    ],
+    [
+     122,
+     10.288352
+    ],
+    [
+     123,
+     10.456427
+    ],
+    [
+     124,
+     10.624516
+    ],
+    [
+     125,
+     10.79258
+    ],
+    [
+     126,
+     10.960691
+    ],
+    [
+     127,
+     11.128737
+    ],
+    [
+     128,
+     11.296834
+    ],
+    [
+     129,
+     11.464887
+    ],
+    [
+     130,
+     11.63294
+    ],
+    [
+     131,
+     11.801
+    ],
+    [
+     132,
+     11.969099
+    ],
+    [
+     133,
+     12.137288
+    ],
+    [
+     134,
+     12.305226
+    ],
+    [
+     135,
+     12.473426
+    ],
+    [
+     136,
+     12.641478
+    ],
+    [
+     137,
+     12.809376
+    ],
+    [
+     138,
+     12.977395
+    ],
+    [
+     139,
+     13.14563
+    ],
+    [
+     140,
+     13.313522
+    ]
+   ]
+  },
+  {
+   "name": "Type of epilepsy surgery",
+   "type": "choice",
+   "coef": 1,
+   "assess": "Extent of the resection. Multilobar resection or hemispherectomy lowers the predicted chance of a good intellectual outcome compared with a focal resection.",
+   "options": [
+    {
+     "label": "Focal resection",
+     "points": 0.0
+    },
+    {
+     "label": "Multilobar resection or hemispherectomy",
+     "points": -1.77076
+    }
+   ]
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": 0,
+  "panel_title": "Intellectual outcome 2 years after paediatric epilepsy surgery",
+  "outputs": [
+   {
+    "label": "Probability of post-operative IQ > 70",
+    "intercept": 0
+   }
+  ],
+  "note": "Population-level estimate from a 2-year post-surgical outcome model. Always apply clinical judgement.",
+  "viz_info": "The pie shows the predicted probability of a post-operative IQ > 70. Below, each factor's contribution to the log-odds is broken down.",
+  "lp_label": "Log-odds",
+  "show_lp": false
+ },
+ "provenance": {
+  "extraction_method": "authors_reference_implementation",
+  "source": "Cloppenborg et al., Neurology 2022;98(3):e225-e235 (doi 10.1212/WNL.0000000000013065, PMID 34795046). Published look-up table taken verbatim from the authors' reference implementation at github.com/wmotte/epilepsypredictiontools (Apache-2.0), as published at epilepsypredictiontools.info. The table is a materialisation of an additive logistic model: inverting the logit recovers the model exactly (category effects are constant across the whole axis to <3e-4 on the log-odds scale, i.e. rounding of the published 9-decimal probabilities). Reproduced here as a spline on the pre-operative score plus constant category effects.",
+  "review_status": "human_reviewed",
+  "notes": "Additive logistic model recovered by inverting the authors' published probability table. Spline = logit p at the reference profile (focal resection) across IQ 41-140; multilobar/hemispherectomy enters as a constant log-odds offset."
+ }
+}

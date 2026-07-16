@@ -953,13 +953,17 @@
     _renderMultiScore() {
       const d = this.data, m = d.model, preds = d.predictors || [];
       if (!this._msSel) this._msSel = preds.map(() => 0);
-      if (!this._msSlider) this._msSlider = preds.map((p) => p.type === "slider" ? (p.default != null ? p.default : (p.min || 0)) : 0);
+      if (!this._msSlider) this._msSlider = preds.map((p) => p.type !== "slider" ? 0
+        : p.vals ? Math.max(0, p.vals.indexOf(p.default))
+        : (p.default != null ? p.default : (p.min || 0)));
       let rail = "";
       preds.forEach((p, i) => {
         if (p.type === "slider") {
-          const v = this._msSlider[i], mn = p.min || 0, mx = p.max != null ? p.max : 10;
-          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span><span class="pill" id="ms${i}v">${v}${p.unit ? " " + esc(p.unit) : ""}</span></div>
-            <input type="range" class="mspred" data-si="${i}" min="${mn}" max="${mx}" step="${p.step || 1}" value="${v}" style="--fill:${(v - mn) / (mx - mn) * 100}%"></div>`;
+          // p.vals = non-uniform published steps; the slider then walks the INDEX and shows vals[i].
+          const v = this._msSlider[i], mn = p.vals ? 0 : (p.min || 0), mx = p.vals ? p.vals.length - 1 : (p.max != null ? p.max : 10);
+          const disp = p.vals ? p.vals[v] : v;
+          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span><span class="pill" id="ms${i}v">${disp}${p.unit ? " " + esc(p.unit) : ""}</span></div>
+            <input type="range" class="mspred" data-si="${i}" min="${mn}" max="${mx}" step="${p.vals ? 1 : (p.step || 1)}" value="${v}" style="--fill:${(v - mn) / (mx - mn) * 100}%"></div>`;
         } else {
           rail += `<div class="field"><div class="flabel"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span></div>
             <div class="seg" data-pi="${i}">${(p.options || []).map((o, oi) => `<button data-oi="${oi}" class="${oi === this._msSel[i] ? "on" : ""}">${esc(o.label)}</button>`).join("")}</div></div>`;
@@ -978,7 +982,8 @@
       this._rail.querySelectorAll(".mspred").forEach((sl) => sl.addEventListener("input", (e) => {
         const i = +e.target.dataset.si, mn = +e.target.min, mx = +e.target.max; this._msSlider[i] = +e.target.value;
         e.target.style.setProperty("--fill", (this._msSlider[i] - mn) / (mx - mn) * 100 + "%");
-        const p = preds[i]; this._rail.querySelector("#ms" + i + "v").textContent = this._msSlider[i] + (p.unit ? " " + p.unit : "");
+        const p = preds[i], sv = p.vals ? p.vals[this._msSlider[i]] : this._msSlider[i];
+        this._rail.querySelector("#ms" + i + "v").textContent = sv + (p.unit ? " " + p.unit : "");
         this._msUpdate();
       }));
     }

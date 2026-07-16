@@ -1,183 +1,184 @@
 {
-  "schema_version": "1.0",
-  "id": "stevelink_jme_drugresistance",
-  "kind": "formula",
-  "meta": {
-    "title": "Stevelink — Drug-Resistance Risk in Juvenile Myoclonic Epilepsy (JME)",
-    "authors": "Stevelink R, Al-Toma D, Jansen FE, et al.",
-    "journal": "eClinicalMedicine (The Lancet)",
-    "year": 2022,
-    "doi": "10.1016/j.eclinm.2022.101732",
-    "pmid": "36467455",
-    "outcome": "Individual probability of drug-resistant epilepsy in people with JME",
-    "clinical_utility": "Stevelink et al. (eClinicalMedicine 2022) built an individualised prediction model for drug-resistant juvenile myoclonic epilepsy (JME) from an individual-participant-data meta-analysis. Nine baseline factors each contribute points; the total maps to an individual probability of drug resistance (model AUC ~0.70). This calculator implements the published nomogram (Fig 2A): select each factor to accumulate points and read the predicted drug-resistance risk. Family history of epilepsy and Asian ethnicity (protective) were newly identified predictors specific to JME. Point values are digitized from the nomogram figure and anchored to the paper's worked example (89 points → 90% risk)."
-  },
-  "thresholds": null,
-  "predictors": [
+ "schema_version": "1.0",
+ "id": "stevelink_jme_drugresistance",
+ "kind": "formula",
+ "meta": {
+  "title": "Stevelink — Drug-Resistance Risk in Juvenile Myoclonic Epilepsy (JME)",
+  "authors": "Stevelink R, Al-Toma D, Jansen FE, et al.",
+  "journal": "eClinicalMedicine (The Lancet)",
+  "year": 2022,
+  "doi": "10.1016/j.eclinm.2022.101732",
+  "pmid": "36467455",
+  "outcome": "Individual probability of drug-resistant epilepsy in people with JME",
+  "clinical_utility": "Stevelink et al. (eClinicalMedicine 2022) built an individualised prediction model for drug-resistant juvenile myoclonic epilepsy (JME) from an individual-participant-data meta-analysis. Nine baseline factors each contribute points; the total maps to an individual probability of drug resistance (model AUC ~0.70). This calculator implements the published nomogram (Fig 2A): select each factor to accumulate points and read the predicted drug-resistance risk. Family history of epilepsy and Asian ethnicity (protective) were newly identified predictors specific to JME. Point values are digitized from the nomogram figure and anchored to the paper's worked example (89 points → 90% risk).",
+  "cff_info": "<p><b>Source &amp; acknowledgement.</b> This model was developed at <b>UMC Utrecht</b> and is also available from the authors' own site, <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>. Please cite the original paper and visit the authors' site for their original tool.</p>"
+ },
+ "thresholds": null,
+ "predictors": [
+  {
+   "name": "Ethnicity",
+   "coef": 1,
+   "assess": "Self-reported ethnicity. Asian ethnicity was protective vs Caucasian/European in this JME cohort.",
+   "options": [
     {
-      "name": "Ethnicity",
-      "coef": 1,
-      "assess": "Self-reported ethnicity. Asian ethnicity was protective vs Caucasian/European in this JME cohort.",
-      "options": [
-        {
-          "label": "Asian",
-          "points": 0.0
-        },
-        {
-          "label": "Latin-American",
-          "points": 1.20795
-        },
-        {
-          "label": "European / Caucasian",
-          "points": 1.44954
-        },
-        {
-          "label": "Other",
-          "points": 1.6106
-        }
-      ]
+     "label": "Asian",
+     "points": 0.0
     },
     {
-      "name": "History of febrile seizures",
-      "coef": 1,
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 0.72477
-        }
-      ],
-      "assess": "Any seizure with fever in infancy/childhood (before the JME diagnosis). A history of febrile seizures modestly raises the predicted risk of drug resistance."
+     "label": "Latin-American",
+     "points": 1.20795
     },
     {
-      "name": "Status epilepticus",
-      "coef": 1,
-      "options": [
-        {
-          "label": "Never",
-          "points": 0.0
-        },
-        {
-          "label": "Ever",
-          "points": 0.8053
-        }
-      ],
-      "assess": "Any prior episode of status epilepticus (a prolonged seizure or repeated seizures without recovery). 'Ever' raises the predicted risk."
+     "label": "European / Caucasian",
+     "points": 1.44954
     },
     {
-      "name": "Psychiatric comorbidities",
-      "coef": 1,
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 1.00663
-        }
-      ],
-      "assess": "Any diagnosed psychiatric comorbidity (e.g. anxiety, depression). Present raises the predicted risk of drug resistance."
-    },
-    {
-      "name": "Family history of epilepsy",
-      "coef": 1,
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 0.32212
-        }
-      ],
-      "assess": "A first- or second-degree relative with epilepsy. A newly-identified JME-specific risk factor — present modestly raises the risk."
-    },
-    {
-      "name": "Three seizure types",
-      "coef": 1,
-      "assess": "Presence of all three JME seizure types (myoclonic, absence, and generalised tonic-clonic).",
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 1.57034
-        }
-      ]
-    },
-    {
-      "name": "Catamenial epilepsy",
-      "coef": 1,
-      "assess": "Seizures clustering around the menstrual cycle. Choose No for males.",
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 1.04689
-        }
-      ]
-    },
-    {
-      "name": "Epileptiform focality on EEG",
-      "coef": 1,
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 1.36901
-        }
-      ],
-      "assess": "Focal epileptiform activity on EEG (in addition to the generalised discharges typical of JME). Present raises the predicted risk."
-    },
-    {
-      "name": "History of CAE progressing to JME",
-      "coef": 1,
-      "assess": "Childhood absence epilepsy that later evolved into juvenile myoclonic epilepsy.",
-      "options": [
-        {
-          "label": "No",
-          "points": 0.0
-        },
-        {
-          "label": "Yes",
-          "points": 0.48318
-        }
-      ]
+     "label": "Other",
+     "points": 1.6106
     }
-  ],
-  "model": {
-    "type": "logistic",
-    "intercept": -5.0118,
-    "panel_title": "Predicted drug-resistance risk",
-    "show_lp": false,
-    "outputs": [
-      {
-        "label": "Risk of drug resistance",
-        "intercept": 0
-      }
-    ],
-    "note": "Point values and the points→risk scale are digitized from the published nomogram (Fig 2A) and anchored to the paper's worked example (89 points → 90%). Treat as an approximation of the original figure (±~5 percentage points); verify against the source before clinical use.",
-    "viz_info": "This is an additive risk model. The waterfall (left) begins at the baseline risk for a patient with no risk factors, then each factor you select steps the risk up (blue) or down (red) — the number on each bar is that factor's contribution in percentage points, so you can see which factors dominate. The donut (right) shows the same active factors as coloured wedges that sum to the total predicted risk shown in the centre. Both update live as you change the inputs."
+   ]
   },
-  "provenance": {
-    "extraction_method": "figure_digitized",
-    "source_paper": "PMID36467455_2022_Individualised prediction of drug resistance and seizure recurrence.pdf",
-    "source_figure": "Figure 2A (nomogram for drug-resistant JME)",
-    "doi_source": "Verified verbatim in PDF text: '10.1016/j.eclinm.2022.101732'",
-    "review_status": "unreviewed",
-    "notes": "Nomogram digitized: 6/9 predictor point values confirmed by the figure caption's worked example (sum exactly 89); status-epilepticus 'ever', family-history 'yes', CAE 'yes' and the ethnicity levels read visually from the figure. Points→risk logistic fit to the 9 risk-axis ticks + caption anchor. MANDATORY human review of the digitized values against Fig 2A before deploy."
+  {
+   "name": "History of febrile seizures",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 0.72477
+    }
+   ],
+   "assess": "Any seizure with fever in infancy/childhood (before the JME diagnosis). A history of febrile seizures modestly raises the predicted risk of drug resistance."
+  },
+  {
+   "name": "Status epilepticus",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Never",
+     "points": 0.0
+    },
+    {
+     "label": "Ever",
+     "points": 0.8053
+    }
+   ],
+   "assess": "Any prior episode of status epilepticus (a prolonged seizure or repeated seizures without recovery). 'Ever' raises the predicted risk."
+  },
+  {
+   "name": "Psychiatric comorbidities",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 1.00663
+    }
+   ],
+   "assess": "Any diagnosed psychiatric comorbidity (e.g. anxiety, depression). Present raises the predicted risk of drug resistance."
+  },
+  {
+   "name": "Family history of epilepsy",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 0.32212
+    }
+   ],
+   "assess": "A first- or second-degree relative with epilepsy. A newly-identified JME-specific risk factor — present modestly raises the risk."
+  },
+  {
+   "name": "Three seizure types",
+   "coef": 1,
+   "assess": "Presence of all three JME seizure types (myoclonic, absence, and generalised tonic-clonic).",
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 1.57034
+    }
+   ]
+  },
+  {
+   "name": "Catamenial epilepsy",
+   "coef": 1,
+   "assess": "Seizures clustering around the menstrual cycle. Choose No for males.",
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 1.04689
+    }
+   ]
+  },
+  {
+   "name": "Epileptiform focality on EEG",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 1.36901
+    }
+   ],
+   "assess": "Focal epileptiform activity on EEG (in addition to the generalised discharges typical of JME). Present raises the predicted risk."
+  },
+  {
+   "name": "History of CAE progressing to JME",
+   "coef": 1,
+   "assess": "Childhood absence epilepsy that later evolved into juvenile myoclonic epilepsy.",
+   "options": [
+    {
+     "label": "No",
+     "points": 0.0
+    },
+    {
+     "label": "Yes",
+     "points": 0.48318
+    }
+   ]
   }
+ ],
+ "model": {
+  "type": "logistic",
+  "intercept": -5.0118,
+  "panel_title": "Predicted drug-resistance risk",
+  "show_lp": false,
+  "outputs": [
+   {
+    "label": "Risk of drug resistance",
+    "intercept": 0
+   }
+  ],
+  "note": "Point values and the points→risk scale are digitized from the published nomogram (Fig 2A) and anchored to the paper's worked example (89 points → 90%). Treat as an approximation of the original figure (±~5 percentage points); verify against the source before clinical use.",
+  "viz_info": "This is an additive risk model. The waterfall (left) begins at the baseline risk for a patient with no risk factors, then each factor you select steps the risk up (blue) or down (red) — the number on each bar is that factor's contribution in percentage points, so you can see which factors dominate. The donut (right) shows the same active factors as coloured wedges that sum to the total predicted risk shown in the centre. Both update live as you change the inputs."
+ },
+ "provenance": {
+  "extraction_method": "figure_digitized",
+  "source_paper": "PMID36467455_2022_Individualised prediction of drug resistance and seizure recurrence.pdf",
+  "source_figure": "Figure 2A (nomogram for drug-resistant JME)",
+  "doi_source": "Verified verbatim in PDF text: '10.1016/j.eclinm.2022.101732'",
+  "review_status": "unreviewed",
+  "notes": "Nomogram digitized: 6/9 predictor point values confirmed by the figure caption's worked example (sum exactly 89); status-epilepticus 'ever', family-history 'yes', CAE 'yes' and the ethnicity levels read visually from the figure. Points→risk logistic fit to the 9 risk-axis ticks + caption anchor. MANDATORY human review of the digitized values against Fig 2A before deploy."
+ }
 }

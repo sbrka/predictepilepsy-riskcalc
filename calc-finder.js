@@ -80,6 +80,7 @@
     ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
+    ["calc-tts-postop-withdrawal", "TTS — ASM Withdrawal after Paediatric Surgery", "Seizure recurrence (2 & 5 yr), long-term seizure freedom and cure after stopping ASM in children who had epilepsy surgery — TimeToStop nomograms (Lamberink 2018, UMC Utrecht).", "g3", "withdrawal"],
     ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
@@ -95,6 +96,9 @@
     ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term (Khoo 2022)", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g4", "surg_outcome"],
     ["calc-frontal-lgg-seizure", "Frontal Low-Grade Tumour", "Seizure outcome after resection of frontal low-grade tumours.", "g4", "surg_outcome"],
     ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g4", "surg_outcome"],
+    ["calc-postop-iq85", "Post-op IQ > 85 (children)", "Probability of an IQ above 85 two years after paediatric epilepsy surgery, from pre-surgical IQ, resection extent and invasive diagnostics (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
+    ["calc-postop-iq70", "Post-op IQ > 70 (children)", "Probability of an IQ above 70 two years after paediatric epilepsy surgery, from pre-surgical IQ and resection extent (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
+    ["calc-postop-dq50", "Post-op DQ > 50 (children)", "For children with developmental delay: probability of a developmental quotient above 50 two years after epilepsy surgery (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
     ["calc-naming-decline", "Naming Decline (TLE surgery)", "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).", "g4", "surg_neuropsych"],
     ["calc-memory-decline", "Verbal Memory Decline (TLR)", "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).", "g4", "surg_neuropsych"],
     ["calc-mood-decline", "Mood Decline (TLE surgery)", "Risk of clinically significant mood (depression) decline after temporal-lobe epilepsy surgery (Doherty nomogram).", "g4", "surg_neuropsych"],
