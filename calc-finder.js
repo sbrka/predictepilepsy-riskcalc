@@ -80,6 +80,7 @@
     ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
+    ["calc-jme-withdrawal", "JME — Recurrence after ASM Withdrawal", "For someone with juvenile myoclonic epilepsy who is seizure-free: risk of recurrence 2 and 5 years after stopping medication (Stevelink 2022, UMC Utrecht).", "g3", "withdrawal"],
     ["calc-tts-postop-withdrawal", "TTS — ASM Withdrawal after Paediatric Surgery", "Seizure recurrence (2 & 5 yr), long-term seizure freedom and cure after stopping ASM in children who had epilepsy surgery — TimeToStop nomograms (Lamberink 2018, UMC Utrecht).", "g3", "withdrawal"],
     ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
     ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],

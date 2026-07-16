@@ -647,7 +647,10 @@
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
       const vizInfo = m.viz_info || "Each risk factor you select adds a coloured contribution. The waterfall (left) starts from the baseline risk and steps up with each active factor, so you can see which factors drive this patient's risk and by how much. The donut (right) shows the same factors as wedges summing to the total predicted risk in the centre.";
-      const survViz = m.type === "surv", relViz = m.type === "relrisk";
+      // One donut per horizon. surv models always; other links opt in via donut_tone (existing
+      // multi-output cloglog models without it keep their single-donut rendering).
+      const multiDonut = m.type === "surv" || (m.donut_tone && (m.outputs || []).length > 1);
+      const survViz = multiDonut, relViz = m.type === "relrisk";
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Predicted risk")} <button class="info-dot" data-info="${attr(vizInfo)}" aria-label="How to read this chart">i</button></div></div>
         <div class="fviz" style="display:flex;flex-direction:column;gap:24px;max-width:780px">
           ${survViz ? `<div id="fdonuts" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"></div>` : ""}
@@ -761,7 +764,7 @@
       const wopts = m.lp_points ? { axis: "points", baseLabel: m.wf_base || "Baseline patient", ptsScale: m.pts_scale || 1, ptsUnit: m.pts_unit || "pts" }
         : (m.type === "surv" ? { baseLabel: m.wf_base || "Baseline patient" } : undefined);
       this._drawWaterfall(_cb, _link, wopts);
-      if (m.type === "surv") { this._drawSurvDonuts(outs); }
+      if (m.type === "surv" || (m.donut_tone && (m.outputs || []).length > 1)) { this._drawSurvDonuts(outs); }
       else { const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
     }
 
@@ -814,9 +817,13 @@
     _drawSurvDonuts(outs) {
       const wrap = this._panel.querySelector("#fdonuts"); if (!wrap) return;
       const m = this.data.model, compLabel = m.complement_label || "recurrence", freeLabel = m.free_label || "seizure-free";
+      // donut_tone:"risk" — the outputs already ARE the risk (cloglog), not the survival, so colour and
+      // word the ring accordingly. Default (surv models like Jehi) is unchanged: green, freedom-framed.
+      const risk = m.donut_tone === "risk";
       wrap.innerHTML = (outs || []).map((o) => {
         const pct = Math.max(0, Math.min(100, o.pct)), cap = (o.label.split("·").pop() || o.label).trim();
-        return this._donutSVG({ pct, disp: Math.round(pct) + "%", centerSub: freeLabel, caption: cap, footnote: Math.round(100 - pct) + "% " + compLabel, color: "#0f7a54" });
+        return this._donutSVG({ pct, disp: Math.round(pct) + "%", centerSub: risk ? compLabel : freeLabel, caption: cap,
+          footnote: Math.round(100 - pct) + "% " + (risk ? freeLabel : compLabel), color: risk ? "#d1495b" : "#0f7a54" });
       }).join("");
     }
 
