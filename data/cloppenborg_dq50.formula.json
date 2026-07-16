@@ -374,9 +374,10 @@
    }
   ],
   "note": "Population-level estimate from a 2-year post-surgical outcome model. Always apply clinical judgement.",
-  "viz_info": "The pie shows the predicted probability of a post-operative DQ > 50. Below, each factor's contribution to the log-odds is broken down.",
+  "viz_info": "The pie shows the predicted probability of a post-operative DQ > 50. Below, the waterfall breaks down how each factor moves that chance up or down from the baseline.",
   "lp_label": "Log-odds",
-  "show_lp": false
+  "show_lp": false,
+  "donut_sub": "chance of DQ > 50"
  },
  "provenance": {
   "extraction_method": "authors_reference_implementation",

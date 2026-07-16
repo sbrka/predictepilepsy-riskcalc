@@ -887,9 +887,12 @@
         segs += arcPath(cx, cy, rad, ang, a2, PAL[k % PAL.length], w); ang = a2;
       });
       const track = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#eef2f6" stroke-width="${w}"/>`;
+      // donut_sub — models whose outcome is GOOD (e.g. chance of a normal IQ) must not be
+      // labelled "risk"; they set their own wording. Default keeps every existing model as-is.
+      const sub = this.data.model.donut_sub || "predicted risk";
       svg.innerHTML = `${track}${segs}
         <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="${String(centerTxt).length > 5 ? 30 : 48}" fill="#1a2430">${esc(centerTxt)}</text>
-        <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">predicted risk</text>
+        <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">${esc(sub)}</text>
         ${active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`}`;
     }
 

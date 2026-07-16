@@ -198,7 +198,8 @@
   "note": "Population-level logistic regression from children seen after one or more paroxysmal events. Complements, does not replace, clinical judgement. Original tool: epilepsypredictiontools.info (UMC Utrecht).",
   "viz_info": "Each clinical feature and the EEG add a weight (the published logistic-regression coefficient) to a linear predictor, which is turned into the probability of an epilepsy diagnosis. The waterfall starts from a baseline child (all features absent, normal EEG) and shows how each finding raises (red) or lowers (green) the probability.",
   "lp_label": "Linear predictor",
-  "show_lp": false
+  "show_lp": false,
+  "donut_sub": "probability of epilepsy"
  },
  "provenance": {
   "extraction_method": "authors_reference_implementation",
