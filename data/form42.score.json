@@ -1,94 +1,94 @@
 {
-  "schema_version": "1.0",
-  "id": "form42",
-  "kind": "score",
-  "meta": {
-    "title": "Epilepsy-Post Acute Symptomatic Seizure (EPI-PASS)",
-    "doi": "10.1212/CPJ.0000000000200342",
-    "cff_info": "<div id=\"fieldInfoEPIPASS\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>EPI-PASS Score</h4>\n  <p><i>Sivaraju et al., 2024</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1212/CPJ.0000000000200342\" target=\"_blank\">10.1212/CPJ.0000000000200342</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Clinical Acute Symptomatic Seizure:</b> 1 point</li>\n    <li><b>Cortical Involvement on Imaging:</b> 1 point</li>\n    <li><b>Persistence of Epileptiform Abnormalities on Follow-up EEG:</b> 1 point</li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Risk estimates for epilepsy at 1 year based on the EPI-PASS score:</p>\n  <ul>\n    <li><b>Score 0:</b> 0% (95% CI: 0–17%)</li>\n    <li><b>Score 1:</b> 13% (95% CI: 5–23%)</li>\n    <li><b>Score 2–3:</b> 46% (95% CI: 31–62%)</li>\n  </ul>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 112 patients with acute symptomatic seizures or epileptiform EEG patterns.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Logistic regression model.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC = 0.85. Significant predictors:\n          <ul>\n            <li><b>Clinical Acute Symptomatic Seizure OR:</b> 7.45 (95% CI: 2.31–54.36)</li>\n            <li><b>Cortical Involvement on Imaging OR:</b> 7.63 (95% CI: 1.96–29.58)</li>\n            <li><b>Persistence of Epileptiform Patterns on Follow-up EEG OR:</b> 7.18 (95% CI: 1.36–37.88)</li>\n          </ul>\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (requires independent validation).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Assists in assessing epilepsy risk after ASyS and guiding ASM management decisions.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
-    "authors": "Sivaraju A, Tao A, Jadav R, et al.",
-    "journal": "Neurology Clinical Practice",
-    "year": 2024,
-    "outcome": "Antiseizure Medication Withdrawal, Risk of Epilepsy, and Longterm EEG Trends in Acute Symptomatic Seizures or Epileptic EEG Patterns"
-  },
-  "thresholds": {
-    "group1": 20,
-    "group2": 2
-  },
-  "predictors": [
+ "schema_version": "1.0",
+ "id": "form42",
+ "kind": "score",
+ "meta": {
+  "title": "Epilepsy-Post Acute Symptomatic Seizure (EPI-PASS)",
+  "doi": "10.1212/CPJ.0000000000200342",
+  "cff_info": "<div id=\"fieldInfoEPIPASS\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>EPI-PASS Score</h4>\n  <p><i>Sivaraju et al., 2024</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1212/CPJ.0000000000200342\" target=\"_blank\">10.1212/CPJ.0000000000200342</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Clinical Acute Symptomatic Seizure:</b> 1 point</li>\n    <li><b>Cortical Involvement on Imaging:</b> 1 point</li>\n    <li><b>Persistence of Epileptiform Abnormalities on Follow-up EEG:</b> 1 point</li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Risk estimates for epilepsy at 1 year based on the EPI-PASS score:</p>\n  <ul>\n    <li><b>Score 0:</b> 0% (95% CI: 0–17%)</li>\n    <li><b>Score 1:</b> 13% (95% CI: 5–23%)</li>\n    <li><b>Score 2–3:</b> 46% (95% CI: 31–62%)</li>\n  </ul>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 112 patients with acute symptomatic seizures or epileptiform EEG patterns.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Logistic regression model.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC = 0.85. Significant predictors:\n          <ul>\n            <li><b>Clinical Acute Symptomatic Seizure OR:</b> 7.45 (95% CI: 2.31–54.36)</li>\n            <li><b>Cortical Involvement on Imaging OR:</b> 7.63 (95% CI: 1.96–29.58)</li>\n            <li><b>Persistence of Epileptiform Patterns on Follow-up EEG OR:</b> 7.18 (95% CI: 1.36–37.88)</li>\n          </ul>\n        </td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (requires independent validation).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Assists in assessing epilepsy risk after ASyS and guiding ASM management decisions.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
+  "authors": "Sivaraju A, Tao A, Jadav R, et al.",
+  "journal": "Neurology Clinical Practice",
+  "year": 2024,
+  "outcome": "Antiseizure Medication Withdrawal, Risk of Epilepsy, and Longterm EEG Trends in Acute Symptomatic Seizures or Epileptic EEG Patterns"
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 2
+ },
+ "predictors": [
+  {
+   "name": "Clinical Acute Symptomatic Seizure",
+   "options": [
     {
-      "name": "Clinical Acute Symptomatic Seizure",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 1
-        }
-      ],
-      "assess": "Acute symptomatic seizures (ASyS) are defined as seizures that occur in close temporal proximity—typically within seven days—of an identifiable acute brain insult or systemic condition. In this study, the most common causes included traumatic brain injury (27% of cases), toxic metabolic encephalopathy (20%), ischemic stroke (14%), hemorrhagic stroke (10%), aneurysmal subarachnoid hemorrhage (9%), CNS infections (8%), and cavernomas or other vascular malformations (8%). Less common causes included low-grade meningiomas and posterior reversible encephalopathy syndrome. The total number of patients with ASyS in this cohort was 112."
+     "label": "No",
+     "points": 0
     },
     {
-      "name": "Cortical Involvement on Imaging",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 1
-        }
-      ],
-      "assess": "Cortical involvement refers to identifiable injury or abnormalities in the cortical regions of the brain, as seen on imaging studies such as MRI or CT scans. Common findings include cortical strokes (ischemic or hemorrhagic), vascular malformations like arteriovenous malformations or cavernomas, and other structural lesions."
-    },
-    {
-      "name": "Persistence of Epileptiform Patterns on Follow-up EEG",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 1
-        }
-      ],
-      "assess": "Persistent epileptiform patterns refer to abnormal brain activity, such as periodic discharges (generalized or lateralized), rhythmic delta activity, or sporadic epileptiform discharges, that remain visible on follow-up EEG recordings after the acute phase. In this study, inpatient EEGs had a median duration of 26 hours, while follow-up outpatient EEGs ranged from one hour to over 24 hours using ambulatory monitoring."
+     "label": "Yes",
+     "points": 1
     }
-  ],
-  "model": {
-    "score_type": "points",
-    "horizon": "1 year",
-    "rows": [
-      {
-        "label": "score 0",
-        "score": 0,
-        "pct": 0.0
-      },
-      {
-        "label": "score 1",
-        "score": 1,
-        "pct": 13.0
-      },
-      {
-        "label": "score 2",
-        "score": 2,
-        "pct": 46.0
-      },
-      {
-        "label": "score 3",
-        "score": 3,
-        "pct": 46.0
-      }
-    ]
+   ],
+   "assess": "Acute symptomatic seizures (ASyS) are defined as seizures that occur in close temporal proximity—typically within seven days—of an identifiable acute brain insult or systemic condition. In this study, the most common causes included traumatic brain injury (27% of cases), toxic metabolic encephalopathy (20%), ischemic stroke (14%), hemorrhagic stroke (10%), aneurysmal subarachnoid hemorrhage (9%), CNS infections (8%), and cavernomas or other vascular malformations (8%). Less common causes included low-grade meningiomas and posterior reversible encephalopathy syndrome. The total number of patients with ASyS in this cohort was 112."
   },
-  "provenance": {
-    "extraction_method": "cff_export",
-    "source": "export_42_2026-04-07_172813.cpfm",
-    "review_status": "unreviewed",
-    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form. | score->risk rows re-derived from CFF (QA fix)."
+  {
+   "name": "Cortical Involvement on Imaging",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Cortical involvement refers to identifiable injury or abnormalities in the cortical regions of the brain, as seen on imaging studies such as MRI or CT scans. Common findings include cortical strokes (ischemic or hemorrhagic), vascular malformations like arteriovenous malformations or cavernomas, and other structural lesions."
+  },
+  {
+   "name": "Persistence of Epileptiform Patterns on Follow-up EEG",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Persistent epileptiform patterns refer to abnormal brain activity, such as periodic discharges (generalized or lateralized), rhythmic delta activity, or sporadic epileptiform discharges, that remain visible on follow-up EEG recordings after the acute phase. In this study, inpatient EEGs had a median duration of 26 hours, while follow-up outpatient EEGs ranged from one hour to over 24 hours using ambulatory monitoring."
   }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "1 year",
+  "rows": [
+   {
+    "label": "score 0",
+    "score": 0,
+    "pct": 0.0
+   },
+   {
+    "label": "score 1",
+    "score": 1,
+    "pct": 13.0
+   },
+   {
+    "label": "score 2",
+    "score": 2,
+    "pct": 46.0
+   },
+   {
+    "label": "score 3",
+    "score": 3,
+    "pct": 46.0
+   }
+  ]
+ },
+ "provenance": {
+  "extraction_method": "cff_export",
+  "source": "export_42_2026-04-07_172813.cpfm",
+  "review_status": "unreviewed",
+  "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form. | score->risk rows re-derived from CFF (QA fix)."
+ }
 }

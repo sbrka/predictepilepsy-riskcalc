@@ -3,7 +3,7 @@
  "id": "cloppenborg_iq85",
  "kind": "formula",
  "meta": {
-  "title": "Post-operative IQ > 85 after paediatric epilepsy surgery (Cloppenborg)",
+  "title": "Cognitive outcomes after paediatric epilepsy surgery — IQ > 85",
   "doi": "10.1212/WNL.0000000000013065",
   "pmid": "34795046",
   "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
@@ -11,7 +11,12 @@
   "journal": "Neurology",
   "outcome": "Probability of post-operative IQ > 85",
   "cff_info": "<p><b>What this shows.</b> The probability that a child will have an intelligence quotient <b>above 85</b> two years after paediatric epilepsy surgery, from pre-surgical IQ, the extent of the resection, and whether invasive diagnostics were performed. Developed and validated in a collaborative study between Universitätsklinik OWL and UMC Utrecht.</p><p><b>Validation.</b> Developed from 492 children with IQ/DQ measured before and 2 years after surgery (IQ n=365, DQ n=127). The IQ models were developed in the Bielefeld (Bethel) cohort (n=258) and externally validated in the Utrecht cohort (n=102): accuracy 0.82 (IQ&gt;85) and 0.84 (IQ&gt;70), with excellent discrimination (AUC 0.90 and 0.92). The DQ model was developed in the Bethel cohort with 10-fold cross-validation (correct classification 76%). Notably, the risk of cognitive deterioration after surgery was very low (IQ: 37.3% improved vs 6.6% deteriorated).</p><p><b>Source &amp; acknowledgement.</b> This calculator reproduces the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> model developed jointly by <b>Universitätsklinik OWL (Bielefeld)</b> and <b>UMC Utrecht</b>. The published look-up tables were taken from the authors' own reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0) and re-expressed exactly as the underlying additive logistic model. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tools.</p>",
-  "citation": "Neurology 2022;98(3):e225–e235"
+  "citation": "Neurology 2022;98(3):e225–e235",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "predictors": [
   {

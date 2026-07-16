@@ -3,7 +3,7 @@
  "id": "stevelink_jme_drugresistance",
  "kind": "formula",
  "meta": {
-  "title": "Stevelink — Drug-Resistance Risk in Juvenile Myoclonic Epilepsy (JME)",
+  "title": "JME — drug resistance",
   "authors": "Stevelink R, Al-Toma D, Jansen FE, et al.",
   "journal": "eClinicalMedicine (The Lancet)",
   "year": 2022,
@@ -11,7 +11,12 @@
   "pmid": "36467455",
   "outcome": "Individual probability of drug-resistant epilepsy in people with JME",
   "clinical_utility": "Stevelink et al. (eClinicalMedicine 2022) built an individualised prediction model for drug-resistant juvenile myoclonic epilepsy (JME) from an individual-participant-data meta-analysis. Nine baseline factors each contribute points; the total maps to an individual probability of drug resistance (model AUC ~0.70). This calculator implements the published nomogram (Fig 2A): select each factor to accumulate points and read the predicted drug-resistance risk. Family history of epilepsy and Asian ethnicity (protective) were newly identified predictors specific to JME. Point values are digitized from the nomogram figure and anchored to the paper's worked example (89 points → 90% risk).",
-  "cff_info": "<p><b>Source &amp; acknowledgement.</b> This model was developed at <b>UMC Utrecht</b> and is also available from the authors' own site, <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>. Please cite the original paper and visit the authors' site for their original tool.</p>"
+  "cff_info": "<p><b>Source &amp; acknowledgement.</b> This model was developed at <b>UMC Utrecht</b> and is also available from the authors' own site, <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>. Please cite the original paper and visit the authors' site for their original tool.</p>",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "thresholds": null,
  "predictors": [

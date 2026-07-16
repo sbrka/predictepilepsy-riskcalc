@@ -1344,7 +1344,14 @@
     const jy = [m.journal, m.year].filter(Boolean).join(" ");
     const doi = m.doi ? `doi:${esc(m.doi)}` : "";
     const doiHtml = m.doi ? (plain ? `doi:${esc(m.doi)}` : `<a href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener">doi:${esc(m.doi)}</a>`) : "";
-    return [esc(who), esc(jy) + (m.year ? "" : ""), doiHtml].filter(Boolean).join(" &middot; ");
+    // source_link — where the ORIGINAL tool lives (e.g. a partner site). Shown in the header
+    // byline so the attribution is visible without opening the About panel.
+    const sl = m.source_link;
+    const slHtml = sl && sl.url
+      ? (plain ? `${sl.label || "original tool"}: ${esc(sl.url.replace(/^https?:\/\//, "").replace(/\/$/, ""))}`
+               : `<a href="${esc(sl.url)}" target="_blank" rel="noopener" title="${attr(sl.title || "The authors' original tool")}">${esc(sl.label || "original tool")}: ${esc(sl.url.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</a>`)
+      : "";
+    return [esc(who), esc(jy) + (m.year ? "" : ""), doiHtml, slHtml].filter(Boolean).join(" &middot; ");
   }
 
   function seg2(host, items, cur, cb) {

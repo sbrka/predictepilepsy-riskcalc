@@ -3,7 +3,7 @@
  "id": "tts_postop_withdrawal",
  "kind": "multiscore",
  "meta": {
-  "title": "TimeToStop (TTS) — ASM withdrawal after paediatric epilepsy surgery",
+  "title": "Postoperative relapse risk after ASM withdrawal in children",
   "doi": "10.1111/epi.14020",
   "pmid": "29446447",
   "authors": "Lamberink HJ, Boshuisen K, Otte WM, Geleijns K, Braun KPJ, on behalf of the TimeToStop Study Group",
@@ -11,7 +11,12 @@
   "journal": "Epilepsia",
   "outcome": "Individualised risk of seizure recurrence (2 and 5 years), chance of long-term seizure freedom, and chance of cure after withdrawal of antiseizure medication following epilepsy surgery in children.",
   "cff_info": "<p><b>What this shows.</b> Three nomograms from the TimeToStop study (Lamberink et&nbsp;al., <i>Epilepsia</i> 2018) for children who became seizure-free after epilepsy surgery and are considering withdrawal of antiseizure medication. They estimate (1) the risk of seizure recurrence at 2 and 5&nbsp;years after starting withdrawal, (2) the chance of long-term seizure freedom, and (3) the chance of <i>cure</i> (seizure-free <b>and</b> off medication).</p><p><b>Cohort &amp; performance.</b> 766 children who underwent epilepsy surgery in 15 centres across 8 European countries (the European retrospective TimeToStop study). Adjusted concordance statistic 0.68 (95% CI 0.67–0.69) for seizure recurrence and 0.73 (95% CI 0.72–0.75) for eventual seizure freedom.</p><p><b>Note.</b> The three models use different predictor subsets, so a factor may add points to one score and not another. Values outside the published range are capped; risks beyond the table ends are reported as bounds (e.g. &lt;2%, &gt;54%).</p><p><b>Source &amp; acknowledgement.</b> This calculator is a faithful re-implementation of the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> nomogram published by the <b>TimeToStop (TTS) study group</b> at <b>UMC Utrecht</b>. The point tables and risk look-ups are taken from the authors' own reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0), not digitised from the figures, and reproduce it exactly. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tool.</p>",
-  "citation": "Epilepsia 2018;59(3):e28–e33"
+  "citation": "Epilepsia 2018;59(3):e28–e33",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "predictors": [
   {

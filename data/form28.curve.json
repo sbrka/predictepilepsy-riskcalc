@@ -11,7 +11,12 @@
   "outcome": "Individualised prediction model of seizure recurrence and long-term outcomes after withdrawal of antiepileptic drugs in seizure-free patients: a systematic review and individual participant data meta-analysis",
   "clinical_utility": "People with epilepsy who became seizure-free while taking antiepileptic drugs might consider discontinuing their medication, with the possibility of increased quality of life because of the elimination of adverse events. The risk with this action, however, is seizure recurrence. The objectives of our study were to identify predictors of seizure recurrence and long-term seizure outcomes and to produce nomograms for estimation of individualised outcomes.",
   "pmid": "28483337",
-  "cff_info": "<p><b>Source &amp; acknowledgement.</b> This model was developed at <b>UMC Utrecht</b> and is also available from the authors' own site, <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>. Please cite the original paper and visit the authors' site for their original tool.</p>"
+  "cff_info": "<p><b>Source &amp; acknowledgement.</b> This model was developed at <b>UMC Utrecht</b> and is also available from the authors' own site, <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>. Please cite the original paper and visit the authors' site for their original tool.</p>",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "thresholds": {
   "group1": 20.0,

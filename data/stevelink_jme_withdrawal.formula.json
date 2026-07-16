@@ -3,7 +3,7 @@
  "id": "stevelink_jme_withdrawal",
  "kind": "formula",
  "meta": {
-  "title": "JME — seizure recurrence after ASM withdrawal (Stevelink)",
+  "title": "JME — post-withdrawal relapse risk",
   "doi": "10.1016/j.eclinm.2022.101732",
   "pmid": "36467455",
   "citation": "eClinicalMedicine 2022;53:101732",
@@ -11,7 +11,12 @@
   "year": 2022,
   "journal": "eClinicalMedicine",
   "outcome": "Individualised risk of seizure recurrence at 2 and 5 years after withdrawal of antiseizure medication in a currently seizure-free person with juvenile myoclonic epilepsy (JME).",
-  "cff_info": "<p><b>What this shows.</b> For a person with <b>juvenile myoclonic epilepsy</b> who is currently seizure-free and considering stopping antiseizure medication, this estimates the probability of seizure recurrence within 2 and 5 years, from age at withdrawal, how long they have been seizure-free, and how many ASMs they take.</p><p><b>Evidence.</b> Developed in a systematic review and individual participant data meta-analysis. This is the withdrawal companion to the JME drug-resistance model also hosted here.</p><p><b>Note.</b> A longer seizure-free interval lowers the risk; more ASMs and older age at withdrawal raise it. Population-level estimates — always apply clinical judgement, and weigh them against the consequences of a recurrence (e.g. driving).</p><p><b>Source &amp; acknowledgement.</b> This calculator reproduces the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> JME medication-withdrawal model from <b>UMC Utrecht</b> and partners. The published look-up table (20,400 rows per horizon) was taken from the authors' reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0) and re-expressed exactly as the underlying proportional-hazards model. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tool.</p>"
+  "cff_info": "<p><b>What this shows.</b> For a person with <b>juvenile myoclonic epilepsy</b> who is currently seizure-free and considering stopping antiseizure medication, this estimates the probability of seizure recurrence within 2 and 5 years, from age at withdrawal, how long they have been seizure-free, and how many ASMs they take.</p><p><b>Evidence.</b> Developed in a systematic review and individual participant data meta-analysis. This is the withdrawal companion to the JME drug-resistance model also hosted here.</p><p><b>Note.</b> A longer seizure-free interval lowers the risk; more ASMs and older age at withdrawal raise it. Population-level estimates — always apply clinical judgement, and weigh them against the consequences of a recurrence (e.g. driving).</p><p><b>Source &amp; acknowledgement.</b> This calculator reproduces the <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">Epilepsy Prediction Tools</a> JME medication-withdrawal model from <b>UMC Utrecht</b> and partners. The published look-up table (20,400 rows per horizon) was taken from the authors' reference implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0) and re-expressed exactly as the underlying proportional-hazards model. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the authors' original tool.</p>",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "predictors": [
   {

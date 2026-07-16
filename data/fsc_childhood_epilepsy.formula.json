@@ -3,7 +3,7 @@
  "id": "fsc_childhood_epilepsy",
  "kind": "formula",
  "meta": {
-  "title": "First Consultation (FSC) — childhood epilepsy after 1 or more paroxysmal events",
+  "title": "First seizure(-like events) in children — risk of an epilepsy diagnosis",
   "doi": "10.1542/peds.2018-0931",
   "pmid": "30389715",
   "authors": "van Diessen E, Lamberink HJ, Otte WM, Doornebal N, Brouwer OF, Jansen FE, Braun KPJ",
@@ -11,7 +11,12 @@
   "journal": "Pediatrics",
   "outcome": "Probability that a child presenting after one or more paroxysmal events will be diagnosed with epilepsy, from 11 clinical features and the interictal EEG available at the first consultation",
   "cff_info": "<p><b>What this shows.</b> The <b>First Consultation (FSC)</b> model (van Diessen et&nbsp;al., <i>Pediatrics</i> 2018) estimates the probability that a child who presents after <b>one or more paroxysmal events</b> will be diagnosed with epilepsy, using only information available at the <b>first outpatient consultation</b>: 11 clinical features plus the interictal EEG. Developed at the UMC Utrecht paediatric-neurology outpatient department and validated on a similar cohort from the Martini Hospital, Groningen.</p><h4>How to read it</h4><ul><li>The result is the <b>percent probability of an epilepsy diagnosis</b>.</li><li>The <b>EEG</b> is by far the strongest single driver (generalised epileptiform &rarr; large increase), followed by <b>automatisms</b> and a <b>history of neurological disorder</b>.</li><li>Intended to support — not replace — the clinical judgement at that first visit.</li></ul><p><b>Validation.</b> Developed in 451 children referred for diagnostic work-up after one or more paroxysmal events and externally validated in a second cohort (n=187). Discrimination was excellent (AUC 0.86, 95% CI 0.80–0.92; PPV 0.93, NPV 0.76); in the subgroup still diagnostically uncertain after initial work-up, AUC was 0.73.</p><p><b>Source &amp; acknowledgement.</b> This calculator is a faithful re-implementation of the <b>First Consultation (FSC)</b> tool from <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a>, developed at <b>UMC Utrecht</b> (Braun / Otte group). The model coefficients were ported verbatim from the authors' own open-source implementation (<a href=\"https://github.com/wmotte/epilepsypredictiontools\" target=\"_blank\" rel=\"noopener\">github.com/wmotte/epilepsypredictiontools</a>, Apache-2.0), reproduced here with the authors' permission. Please cite the original paper and visit <a href=\"https://epilepsypredictiontools.info/\" target=\"_blank\" rel=\"noopener\">epilepsypredictiontools.info</a> for the original tool.</p>",
-  "citation": "Pediatrics 2018;142(6):e20180931"
+  "citation": "Pediatrics 2018;142(6):e20180931",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://epilepsypredictiontools.info/",
+   "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
+  }
  },
  "predictors": [
   {
