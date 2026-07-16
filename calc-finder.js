@@ -60,30 +60,30 @@
     ["calc-glioma-epilepsy", "Glioma-Related Epilepsy", "Epilepsy in diffuse high-grade glioma.", "g1", "tumour"],
     ["calc-meningioma-seizures", "Meningioma Late Seizures (Zhang)", "Probability of late postoperative seizures after meningioma resection, from 5 factors.", "g1", "tumour"],
     ["calc-bm-seizures", "Brain Metastases Seizures (Makkawi)", "Probability of a seizure in a patient with brain metastases, from 3 factors (small cohort).", "g1", "tumour"],
-    ["calc-ncc-seizure-recurrence", "Neurocysticercosis (adults)", "Seizure recurrence in solitary calcified neurocysticercosis.", "g1", "infection"],
-    ["calc-nepc", "NEPC (paediatric NCC)", "6-month seizure-recurrence risk in children with neurocysticercosis (Panda 2023).", "g1", "infection"],
+    ["calc-ncc-seizure-recurrence", "Neurocysticercosis (adults)", "Seizure recurrence in solitary calcified neurocysticercosis.", "g1", "infection", { pop: "adult" }],
+    ["calc-nepc", "NEPC (paediatric NCC)", "6-month seizure-recurrence risk in children with neurocysticercosis (Panda 2023).", "g1", "infection", { pop: "paed" }],
     ["calc-autoimmune-enceph-recurrence", "Autoimmune Encephalitis", "Seizure recurrence in NMDAR / LGI1 / CASPR2 encephalitis.", "g1", "autoimmune"],
-    ["calc-hs-tle-fse", "HS / TLE after Febrile Status", "Hippocampal sclerosis & temporal-lobe epilepsy after febrile status epilepticus.", "g1", "febrile"],
+    ["calc-hs-tle-fse", "HS / TLE after Febrile Status", "Hippocampal sclerosis & temporal-lobe epilepsy after febrile status epilepticus.", "g1", "febrile", { pop: "paed" }],
     ["calc-epi-pass", "EPI-PASS", "Epilepsy after an acute symptomatic seizure.", "g1", "acute_sympt"],
     ["calc-2helps2b", "2HELPS2B (cEEG seizure risk)", "Probability of an electrographic seizure on continuous EEG in critically ill patients, from 6 EEG/clinical features.", "g1", "critical_eeg"],
 
     ["calc-first-seizure-driving", "First Seizure & Driving", "Recurrence risk (COSY) after a first-ever seizure by aetiology, and when driving thresholds are met.", "g2", "first_seizure"],
-    ["calc-fsc-childhood-epilepsy", "First Consultation — Children (FSC)", "Probability of an epilepsy diagnosis in a child after one or more paroxysmal events, from 11 clinical features + EEG (van Diessen 2018, UMC Utrecht).", "g2", "first_seizure"],
+    ["calc-fsc-childhood-epilepsy", "First Consultation — Children (FSC)", "Probability of an epilepsy diagnosis in a child after one or more paroxysmal events, from 11 clinical features + EEG (van Diessen 2018, UMC Utrecht).", "g2", "first_seizure", { pop: "paed" }],
     ["calc-first-seizure-recurrence", "First Unprovoked Seizure — Recurrence", "Recurrence after a first unprovoked seizure by risk factor (EEG, MRI, nocturnal, prior insult).", "g2", "first_seizure"],
     ["calc-mess-part1", "MESS (Part 1)", "Recurrence risk after a first seizure — combination table.", "g2", "first_seizure"],
     ["calc-mess-part2", "MESS (Part 2)", "Prognostic index for recurrence after a single seizure / early epilepsy.", "g2", "first_seizure"],
-    ["calc-first-tcs-adults", "First Tonic-Clonic Seizure", "Recurrence after a first tonic-clonic seizure in adults.", "g2", "first_seizure"],
+    ["calc-first-tcs-adults", "First Tonic-Clonic Seizure", "Recurrence after a first tonic-clonic seizure in adults.", "g2", "first_seizure", { pop: "adult" }],
     ["calc-egtca", "EGTCA", "Epilepsy with generalized tonic-clonic seizures alone.", "g2", "first_seizure"],
     ["calc-return-driving-first-seizure", "Return to Driving", "When is it safe to drive after a first-ever seizure?", "g2", "first_seizure"],
-    ["calc-epilepsy-first-seizure-dementia", "First Seizure in Dementia", "Epilepsy risk after a first unprovoked seizure in dementia.", "g2", "first_seizure"],
+    ["calc-epilepsy-first-seizure-dementia", "First Seizure in Dementia", "Epilepsy risk after a first unprovoked seizure in dementia.", "g2", "first_seizure", { pop: "adult" }],
     ["calc-hauser-cosy", "After Two Unprovoked Seizures", "Recurrence risk after two unprovoked seizures (Hauser).", "g2", "two_seizures"],
     ["calc-sanad-bt", "SANAD Breakthrough", "Breakthrough seizure, recurrence & re-remission after a 12-month remission on treatment (SANAD).", "g2", "remission"],
 
     // g3 — withdrawing antiseizure medication (relapse risk when stopping ASMs)
     ["calc-jme-withdrawal", "JME — Recurrence after ASM Withdrawal", "For someone with juvenile myoclonic epilepsy who is seizure-free: risk of recurrence 2 and 5 years after stopping medication (Stevelink 2022, UMC Utrecht).", "g3", "withdrawal"],
-    ["calc-tts-postop-withdrawal", "TTS — ASM Withdrawal after Paediatric Surgery", "Seizure recurrence (2 & 5 yr), long-term seizure freedom and cure after stopping ASM in children who had epilepsy surgery — TimeToStop nomograms (Lamberink 2018, UMC Utrecht).", "g3", "withdrawal"],
+    ["calc-tts-postop-withdrawal", "TTS — ASM Withdrawal after Paediatric Surgery", "Seizure recurrence (2 & 5 yr), long-term seizure freedom and cure after stopping ASM in children who had epilepsy surgery — TimeToStop nomograms (Lamberink 2018, UMC Utrecht).", "g3", "withdrawal", { pop: "paed" }],
     ["calc-lamberink", "ASM Withdrawal — Individualised (Lamberink)", "Individualised 2- & 5-year recurrence risk and 10-year seizure-freedom chance after ASM withdrawal (Lamberink nomograms).", "g3", "withdrawal"],
-    ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal"],
+    ["calc-relapse-asm-withdrawal-focal", "ASM Withdrawal — Focal Epilepsy", "Relapse after ASM withdrawal in adult focal epilepsy.", "g3", "withdrawal", { pop: "adult" }],
     ["calc-drug-withdrawal", "WAMS (after surgery)", "ASM withdrawal after epilepsy surgery — cumulative & COSY curves.", "g3", "withdrawal"],
 
     // g4 — epilepsy surgery: planning (SEEG) + seizure outcome + cognitive/mood outcome
@@ -91,18 +91,18 @@
     ["calc-jehi-nomogram", "Jehi Nomogram (seizure freedom)", "Chance of complete seizure freedom at 2 and 5 years after resective epilepsy surgery, from six presurgical characteristics.", "g4", "surg_outcome"],
     ["calc-slah-score", "SLAH Seizure-Freedom Score", "Chance of seizure freedom after laser ablation (SLAH) for mesial temporal lobe epilepsy.", "g4", "surg_outcome"],
     ["calc-sfs", "Seizure-Freedom Score (SFS)", "Chance of seizure freedom at 10 years after resective epilepsy surgery, from 4 factors (Garcia-Gracia 2015).", "g4", "surg_outcome"],
-    ["calc-hops", "HOPS (paediatric hemispheric surgery)", "Chance of seizure freedom after hemispheric surgery in children, from 5 factors (Weil 2021).", "g4", "surg_outcome"],
+    ["calc-hops", "HOPS (paediatric hemispheric surgery)", "Chance of seizure freedom after hemispheric surgery in children, from 5 factors (Weil 2021).", "g4", "surg_outcome", { pop: "paed" }],
     ["calc-fle-surgery-prognostic", "Frontal Lobe Surgery — Seizure Outcome (Xu 2019)", "Prognostic factors for seizure outcome after frontal-lobe epilepsy surgery.", "g4", "surg_outcome"],
     ["calc-fle-surgery-outcome", "Frontal Lobe Surgery — Seizure Outcome (Samuel 2019)", "Seizure outcome after frontal-lobe epilepsy surgery.", "g4", "surg_outcome"],
     ["calc-fle-surgery-longterm", "Frontal Lobe Surgery — Long-term (Khoo 2022)", "Long-term seizure & psychosocial outcomes after frontal-lobe surgery.", "g4", "surg_outcome"],
     ["calc-frontal-lgg-seizure", "Frontal Low-Grade Tumour", "Seizure outcome after resection of frontal low-grade tumours.", "g4", "surg_outcome"],
     ["calc-pgrem", "PGREM", "Post-operative glioma-related epilepsy risk.", "g4", "surg_outcome"],
-    ["calc-postop-iq85", "Post-op IQ > 85 (children)", "Probability of an IQ above 85 two years after paediatric epilepsy surgery, from pre-surgical IQ, resection extent and invasive diagnostics (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
-    ["calc-postop-iq70", "Post-op IQ > 70 (children)", "Probability of an IQ above 70 two years after paediatric epilepsy surgery, from pre-surgical IQ and resection extent (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
-    ["calc-postop-dq50", "Post-op DQ > 50 (children)", "For children with developmental delay: probability of a developmental quotient above 50 two years after epilepsy surgery (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych"],
-    ["calc-naming-decline", "Naming Decline (TLE surgery)", "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).", "g4", "surg_neuropsych"],
-    ["calc-memory-decline", "Verbal Memory Decline (TLR)", "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).", "g4", "surg_neuropsych"],
-    ["calc-mood-decline", "Mood Decline (TLE surgery)", "Risk of clinically significant mood (depression) decline after temporal-lobe epilepsy surgery (Doherty nomogram).", "g4", "surg_neuropsych"],
+    ["calc-postop-iq85", "Post-op IQ > 85 (children)", "Probability of an IQ above 85 two years after paediatric epilepsy surgery, from pre-surgical IQ, resection extent and invasive diagnostics (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych", { pop: "paed" }],
+    ["calc-postop-iq70", "Post-op IQ > 70 (children)", "Probability of an IQ above 70 two years after paediatric epilepsy surgery, from pre-surgical IQ and resection extent (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych", { pop: "paed" }],
+    ["calc-postop-dq50", "Post-op DQ > 50 (children)", "For children with developmental delay: probability of a developmental quotient above 50 two years after epilepsy surgery (Cloppenborg 2022, Bielefeld/Utrecht).", "g4", "surg_neuropsych", { pop: "paed" }],
+    ["calc-naming-decline", "Naming Decline (TLE surgery)", "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).", "g4", "surg_neuropsych", { pop: "adult" }],
+    ["calc-memory-decline", "Verbal Memory Decline (TLR)", "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).", "g4", "surg_neuropsych", { pop: "adult" }],
+    ["calc-mood-decline", "Mood Decline (TLE surgery)", "Risk of clinically significant mood (depression) decline after temporal-lobe epilepsy surgery (Doherty nomogram).", "g4", "surg_neuropsych", { pop: "adult" }],
 
     // g5 — SUDEP risk
     ["calc-sudep3", "SUDEP-3 Inventory", "Three-item inventory stratifying the risk of sudden unexpected death in epilepsy (SUDEP).", "g5", "sudep"],
@@ -194,6 +194,10 @@
     .chiprow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
     .chip.norec{background:#fbeaea;color:#b02020}
     .chip.ext{background:#eef6fe;color:var(--azure-deep)}
+    .popsec{margin:0 0 18px}
+    .poph{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--azure-deep);margin:16px 0 9px;padding-bottom:5px;border-bottom:1px solid var(--azure-line)}
+    .chip.paed{background:#eef4ff;color:#1c3f94;border-color:#c9d9f7}
+    .chip.adult{background:#f2f4f7;color:#495667;border-color:#dde3ea}
     .chip.ec{background:#fdefd0;color:#7a4d00;border:1px solid #e0b25f;font-weight:750;letter-spacing:.01em}
     .chip.rec{background:#e7f4ec;color:#0f6b45;border:1px solid #bfe3ce;font-weight:650}
     .card.ec{border:2px solid #e0b25f;background:linear-gradient(180deg,#fffcf3 0%,#fff 60%);box-shadow:0 6px 20px rgba(190,140,40,.18)}
@@ -267,8 +271,22 @@
       this.render();
     }
     go(slug) { window.location.href = this._base + "/" + slug + "/"; }
+    /* Render a list of calculators. When a setting mixes paediatric and non-paediatric tools
+       (e.g. cognitive outcomes after surgery: Cloppenborg in children vs Busch in adults), split
+       them under age headings so the wrong-population tool isn't picked by accident. Untagged
+       models are grouped as "not age-specific" rather than being asserted to be adult. */
+    cardList(list) {
+      const pop = (c) => (c[5] || {}).pop;
+      const paed = list.filter((c) => pop(c) === "paed");
+      const adult = list.filter((c) => pop(c) === "adult");
+      const rest = list.filter((c) => !pop(c));
+      const cards = (l) => `<div class="cards">${l.map((c) => this.card(c)).join("")}</div>`;
+      if (!paed.length || paed.length === list.length) return cards(list);   // nothing to separate
+      const sec = (title, l) => l.length ? `<div class="popsec"><div class="poph">${title}</div>${cards(l)}</div>` : "";
+      return sec("Adults", adult) + sec("Not age-specific", rest) + sec("Children", paed);
+    }
     card(c) {
-      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge}
+      const o = c[5] || {};                       // optional flags: {ext:url, rec:false, ab, badge, pop}
       const ext = o.ext, norec = o.rec === false;
       const b = BADGE[c[0]] || null;              // ["ec"|"rec", why] from the evidence table
       const ec = !!b && b[0] === "ec", recd = !!b && b[0] === "rec";
@@ -276,7 +294,10 @@
       const ab = o.ab || abbrev(c[1]);
       const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
+      // pop chip — only set where the source paper states the population explicitly.
       const flags =
+        (o.pop === "paed" ? `<span class="chip paed" title="Developed and validated in children">Children</span>` : "") +
+        (o.pop === "adult" ? `<span class="chip adult" title="Developed and validated in adults">Adults</span>` : "") +
         (ec ? `<span class="chip ec" title="${esc(b[1])}">&#9733; Editor&rsquo;s choice</span>` : "") +
         (recd ? `<span class="chip rec" title="${esc(b[1])}">&#10003; Recommended</span>` : "") +
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
@@ -316,7 +337,7 @@
       } else {
         const matches = CALCS.filter((c) => c[3] === this._grp && c[4] === this._set);
         h += `<div class="step"><h2>${matches.length} calculator${matches.length === 1 ? "" : "s"} for this situation</h2>` +
-          (matches.length ? `<div class="cards">${matches.map((c) => this.card(c)).join("")}</div>` : `<p class="none">No calculator listed for this situation yet.</p>`) +
+          (matches.length ? this.cardList(matches) : `<p class="none">No calculator listed for this situation yet.</p>`) +
           `</div>`;
       }
       return h;
@@ -328,7 +349,7 @@
       return GROUPS.map((g) => {
         const list = this._dedup(CALCS.filter((c) => c[3] === g.id));
         return `<div class="grp"><div class="gh"><span class="gi">${g.icon}</span><h2>${esc(g.title)}</h2></div>
-          <p class="gsub">${esc(g.sub)}</p><div class="cards">${list.map((c) => this.card(c)).join("")}</div></div>`;
+          <p class="gsub">${esc(g.sub)}</p>${this.cardList(list)}</div>`;
       }).join("");
     }
     // --- search by calculator name / acronym ---
@@ -341,7 +362,7 @@
     search() {
       const q = this._q.trim(), res = this._matches(q);
       if (!res.length) return `<p class="none">No calculator matches &ldquo;${esc(q)}&rdquo;. Try another name or acronym (e.g. SeLECT, CAVE, SUDEP, Lamberink).</p>`;
-      return `<div class="sres"><h2><b>${res.length}</b> calculator${res.length === 1 ? "" : "s"} matching &ldquo;${esc(q)}&rdquo;</h2><div class="cards">${res.map((c) => this.card(c)).join("")}</div></div>`;
+      return `<div class="sres"><h2><b>${res.length}</b> calculator${res.length === 1 ? "" : "s"} matching &ldquo;${esc(q)}&rdquo;</h2>${this.cardList(res)}</div>`;
     }
     _bodyHTML() { return this._q.trim() ? this.search() : (this._tab === "guided" ? this.guided() : this.browse()); }
     // after a guided step, bring the finder back into view (esp. on mobile, where the

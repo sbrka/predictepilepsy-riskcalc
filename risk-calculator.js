@@ -158,8 +158,11 @@
     input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:3px;background:linear-gradient(90deg,var(--azure) var(--fill,20%),var(--line) var(--fill,20%));cursor:pointer;margin:9px 0 2px}
     input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--azure);box-shadow:0 1px 4px rgba(14,28,43,.2)}
     input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--azure)}
-    .scorewrap{display:flex;gap:22px;align-items:flex-end;margin:22px 0 20px;padding-top:20px;border-top:1px solid var(--line)}
-    .metric .k{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+    /* wrap + a floor width: without them the global min-width:0 lets metrics shrink below their
+       content, and a 4-metric row in the narrow rail breaks "16%" across three lines. */
+    .scorewrap{display:flex;flex-wrap:wrap;gap:16px 20px;align-items:flex-end;margin:22px 0 20px;padding-top:20px;border-top:1px solid var(--line)}
+    .metric{flex:1 1 104px;min-width:104px}
+    .metric .k{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;overflow-wrap:break-word;hyphens:none}
     .metric .v{font-family:var(--serif);font-size:44px;line-height:.92;font-variant-numeric:tabular-nums;color:var(--ink)}
     .metric.sm .v{font-size:40px;font-weight:600}
     .metric .cisub{font-size:12.5px;color:var(--muted);margin-top:4px;font-weight:600;font-variant-numeric:tabular-nums}
