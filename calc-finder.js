@@ -152,7 +152,13 @@
     "calc-sanad-bt": ["rec", "Recommended — clinically useful with good evidence (tier B, cohort n/a)."],
     "calc-sfs": ["rec", "Recommended — clinically useful with good evidence (tier B, n=466)."],
     "select-score": ["ec", "Editor's choice — the most extensively externally validated model for late seizures after ischaemic stroke (alongside IsCHEMiA)."],
-  };
+      "calc-fsc-childhood-epilepsy": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=451, externally validated in an independent cohort of 187; AUC 0.86). The only model for epilepsy diagnosis in children after paroxysmal events."],
+    "calc-postop-iq85": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=258, externally validated in 102; accuracy 0.82, AUC 0.90)."],
+    "calc-postop-iq70": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=258, externally validated in 102; accuracy 0.84, AUC 0.92)."],
+    "calc-jme-withdrawal": ["ec", "Editor's choice — the only model for ASM withdrawal in JME (tier A; IPD meta-analysis of 24 studies with internal-external cross-validation, c 0.70). Note it rests on the 368 people who attempted withdrawal, not the full 2518-person cohort."],
+    "calc-tts-postop-withdrawal": ["rec", "Recommended — the only tool for ASM withdrawal after epilepsy surgery in children (n=766, 15 centres, 8 countries). Tier B: internally adjusted only, not externally validated, and discrimination is modest (c 0.68-0.73). WAMS is the editor's choice for this question overall."],
+    "calc-postop-dq50": ["rec", "Recommended — the only tool for developmental outcome in children with developmental delay. Tier B: small cohort (n=127), 10-fold cross-validation only, correct classification 76% — weaker than its IQ siblings from the same paper."],
+};
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // per-group accent dot on the score badge (matches the old calc-home look)
