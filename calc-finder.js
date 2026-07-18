@@ -188,7 +188,7 @@
     "calc-postop-iq85": "IQ>85", "calc-postop-iq70": "IQ>70", "calc-postop-dq50": "DQ>50",
   };
   // Font size that keeps an abbreviation on ONE line inside the 58px badge (~52px usable, weight 800).
-  const badgeFont = (n) => n <= 3 ? 22 : n <= 4 ? 20 : n <= 5 ? 16 : n <= 6 ? 13.5 : n <= 7 ? 11.5 : n <= 8 ? 10 : n <= 10 ? 8.5 : 7.5;
+  const badgeFont = (n) => n <= 3 ? 21 : n <= 4 ? 18 : n <= 5 ? 15.5 : n <= 6 ? 13 : n <= 7 ? 11.5 : n <= 8 ? 10 : n <= 10 ? 8.5 : 7.5;
   // Badge inner HTML: single words stay on one line (font shrinks to fit); only a hyphenated
   // abbreviation wraps — cleanly at the hyphen — into two rows (e.g. Post-/Stroke, END-/IT).
   const badgeInner = (ab) => {
