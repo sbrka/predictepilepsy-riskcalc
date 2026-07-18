@@ -1,0 +1,119 @@
+{
+ "schema_version": "1.0",
+ "id": "emse",
+ "kind": "formula",
+ "meta": {
+  "title": "EMSE — Epidemiology-based Mortality Score in Status Epilepticus (EACE)",
+  "doi": "10.1007/s12028-014-0080-y",
+  "pmid": "25412806",
+  "citation": "Neurocrit Care 2015;22(2):273-282",
+  "authors": "Leitinger M, Höller Y, Kalss G, Rohracher A, Novak HF, Höfler J, Dobesberger J, Kuchukhidze G, Trinka E",
+  "year": 2015,
+  "journal": "Neurocritical Care",
+  "outcome": "Risk of a poor outcome (in-hospital death) after status epilepticus, from the EMSE-EACE combination (aetiology, age, comorbidity, EEG). Point values are literature-derived mortality rates; the total is compared with the cut-off of 64.",
+  "metric_label": "In-hospital mortality (approx.)",
+  "source_note": "EMSE: Leitinger et al., Neurocrit Care 2015 (doi 10.1007/s12028-014-0080-y, PMID 25412806). Point tables from Figure 2 (EMSE-EACE evaluation sheet). Cut-off 64 = lowest non-survivor EMSE-EACE score in the derivation cohort. In head-to-head studies EMSE-EACE matches or exceeds STESS for mortality prediction (Yuan et al., Epilepsia 2022, doi 10.1111/epi.17442).",
+  "cff_info": "<p><b>What this is.</b> The <b>Epidemiology-based Mortality Score in Status Epilepticus (EMSE)</b> predicts a poor outcome (in-hospital death) after status epilepticus. Unlike STESS, each item's points are the <b>published mortality rate (%)</b> for that feature, so the score is more individualised. This calculator implements the validated four-item version, <b>EMSE-EACE</b> (a<b>E</b>tiology, <b>A</b>ge, <b>C</b>omorbidity, <b>E</b>EG).</p><p><b>How it is scored.</b> Add the points for the single worst aetiology, the age band, the Charlson Comorbidity Index (×10), and the worst EEG pattern. The total is compared with the <b>cut-off of 64</b>: a score <b>≥64 indicates a high risk of a poor outcome</b>, below 64 is favourable.</p><p><b>How well it works.</b> EMSE-EACE has good discrimination (pooled AUC 0.77; Yuan 2022) and a high negative predictive value — a score below 64 reliably identifies survivors. Its positive predictive value varies across cohorts (~40–69%), so a high score raises concern but is <b>not</b> a certainty of death.</p><p><b>Caveats.</b> The cut-off of 64 was defined in a small, explorative derivation cohort (92 non-hypoxic patients) as the lowest score among those who died, so it is optimistic in that sample; use the total and cut-off as a risk indicator, not an exact probability, and always apply clinical judgement. Comorbidity uses the Charlson index (CCI × 10).</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/25412806/",
+   "title": "Leitinger et al., Neurocrit Care 2015 — EMSE"
+  }
+ },
+ "thresholds": null,
+ "predictors": [
+  {
+   "name": "Aetiology (worst single cause)",
+   "coef": 1,
+   "layout": "stack",
+   "assess": "The single underlying cause of the status epilepticus (score one stratum). Points are the published mortality rate for that aetiology. 'Acute' cerebrovascular disease or brain trauma = within the past 2 weeks; otherwise use the 'remote' category.",
+   "options": [
+    { "label": "CNS anomalies", "points": 2 },
+    { "label": "Drug reduction / withdrawal / poor compliance", "points": 2 },
+    { "label": "Multiple sclerosis", "points": 5 },
+    { "label": "Remote cerebrovascular disease / brain injury", "points": 7 },
+    { "label": "Hydrocephalus", "points": 8 },
+    { "label": "Alcohol abuse", "points": 10 },
+    { "label": "Drug overdose", "points": 11 },
+    { "label": "Head trauma (acute)", "points": 12 },
+    { "label": "Cryptogenic (no cause found)", "points": 12 },
+    { "label": "Brain tumour", "points": 16 },
+    { "label": "Metabolic: sodium imbalance", "points": 17 },
+    { "label": "Metabolic disorders (other)", "points": 22 },
+    { "label": "Acute cerebrovascular disease", "points": 26 },
+    { "label": "CNS infection (acute)", "points": 33 },
+    { "label": "Anoxia / hypoxia", "points": 65 }
+   ]
+  },
+  {
+   "name": "Age",
+   "coef": 1,
+   "assess": "Patient age band (score one stratum). Points are the published age-specific mortality rate. EMSE age strata were derived for adults; younger patients contribute 0.",
+   "options": [
+    { "label": "< 21 years", "points": 0 },
+    { "label": "21–30 years", "points": 1 },
+    { "label": "31–40 years", "points": 2 },
+    { "label": "41–50 years", "points": 3 },
+    { "label": "51–60 years", "points": 5 },
+    { "label": "61–70 years", "points": 7 },
+    { "label": "71–80 years", "points": 8 },
+    { "label": "> 80 years", "points": 10 }
+   ]
+  },
+  {
+   "name": "Charlson Comorbidity Index (total)",
+   "coef": 10,
+   "assess": "The patient's total Charlson Comorbidity Index (CCI). EMSE enters comorbidity as CCI × 10 (each CCI point ≈ 10% mortality). Compute the CCI separately (e.g. myocardial infarction, heart failure, diabetes = 1 each; hemiplegia, any tumour, moderate/severe renal disease = 2 each; moderate/severe liver disease = 3; metastatic tumour or AIDS = 6). Do not double-count the aetiology already chosen above.",
+   "options": [
+    { "label": "CCI 0", "points": 0 },
+    { "label": "CCI 1", "points": 1 },
+    { "label": "CCI 2", "points": 2 },
+    { "label": "CCI 3", "points": 3 },
+    { "label": "CCI 4", "points": 4 },
+    { "label": "CCI 5", "points": 5 },
+    { "label": "CCI 6", "points": 6 },
+    { "label": "CCI 7", "points": 7 },
+    { "label": "CCI ≥ 8", "points": 8 }
+   ]
+  },
+  {
+   "name": "Worst EEG pattern",
+   "coef": 1,
+   "layout": "stack",
+   "assess": "The single worst EEG pattern (score only worst stratum). LPDs = lateralized periodic discharges (≥7 per 10 s); GPDs = generalized periodic discharges (≥9 per 10 s); ASIDs = after-status ictal discharges; spontaneous (non-medically induced) burst suppression scores highest.",
+   "options": [
+    { "label": "No LPDs, GPDs or ASIDs", "points": 0 },
+    { "label": "LPDs (lateralized periodic discharges)", "points": 40 },
+    { "label": "GPDs (generalized periodic discharges)", "points": 40 },
+    { "label": "ASIDs (after-status ictal discharges)", "points": 40 },
+    { "label": "Spontaneous burst suppression", "points": 60 }
+   ]
+  }
+ ],
+ "model": {
+  "type": "lookup",
+  "intercept": 0,
+  "lp_points": true,
+  "show_lp": true,
+  "lp_label": "EMSE-EACE score",
+  "pts_unit": "pts",
+  "wf_base": "Baseline (0 pts)",
+  "panel_title": "EMSE-EACE — status epilepticus mortality risk",
+  "metric_label": "In-hospital mortality (approx.)",
+  "bands": [
+   { "lt": 64, "pct": 8 },
+   { "lt": 100000, "pct": 50 }
+  ],
+  "outputs": [
+   { "label": "In-hospital mortality (approx.)" }
+  ],
+  "note": "EMSE-EACE is a THRESHOLD score: add aetiology + age + (Charlson×10) + worst EEG, then compare with the cut-off 64. ≥64 = high risk of poor outcome (death); <64 = favourable (high NPV). The two mortality figures shown (~8% below cut-off, ~50% at/above) are approximate, validation-informed bands — the derivation cut-off (lowest non-survivor score, n=92) is optimistic and PPV varies 40–69% across cohorts. Read the EMSE total and the cut-off, not an exact probability.",
+  "viz_info": "Each item — aetiology, age, Charlson comorbidity (×10) and worst EEG pattern — adds points (waterfall) whose values are literature mortality rates. The EMSE-EACE total is shown above; the donut shows the approximate mortality band for being below vs at/above the cut-off of 64."
+ },
+ "provenance": {
+  "extraction_method": "text_table_verbatim",
+  "source": "EMSE-EACE point values taken verbatim from Leitinger et al., Neurocrit Care 2015, Figure 2 (evaluation sheet) — aetiology (CNS-anomalies 2 … anoxia 65), age (21–30:1 … >80:10), comorbidity = Charlson CCI × 10, EEG (none 0; LPDs/GPDs/ASIDs 40; spontaneous burst suppression 60). Cut-off 64 (EMSE-EACE) = lowest non-survivor score in the derivation cohort (Results, p.277). PDF in 0_inbox/papers/status_epilepticus/. Head-to-head performance: Yuan et al., Epilepsia 2022 (AUC 0.77).",
+  "review_status": "verified",
+  "notes": "Formula kind, type=lookup: lp = Σ(points) with comorbidity coef=10 (CCI×10), all others coef=1; band split at 64. show_lp displays the EMSE-EACE total. '< 21 years'=0 added for usability (EMSE age table starts at 21–30; younger age contributes ~0). Band mortality (~8% / ~50%) is a validation-informed approximation, flagged approx and caveated (derivation cut-off optimistic, PPV 40–69% across cohorts); EMSE is a threshold classifier, not a per-total probability."
+ }
+}
