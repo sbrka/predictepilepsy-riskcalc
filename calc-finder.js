@@ -22,8 +22,8 @@
       sub: "Individual risk of sudden unexpected death in epilepsy (SUDEP)." },
     { id: "g6", title: "Established / chronic epilepsy", icon: "🧬",
       sub: "Predicting drug resistance, and managing epilepsy in special situations such as pregnancy." },
-    { id: "g7", title: "Status epilepticus \u2014 prognosis", icon: "\u23f1\ufe0f",
-      sub: "Estimating survival and long-term mortality after an episode of status epilepticus." },
+    { id: "g7", title: "Status epilepticus", icon: "\u23f1\ufe0f",
+      sub: "Estimating survival, mortality and outcome after an episode of status epilepticus." },
   ];
   const SETTINGS = {
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
@@ -118,6 +118,7 @@
     ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors.", "g6", "pregnancy"],
     ["calc-acd-se-mortality", "ACD Score \u2014 Mortality after Status Epilepticus", "Two-year mortality after non-anoxic status epilepticus from the Age\u2013Consciousness\u2013Duration (ACD) score (Roberg 2022; validated Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-se-survival-5yr", "Survival Curves after Status Epilepticus (5-year)", "Cumulative 5-year mortality after status epilepticus by ACD band and by Lattanzi aetiology — digitized Kaplan\u2013Meier curves (Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-stess", "STESS — Status Epilepticus Severity Score", "The most validated bedside score for survival after status epilepticus: 4 pre-treatment items (Rossetti 2008). Favorable 0–2 vs unfavorable 3–6.", "g7", "se_prognosis", { pop: "adult" }],
   ];
   // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
   // "ec" = Editor's choice (strongest evidence for that clinical question)

@@ -1,0 +1,150 @@
+{
+ "schema_version": "1.0",
+ "id": "stess",
+ "kind": "score",
+ "meta": {
+  "title": "STESS — Status Epilepticus Severity Score",
+  "doi": "10.1007/s00415-008-0989-1",
+  "pmid": "18769858",
+  "citation": "J Neurol 2008;255(10):1561-1566",
+  "authors": "Rossetti AO, Logroscino G, Milligan TA, Michaelides C, Ruffieux C, Bromfield EB",
+  "year": 2008,
+  "journal": "Journal of Neurology",
+  "outcome": "In-hospital survival vs death after an episode of status epilepticus, from four pre-treatment predictors (age, history of seizures, worst seizure type, level of consciousness).",
+  "metric_label": "In-hospital mortality",
+  "source_note": "STESS: Rossetti et al., J Neurol 2008 (doi 10.1007/s00415-008-0989-1, PMID 18769858); score first proposed in Rossetti et al., Neurology 2006 (doi 10.1212/01.wnl.0000223352.71621.97). The most widely externally validated status epilepticus prognostic score (21 validation cohorts pooled in Yuan et al., Epilepsia 2022, doi 10.1111/epi.17442).",
+  "cff_info": "<p><b>What this is.</b> The <b>Status Epilepticus Severity Score (STESS)</b> is a simple bedside score, calculated <b>before treatment</b>, that predicts the chance of surviving an episode of <b>status epilepticus (SE)</b>. It is the most widely used and externally validated SE prognostic score.</p><p><b>How it is scored.</b> Four pre-treatment predictors are added — level of consciousness (0–1), worst seizure type (0–2), age (0 or 2) and history of previous seizures (0–1) — for a total of <b>0–6</b>. A score of <b>0–2 is favorable</b>; <b>3–6 is unfavorable</b>.</p><p><b>What the bands mean (Rossetti 2008, 154 patients).</b> A favorable score (0–2) was associated with <b>~3% in-hospital mortality</b> and an unfavorable score (3–6) with <b>~39%</b>. Its strength is a very high <b>negative predictive value (0.97)</b>: a favorable STESS reliably identifies patients who will survive, and early aggressive coma induction may not be routinely warranted in them.</p><p><b>Important caveat.</b> STESS has a <b>low positive predictive value (0.39)</b> — an unfavorable score does <b>not</b> reliably predict death and, as the authors state, <b>must not be used to justify withdrawal of medical support</b>. Use it to reassure, not to limit care. Population-level estimate; always apply clinical judgement.</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/18769858/",
+   "title": "Rossetti et al., J Neurol 2008 — STESS"
+  }
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 10
+ },
+ "predictors": [
+  {
+   "name": "Level of consciousness",
+   "assess": "Level of consciousness before treatment. Alert, or somnolent/confused (arousable and responsive) scores 0; stuporous (arousable but non-responsive) or comatose scores 1.",
+   "options": [
+    {
+     "label": "Alert or somnolent / confused",
+     "points": 0
+    },
+    {
+     "label": "Stuporous or comatose",
+     "points": 1
+    }
+   ]
+  },
+  {
+   "name": "Worst seizure type",
+   "layout": "stack",
+   "assess": "The most severe seizure semiology before treatment (worst manifestation). Simple-partial, complex-partial, absence or myoclonic = 0; generalized-convulsive = 1; nonconvulsive status epilepticus in a comatose patient = 2.",
+   "options": [
+    {
+     "label": "Simple-partial, complex-partial, absence, or myoclonic",
+     "points": 0
+    },
+    {
+     "label": "Generalized-convulsive",
+     "points": 1
+    },
+    {
+     "label": "Nonconvulsive SE in coma",
+     "points": 2
+    }
+   ]
+  },
+  {
+   "name": "Age",
+   "assess": "Patient age. 65 years or older adds 2 points.",
+   "options": [
+    {
+     "label": "< 65 years",
+     "points": 0
+    },
+    {
+     "label": "≥ 65 years",
+     "points": 2
+    }
+   ]
+  },
+  {
+   "name": "History of previous seizures",
+   "assess": "Any known history of seizures before this episode (a surrogate for acute vs remote aetiology). Yes scores 0; no or unknown scores 1.",
+   "options": [
+    {
+     "label": "Yes",
+     "points": 0
+    },
+    {
+     "label": "No or unknown",
+     "points": 1
+    }
+   ]
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "in-hospital",
+  "metric_label": "In-hospital mortality",
+  "panel_title": "STESS — predicted outcome after status epilepticus",
+  "donut_sub": "in-hospital mortality",
+  "viz_title": "STESS build-up",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 3,
+    "disp": "~3%",
+    "label": "STESS 0 — FAVORABLE: ~3% in-hospital mortality; survival highly likely (NPV 0.97)"
+   },
+   {
+    "score": 1,
+    "pct": 3,
+    "disp": "~3%",
+    "label": "STESS 1 — FAVORABLE: ~3% in-hospital mortality; survival highly likely (NPV 0.97)"
+   },
+   {
+    "score": 2,
+    "pct": 3,
+    "disp": "~3%",
+    "label": "STESS 2 — FAVORABLE: ~3% in-hospital mortality; survival highly likely (NPV 0.97)"
+   },
+   {
+    "score": 3,
+    "pct": 39,
+    "disp": "~39%",
+    "label": "STESS 3 — UNFAVORABLE: ~39% in-hospital mortality (low PPV — do not use to justify withdrawing care)"
+   },
+   {
+    "score": 4,
+    "pct": 39,
+    "disp": "~39%",
+    "label": "STESS 4 — UNFAVORABLE: ~39% in-hospital mortality (low PPV — do not use to justify withdrawing care)"
+   },
+   {
+    "score": 5,
+    "pct": 39,
+    "disp": "~39%",
+    "label": "STESS 5 — UNFAVORABLE: ~39% in-hospital mortality (low PPV — do not use to justify withdrawing care)"
+   },
+   {
+    "score": 6,
+    "pct": 39,
+    "disp": "~39%",
+    "label": "STESS 6 — UNFAVORABLE: ~39% in-hospital mortality (low PPV — do not use to justify withdrawing care)"
+   }
+  ],
+  "note": "STESS is validated as a two-band stratifier, not a per-point probability: 0–2 favorable (~3% in-hospital mortality, NPV 0.97) vs 3–6 unfavorable (~39%). Band mortality from Rossetti 2008 (Table 4, 154 patients). Its value is ruling OUT death (high NPV); its PPV is low (0.39), so an unfavorable score must not justify withdrawal of care.",
+  "viz_info": "Consciousness, worst seizure type, age and seizure history each add points (waterfall). A total of 0–2 is favorable (~3% in-hospital mortality); 3–6 is unfavorable (~39%). The donut shows the band's mortality. STESS reliably identifies survivors (high NPV) but does not reliably predict death (low PPV)."
+ },
+ "provenance": {
+  "extraction_method": "text_table_verbatim",
+  "source": "STESS point table taken verbatim from Rossetti et al., J Neurol 2008, Table 1 (doi 10.1007/s00415-008-0989-1, PMID 18769858; PDF in 0_inbox/papers/status_epilepticus/). Band mortality (0–2 → 3%, 3–6 → 39%) and NPV 0.97 / PPV 0.39 from Table 4 of the same paper (154 patients).",
+  "review_status": "verified",
+  "notes": "4 predictors exactly per Table 1: consciousness (0/1), worst seizure type (0/1/2), age (0/2), history of previous seizures (0/1); total 0–6. STESS validates a DICHOTOMY (0–2 favorable vs 3–6 unfavorable), so per-score rows carry the band mortality (not a spurious per-point curve). Honesty caveat (high NPV, low PPV, do not use to withdraw care) surfaced in cff_info + note per the paper's Discussion."
+ }
+}
