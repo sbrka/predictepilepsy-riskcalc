@@ -22,6 +22,8 @@
       sub: "Individual risk of sudden unexpected death in epilepsy (SUDEP)." },
     { id: "g6", title: "Established / chronic epilepsy", icon: "🧬",
       sub: "Predicting drug resistance, and managing epilepsy in special situations such as pregnancy." },
+    { id: "g7", title: "Status epilepticus \u2014 prognosis", icon: "\u23f1\ufe0f",
+      sub: "Estimating survival and long-term mortality after an episode of status epilepticus." },
   ];
   const SETTINGS = {
     stroke_isch: "Ischaemic stroke", ich: "Intracerebral haemorrhage", sah: "Subarachnoid haemorrhage",
@@ -30,7 +32,7 @@
     acute_sympt: "Acute symptomatic seizure", critical_eeg: "Critically ill (EEG monitoring)", first_seizure: "First unprovoked seizure",
     two_seizures: "After two unprovoked seizures", withdrawal: "Withdrawing antiseizure medication",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance", pregnancy: "Seizures in pregnancy",
-    seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
+    se_prognosis: "Survival after status epilepticus", seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -114,6 +116,7 @@
     ["calc-pse-dre", "Post-Stroke Epilepsy — Drug Resistance", "Probability of drug-resistant epilepsy in people with post-stroke epilepsy, from 5 factors.", "g6", "drug_resistance"],
     ["calc-pte-dre", "Post-Traumatic Epilepsy — Drug Resistance", "Probability of drug-resistant epilepsy in people with post-traumatic epilepsy, from 4 factors.", "g6", "drug_resistance"],
     ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors.", "g6", "pregnancy"],
+    ["calc-acd-se-mortality", "ACD Score \u2014 Mortality after Status Epilepticus", "Two-year mortality after non-anoxic status epilepticus from the Age\u2013Consciousness\u2013Duration (ACD) score (Roberg 2022; validated Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
   ];
   // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
   // "ec" = Editor's choice (strongest evidence for that clinical question)
@@ -158,15 +161,16 @@
     "calc-jme-withdrawal": ["ec", "Editor's choice — the only model for ASM withdrawal in JME (tier A; IPD meta-analysis of 24 studies with internal-external cross-validation, c 0.70). Note it rests on the 368 people who attempted withdrawal, not the full 2518-person cohort."],
     "calc-tts-postop-withdrawal": ["rec", "Recommended — the only tool for ASM withdrawal after epilepsy surgery in children (n=766, 15 centres, 8 countries). Tier B: internally adjusted only, not externally validated, and discrimination is modest (c 0.68-0.73). WAMS is the editor's choice for this question overall."],
     "calc-postop-dq50": ["rec", "Recommended — the only tool for developmental outcome in children with developmental delay. Tier B: small cohort (n=127), 10-fold cross-validation only, correct classification 76% — weaker than its IQ siblings from the same paper."],
+    "calc-acd-se-mortality": ["rec", "Recommended — the only tool for mortality after status epilepticus. The ACD score is externally validated across Denmark, Germany and Norway (Roberg 2022) and again in Spain (Alanís-Bernal 2026). Per-score 2-year mortality is read from the published nomogram; pending human review of the extraction (would otherwise be Editor\u2019s choice as the sole tier-A tool for this question)."],
 };
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   // per-group accent dot on the score badge (matches the old calc-home look)
-  const GROUP_DOT = { g1: "#3f7fd0", g2: "#e0691f", g3: "#7a5ea8", g4: "#0f7a54", g5: "#c0322b" };
+  const GROUP_DOT = { g1: "#3f7fd0", g2: "#e0691f", g3: "#7a5ea8", g4: "#0f7a54", g5: "#c0322b", g7: "#3f4a5a" };
   // per-clinical-group badge gradient (lighter -> deeper) — gives each score's tile the colour of its group
   const GROUP_GRAD = {
     g1: ["#4a86d6", "#1f5aa8"], g2: ["#ef8a44", "#c85713"], g3: ["#9074c0", "#5f4790"],
-    g4: ["#22a578", "#0c6647"], g5: ["#d8564a", "#9e2820"],
+    g4: ["#22a578", "#0c6647"], g5: ["#d8564a", "#9e2820"], g7: ["#5a6b80", "#333c4a"],
   };
   const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3 L96 34 L0 34 Z" fill="#fff" opacity=".12"/><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".92"/></svg>';
   const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 9);
