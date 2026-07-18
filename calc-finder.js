@@ -181,8 +181,14 @@
   };
   const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3 L96 34 L0 34 Z" fill="#fff" opacity=".12"/><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".92"/></svg>';
   const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 12);
+  // Clean short badge labels where the auto-abbrev (first word) would be an ugly long truncation.
+  const AB = {
+    "calc-ncc-seizure-recurrence": "NCC", "calc-tts-postop-withdrawal": "TTS",
+    "calc-autoimmune-enceph-recurrence": "AIE", "calc-meningioma-seizures": "Mening.",
+    "calc-postop-iq85": "IQ>85", "calc-postop-iq70": "IQ>70", "calc-postop-dq50": "DQ>50",
+  };
   // Font size that keeps an abbreviation on ONE line inside the 58px badge (~52px usable, weight 800).
-  const badgeFont = (n) => n <= 3 ? 22 : n <= 4 ? 20 : n <= 5 ? 16 : n <= 6 ? 13.5 : n <= 7 ? 11.5 : n <= 8 ? 10 : 9;
+  const badgeFont = (n) => n <= 3 ? 22 : n <= 4 ? 20 : n <= 5 ? 16 : n <= 6 ? 13.5 : n <= 7 ? 11.5 : n <= 8 ? 10 : n <= 10 ? 8.5 : 7.5;
   // Badge inner HTML: single words stay on one line (font shrinks to fit); only a hyphenated
   // abbreviation wraps — cleanly at the hyphen — into two rows (e.g. Post-/Stroke, END-/IT).
   const badgeInner = (ab) => {
@@ -324,7 +330,7 @@
       const b = BADGE[c[0]] || null;              // ["ec"|"rec", why] from the evidence table
       const ec = !!b && b[0] === "ec", recd = !!b && b[0] === "rec";
       const href = ext || (this._base + "/" + c[0] + "/");
-      const ab = o.ab || abbrev(c[1]);
+      const ab = o.ab || AB[c[0]] || abbrev(c[1]);
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
       // pop chip — only set where the source paper states the population explicitly.
       const flags =
