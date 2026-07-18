@@ -1,0 +1,83 @@
+{
+ "schema_version": "1.0",
+ "id": "tiamkao",
+ "kind": "formula",
+ "meta": {
+  "title": "SE mortality risk score (Thai national database)",
+  "doi": "10.1111/epi.14489",
+  "pmid": "30159871",
+  "citation": "Epilepsia 2018;59(Suppl 2):S184-S186",
+  "authors": "Tiamkao S, Pranbul S, Sawanyawisuth K, Thepsuthammarat K, Integrated Epilepsy Research Group",
+  "year": 2018,
+  "journal": "Epilepsia",
+  "outcome": "Risk of death (in hospital or within 30 days) after status epilepticus, from a clinical risk score built on age, comorbidities and SE complications — no EEG or imaging needed.",
+  "metric_label": "Death (approx.)",
+  "source_note": "Risk score: Tiamkao et al., Epilepsia 2018 (doi 10.1111/epi.14489, PMID 30159871). Derived (n=10,924) and validated (n=10,808) on the Thai national database; ROC 0.836/0.835. Cut-off ≥4 (sensitivity 78%, specificity 75%). Purely clinical — designed for settings without EEG/imaging.",
+  "cff_info": "<p><b>What this is.</b> A purely <b>clinical risk score</b> for <b>death after status epilepticus (SE)</b>, built on a national database of &gt;10,000 patients. Unlike STESS/EMSE it needs <b>no EEG, imaging, or level-of-consciousness input</b> — just age, comorbidities and SE complications — so it suits settings where those aren't available.</p><p><b>How it is scored.</b> Add the age-band points, plus points for each comorbidity present (heart disease 3.5, CNS infection 2.5, cancer 2, chronic renal failure 2, anaemia 1) and each SE complication present (shock 5, acute renal failure 3, septicaemia 3, pneumonia 1, respiratory failure 1). Total ranges 0–28.</p><p><b>What it means.</b> The validated cut-off is <b>≥4</b> (sensitivity 78%, specificity 75%; ROC 0.84 in both derivation and validation cohorts). Overall SE mortality was 16.7%; a score <b>below 4 carries roughly 6% mortality, ≥4 roughly 39%</b> (derived from the published operating characteristics). Higher scores indicate progressively higher risk.</p><p><b>Caveats.</b> Registry/administrative-data score (ICD-10 coded) — it captures burden of illness, not seizure semiology. Developed and validated in Thailand; not yet validated elsewhere. The two mortality figures are bands from the cut-off, not exact per-score probabilities. Population-level estimate — apply clinical judgement.</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/30159871/",
+   "title": "Tiamkao et al., Epilepsia 2018 — national-database SE mortality score"
+  }
+ },
+ "thresholds": null,
+ "predictors": [
+  {
+   "name": "Age",
+   "coef": 1,
+   "assess": "Age band (score one stratum). Points: 0–20 y = 0; 21–40 y = 1.5; 41–60 y = 2.5; >60 y = 4.",
+   "options": [
+    { "label": "0–20 years", "points": 0 },
+    { "label": "21–40 years", "points": 1.5 },
+    { "label": "41–60 years", "points": 2.5 },
+    { "label": "> 60 years", "points": 4 }
+   ]
+  },
+  { "name": "Heart disease", "coef": 1, "assess": "Any heart disease (ICD-10 I05–I09, I27, I30–I52), excluding ischaemic heart disease. Present = 3.5 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 3.5 } ] },
+  { "name": "CNS infection", "coef": 1, "assess": "Central nervous system infection. Present = 2.5 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 2.5 } ] },
+  { "name": "Cancer", "coef": 1, "assess": "Any cancer (ICD-10 C00–C97). Present = 2 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 2 } ] },
+  { "name": "Chronic renal failure", "coef": 1, "assess": "Chronic kidney disease / chronic renal failure (ICD-10 N18). Present = 2 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 2 } ] },
+  { "name": "Anaemia", "coef": 1, "assess": "Anaemia (ICD-10 D50–D64). Present = 1 point.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 1 } ] },
+  { "name": "Shock", "coef": 1, "assess": "Shock (ICD-10 R57) during the SE admission. Present = 5 points (the strongest predictor).",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 5 } ] },
+  { "name": "Acute renal failure", "coef": 1, "assess": "Acute renal failure during the SE admission. Present = 3 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 3 } ] },
+  { "name": "Septicaemia", "coef": 1, "assess": "Septicaemia (ICD-10 A40–A41, R50) during the SE admission. Present = 3 points.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 3 } ] },
+  { "name": "Pneumonia", "coef": 1, "assess": "Pneumonia (ICD-10 J12–J18) during the SE admission. Present = 1 point.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 1 } ] },
+  { "name": "Respiratory failure", "coef": 1, "assess": "Respiratory failure (ICD-10 J96) during the SE admission. Present = 1 point.",
+    "options": [ { "label": "No", "points": 0 }, { "label": "Yes", "points": 1 } ] }
+ ],
+ "model": {
+  "type": "lookup",
+  "intercept": 0,
+  "lp_points": true,
+  "show_lp": true,
+  "lp_label": "Mortality risk score",
+  "pts_unit": "pts",
+  "wf_base": "Baseline (0 pts)",
+  "panel_title": "SE mortality risk score (Tiamkao, national database)",
+  "metric_label": "Death (approx.)",
+  "bands": [
+   { "lt": 4, "pct": 6 },
+   { "lt": 100000, "pct": 39 }
+  ],
+  "outputs": [
+   { "label": "Death (approx.)" }
+  ],
+  "note": "Threshold score: add age + comorbidity + complication points (total 0–28) and compare with the cut-off 4. ROC 0.836 (validation 0.835). Below 4 ≈ 6% mortality, ≥4 ≈ 39% (derived from sensitivity 78% / specificity 75% and the 16.7% overall SE mortality). Read the total score and the cut-off, not an exact probability. No EEG/imaging needed.",
+  "viz_info": "Age, each comorbidity and each SE complication add points (waterfall); shock (5) and older age carry the most. The total (0–28) is the mortality risk score; the donut shows the approximate mortality band for being below vs at/above the cut-off of 4."
+ },
+ "provenance": {
+  "extraction_method": "text_table_verbatim",
+  "source": "Risk-score point values taken verbatim from Tiamkao et al., Epilepsia 2018, Table 3 (age 0–20:0/21–40:1.5/41–60:2.5/>60:4; heart disease 3.5; CNS infection 2.5; cancer 2; chronic renal failure 2; anaemia 1; shock 5; acute renal failure 3; septicaemia 3; pneumonia 1; respiratory failure 1; total 0–28). Cut-off 4 and performance from Table 4 (ROC 0.836; sens 78.2% / spec 75.4%; validated 0.835). Band mortality derived from those operating characteristics + 16.7% overall mortality (below-4 ≈5.5%, ≥4 ≈38.9%). PDF in 0_inbox/papers/status_epilepticus/.",
+  "review_status": "verified",
+  "notes": "Formula kind, type=lookup: lp = Σ points (coef 1, intercept 0) = total risk score; band split at 4. show_lp/lp_points display the total score. 11 predictors (age single-select + 5 comorbidity + 5 complication Yes/No, additive). Threshold score (like STESS/EMSE-cutoff), not a per-total probability; the two band mortalities (~6% / ~39%) are DERIVED from the paper's sens/spec/prevalence, not guessed. Registry/ICD-10 based; no EEG/imaging; validated in Thailand only."
+ }
+}

@@ -119,8 +119,11 @@
     ["calc-acd-se-mortality", "ACD Score \u2014 Mortality after Status Epilepticus", "Two-year mortality after non-anoxic status epilepticus from the Age\u2013Consciousness\u2013Duration (ACD) score (Roberg 2022; validated Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-se-survival-5yr", "Survival Curves after Status Epilepticus (5-year)", "Cumulative 5-year mortality after status epilepticus by ACD band and by Lattanzi aetiology — digitized Kaplan\u2013Meier curves (Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-stess", "STESS — Status Epilepticus Severity Score", "The most validated bedside score for survival after status epilepticus: 4 pre-treatment items (Rossetti 2008). Favorable 0–2 vs unfavorable 3–6.", "g7", "se_prognosis", { pop: "adult" }],
-    ["calc-emse", "EMSE — Epidemiology-based Mortality Score", "Individualised mortality risk after status epilepticus from aetiology, age, comorbidity and EEG (Leitinger 2015). Cut-off 64; matches/exceeds STESS.", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-emse", "EMSE — 30-day mortality nomogram", "Individualised 30-day mortality after status epilepticus from aetiology, age, comorbidity and EEG — the EMSE-parameter nomogram (Brigo/Meletti 2022, AUC 0.83).", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-endit", "END-IT — functional outcome after CSE", "Risk of poor functional outcome (mRS 3–6) at 3 months after convulsive status epilepticus, from 5 bedside items (Gao 2016). Cut-off ≥3.", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-after", "AFTER — epilepsy after status epilepticus", "Risk of developing epilepsy in the 5 years after a de novo status epilepticus, from 4 clinical/EEG items (Rodrigo-Gisbert 2023). Cut-off ≥2.", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-tiamkao", "SE Mortality Score (national database)", "Purely clinical mortality risk after status epilepticus (age, comorbidities, complications) — no EEG/imaging needed (Tiamkao 2018, n>10,000).", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-stepss", "STEPSS — paediatric SE severity score", "Risk of poor outcome (POPC ≥3) in children with status epilepticus — the paediatric STESS (Sidharth 2019). Cut-off >3.", "g7", "se_prognosis", { pop: "paed" }],
   ];
   // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
   // "ec" = Editor's choice (strongest evidence for that clinical question)

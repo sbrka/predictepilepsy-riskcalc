@@ -1,0 +1,84 @@
+{
+ "schema_version": "1.0",
+ "id": "after",
+ "kind": "score",
+ "meta": {
+  "title": "AFTER score — epilepsy after de novo status epilepticus",
+  "doi": "10.1016/j.yebeh.2023.109531",
+  "pmid": "37995538",
+  "citation": "Epilepsy Behav 2023;149:109531",
+  "authors": "Rodrigo-Gisbert M, Toledo M, Santamarina E, et al.",
+  "year": 2023,
+  "journal": "Epilepsy & Behavior",
+  "outcome": "Risk of developing epilepsy (a first unprovoked/remote seizure meeting ILAE criteria) within 5 years after a de novo episode of status epilepticus, in adults with no prior epilepsy.",
+  "metric_label": "Epilepsy at 5 years",
+  "source_note": "AFTER score: Rodrigo-Gisbert et al., Epilepsy Behav 2023 (doi 10.1016/j.yebeh.2023.109531, PMID 37995538). Derived by LASSO-Cox in 230 adults with de novo SE (23.9% developed epilepsy); 5-year cumulative risk by Kaplan-Meier; time-dependent AUC 0.743. Not yet externally validated.",
+  "cff_info": "<p><b>What this is.</b> The <b>AFTER score</b> estimates the risk of <b>developing epilepsy</b> (a later unprovoked seizure) in the <b>5 years after a first (de novo) episode of status epilepticus</b>, in a patient with no prior epilepsy. It is the only published points score for this question and complements the group's mortality/functional-outcome tools.</p><p><b>How it is scored.</b> Four items, 1 point each (total 0–4): <b>A</b>ctivity pattern in EEG (rhythmic/periodic patterns — LRDA/LPD/GPD), <b>F</b>irst-line <b>T</b>reatment delayed ≥1&nbsp;hour, cryptogenic <b>E</b>tiology, and super-<b>R</b>efractoriness.</p><p><b>What it means.</b> The validated cut-off is <b>≥2</b>: patients scoring ≥2 had a 5-year epilepsy risk of <b>≈66%</b> versus <b>≈23%</b> for a score of 0–1 (p&lt;0.0001; AUC 0.74). Risk rises further with each point (Fig 3).</p><p><b>Caveats.</b> Single-centre (Vall d'Hebron), de novo SE only (acute-symptomatic or cryptogenic; not prior epilepsy), not yet externally validated. 5-year figures are Kaplan-Meier estimates (median follow-up ~3 years), so they extrapolate beyond most patients' follow-up. Population-level estimate — apply clinical judgement.</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37995538/",
+   "title": "Rodrigo-Gisbert et al., Epilepsy Behav 2023 — AFTER score"
+  }
+ },
+ "thresholds": {
+  "group1": 60,
+  "group2": 30
+ },
+ "predictors": [
+  {
+   "name": "Rhythmic / periodic EEG pattern",
+   "assess": "Rhythmic or periodic patterns (RPPs) on EEG — lateralized rhythmic delta activity (LRDA), lateralized periodic discharges (LPDs), or generalized periodic discharges (GPDs). Present = 1 point.",
+   "options": [
+    { "label": "No (other / normal)", "points": 0 },
+    { "label": "Yes (LRDA / LPD / GPD)", "points": 1 }
+   ]
+  },
+  {
+   "name": "First-line treatment delayed ≥ 1 hour",
+   "assess": "Time from SE onset to first-line (benzodiazepine) treatment of 1 hour or more. Delayed ≥1 h = 1 point.",
+   "options": [
+    { "label": "No (< 1 hour)", "points": 0 },
+    { "label": "Yes (≥ 1 hour)", "points": 1 }
+   ]
+  },
+  {
+   "name": "Cryptogenic aetiology",
+   "assess": "Aetiology of the SE. Cryptogenic (no cause found) = 1 point; acute symptomatic = 0. (This model covers de novo SE — acute-symptomatic or cryptogenic — not remote/progressive causes.)",
+   "options": [
+    { "label": "No (acute symptomatic)", "points": 0 },
+    { "label": "Yes (cryptogenic)", "points": 1 }
+   ]
+  },
+  {
+   "name": "Super-refractory SE",
+   "assess": "Super-refractory status epilepticus — SE continuing or recurring ≥24 h after starting anaesthesia, including on weaning. Present = 1 point.",
+   "options": [
+    { "label": "No", "points": 0 },
+    { "label": "Yes", "points": 1 }
+   ]
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "5 years",
+  "metric_label": "Epilepsy at 5 years (post-SE)",
+  "panel_title": "AFTER — epilepsy risk after de novo status epilepticus",
+  "donut_sub": "epilepsy at 5 yr",
+  "viz_title": "AFTER build-up",
+  "rows": [
+   { "score": 0, "pct": 23, "disp": "~23%", "label": "AFTER 0 — below cut-off (0–1): ~23% 5-year epilepsy risk" },
+   { "score": 1, "pct": 23, "disp": "~23%", "label": "AFTER 1 — below cut-off (0–1): ~23% 5-year epilepsy risk" },
+   { "score": 2, "pct": 66, "disp": "~66%", "label": "AFTER 2 — at/above cut-off (≥2): ~66% 5-year epilepsy risk" },
+   { "score": 3, "pct": 66, "disp": "~66%", "label": "AFTER 3 — above cut-off (≥2): ~66% 5-year epilepsy risk (rising with score)" },
+   { "score": 4, "pct": 66, "disp": "~66%", "label": "AFTER 4 — above cut-off (≥2): ~66% 5-year epilepsy risk (highest band)" }
+  ],
+  "note": "5-year risk of post-SE epilepsy by the AFTER score (Rodrigo-Gisbert 2023). Validated as a dichotomy at the cut-off ≥2: 0–1 → ~23% vs ≥2 → ~66% 5-year Kaplan-Meier risk (p<0.0001; AUC 0.74). Per-score curves (Fig 3) show a further gradient within the ≥2 band but with small numbers (score 3 n=20, score 4 n=2), so rows use the validated two-band risks rather than noisy per-point values.",
+  "viz_info": "Each item — rhythmic/periodic EEG pattern, delayed first-line treatment, cryptogenic aetiology, super-refractoriness — adds a point (waterfall). A total of 0–1 carries ~23% 5-year risk of developing epilepsy; ≥2 (the validated threshold) carries ~66%. The donut shows the band's 5-year epilepsy risk."
+ },
+ "provenance": {
+  "extraction_method": "text_table_verbatim",
+  "source": "AFTER point items taken verbatim from Rodrigo-Gisbert et al., Epilepsy Behav 2023, Table 3 (Activity pattern in EEG [RPPs] 0/1; First-line Treatment ≥1 h 0/1; cryptogenic Etiology 0/1; super-Refractoriness 0/1; total 0–4). Dichotomy risks from Fig 4 (AFTER <2 → 23.0% vs ≥2 → 66.2% 5-year KM risk); per-score distribution + curves from Fig 3. PDF in 0_inbox/papers/status_epilepticus/.",
+  "review_status": "verified",
+  "notes": "Score kind, 4 binary predictors, total 0–4. Outcome = 5-year KM risk of developing epilepsy after de novo SE. Validated cut-off ≥2 (66% vs 23%); rows carry the two-band risks (0–1 → 23%, 2–4 → 66%) because per-score n is small (15/93/100/20/2). Fills the site's post-SE-epilepsy gap; adults, de novo SE only. Not externally validated (single-centre)."
+ }
+}

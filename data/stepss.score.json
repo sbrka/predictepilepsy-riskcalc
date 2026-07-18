@@ -1,0 +1,88 @@
+{
+ "schema_version": "1.0",
+ "id": "stepss",
+ "kind": "score",
+ "meta": {
+  "title": "STEPSS — paediatric status epilepticus severity score",
+  "doi": "10.1016/j.seizure.2019.09.005",
+  "pmid": "31536850",
+  "citation": "Seizure 2019;71:328-332",
+  "authors": "Sidharth, Sankhyan N, Malhi P, Jayashree M",
+  "year": 2019,
+  "journal": "Seizure",
+  "outcome": "Risk of an unfavourable short-term outcome (Paediatric Overall Performance Category ≥3, i.e. moderate disability to death, at discharge) in children with status epilepticus.",
+  "metric_label": "Unfavourable outcome (POPC ≥3)",
+  "source_note": "STEPSS: Sidharth et al., Seizure 2019 (doi 10.1016/j.seizure.2019.09.005, PMID 31536850) — the paediatric modification of STESS (Rossetti 2008), differing only in the age criterion (<2 years = 2 points instead of ≥65 years). Externally validated (Soydan Ekin 2022 AUC 0.92; Fetta 2024).",
+  "cff_info": "<p><b>What this is.</b> <b>STEPSS</b> (Status Epilepticus in Pediatric patients Severity Score) is the <b>paediatric version of STESS</b>. It predicts an <b>unfavourable short-term outcome</b> — Paediatric Overall Performance Category (POPC) ≥3, i.e. at least moderate disability, up to death — at discharge in children with status epilepticus.</p><p><b>How it is scored.</b> Four bedside items are added — level of consciousness (0–1), worst seizure type (0–2), age (<b>&lt;2 years = 2</b>, ≥2 years = 0), and history of previous seizures (0–1) — for a total of <b>0–6</b>. Only the age rule differs from the adult STESS.</p><p><b>What the score means (Sidharth 2019, 140 children).</b> Discrimination was excellent (AUC 0.95). The optimal <b>cut-off is &gt;3 (i.e. ≥4)</b>: sensitivity 93%, specificity 81% for a poor outcome, with a very high negative predictive value (99%) — a score of 0–3 reliably identifies children who will do well. Positive predictive value is lower and rises with the score (≈37% at ≥4, ≈91% at ≥5).</p><p><b>Caveats.</b> Single-centre derivation (New Delhi); the per-score figures shown are derived from the published cut-off operating characteristics (Table 3), not exact per-point risks, so read them as bands. Children 1 month–18 years. Population-level estimate — apply clinical judgement.</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/31536850/",
+   "title": "Sidharth et al., Seizure 2019 — STEPSS"
+  }
+ },
+ "thresholds": {
+  "group1": 60,
+  "group2": 20
+ },
+ "predictors": [
+  {
+   "name": "Level of consciousness",
+   "assess": "Level of consciousness before treatment. Alert, or somnolent/confused = 0; stuporous or comatose = 1.",
+   "options": [
+    { "label": "Alert or somnolent / confused", "points": 0 },
+    { "label": "Stuporous or comatose", "points": 1 }
+   ]
+  },
+  {
+   "name": "Worst seizure type",
+   "layout": "stack",
+   "assess": "The most severe seizure semiology. Simple-partial, complex-partial, absence or myoclonic = 0; generalised-convulsive = 1; non-convulsive SE in coma = 2.",
+   "options": [
+    { "label": "Simple-partial, complex-partial, absence, or myoclonic", "points": 0 },
+    { "label": "Generalised-convulsive", "points": 1 },
+    { "label": "Non-convulsive SE in coma", "points": 2 }
+   ]
+  },
+  {
+   "name": "Age",
+   "assess": "Child's age. Under 2 years adds 2 points (the paediatric modification of STESS); 2 years or older adds none.",
+   "options": [
+    { "label": "≥ 2 years", "points": 0 },
+    { "label": "< 2 years", "points": 2 }
+   ]
+  },
+  {
+   "name": "History of previous seizures",
+   "assess": "Any known history of seizures before this episode. Yes = 0; no or unknown = 1.",
+   "options": [
+    { "label": "Yes", "points": 0 },
+    { "label": "No or unknown", "points": 1 }
+   ]
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "at discharge",
+  "metric_label": "Unfavourable outcome (POPC ≥3)",
+  "panel_title": "STEPSS — outcome after paediatric status epilepticus",
+  "donut_sub": "poor outcome (POPC ≥3)",
+  "viz_title": "STEPSS build-up",
+  "rows": [
+   { "score": 0, "pct": 1,  "disp": "~1%",  "label": "STEPSS 0 — favourable: very low risk of poor outcome (NPV 99% below cut-off)" },
+   { "score": 1, "pct": 1,  "disp": "~1%",  "label": "STEPSS 1 — favourable: very low risk of poor outcome (NPV 99%)" },
+   { "score": 2, "pct": 2,  "disp": "~2%",  "label": "STEPSS 2 — favourable: low risk of poor outcome (NPV 99%)" },
+   { "score": 3, "pct": 3,  "disp": "~3%",  "label": "STEPSS 3 — favourable: low risk (below optimal cut-off >3)" },
+   { "score": 4, "pct": 37, "disp": "~37%", "label": "STEPSS 4 — above cut-off (>3): elevated risk of poor outcome (group ≥4 PPV ~37%)" },
+   { "score": 5, "pct": 91, "disp": "~91%", "label": "STEPSS 5 — high risk of poor outcome (group ≥5 PPV ~91%)" },
+   { "score": 6, "pct": 91, "disp": "~91%", "label": "STEPSS 6 — high risk of poor outcome (group ≥5 PPV ~91%)" }
+  ],
+  "note": "Risk of an unfavourable outcome (POPC ≥3) in children with SE. STEPSS = STESS with the age rule changed to <2 years = 2 points (Sidharth 2019, Table 1). Optimal cut-off >3 (≥4): sensitivity 93% / specificity 81%, NPV 99%, AUC 0.95. Per-score bands are derived from the published cut-off operating characteristics (Table 3: ≥4 PPV 37%, ≥5 PPV 91%), NOT exact per-point risks — its strength is ruling OUT a poor outcome (high NPV).",
+  "viz_info": "Consciousness, worst seizure type, age (<2 y) and seizure history each add points (waterfall). A total of 0–3 is favourable (very high NPV for a good outcome); ≥4 is the validated threshold for an elevated risk of poor outcome, rising steeply at ≥5. The donut shows the band's risk of a poor outcome."
+ },
+ "provenance": {
+  "extraction_method": "text_table_verbatim",
+  "source": "STEPSS point table taken verbatim from Sidharth et al., Seizure 2019, Table 1 (consciousness 0/1; worst seizure type 0/1/2; age <2 y = 2 else 0; history of previous seizures yes 0 / no-or-unknown 1; total 0–6). Cut-off operating characteristics from Table 3 (>3: sens 0.93/spec 0.81/NPV 0.99; ≥4 PPV 0.37; ≥5 PPV 0.91; AUC 0.95). PDF in 0_inbox/papers/status_epilepticus/.",
+  "review_status": "verified",
+  "notes": "Score kind, 4 predictors, total 0–6. Only the age criterion differs from STESS (<2 y = 2 pts). STEPSS validates a cut-off (>3) not per-score risk, so rows carry band risks derived from Table 3 PPVs (0–3 favourable ~1–3% via NPV 99%; 4 → group-≥4 PPV 37%; 5–6 → group-≥5 PPV 91%) — flagged approximate in note/cff_info. Paediatric (1 mo–18 y). Fills the site's paediatric-SE gap."
+ }
+}
