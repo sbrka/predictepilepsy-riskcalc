@@ -975,7 +975,12 @@
           // p.vals = non-uniform published steps; the slider then walks the INDEX and shows vals[i].
           const v = this._msSlider[i], mn = p.vals ? 0 : (p.min || 0), mx = p.vals ? p.vals.length - 1 : (p.max != null ? p.max : 10);
           const disp = p.vals ? p.vals[v] : v;
-          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span><span class="pill" id="ms${i}v">${disp}${p.unit ? " " + esc(p.unit) : ""}</span></div>
+          // p.entry = also expose a free numeric input; typed values snap to the nearest
+          // published step (for p.vals) or are clamped to [min,max] on the step grid.
+          const valBox = p.entry
+            ? `<span class="pill" id="ms${i}v" style="padding:2px 6px;display:inline-flex;align-items:center;gap:3px"><input type="number" inputmode="decimal" class="msentry" data-si="${i}" value="${disp}" min="${p.vals ? p.vals[0] : mn}" max="${p.vals ? p.vals[p.vals.length - 1] : mx}" step="${p.vals ? "any" : (p.step || 1)}" aria-label="${attr(p.name)} value" style="width:58px;border:0;outline:0;background:rgba(255,255,255,.9);border-radius:6px;padding:2px 4px;font:inherit;color:var(--azure-deep);text-align:right">${p.unit ? `<span style="opacity:.85">${esc(p.unit)}</span>` : ""}</span>`
+            : `<span class="pill" id="ms${i}v">${disp}${p.unit ? " " + esc(p.unit) : ""}</span>`;
+          rail += `<div class="field"><div class="flabel" style="justify-content:space-between"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span>${valBox}</div>
             <input type="range" class="mspred" data-si="${i}" min="${mn}" max="${mx}" step="${p.vals ? 1 : (p.step || 1)}" value="${v}" style="--fill:${(v - mn) / (mx - mn) * 100}%"></div>`;
         } else {
           rail += `<div class="field"><div class="flabel"><span>${esc(p.name)}${p.assess ? ` <button class="info-dot" data-info="${attr(p.assess)}" aria-label="About ${esc(p.name)}">i</button>` : ""}</span></div>
@@ -996,9 +1001,35 @@
         const i = +e.target.dataset.si, mn = +e.target.min, mx = +e.target.max; this._msSlider[i] = +e.target.value;
         e.target.style.setProperty("--fill", (this._msSlider[i] - mn) / (mx - mn) * 100 + "%");
         const p = preds[i], sv = p.vals ? p.vals[this._msSlider[i]] : this._msSlider[i];
-        this._rail.querySelector("#ms" + i + "v").textContent = sv + (p.unit ? " " + p.unit : "");
+        const holder = this._rail.querySelector("#ms" + i + "v"), ei = holder && holder.querySelector("input.msentry");
+        if (ei) ei.value = sv; else if (holder) holder.textContent = sv + (p.unit ? " " + p.unit : "");
         this._msUpdate();
       }));
+      // Free numeric entry: snap a typed value to the nearest published step (p.vals)
+      // or to the [min,max] step grid, then mirror it onto the slider.
+      this._rail.querySelectorAll(".msentry").forEach((inp) => {
+        const commit = (e) => {
+          const i = +e.target.dataset.si, p = preds[i];
+          let raw = parseFloat(e.target.value);
+          if (isNaN(raw)) raw = p.vals ? p.vals[this._msSlider[i]] : this._msSlider[i];
+          let idx;
+          if (p.vals) {
+            idx = 0; let best = Math.abs(p.vals[0] - raw);
+            for (let k = 1; k < p.vals.length; k++) { const dd = Math.abs(p.vals[k] - raw); if (dd < best) { best = dd; idx = k; } }
+          } else {
+            const st = p.step || 1, mn = p.min || 0, mx = (p.max != null ? p.max : 10);
+            idx = Math.min(mx, Math.max(mn, Math.round(raw / st) * st));
+          }
+          this._msSlider[i] = idx;
+          const disp = p.vals ? p.vals[idx] : idx;
+          e.target.value = disp;
+          const sl = this._rail.querySelector('.mspred[data-si="' + i + '"]');
+          if (sl) { const mn = +sl.min, mx = +sl.max; sl.value = idx; sl.style.setProperty("--fill", (idx - mn) / (mx - mn) * 100 + "%"); }
+          this._msUpdate();
+        };
+        inp.addEventListener("change", commit);
+        inp.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); commit(e); inp.blur(); } });
+      });
     }
 
     _msUpdate() {

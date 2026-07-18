@@ -1,0 +1,211 @@
+{
+ "schema_version": "1.0",
+ "id": "acd_se_mortality",
+ "kind": "score",
+ "meta": {
+  "title": "ACD score — 2-year mortality after status epilepticus",
+  "doi": "10.1001/jamaneurol.2022.0609",
+  "pmid": "35404392",
+  "citation": "JAMA Neurol 2022;79(6):604-613",
+  "authors": "Roberg LE, Monsson O, Kristensen SB, et al., Beier CP",
+  "year": 2022,
+  "journal": "JAMA Neurology",
+  "outcome": "Two-year mortality after an episode of non-anoxic status epilepticus, from the Age–Consciousness–Duration (ACD) score (Roberg 2022 nomogram).",
+  "source_note": "ACD score and 2-year-mortality nomogram: Roberg et al., JAMA Neurol 2022 (doi 10.1001/jamaneurol.2022.0609, PMID 35404392). Independently validated for long-term mortality by Alanís-Bernal et al., Epilepsia 2026 (doi 10.1002/epi.70363, PMID 42396999).",
+  "cff_info": "<p><b>What this shows.</b> The <b>ACD score</b> (Age, Consciousness, Duration) estimates <b>2-year mortality</b> after an episode of non-anoxic <b>status epilepticus (SE)</b>. It was derived and internally-externally validated by Roberg et&nbsp;al. (<i>JAMA Neurology</i> 2022) in Danish, German and Norwegian cohorts, and the 2-year mortality figures shown here are read directly from their published nomogram (Figure 2C).</p><p><b>How it is scored.</b> Three items are added — age at diagnosis (0–6), duration of SE (0–7) and level of consciousness at admission (0–2) — for a total of 0–15. Two-year mortality rises almost linearly with the total (about 6% per point). The optimal cut-off is <b>10 points</b>: at or above it, more than half of patients have died by 2 years.</p><p><b>Recent external validation.</b> Alanís-Bernal et&nbsp;al. (<i>Epilepsia</i> 2026) confirmed the ACD score as an independent predictor of longer-term (5-year) mortality (HR 1.16 per point, 95% CI 1.06–1.27; ROC area 0.72), with survival again falling below 50% at 2 years once the score reached ≥10.</p><p><b>Scope.</b> Adults / adolescents (≥16–18 years) with <b>non-anoxic</b> SE; the score is most reliable in patients whose SE was <b>not damaging or less damaging to the brain</b> (it under-performs in progressive or brain-damaging causes). Values for scores 0–1 and 15 lie just outside the published nomogram range (2–14) and are extrapolated along the same regression line. Population-level estimates — always apply clinical judgement.</p>"
+ },
+ "thresholds": {
+  "group1": 50,
+  "group2": 25
+ },
+ "predictors": [
+  {
+   "name": "Age at diagnosis",
+   "options": [
+    {
+     "label": "≤ 40 years",
+     "points": 0
+    },
+    {
+     "label": "41–60 years",
+     "points": 2
+    },
+    {
+     "label": "61–80 years",
+     "points": 4
+    },
+    {
+     "label": "> 80 years",
+     "points": 6
+    }
+   ],
+   "assess": "Patient age when status epilepticus was diagnosed. Older age scores more (0–6 points)."
+  },
+  {
+   "name": "Duration of status epilepticus",
+   "options": [
+    {
+     "label": "< 1 hour",
+     "points": 0
+    },
+    {
+     "label": "1–2 hours",
+     "points": 1
+    },
+    {
+     "label": "3–6 hours",
+     "points": 2
+    },
+    {
+     "label": "7–19 hours",
+     "points": 3
+    },
+    {
+     "label": "20–54 hours",
+     "points": 4
+    },
+    {
+     "label": "55–149 hours",
+     "points": 5
+    },
+    {
+     "label": "150–399 hours",
+     "points": 6
+    },
+    {
+     "label": "≥ 400 hours",
+     "points": 7
+    }
+   ],
+   "assess": "Total duration of the SE episode, from clinical onset to cessation of ictal activity. Longer episodes score more (0–7 points)."
+  },
+  {
+   "name": "Level of consciousness at admission",
+   "options": [
+    {
+     "label": "Awake / somnolent",
+     "points": 0
+    },
+    {
+     "label": "Stuporous / comatose",
+     "points": 2
+    }
+   ],
+   "assess": "Level of consciousness on admission. Stupor or coma adds 2 points; an awake or somnolent patient adds none."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "2 years",
+  "metric_label": "2-year mortality",
+  "panel_title": "2-year mortality after status epilepticus",
+  "donut_sub": "2-yr mortality",
+  "viz_title": "ACD score build-up",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 1,
+    "disp": "1%",
+    "label": "ACD 0 — lower risk: ~1% 2-year mortality (extrapolated)"
+   },
+   {
+    "score": 1,
+    "pct": 7,
+    "disp": "7%",
+    "label": "ACD 1 — lower risk: ~7% 2-year mortality (extrapolated)"
+   },
+   {
+    "score": 2,
+    "pct": 13,
+    "disp": "13%",
+    "label": "ACD 2 — lower risk: ~13% 2-year mortality"
+   },
+   {
+    "score": 3,
+    "pct": 19,
+    "disp": "19%",
+    "label": "ACD 3 — lower risk: ~19% 2-year mortality"
+   },
+   {
+    "score": 4,
+    "pct": 25,
+    "disp": "25%",
+    "label": "ACD 4 — intermediate risk: ~25% 2-year mortality"
+   },
+   {
+    "score": 5,
+    "pct": 31,
+    "disp": "31%",
+    "label": "ACD 5 — intermediate risk: ~31% 2-year mortality"
+   },
+   {
+    "score": 6,
+    "pct": 37,
+    "disp": "37%",
+    "label": "ACD 6 — intermediate risk: ~37% 2-year mortality"
+   },
+   {
+    "score": 7,
+    "pct": 43,
+    "disp": "43%",
+    "label": "ACD 7 — intermediate risk: ~43% 2-year mortality"
+   },
+   {
+    "score": 8,
+    "pct": 49,
+    "disp": "49%",
+    "label": "ACD 8 — intermediate risk: ~49% 2-year mortality"
+   },
+   {
+    "score": 9,
+    "pct": 55,
+    "disp": "55%",
+    "label": "ACD 9 — high risk: ~55% 2-year mortality"
+   },
+   {
+    "score": 10,
+    "pct": 61,
+    "disp": "61%",
+    "label": "ACD 10 — high risk: ~61% 2-year mortality"
+   },
+   {
+    "score": 11,
+    "pct": 67,
+    "disp": "67%",
+    "label": "ACD 11 — high risk: ~67% 2-year mortality"
+   },
+   {
+    "score": 12,
+    "pct": 73,
+    "disp": "73%",
+    "label": "ACD 12 — high risk: ~73% 2-year mortality"
+   },
+   {
+    "score": 13,
+    "pct": 79,
+    "disp": "79%",
+    "label": "ACD 13 — high risk: ~79% 2-year mortality"
+   },
+   {
+    "score": 14,
+    "pct": 86,
+    "disp": "86%",
+    "label": "ACD 14 — high risk: ~86% 2-year mortality"
+   },
+   {
+    "score": 15,
+    "pct": 91,
+    "disp": "91%",
+    "label": "ACD 15 — high risk: ~91% 2-year mortality (extrapolated)"
+   }
+  ],
+  "note": "Two-year mortality from the Roberg (2022) ACD nomogram — about 6% per point; ≥10 points means >50% 2-year mortality. Scores 0–1 and 15 are extrapolated just beyond the published nomogram range (2–14). Estimates apply to non-anoxic SE and are most reliable in non–brain-damaging causes.",
+  "viz_info": "Age, duration and consciousness each add points; the waterfall shows the build-up. The total maps to the predicted 2-year mortality (Roberg nomogram) shown in the donut — roughly 6% per point."
+ },
+ "provenance": {
+  "extraction_method": "figure_digitized",
+  "source": "Point table from Roberg et al., JAMA Neurol 2022, Figure 1C (identical to Alanís-Bernal 2026 Fig 3B). Per-score 2-year mortality read from the Roberg Figure 2C nomogram (Total points 2–14 → 13,19,25,31,37,43,49,55,61,67,73,79,86 %; a linear ruler, mortality ≈ 6·score + 1). Scores 0, 1, 15 extrapolated along the same regression line (Fig 2B, Pearson r²=0.848). External long-term validation: Alanís-Bernal et al., Epilepsia 2026 (doi 10.1002/epi.70363, PMID 42396999).",
+  "review_status": "unreviewed",
+  "notes": "Age single 4-level bracket (≤40/41-60/61-80/>80→0/2/4/6); Duration 8-level (0-7); Consciousness 2-level (0/2). Max 15. pct = 2-year mortality per Roberg Fig 2C nomogram (exact for scores 2-14; 0/1/15 extrapolated on the published line). Figure-read but the mapping is an explicit linear ruler, so effectively exact. Roberg reports it in survival terms; shown here as mortality (=100−survival) per user request."
+ }
+}
