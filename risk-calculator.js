@@ -757,10 +757,13 @@
         const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = "none";
         return;
       }
+      // per-calculator display precision (e.g. decimals:1 to match an authors' site that shows 7.1%)
+      const dec = (this.data.meta && this.data.meta.decimals) || 0;
+      this._pctDec = dec;
       if (mroot) {
         let cells = "";
         if (m.show_lp) cells += `<div class="metric"><div class="k">${esc(m.lp_label || "Combined value")}</div><div class="v">${lp.toFixed(1)}</div></div>`;
-        cells += outs.map((o, i) => `<div class="metric${(i || m.show_lp) ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v">${o.approx ? "~" : ""}${fmtPct(o.pct)}</div></div>`).join("");
+        cells += outs.map((o, i) => `<div class="metric${(i || m.show_lp) ? " sm" : ""}"><div class="k">${esc(o.label)}</div><div class="v">${o.approx ? "~" : ""}${fmtPctD(o.pct, dec)}</div></div>`).join("");
         mroot.innerHTML = cells;
       }
       const _cb = this._formulaContribs(), _link = (v) => this._linkRisk(v);
@@ -768,7 +771,7 @@
         : (m.type === "surv" ? { baseLabel: m.wf_base || "Baseline patient" } : undefined);
       this._drawWaterfall(_cb, _link, wopts);
       if (m.type === "surv" || (m.donut_tone && (m.outputs || []).length > 1)) { this._drawSurvDonuts(outs); }
-      else { const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = ""; this._drawDonut(_cb, _link); }
+      else { const donut = this._panel.querySelector("#fdonut"); if (donut) donut.style.display = ""; this._drawDonut(_cb, _link, dec ? (st) => fmtPctD(_link(st), dec) : undefined); }
     }
 
     // House-style risk donut (shared): arc = `pct`% of the ring in `color`, grey remainder.
@@ -849,7 +852,7 @@
       const baseEnd = pmode ? sx(base) : sx(baseRisk);
       g += `<rect x="${x0}" y="${y}" width="${Math.max(pmode ? 0 : 1, baseEnd - x0)}" height="15" rx="2" fill="#9fb4c7"/>`;
       g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="10.5" fill="#5b6b7b" font-family="var(--sans)">${esc((opts && opts.baseLabel) || "Baseline risk")}</text>`;
-      g += `<text x="${baseEnd + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPct(baseRisk)}</text>`;
+      g += `<text x="${baseEnd + 5}" y="${y + 12}" font-size="10" fill="#5b6b7b" font-family="var(--sans)">${fmtPctD(baseRisk, this._pctDec || 0)}</text>`;
       y += rowH;
       active.forEach((c, k) => {
         if (pmode) {
@@ -870,7 +873,7 @@
       const total = link(cur), totEnd = pmode ? sx(cur) : sx(total);
       g += `<rect x="${x0}" y="${y}" width="${Math.max(1, totEnd - x0)}" height="15" rx="2" fill="#0f7a54"/>`;
       g += `<text x="${x0 - 8}" y="${y + 12}" text-anchor="end" font-size="12" fill="#1a2430" font-weight="700" font-family="var(--serif)">Total</text>`;
-      g += `<text x="${totEnd + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPct(total)}</text>`;
+      g += `<text x="${totEnd + 5}" y="${y + 12}" font-size="12" fill="#0f7a54" font-weight="700" font-family="var(--serif)">${fmtPctD(total, this._pctDec || 0)}</text>`;
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.style.maxHeight = "340px"; svg.innerHTML = g;
     }
 
@@ -1348,6 +1351,8 @@
   function esc(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
   function attr(x) { return esc(x).replace(/'/g, "&#39;"); }
   function fmtPct(v) { return (v == null ? 0 : Math.round(v)) + "%"; }
+  // Decimal-aware percent formatter (matches an authors' site that shows N decimals). d=0 == fmtPct.
+  function fmtPctD(v, d) { d = d || 0; const f = Math.pow(10, d); return (Math.round((v == null ? 0 : v) * f) / f).toFixed(d) + "%"; }
   function fmtScore(n) { return (typeof n === "number" && isFinite(n)) ? +n.toFixed(3) : n; }   // trims float noise e.g. 26.200000000000003 -> 26.2
   function fmtMo(v) { return v == null ? "not reached" : v <= 0 ? "immediately" : v + " mo"; }
   function firstBelow(arr, thr) { for (let i = 0; i < arr.length; i++) if (arr[i] < thr) return i; return null; }

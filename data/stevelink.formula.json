@@ -16,7 +16,8 @@
    "label": "original tool",
    "url": "https://epilepsypredictiontools.info/",
    "title": "The authors' original tool at epilepsypredictiontools.info (UMC Utrecht)"
-  }
+  },
+  "decimals": 1
  },
  "thresholds": null,
  "predictors": [
