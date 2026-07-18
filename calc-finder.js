@@ -180,7 +180,20 @@
     g4: ["#22a578", "#0c6647"], g5: ["#d8564a", "#9e2820"], g7: ["#5a6b80", "#333c4a"],
   };
   const BADGE_CURVE = '<svg class="ccrv" viewBox="0 0 96 34" preserveAspectRatio="none"><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3 L96 34 L0 34 Z" fill="#fff" opacity=".12"/><path d="M0 31 C24 29 33 15 52 10 71 5 80 4 96 3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".92"/></svg>';
-  const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 9);
+  const abbrev = (name) => String(name).split(/[\s(]/)[0].replace(/[:,]$/, "").slice(0, 12);
+  // Font size that keeps an abbreviation on ONE line inside the 58px badge (~52px usable, weight 800).
+  const badgeFont = (n) => n <= 3 ? 22 : n <= 4 ? 20 : n <= 5 ? 16 : n <= 6 ? 13.5 : n <= 7 ? 11.5 : n <= 8 ? 10 : 9;
+  // Badge inner HTML: single words stay on one line (font shrinks to fit); only a hyphenated
+  // abbreviation wraps — cleanly at the hyphen — into two rows (e.g. Post-/Stroke, END-/IT).
+  const badgeInner = (ab) => {
+    ab = String(ab);
+    const i = ab.indexOf("-");
+    if (i > 0 && i < ab.length - 1) {
+      const p1 = ab.slice(0, i + 1), p2 = ab.slice(i + 1);
+      return `<span class="cab wrap" style="font-size:${badgeFont(Math.max(p1.length, p2.length))}px">${esc(p1)}<br>${esc(p2)}</span>`;
+    }
+    return `<span class="cab" style="font-size:${badgeFont(ab.length)}px">${esc(ab)}</span>`;
+  };
 
   const CSS = `
     :host{--azure:#135ba8;--azure-deep:#0e4a8a;--azure-wash:#eef6fe;--azure-line:#cfe4fb;--ink:#16222f;--muted:#5c6b7a;
@@ -246,7 +259,8 @@
     .card:hover{border-color:var(--azure);box-shadow:0 8px 22px rgba(19,91,168,.13);transform:translateY(-2px)}
     .cbadge{width:58px;height:58px;flex:0 0 auto;border-radius:15px;background:linear-gradient(150deg,#2472c8,#0e4a8a);box-shadow:0 5px 15px rgba(14,40,74,.24);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
     .cbadge::after{content:"";position:absolute;inset:0;border-radius:15px;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,0) 46%);pointer-events:none}
-    .cbadge .cab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 3px;letter-spacing:-.3px;text-shadow:0 1px 2px rgba(0,0,0,.13)}
+    .cbadge .cab{font-weight:800;line-height:1;text-align:center;z-index:1;padding:0 2px;letter-spacing:-.3px;text-shadow:0 1px 2px rgba(0,0,0,.13);white-space:nowrap}
+    .cbadge .cab.wrap{white-space:normal;line-height:1.02}
     .cbadge .ccrv{position:absolute;left:0;right:0;bottom:0;height:20px}
     .ctxt{display:flex;flex-direction:column;min-width:0;flex:1}
     .card .cn{font-weight:700;font-size:16px;color:var(--azure-deep);margin-bottom:4px}
@@ -311,7 +325,6 @@
       const ec = !!b && b[0] === "ec", recd = !!b && b[0] === "rec";
       const href = ext || (this._base + "/" + c[0] + "/");
       const ab = o.ab || abbrev(c[1]);
-      const fs = ab.length <= 4 ? 21 : ab.length <= 6 ? 15 : ab.length <= 7 ? 13 : 11;
       const grad = GROUP_GRAD[c[3]] || ["#2472c8", "#0e4a8a"];
       // pop chip — only set where the source paper states the population explicitly.
       const flags =
@@ -322,7 +335,7 @@
         (norec ? `<span class="chip norec" title="${esc(o.badge || "Weak evidence — use only if nothing better is available")}">not recommended</span>` : "") +
         (ext ? `<span class="chip ext">external tool ↗</span>` : "");
       return `<a class="card${norec ? " norec" : ""}${ec ? " ec" : recd ? " rec" : ""}" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""} data-slug="${c[0]}">` +
-        `<span class="cbadge" style="background:linear-gradient(150deg,${grad[0]},${grad[1]})"><span class="cab" style="font-size:${fs}px">${esc(ab)}</span>${BADGE_CURVE}</span>` +
+        `<span class="cbadge" style="background:linear-gradient(150deg,${grad[0]},${grad[1]})">${badgeInner(ab)}${BADGE_CURVE}</span>` +
         `<span class="ctxt">${flags ? `<span class="chiprow">${flags}</span>` : ""}<span class="cn">${esc(c[1])}</span><span class="cd">${esc(c[2])}</span><span class="go">${ext ? "Open tool ↗" : "Open calculator &rarr;"}</span></span></a>`;
     }
     back() {
