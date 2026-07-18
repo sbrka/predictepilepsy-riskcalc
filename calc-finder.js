@@ -32,7 +32,7 @@
     acute_sympt: "Acute symptomatic seizure", critical_eeg: "Critically ill (EEG monitoring)", first_seizure: "First unprovoked seizure",
     two_seizures: "After two unprovoked seizures", withdrawal: "Withdrawing antiseizure medication",
     remission: "After a period of remission", drug_resistance: "Predicting drug resistance", pregnancy: "Seizures in pregnancy",
-    se_prognosis: "Survival after status epilepticus", seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
+    se_prognosis: "Outcome / prognosis after status epilepticus", seeg: "SEEG / will it localise the focus?", surg_outcome: "Seizure freedom after surgery", surg_neuropsych: "Cognitive / mood outcome", sudep: "SUDEP risk",
   };
   // ---- catalogue:  [slug, name, description, group, setting] -----------------
   const CALCS = [
@@ -120,6 +120,7 @@
     ["calc-se-survival-5yr", "Survival Curves after Status Epilepticus (5-year)", "Cumulative 5-year mortality after status epilepticus by ACD band and by Lattanzi aetiology — digitized Kaplan\u2013Meier curves (Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-stess", "STESS — Status Epilepticus Severity Score", "The most validated bedside score for survival after status epilepticus: 4 pre-treatment items (Rossetti 2008). Favorable 0–2 vs unfavorable 3–6.", "g7", "se_prognosis", { pop: "adult" }],
     ["calc-emse", "EMSE — Epidemiology-based Mortality Score", "Individualised mortality risk after status epilepticus from aetiology, age, comorbidity and EEG (Leitinger 2015). Cut-off 64; matches/exceeds STESS.", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-endit", "END-IT — functional outcome after CSE", "Risk of poor functional outcome (mRS 3–6) at 3 months after convulsive status epilepticus, from 5 bedside items (Gao 2016). Cut-off ≥3.", "g7", "se_prognosis", { pop: "adult" }],
   ];
   // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
   // "ec" = Editor's choice (strongest evidence for that clinical question)

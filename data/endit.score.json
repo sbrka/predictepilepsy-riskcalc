@@ -1,0 +1,96 @@
+{
+ "schema_version": "1.0",
+ "id": "endit",
+ "kind": "score",
+ "meta": {
+  "title": "END-IT — functional outcome after convulsive status epilepticus",
+  "doi": "10.1186/s13054-016-1221-9",
+  "pmid": "26916702",
+  "citation": "Crit Care 2016;20:46",
+  "authors": "Gao Q, Ou-Yang T-P, Sun X-L, Yang F, Wu C, Kang T, Kang X-G, Jiang W",
+  "year": 2016,
+  "journal": "Critical Care",
+  "outcome": "Risk of an unfavorable functional outcome (modified Rankin Scale 3–6, i.e. death or dependence) at 3 months after discharge, in adults with convulsive status epilepticus.",
+  "metric_label": "Unfavorable outcome (mRS 3–6) at 3 mo",
+  "source_note": "END-IT: Gao et al., Crit Care 2016 (doi 10.1186/s13054-016-1221-9, PMID 26916702). Point table from Table 4; per-score probability read from Figure 2; operating characteristics (cut-off ≥3) from Table 5. Externally validated (e.g. Reindl 2018, Bögli 2023, Kanmaz 2025) with more modest discrimination (AUC ~0.65–0.74) in NCSE/neuro-ICU and paediatric cohorts.",
+  "cff_info": "<p><b>What this is.</b> <b>END-IT</b> predicts a <b>poor functional outcome</b> — modified Rankin Scale (mRS) 3–6, i.e. moderate-to-severe disability or death — at <b>3 months</b> after an episode of <b>convulsive status epilepticus (CSE)</b>. It complements survival scores (STESS, EMSE) by focusing on disability among survivors.</p><p><b>How it is scored.</b> Five items are added — <b>E</b>ncephalitis, <b>N</b>CSE (non-convulsive/subtle SE), <b>D</b>iazepam resistance, <b>I</b>maging abnormality (unilateral 1, bilateral/diffuse oedema 2), and <b>T</b>racheal intubation — for a total of <b>0–6</b>. The predicted probability of a poor outcome rises steadily with the score.</p><p><b>How well it works.</b> In the derivation cohort (132 patients) discrimination was good (AUC 0.83) and the optimal <b>cut-off was ≥3</b> (sensitivity 84%, specificity 69%, PPV 70%, NPV 83%), outperforming STESS and EMSE-EACE for functional outcome. External validations show more modest performance (AUC ~0.65–0.74), so treat it as a risk indicator, not a certainty.</p><p><b>Scope.</b> Adults with convulsive SE (median age 25; cerebral anoxia excluded). Per-score probabilities are read from the paper's Figure 2 and are study-population specific. Population-level estimate — always apply clinical judgement.</p>",
+  "source_link": {
+   "label": "PubMed",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26916702/",
+   "title": "Gao et al., Crit Care 2016 — END-IT"
+  }
+ },
+ "thresholds": {
+  "group1": 60,
+  "group2": 40
+ },
+ "predictors": [
+  {
+   "name": "Encephalitis",
+   "assess": "Encephalitis as the cause of the status epilepticus (the commonest cause in the derivation cohort). Present = 1 point.",
+   "options": [
+    { "label": "No", "points": 0 },
+    { "label": "Yes", "points": 1 }
+   ]
+  },
+  {
+   "name": "NCSE (non-convulsive / subtle SE)",
+   "assess": "Convulsive SE complicated by / evolving into non-convulsive (subtle) status epilepticus — subtle clinical signs with EEG discharges. Present = 1 point.",
+   "options": [
+    { "label": "No", "points": 0 },
+    { "label": "Yes", "points": 1 }
+   ]
+  },
+  {
+   "name": "Diazepam resistance",
+   "assess": "Status epilepticus that did not respond to first-line benzodiazepine (diazepam). Present = 1 point.",
+   "options": [
+    { "label": "No", "points": 0 },
+    { "label": "Yes", "points": 1 }
+   ]
+  },
+  {
+   "name": "Neuroimaging abnormality",
+   "layout": "stack",
+   "assess": "Worst brain-imaging finding. No responsible lesion = 0; a unilateral lesion = 1; bilateral lesions or diffuse cerebral oedema = 2.",
+   "options": [
+    { "label": "No responsible lesion", "points": 0 },
+    { "label": "Unilateral lesion", "points": 1 },
+    { "label": "Bilateral lesions or diffuse cerebral oedema", "points": 2 }
+   ]
+  },
+  {
+   "name": "Tracheal intubation",
+   "assess": "Need for tracheal intubation during the SE episode. Present = 1 point.",
+   "options": [
+    { "label": "No", "points": 0 },
+    { "label": "Yes", "points": 1 }
+   ]
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "3 months",
+  "metric_label": "Unfavorable outcome (mRS 3–6) at 3 mo",
+  "panel_title": "END-IT — poor functional outcome after convulsive SE",
+  "donut_sub": "poor outcome at 3 mo",
+  "viz_title": "END-IT build-up",
+  "rows": [
+   { "score": 0, "pct": 3,  "disp": "~3%",  "label": "END-IT 0 — favorable: ~3% risk of poor outcome (below cut-off; NPV 83% at ≥3)" },
+   { "score": 1, "pct": 9,  "disp": "~9%",  "label": "END-IT 1 — favorable: ~9% risk of poor outcome (below cut-off)" },
+   { "score": 2, "pct": 24, "disp": "~24%", "label": "END-IT 2 — favorable: ~24% risk of poor outcome (below cut-off)" },
+   { "score": 3, "pct": 49, "disp": "~49%", "label": "END-IT 3 — at/above cut-off (≥3): ~49% risk of poor outcome" },
+   { "score": 4, "pct": 72, "disp": "~72%", "label": "END-IT 4 — unfavorable: ~72% risk of poor outcome" },
+   { "score": 5, "pct": 88, "disp": "~88%", "label": "END-IT 5 — unfavorable: ~88% risk of poor outcome" },
+   { "score": 6, "pct": 96, "disp": "~96%", "label": "END-IT 6 — unfavorable: ~96% risk of poor outcome" }
+  ],
+  "note": "Predicted probability of an unfavorable functional outcome (mRS 3–6) at 3 months, read from the END-IT logistic curve (Gao 2016, Fig 2); points from Table 4. The validated decision cut-off is ≥3 (sensitivity 84% / specificity 69% / PPV 70% / NPV 83%; AUC 0.83 in derivation, ~0.65–0.74 externally). Study-population-specific — a risk indicator, not an exact probability.",
+  "viz_info": "Encephalitis, NCSE, diazepam resistance, imaging and tracheal intubation each add points (waterfall). The total (0–6) maps to the predicted risk of a poor functional outcome at 3 months (donut). A score of ≥3 is the validated threshold for a likely poor outcome."
+ },
+ "provenance": {
+  "extraction_method": "figure_digitized",
+  "source": "Point allocation taken verbatim from Gao et al., Crit Care 2016, Table 4 (Encephalitis 1, NCSE 1, Diazepam resistance 1, Imaging unilateral 1 / bilateral-or-diffuse-oedema 2, Tracheal intubation 1). Per-score probabilities read from Figure 2 (predicted-probability logistic curve): 0→~3%, 1→~9%, 2→~24%, 3→~49%, 4→~72%, 5→~88%, 6→~96% (consistent with logit ≈ −3.48 + 1.15·score). Operating characteristics (cut-off ≥3) from Table 5. PDF in 0_inbox/papers/status_epilepticus/.",
+  "review_status": "unreviewed",
+  "notes": "Score kind, 5 predictors (Imaging 0/1/2, others 0/1), total 0–6. Points are exact (Table 4). Per-score pct digitized from Fig 2 (population-specific predicted probability), so approximate (±~5pp) — flagged in note/cff_info; the validated dichotomy is ≥3. Fills the site's functional-outcome gap (STESS/EMSE/ACD are mortality/survival)."
+ }
+}
