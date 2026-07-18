@@ -548,10 +548,15 @@
         const mo = Math.round((px - G.pL) / (G.W - G.pL - G.pR) * xmax);
         if (mo < 0 || mo > xmax) { hide(); return; }
         const cumV = cumArr[Math.min(mo, cumArr.length - 1)], cosyV = cosyArr[Math.min(mo, cosyArr.length - 1)];
-        const [zn, zs] = zoneFor(cosyV, th);
         const _s = this._cur.s, _lo = _s.cum_lo ? seriesArr(_s.cum_lo, ax.cum) : null, _hi = _s.cum_hi ? seriesArr(_s.cum_hi, ax.cum) : null;
+        // COSY (and its driving zone) only for scores that actually report it; otherwise show what IS presented.
+        const isMort = this.data.model.curve_metric === "mortality";
+        const showCosy = !isMort && !_s.no_cosy && cosyArr && cosyArr.length > 0;
+        const cumLabel = isMort ? "Cumulative mortality" : "Cumulative";
         const ciRow = (_lo && _hi) ? `<div class="r" style="opacity:.8"><span>95% CI</span><b>${fmtPct(_lo[Math.min(mo, _lo.length - 1)])}–${fmtPct(_hi[Math.min(mo, _hi.length - 1)])}</b></div>` : "";
-        tip.innerHTML = `<div class="d">Month ${mo}</div><div class="r"><span>Cumulative</span><b>${fmtPct(cumV)}</b></div>${ciRow}<div class="r"><span>COSY</span><b>${fmtPct(cosyV)}</b></div><div class="z" style="${zs}">${zn}</div>`;
+        const cosyRow = showCosy ? `<div class="r"><span>COSY</span><b>${fmtPct(cosyV)}</b></div>` : "";
+        const zoneRow = showCosy ? (([zn, zs]) => `<div class="z" style="${zs}">${zn}</div>`)(zoneFor(cosyV, th)) : "";
+        tip.innerHTML = `<div class="d">Month ${mo}</div><div class="r"><span>${cumLabel}</span><b>${fmtPct(cumV)}</b></div>${ciRow}${cosyRow}${zoneRow}`;
         const ymax = this._mode === "cosy" ? this._cur.cosyMax : 100; const useV = this._mode === "cosy" ? cosyV : cumV;
         const dx = G.pL + (mo / xmax) * (G.W - G.pL - G.pR);
         const dy = G.pT + (1 - Math.min(useV, ymax) / ymax) * (G.H - G.pT - G.pB);
