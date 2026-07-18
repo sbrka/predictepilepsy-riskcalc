@@ -117,6 +117,7 @@
     ["calc-pte-dre", "Post-Traumatic Epilepsy — Drug Resistance", "Probability of drug-resistant epilepsy in people with post-traumatic epilepsy, from 4 factors.", "g6", "drug_resistance"],
     ["calc-empire", "EMPiRE (seizures in pregnancy)", "Probability of a seizure during pregnancy in a woman with epilepsy, from booking-visit factors.", "g6", "pregnancy"],
     ["calc-acd-se-mortality", "ACD Score \u2014 Mortality after Status Epilepticus", "Two-year mortality after non-anoxic status epilepticus from the Age\u2013Consciousness\u2013Duration (ACD) score (Roberg 2022; validated Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
+    ["calc-se-survival-5yr", "Survival Curves after Status Epilepticus (5-year)", "Cumulative 5-year mortality after status epilepticus by ACD band and by Lattanzi aetiology — digitized Kaplan\u2013Meier curves (Alan\u00eds-Bernal 2026).", "g7", "se_prognosis", { pop: "adult" }],
   ];
   // ---- evidence badges (from 5_validate_qa/evidence_grades.csv; see QC memory Dim7) ----
   // "ec" = Editor's choice (strongest evidence for that clinical question)

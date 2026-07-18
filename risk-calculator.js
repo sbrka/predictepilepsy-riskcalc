@@ -317,7 +317,8 @@
         key = this._stratKey || Object.keys(strata)[0]; this._stratKey = key;
       }
       const s = strata[key] || {};
-      if (s.no_cosy) this._mode = "cum";           // this subgroup has cumulative risk only
+      const isMort = m.curve_metric === "mortality";   // mortality curves: relabel + drop the driving panel
+      if (s.no_cosy || isMort) this._mode = "cum";  // this subgroup has cumulative risk only
       if (s.no_cum) this._mode = "cosy";           // this subgroup reports COSY only (no cumulative curve)
       const ax = { cum: m.month_max_cum || 72, cosy: m.month_max_cosy || 60 };
       const cosyMax = m.cosy_axis_max || COSY_AXIS;
@@ -342,16 +343,17 @@
       const ciTxt = (mm) => (ciLo && ciHi) ? `95% CI ${fmtPct(ciLo[mm])}–${fmtPct(ciHi[mm])}` : "";
       rail += `<div class="scorewrap">
         ${preds.length && !m.hide_score ? `<div class="metric"><div class="k">Total score</div><div class="v" id="scoreN">${fmtScore(this._score)}</div></div>` : `<div class="metric"><div class="k">${esc(m.selector || "Risk group")}</div><div class="v" style="font-size:${m.hide_score ? "16px;line-height:1.25" : "22px"}">${esc(s.display || key)}</div><div class="v" id="scoreN" hidden>${fmtScore(this._score)}</div>${s.info ? `<div class="stratinfo" style="font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;font-family:var(--sans)">${esc(s.info)}</div>` : ""}</div>`}
-        ${s.no_cum ? `<div class="metric sm"><div class="k">COSY at <span id="atmo">${mo}</span> mo seizure-free</div><div class="v" id="cumAt">${fmtPct(seriesArr(s.cosy, ax.cosy)[mo])}</div></div>` : `<div class="metric sm"><div class="k">Cumulative risk at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cumArr[mo])}</div><div class="cisub" id="cumCI">${ciTxt(mo)}</div></div>`}</div>`;
-      // verdict
+        ${s.no_cum ? `<div class="metric sm"><div class="k">COSY at <span id="atmo">${mo}</span> mo seizure-free</div><div class="v" id="cumAt">${fmtPct(seriesArr(s.cosy, ax.cosy)[mo])}</div></div>` : `<div class="metric sm"><div class="k">${isMort ? "Cumulative mortality" : "Cumulative risk"} at <span id="atmo">${mo}</span> mo</div><div class="v" id="cumAt">${fmtPct(cumArr[mo])}</div><div class="cisub" id="cumCI">${ciTxt(mo)}</div></div>`}</div>`;
+      // verdict — the driving-orientation panel is COSY/seizure-specific; suppress it for mortality curves.
       const noCosy = !!s.no_cosy;
       const cosyArr = seriesArr(s.cosy, ax.cosy);
       const g1 = noCosy ? null : firstBelow(cosyArr, th.group1), g2 = noCosy ? null : firstBelow(cosyArr, th.group2);
-      rail += `<div class="verdict">
+      if (!isMort) rail += `<div class="verdict">
         <div class="vhead">Driving orientation &middot; seizure-free interval <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY and the orientation cut-offs">i</button></div>
         <div class="vrow"><span class="lab"><i style="background:var(--amber-deep)"></i><span class="lt"><b>Group 1</b><span class="t">private &middot; COSY &lt; ${th.group1}%</span></span></span><span class="val" style="color:var(--amber-deep)">${noCosy ? "—" : fmtMo(g1)}</span></div>
         <div class="vrow"><span class="lab"><i style="background:var(--red)"></i><span class="lt"><b>Group 2</b><span class="t">commercial &middot; COSY &lt; ${th.group2}%</span></span></span><span class="val" style="color:var(--red)">${noCosy ? "—" : fmtMo(g2)}</span></div>
         <div class="vnote">${noCosy ? "COSY is not available for this subgroup — cumulative risk only." : `${th.group1}% and ${th.group2}% are orientation cut-offs used in some jurisdictions — not established limits. Local laws and guidelines apply.`}</div></div>`;
+      else if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
 
       // panel
@@ -379,7 +381,8 @@
         const ciEl = this._rail.querySelector("#cumCI"); if (ciEl) ciEl.textContent = ciTxt(mm);
         this._drawCurve();
       });
-      seg2(this._panel.querySelector("#mode"), s.no_cum ? [{ l: "COSY", v: "cosy" }] : (s.no_cosy ? [{ l: "Cumulative risk", v: "cum" }] : [{ l: "Cumulative risk", v: "cum" }, { l: "COSY", v: "cosy" }]), this._mode, (v) => { this._mode = v; this._renderCurve(); });
+      const cumLabel = isMort ? "Cumulative mortality" : "Cumulative risk";
+      seg2(this._panel.querySelector("#mode"), s.no_cum ? [{ l: "COSY", v: "cosy" }] : (s.no_cosy || isMort ? [{ l: cumLabel, v: "cum" }] : [{ l: cumLabel, v: "cum" }, { l: "COSY", v: "cosy" }]), this._mode, (v) => { this._mode = v; this._renderCurve(); });
       this._drawCurve();
       this._bindHover(cumArr, cosyArr, ax, th, cosyMax);
     }
