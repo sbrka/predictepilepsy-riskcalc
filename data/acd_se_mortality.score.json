@@ -43,6 +43,7 @@
   },
   {
    "name": "Duration of status epilepticus",
+   "layout": "stack",
    "options": [
     {
      "label": "< 1 hour",
