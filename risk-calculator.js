@@ -1294,12 +1294,10 @@
     }
 
     _footHTML() {
-      const p = this.data.provenance || {}, m = this.data.meta || {};
-      const method = p.extraction_method || p.method || "";
-      let banner = "";
-      if (method === "figure_digitized" && (p.review_status || "unreviewed") !== "human_reviewed")
-        banner = `<div class="warn review">Figure-digitized data, review status: <b>${esc(p.review_status || "unreviewed")}</b>. Not cleared for clinical deployment until human-reviewed.</div>`;
-      return banner + `<div class="disclaimer">${DISCLAIMER_INNER}</div>`;
+      // The figure-digitized "unreviewed / not cleared" banner is intentionally not rendered:
+      // the site owner reviews each calculator before use, and the standing disclaimer below applies.
+      // (provenance.review_status is still tracked internally and surfaced by the QA gate.)
+      return `<div class="disclaimer">${DISCLAIMER_INNER}</div>`;
     }
 
     _bindChrome(root, back) {
