@@ -504,7 +504,8 @@
       for (let x = 0; x <= xmax; x += xstep) g += `<text x="${X(x)}" y="${H - pB + 18 * fs}" text-anchor="middle" font-size="${f(12.5)}" fill="#8a97a4">${x}</text>`;
       g += `<text x="${(pL + W - pR) / 2}" y="${H - 4 * fs}" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "months seizure-free" : "months since event"}</text>`;
       const yMid = pT + (H - pT - pB) / 2;
-      g += `<text x="${15 * fs}" y="${yMid}" transform="rotate(-90 ${15 * fs} ${yMid})" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${cosy ? "chance of seizure in next year (%)" : "cumulative seizure risk (%)"}</text>`;
+      const _yTitle = cosy ? "chance of seizure in next year (%)" : (this.data.model.curve_metric === "mortality" ? "cumulative mortality (%)" : "cumulative seizure risk (%)");
+      g += `<text x="${15 * fs}" y="${yMid}" transform="rotate(-90 ${15 * fs} ${yMid})" text-anchor="middle" font-size="${f(13)}" font-weight="600" fill="#5c6b7a">${_yTitle}</text>`;
       const hasCI = !cosy && s.cum_lo && s.cum_hi;
       const loArr = hasCI ? seriesArr(s.cum_lo, ax.cum) : null, hiArr = hasCI ? seriesArr(s.cum_hi, ax.cum) : null;
       if (hasCI) {
@@ -530,7 +531,8 @@
       g += `<circle id="hovdot" r="${7 * fs}" fill="#ff7a1a" stroke="#fff" stroke-width="${2.5 * fs}" style="display:none;pointer-events:none"/>`;
       this._panel.querySelector("#plot").innerHTML = g;
       const lg = this._panel.querySelector("#legend");
-      lg.innerHTML = cosy ? `<span><span class="ln amb"></span>COSY</span><span><span class="ln" style="border-color:#b26a06;border-top-style:dashed"></span>orientation cut-offs</span>` : `<span><span class="ln"></span>cumulative risk</span>${hasCI ? `<span><span class="ln" style="border:0;width:16px;height:10px;background:rgba(31,131,230,.17)"></span>95% CI</span>` : ""}`;
+      const _lgLabel = this.data.model.curve_metric === "mortality" ? "cumulative mortality" : "cumulative risk";
+      lg.innerHTML = cosy ? `<span><span class="ln amb"></span>COSY</span><span><span class="ln" style="border-color:#b26a06;border-top-style:dashed"></span>orientation cut-offs</span>` : `<span><span class="ln"></span>${_lgLabel}</span>${hasCI ? `<span><span class="ln" style="border:0;width:16px;height:10px;background:rgba(31,131,230,.17)"></span>95% CI</span>` : ""}`;
     }
 
     _bindHover(cumArr, cosyArr, ax, th) {
