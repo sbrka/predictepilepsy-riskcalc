@@ -571,15 +571,16 @@
     css();
     var ios = isIOS();
     var wrap = D.createElement("div"); wrap.id = "pepA2HS"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-label", "Add predictepilepsy to your home screen");
-    var action = deferred
-      ? '<button class="btn" id="pepInstall">Install</button>'
+    var line = deferred
+      ? "Quick, one-tap access to this calculator."
       : (ios
-        ? '<div class="ts" style="flex:0 0 auto;max-width:140px">Tap <b>Share&nbsp;&#x2191;</b> then <b>Add to Home Screen</b></div>'
-        : '<div class="ts" style="flex:0 0 auto;max-width:140px">Open the <b>&#8942; menu</b> then <b>Add to Home screen</b></div>');
+        ? 'Tap <b>Share&nbsp;&#x2191;</b>, then <b>Add to Home&nbsp;Screen</b>.'
+        : 'Open the browser <b>&#8942;&nbsp;menu</b>, then <b>Add to Home&nbsp;screen</b>.');
+    var action = deferred ? '<button class="btn" id="pepInstall">Install</button>' : '';
     wrap.innerHTML =
       '<img class="ic" src="' + ICON + '" alt="" width="46" height="46">' +
-      '<div class="tx"><div class="tt">Add to your home screen</div>' +
-      '<div class="ts">One-tap access to this calculator, straight from your phone screen.</div></div>' +
+      '<div class="tx"><div class="tt">Add to home screen</div>' +
+      '<div class="ts">' + line + '</div></div>' +
       action +
       '<button class="x" id="pepClose" aria-label="Dismiss">&times;</button>';
     D.body.appendChild(wrap);
