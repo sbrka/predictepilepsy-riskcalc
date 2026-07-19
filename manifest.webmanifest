@@ -1,0 +1,17 @@
+{
+  "name": "predictepilepsy — Epilepsy risk calculators",
+  "short_name": "predictepilepsy",
+  "description": "Prognostic risk calculators for epilepsy and seizures — direct bedside assessment.",
+  "start_url": "https://predictepilepsy.com/",
+  "scope": "https://predictepilepsy.com/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#135ba8",
+  "icons": [
+    { "src": "icons/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
