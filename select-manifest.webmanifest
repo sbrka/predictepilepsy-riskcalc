@@ -1,0 +1,17 @@
+{
+  "name": "SeLECT Consortium",
+  "short_name": "SeLECT",
+  "description": "The SeLECT Consortium — prediction of seizures and epilepsy after stroke.",
+  "start_url": "https://select-consortium.com/",
+  "scope": "https://select-consortium.com/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#accc0c",
+  "icons": [
+    { "src": "icons/select-app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/select-app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/select-app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/select-app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
