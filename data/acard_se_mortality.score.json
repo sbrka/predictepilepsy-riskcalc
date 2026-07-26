@@ -1,0 +1,199 @@
+{
+ "schema_version": "1.0",
+ "id": "acard_se_mortality",
+ "kind": "score",
+ "meta": {
+  "title": "ACARD score — 30-day mortality after status epilepticus",
+  "doi": "10.1212/WNL.0000000000218281",
+  "pmid": "42479996",
+  "citation": "Neurology 2026;107(3):e218281",
+  "authors": "Lattanzi S, Trinka E, Bosque-Varela P, et al., Meletti S",
+  "year": 2026,
+  "journal": "Neurology",
+  "outcome": "Risk of death within 30 days of the onset of non-hypoxic status epilepticus, from the Age–Consciousness–Aetiology–Refractoriness–Disability (ACARD) score.",
+  "cff_info": "<p><b>What this shows.</b> The <b>ACARD score</b> (Age, Consciousness, Aetiology, Refractoriness, Disability) estimates the risk of <b>death within 30 days</b> of the onset of non-hypoxic <b>status epilepticus (SE)</b> in adults (Lattanzi et&nbsp;al., <i>Neurology</i> 2026).</p><p><b>How it is scored.</b> Five routinely-available items are added: age ≥75 (+3), stupor/coma before treatment (+1), acute-primary-CNS aetiology (+2) or remote aetiology (−2), refractoriness to treatment (+3) and pre-existing disability (mRS ≥3, +2). The total ranges from −2 to +11; each total maps to a published 30-day-mortality estimate.</p><p><b>Validation.</b> Derived in 689 SE episodes (Modena, Italy; 30-day mortality 27.3%) and externally validated in 569 episodes (Salzburg, Austria; 11.6%), with strong discrimination (AUC 0.864 derivation, 0.845 validation) and good calibration. It outperformed STESS, mSTESS, EMSE and SACE. The optimal cut-off is <b>≥6 points</b> (sensitivity 69%, specificity 84%): 88% of patients scoring &lt;6 survived, while 63% scoring ≥6 died.</p><p><b>Scope.</b> Adults / adolescents (≥14 years) with non-hypoxic SE. A group-level tool — it should support, not replace, clinical judgement, and must not by itself justify limiting life-sustaining care. Population-level estimates.</p>"
+ },
+ "thresholds": {
+  "group1": 45,
+  "group2": 20
+ },
+ "predictors": [
+  {
+   "name": "Age ≥ 75 years",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 3
+    }
+   ],
+   "assess": "Is the patient aged 75 years or older at SE onset? (Data-driven optimal cut-off in the derivation cohort.)"
+  },
+  {
+   "name": "Consciousness before treatment",
+   "options": [
+    {
+     "label": "Alert / somnolent / confused",
+     "points": 0
+    },
+    {
+     "label": "Stuporous or comatose",
+     "points": 1
+    }
+   ],
+   "assess": "Level of consciousness before SE treatment, using the STESS categorisation. Stupor or coma adds a point."
+  },
+  {
+   "name": "Aetiology of status epilepticus",
+   "layout": "stack",
+   "options": [
+    {
+     "label": "Acute — primary CNS (cerebrovascular, active CNS infection, head trauma)",
+     "points": 2
+    },
+    {
+     "label": "Remote symptomatic",
+     "points": -2
+    },
+    {
+     "label": "Other (acute-secondary CNS, acute-toxic, triggering factors, progressive, unknown)",
+     "points": 0
+    }
+   ],
+   "assess": "Underlying cause. Acute-primary-CNS pathology carries the highest risk (+2); a remote symptomatic cause is protective (−2); all other aetiologies score 0."
+  },
+  {
+   "name": "Refractoriness to treatment",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 3
+    }
+   ],
+   "assess": "Refractory SE = persistence despite first-line benzodiazepine plus one second-line ASM. Available early in the episode, though not at the very onset."
+  },
+  {
+   "name": "Disability before SE (mRS ≥ 3)",
+   "options": [
+    {
+     "label": "No (mRS 0–2)",
+     "points": 0
+    },
+    {
+     "label": "Yes (mRS ≥ 3)",
+     "points": 2
+    }
+   ],
+   "assess": "Pre-existing functional disability, modified Rankin Scale ≥3 before the SE episode."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "30 days",
+  "metric_label": "30-day mortality",
+  "panel_title": "30-day mortality after status epilepticus",
+  "donut_sub": "30-day mortality",
+  "viz_title": "ACARD score build-up",
+  "rows": [
+   {
+    "score": -2,
+    "pct": 0.0,
+    "disp": "0%",
+    "label": "ACARD -2 — low risk: 0% 30-day mortality (95% CI 0.0–4.0*)"
+   },
+   {
+    "score": -1,
+    "pct": 0.0,
+    "disp": "0%",
+    "label": "ACARD -1 — low risk: 0% 30-day mortality (95% CI 0.0–18.5*)"
+   },
+   {
+    "score": 0,
+    "pct": 0.0,
+    "disp": "0%",
+    "label": "ACARD 0 — low risk: 0% 30-day mortality (95% CI 0.0–1.6*)"
+   },
+   {
+    "score": 1,
+    "pct": 3.1,
+    "disp": "3.1%",
+    "label": "ACARD +1 — low risk: 3.1% 30-day mortality (95% CI 0.8–7.6)"
+   },
+   {
+    "score": 2,
+    "pct": 7.6,
+    "disp": "7.6%",
+    "label": "ACARD +2 — moderate risk: 7.6% 30-day mortality (95% CI 3.3–14.4)"
+   },
+   {
+    "score": 3,
+    "pct": 15.8,
+    "disp": "15.8%",
+    "label": "ACARD +3 — moderate risk: 15.8% 30-day mortality (95% CI 10.9–21.8)"
+   },
+   {
+    "score": 4,
+    "pct": 21.0,
+    "disp": "21%",
+    "label": "ACARD +4 — high risk: 21% 30-day mortality (95% CI 12.7–31.5)"
+   },
+   {
+    "score": 5,
+    "pct": 24.3,
+    "disp": "24.3%",
+    "label": "ACARD +5 — high risk: 24.3% 30-day mortality (95% CI 17.8–32.0)"
+   },
+   {
+    "score": 6,
+    "pct": 45.6,
+    "disp": "45.6%",
+    "label": "ACARD +6 — high risk: 45.6% 30-day mortality (95% CI 35.0–56.4)"
+   },
+   {
+    "score": 7,
+    "pct": 46.5,
+    "disp": "46.5%",
+    "label": "ACARD +7 — high risk: 46.5% 30-day mortality (95% CI 31.2–62.3)"
+   },
+   {
+    "score": 8,
+    "pct": 66.7,
+    "disp": "66.7%",
+    "label": "ACARD +8 — high risk: 66.7% 30-day mortality (95% CI 52.9–78.6)"
+   },
+   {
+    "score": 9,
+    "pct": 76.9,
+    "disp": "76.9%",
+    "label": "ACARD +9 — high risk: 76.9% 30-day mortality (95% CI 63.2–87.5)"
+   },
+   {
+    "score": 10,
+    "pct": 83.3,
+    "disp": "83.3%",
+    "label": "ACARD +10 — high risk: 83.3% 30-day mortality (95% CI 35.9–99.6)"
+   },
+   {
+    "score": 11,
+    "pct": 100.0,
+    "disp": "100%",
+    "label": "ACARD +11 — high risk: 100% 30-day mortality (95% CI 76.8–100.0*)"
+   }
+  ],
+  "note": "30-day mortality by ACARD total (Lattanzi 2026, Figure 2). A group-level prognostic tool — interpret alongside the full clinical picture; do not use it alone to justify withdrawal of life-sustaining treatment.",
+  "viz_info": "Age, consciousness, aetiology, refractoriness and disability each add (or subtract) points; the waterfall shows the build-up from the lowest-risk profile. The total maps to the published 30-day mortality shown in the donut."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Lattanzi et al., Neurology 2026;107(3):e218281 (doi 10.1212/WNL.0000000000218281). Point values from Table 2; per-score 30-day-mortality estimates and 95% CIs from the Figure 2 companion table (exact printed values, not digitized).",
+  "review_status": "human_reviewed",
+  "notes": "ACARD = Age(≥75 +3) / Consciousness(stupor-coma +1) / Aetiology(acute-primary-CNS +2, remote −2, other 0) / Refractoriness(+3) / Disability(mRS≥3 +2). Score −2..+11. pct = 30-day mortality per Fig 2 table. Baseline (all-minimum) profile is remote-aetiology, <75, alert, non-refractory, mRS<3 → 0%. Externally validated (AUC 0.845)."
+ }
+}
