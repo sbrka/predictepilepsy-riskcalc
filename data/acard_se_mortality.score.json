@@ -106,89 +106,104 @@
     "score": -2,
     "pct": 0.0,
     "disp": "0%",
-    "label": "ACARD -2 — low risk: 0% 30-day mortality (95% CI 0.0–4.0*)"
+    "ci": "0.0–4.0*",
+    "label": "ACARD -2 — low risk: 0% 30-day mortality"
    },
    {
     "score": -1,
     "pct": 0.0,
     "disp": "0%",
-    "label": "ACARD -1 — low risk: 0% 30-day mortality (95% CI 0.0–18.5*)"
+    "ci": "0.0–18.5*",
+    "label": "ACARD -1 — low risk: 0% 30-day mortality"
    },
    {
     "score": 0,
     "pct": 0.0,
     "disp": "0%",
-    "label": "ACARD 0 — low risk: 0% 30-day mortality (95% CI 0.0–1.6*)"
+    "ci": "0.0–1.6*",
+    "label": "ACARD 0 — low risk: 0% 30-day mortality"
    },
    {
     "score": 1,
     "pct": 3.1,
     "disp": "3.1%",
-    "label": "ACARD +1 — low risk: 3.1% 30-day mortality (95% CI 0.8–7.6)"
+    "ci": "0.8–7.6",
+    "label": "ACARD +1 — low risk: 3.1% 30-day mortality"
    },
    {
     "score": 2,
     "pct": 7.6,
     "disp": "7.6%",
-    "label": "ACARD +2 — moderate risk: 7.6% 30-day mortality (95% CI 3.3–14.4)"
+    "ci": "3.3–14.4",
+    "label": "ACARD +2 — moderate risk: 7.6% 30-day mortality"
    },
    {
     "score": 3,
     "pct": 15.8,
     "disp": "15.8%",
-    "label": "ACARD +3 — moderate risk: 15.8% 30-day mortality (95% CI 10.9–21.8)"
+    "ci": "10.9–21.8",
+    "label": "ACARD +3 — moderate risk: 15.8% 30-day mortality"
    },
    {
     "score": 4,
     "pct": 21.0,
     "disp": "21%",
-    "label": "ACARD +4 — high risk: 21% 30-day mortality (95% CI 12.7–31.5)"
+    "ci": "12.7–31.5",
+    "label": "ACARD +4 — high risk: 21% 30-day mortality"
    },
    {
     "score": 5,
     "pct": 24.3,
     "disp": "24.3%",
-    "label": "ACARD +5 — high risk: 24.3% 30-day mortality (95% CI 17.8–32.0)"
+    "ci": "17.8–32.0",
+    "label": "ACARD +5 — high risk: 24.3% 30-day mortality"
    },
    {
     "score": 6,
     "pct": 45.6,
     "disp": "45.6%",
-    "label": "ACARD +6 — high risk: 45.6% 30-day mortality (95% CI 35.0–56.4)"
+    "ci": "35.0–56.4",
+    "label": "ACARD +6 — high risk: 45.6% 30-day mortality"
    },
    {
     "score": 7,
     "pct": 46.5,
     "disp": "46.5%",
-    "label": "ACARD +7 — high risk: 46.5% 30-day mortality (95% CI 31.2–62.3)"
+    "ci": "31.2–62.3",
+    "label": "ACARD +7 — high risk: 46.5% 30-day mortality"
    },
    {
     "score": 8,
     "pct": 66.7,
     "disp": "66.7%",
-    "label": "ACARD +8 — high risk: 66.7% 30-day mortality (95% CI 52.9–78.6)"
+    "ci": "52.9–78.6",
+    "label": "ACARD +8 — high risk: 66.7% 30-day mortality"
    },
    {
     "score": 9,
     "pct": 76.9,
     "disp": "76.9%",
-    "label": "ACARD +9 — high risk: 76.9% 30-day mortality (95% CI 63.2–87.5)"
+    "ci": "63.2–87.5",
+    "label": "ACARD +9 — high risk: 76.9% 30-day mortality"
    },
    {
     "score": 10,
     "pct": 83.3,
     "disp": "83.3%",
-    "label": "ACARD +10 — high risk: 83.3% 30-day mortality (95% CI 35.9–99.6)"
+    "ci": "35.9–99.6",
+    "label": "ACARD +10 — high risk: 83.3% 30-day mortality"
    },
    {
     "score": 11,
     "pct": 100.0,
     "disp": "100%",
-    "label": "ACARD +11 — high risk: 100% 30-day mortality (95% CI 76.8–100.0*)"
+    "ci": "76.8–100.0*",
+    "label": "ACARD +11 — high risk: 100% 30-day mortality"
    }
   ],
   "note": "30-day mortality by ACARD total (Lattanzi 2026, Figure 2). A group-level prognostic tool — interpret alongside the full clinical picture; do not use it alone to justify withdrawal of life-sustaining treatment.",
-  "viz_info": "Age, consciousness, aetiology, refractoriness and disability each add (or subtract) points; the waterfall shows the build-up from the lowest-risk profile. The total maps to the published 30-day mortality shown in the donut."
+  "viz_info": "Age, consciousness, aetiology, refractoriness and disability each add (or subtract) points; the waterfall shows the build-up from the lowest-risk profile. The total maps to the published 30-day mortality shown in the donut.",
+  "ci_note": "* one-sided 97.5% CI (score with 0% or 100% observed mortality)."
  },
  "provenance": {
   "extraction_method": "paper_table",

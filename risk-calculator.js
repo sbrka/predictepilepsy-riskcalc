@@ -589,7 +589,7 @@
       const rec = recs ? (recs.find((r) => this._score >= (r.lo != null ? r.lo : -1e9) && this._score <= (r.hi != null ? r.hi : 1e9)) || null) : null;
       const recColor = (t) => t === "high" ? "var(--red)" : t === "med" ? "var(--amber-deep)" : "var(--green)";
       rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(preds.length ? "Total score" : "Score")}</div><div class="v" id="scoreN">${fmtScore(this._score)}</div>${band ? `<div class="band"><span class="d" style="background:${band.c}"></span><span style="color:${band.c}">${band.n}</span></div>` : ``}</div>
-        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">${esc(m.metric_label || ("Risk at " + (m.horizon || "horizon")))}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div></div>`}</div>`;
+        ${recs ? `<div class="metric sm"><div class="k">Recommendation</div><div class="v" style="font-size:14px;line-height:1.25;color:${rec ? recColor(rec.tone) : "var(--muted)"}">${rec ? esc(rec.text) : "—"}</div></div>` : `<div class="metric sm"><div class="k">${esc(m.metric_label || ("Risk at " + (m.horizon || "horizon")))}</div><div class="v" id="riskN"${row && row.disp && row.pct == null ? ' style="font-size:22px;line-height:1.2"' : ""}>${row ? (row.disp ? esc(row.disp) : (row.pct != null ? fmtPct(row.pct) : "—")) : "—"}</div>${row && row.ci ? `<div class="cisub" id="riskCI">95% CI ${esc(row.ci)}</div>` : ""}</div>`}</div>`;
       if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
 
@@ -906,10 +906,16 @@
       // donut_sub — models whose outcome is GOOD (e.g. chance of a normal IQ) must not be
       // labelled "risk"; they set their own wording. Default keeps every existing model as-is.
       const sub = this.data.model.donut_sub || "predicted risk";
+      // per-score confidence interval, if the model provides one on its rows
+      const _rows = (this.data.model.rows) || [];
+      const _row = this.data.model.score_type === "range"
+        ? _rows.find((r) => scoreTotal >= (r.lo != null ? r.lo : -1e9) && scoreTotal <= (r.hi != null ? r.hi : 1e9))
+        : _rows.reduce((b, r) => (Number(r.score) === scoreTotal ? r : b), null);
+      const ci = _row && _row.ci ? _row.ci : "";
       svg.innerHTML = `${track}${segs}
         <text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="var(--serif)" font-size="${String(centerTxt).length > 5 ? 30 : 48}" fill="#1a2430">${esc(centerTxt)}</text>
         <text x="${cx}" y="${cy + 26}" text-anchor="middle" font-family="var(--sans)" font-size="13" fill="#5b6b7b">${esc(sub)}</text>
-        ${active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`}`;
+        ${ci ? `<text x="${cx}" y="${cy + 46}" text-anchor="middle" font-family="var(--sans)" font-size="11.5" fill="#8a97a4">95% CI ${esc(ci)}</text>` : (active.length ? "" : `<text x="${cx}" y="${cy + 50}" text-anchor="middle" font-family="var(--sans)" font-size="12" fill="#98a6b5">baseline patient</text>`)}`;
     }
 
     // Diverging log-odds-ratio chart (mirrors the paper's adjusted-OR forest plot):
