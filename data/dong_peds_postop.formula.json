@@ -1,0 +1,124 @@
+{
+ "schema_version": "1.0",
+ "id": "dong_peds_postop",
+ "kind": "formula",
+ "meta": {
+  "title": "Seizure freedom after focal epilepsy surgery in children",
+  "abbrev": "Peds",
+  "doi": "10.3389/fped.2026.1869297",
+  "pmid": "42729367",
+  "citation": "Front Pediatr 2026;14:1869297",
+  "authors": "Dong X, Sun T",
+  "year": 2026,
+  "journal": "Frontiers in Pediatrics",
+  "outcome": "Chance of staying seizure-free 1 and 2 years after focal or lobar resection in children, from five clinical, surgical, histopathological and EEG features known at the first postoperative review.",
+  "clinical_utility": "Postoperative counselling and follow-up planning in children after resective epilepsy surgery. Single-centre model, temporally validated at the same centre only; the authors state it should not by itself drive antiseizure-medication withdrawal.",
+  "cff_info": "<p><b>What this shows.</b> The chance that a child remains <b>free of seizure recurrence</b> 1 and 2 years after focal or lobar resection for drug-resistant epilepsy (Dong &amp; Sun, <i>Front Pediatr</i> 2026). Recurrence was defined as Engel class II–IV or epilepsy-related reoperation.</p><p><b>Inputs.</b> Five features selected by LASSO from 18 candidates: epilepsy duration, a definitive structural lesion on MRI, histopathology, completeness of resection, and the NREM interictal spike index. All are known at the first postoperative review.</p><p><b>Cohort and performance.</b> Single centre, 256 children aged 1–18 years (181 training, 75 later temporal validation); 90 recurrences. Bootstrap-corrected C-index 0.81 (95% CI 0.77–0.86); in the temporal cohort 0.79 (0.71–0.86), applied without refitting or recalibration. Time-dependent AUC 0.82 (1 year) and 0.81 (2 years).</p><p><b>Limits.</b> <b>No external validation</b> — the validation cohort came from the same centre, later in time, and its median follow-up was only 24 months. The spike index needs a quantified NREM count and its &gt;38/h cut-off was derived in this cohort (upper tertile), so it may not transfer to other laboratories. The paper's internal event counts are inconsistent (175/62 in the sample-size section vs 181/65 in the results). The authors state the model should not on its own drive decisions about stopping medication.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Epilepsy duration before surgery",
+   "type": "slider",
+   "min": 1,
+   "max": 15,
+   "step": 1,
+   "default": 5,
+   "unit": "years",
+   "coef": 0.10436,
+   "assess": "Years from epilepsy onset to surgery. Each additional year multiplies the recurrence hazard by 1.11 (7.1 nomogram points). The published range is 1–15 years."
+  },
+  {
+   "name": "Definitive structural lesion on MRI",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Present",
+     "points": 0
+    },
+    {
+     "label": "Absent (MRI-negative)",
+     "points": 0.76547
+    }
+   ],
+   "assess": "A definitive structural lesion on preoperative MRI. MRI-negative epilepsy roughly doubles the recurrence hazard (HR 2.15; 52.0 nomogram points)."
+  },
+  {
+   "name": "Histopathological diagnosis",
+   "coef": 1,
+   "layout": "stack",
+   "options": [
+    {
+     "label": "CNS tumour",
+     "points": 0
+    },
+    {
+     "label": "Focal cortical dysplasia (FCD)",
+     "points": 0.57982
+    },
+    {
+     "label": "Other (hippocampal sclerosis, gliosis, cavernoma)",
+     "points": 0.87992
+    }
+   ],
+   "assess": "Histopathology of the resected tissue. A CNS tumour carries the lowest recurrence hazard (HR 0.56 vs FCD in the paper); other aetiologies the highest. Points are expressed relative to CNS tumour, as in the supplement."
+  },
+  {
+   "name": "Completeness of resection",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Gross total resection",
+     "points": 0
+    },
+    {
+     "label": "Subtotal resection",
+     "points": 0.892
+    }
+   ],
+   "assess": "Whether the planned epileptogenic lesion was completely removed. Subtotal resection is the strongest single predictor (HR 2.44; 60.7 nomogram points)."
+  },
+  {
+   "name": "NREM interictal spike index",
+   "coef": 1,
+   "options": [
+    {
+     "label": "Low / moderate (≤38 spikes/h)",
+     "points": 0
+    },
+    {
+     "label": "High (>38 spikes/h)",
+     "points": 0.74194
+    }
+   ],
+   "assess": "Postoperative interictal spikes per hour counted on NREM sleep EEG. The >38/h threshold is the upper tertile of this cohort, not an established cut-off, and needs a quantified count rather than a visual impression (HR 2.10; 50.5 nomogram points)."
+  }
+ ],
+ "model": {
+  "type": "surv",
+  "center": 0.10436,
+  "panel_title": "Chance of staying seizure-free after surgery",
+  "wf_base": "Baseline child",
+  "outputs": [
+   {
+    "label": "Seizure-free · 1 year",
+    "F0": 0.01
+   },
+   {
+    "label": "Seizure-free · 2 years",
+    "F0": 0.03
+   }
+  ],
+  "free_label": "seizure-free",
+  "complement_label": "recurrence",
+  "lp_label": "Linear predictor",
+  "show_lp": false,
+  "note": "Single-centre model (n=256) with temporal validation at the same centre only — no external validation. The spike-index cut-off (>38/h) was derived in this cohort. Estimates describe groups, not individuals, and the authors state the model should not on its own drive antiseizure-medication withdrawal.",
+  "viz_info": "Two donuts show the predicted chance of remaining seizure-free at 1 and 2 years (green = seizure-free, grey = recurrence). The waterfall starts from the lowest-risk child in the model (1 year of epilepsy, lesion on MRI, CNS tumour, gross total resection, low spike index) and shows how each feature lowers (red) or raises (green) that chance."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Dong & Sun, Front Pediatr 2026;14:1869297 (doi 10.3389/fped.2026.1869297, PMID 42729367). Hazard ratios from Table 2; point allocations from Supplementary Table S1 and the points→survival mapping from Supplementary Table S2 (0_inbox/papers/dong_2026_fped_supplement_Table_1.docx); cohort and performance from Results 3.1–3.4.",
+  "review_status": "unreviewed",
+  "notes": "Implemented as the live Cox equation S(t)=S0(t)^exp(lp-center), not as a points lookup: the supplement's points are a linear rescaling of the Table 2 coefficients (68.42 points per unit lp; every predictor matches to <0.5 points). S0 = 0.990 (1 y) / 0.970 (2 y) at 0 points; center = ln(1.11) so the slider's 1-year minimum is the 0-point profile. build_dong_peds_postop.py asserts that all 14 rows of Table S2 reproduce to <1 percentage point (max deviation 0.99 pp at 300 points). Set review_status to human_reviewed after a person has checked a worked example against the published nomogram."
+ }
+}
