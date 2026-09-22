@@ -1,0 +1,130 @@
+{
+ "schema_version": "1.0",
+ "id": "abend_asys_peds",
+ "kind": "score",
+ "meta": {
+  "title": "Seizure/Epilepsy Risk Score (critically ill children)",
+  "abbrev": "ASyS",
+  "doi": "10.1002/epi.70452",
+  "pmid": "42631926",
+  "citation": "Epilepsia 2026;00:1–14 (early view)",
+  "authors": "Abend NS, Fung FW, Parikh DS, Ramos M, Xiao R, Topjian AA",
+  "year": 2026,
+  "journal": "Epilepsia",
+  "outcome": "Subsequent seizure or epilepsy diagnosis after acute symptomatic seizures in the PICU, from four clinical and continuous-EEG items.",
+  "clinical_utility": "Early risk stratification after acute symptomatic seizures in the PICU, to guide counselling and follow-up intensity. Not validated; not a basis for ASM decisions on its own.",
+  "cff_info": "<p><b>What this shows.</b> The <b>Seizure/Epilepsy Risk Score</b> estimates the chance that a critically ill child with <b>acute symptomatic seizures</b> or acute encephalopathy is later diagnosed with <b>seizures or epilepsy</b> after hospital discharge (Abend et&nbsp;al., <i>Epilepsia</i> 2026).</p><p><b>How it is scored.</b> One point each for developmental delay/intellectual disability, clinical seizures or status epilepticus before CEEG, electrographic seizures or status epilepticus during CEEG, and epileptiform discharges during CEEG (total 0–4). Each total maps to the <b>observed</b> proportion of children with a subsequent seizure/epilepsy diagnosis: 13% (score 0), 71% (1), 79% (2), 96% (3), 86% (4). Score 4 is based on only 7 children, which is why it sits below score 3; read it together with its wide confidence interval.</p><p><b>Cohort.</b> Single-centre prospective cohort (Children's Hospital of Philadelphia PICU, 2017–2020): children older than 30 days with acute encephalopathy undergoing clinically indicated CEEG, <b>without pre-existing epilepsy</b>, who survived to discharge and had neurology follow-up (n=365 of 590 survivors). Median follow-up to the latest visit 1021 days. Overall, 64% had a subsequent seizure/epilepsy diagnosis; cumulative incidence was 27% at 30 days, 46% at 90 days, 61% at 1 year and 67% at 2 years.</p><p><b>Performance and limits.</b> AUC 0.81 (95% CI 0.76–0.85) in the <b>derivation cohort itself</b>; the score has <b>not been internally or externally validated</b>. A score ≥1 had sensitivity 96%, specificity 53%, PPV 79% and NPV 88%. The outcome was an ICD-10 seizure/epilepsy code (R56/G40) at follow-up, not a chart-confirmed unprovoked seizure, and children with follow-up were enriched for in-hospital seizures, so absolute risks are probably <b>overestimated</b>. Risks are over the whole follow-up, not a fixed horizon.</p><p><b>Not treatment advice.</b> Children discharged on antiseizure medication had a similar risk to those discharged without it after propensity adjustment (IPTW OR 1.03, 95% CI 0.61–1.72). The score informs counselling and follow-up intensity; it does not show that continuing ASM prevents seizures.</p>"
+ },
+ "predictors": [
+  {
+   "name": "Developmental delay / intellectual disability",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Prior medical history of developmental delay or intellectual disability, present before the admission."
+  },
+  {
+   "name": "Clinical seizures or status epilepticus before CEEG",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Clinically evident seizures, or clinical status epilepticus, during the acute illness before continuous EEG monitoring was started."
+  },
+  {
+   "name": "Electrographic seizures or status epilepticus on CEEG",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Electrographic seizure = abnormal paroxysmal event distinct from the background, lasting >10 s, with a plausible field and evolution in morphology, frequency or amplitude. Electrographic status epilepticus = a single seizure ≥30 min, or seizures totalling >30 min in any 1-hour period (≥50% burden). Clinical and subclinical events both count."
+  },
+  {
+   "name": "Epileptiform discharges on CEEG",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Any of: sporadic interictal epileptiform discharges, lateralized periodic discharges (LPDs), generalized periodic discharges (GPDs) or lateralized rhythmic delta activity (LRDA), per the ACNS critical-care EEG terminology."
+  }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "latest follow-up (median ≈2.8 years)",
+  "metric_label": "Subsequent seizure/epilepsy diagnosis",
+  "panel_title": "Risk of a subsequent seizure or epilepsy diagnosis",
+  "donut_sub": "observed risk",
+  "viz_title": "Seizure/Epilepsy Risk Score build-up",
+  "rows": [
+   {
+    "score": 0,
+    "pct": 13.0,
+    "disp": "13%",
+    "ci": "7–22",
+    "label": "Score 0: 13% (10/80) had a subsequent seizure/epilepsy diagnosis"
+   },
+   {
+    "score": 1,
+    "pct": 71.0,
+    "disp": "71%",
+    "ci": "62–78",
+    "label": "Score 1: 71% (87/123) had a subsequent seizure/epilepsy diagnosis"
+   },
+   {
+    "score": 2,
+    "pct": 79.0,
+    "disp": "79%",
+    "ci": "70–85",
+    "label": "Score 2: 79% (81/103) had a subsequent seizure/epilepsy diagnosis"
+   },
+   {
+    "score": 3,
+    "pct": 96.0,
+    "disp": "96%",
+    "ci": "87–99",
+    "label": "Score 3: 96% (50/52) had a subsequent seizure/epilepsy diagnosis"
+   },
+   {
+    "score": 4,
+    "pct": 86.0,
+    "disp": "86%",
+    "ci": "49–97",
+    "label": "Score 4: 86% (6/7) had a subsequent seizure/epilepsy diagnosis — very small group, estimate unstable"
+   }
+  ],
+  "note": "Observed proportions in one derivation cohort (n=365), not validated. The outcome is an ICD-10 seizure/epilepsy code during follow-up (median ≈2.8 years), not a fixed horizon, and follow-up was enriched for higher-risk children, so risks are probably overestimated. Score 4 rests on 7 children. Not a basis for starting or stopping ASM on its own.",
+  "viz_info": "Each of the four items adds one point; the waterfall shows the build-up from a child with none of them (13% observed risk). In the donut the grey wedge is that baseline risk and the coloured wedges share the rise above it; the centre is the observed proportion with a subsequent seizure/epilepsy diagnosis for the total score. The items are not strictly additive: the published risk for score 4 (86%, 7 children) is below score 3 (96%).",
+  "ci_note": "95% CIs are Wilson intervals calculated by predictepilepsy from the counts in Table 3 (the paper shows them only as error bars in Figure 4)."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Abend et al., Epilepsia 2026 (doi 10.1002/epi.70452, PMID 42631926). Score items from Methods 2.5 and the Table 3 footnote; events/patients per score from Table 3 and Results 3.3; cohort figures from Results 3.2 and Table 1; AUC and threshold performance from Results 3.3; IPTW ASM result from Results 3.4.",
+  "review_status": "unreviewed",
+  "notes": "pct = events/n per score from Table 3, rounded to whole % as printed (13/71/79/96/86). CIs derived (Wilson, z=1.96) by 3_assemble/build_abend_asys_peds.py, not from the paper. Non-monotonic at score 4 (6/7) is reported as published; scores were not merged. The multivariable model (Table 2) is not implemented: no intercept is reported and it includes inpatient ASM administration. Deployed 2026-09-22 on the author's instruction; the per-score counts are asserted against Table 3 in the build script, but a row-by-row human comparison with the paper is still pending. Set review_status to human_reviewed after a person has done it."
+ }
+}

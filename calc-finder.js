@@ -67,6 +67,7 @@
     ["calc-autoimmune-enceph-recurrence", "Autoimmune Encephalitis", "Seizure recurrence in NMDAR / LGI1 / CASPR2 encephalitis.", "g1", "autoimmune"],
     ["calc-hs-tle-fse", "HS / TLE after Febrile Status", "Hippocampal sclerosis & temporal-lobe epilepsy after febrile status epilepticus.", "g1", "febrile", { pop: "paed" }],
     ["calc-epi-pass", "EPI-PASS", "Epilepsy after an acute symptomatic seizure.", "g1", "acute_sympt"],
+    ["calc-picu-seizure-epilepsy-score", "Seizure/Epilepsy Risk Score (PICU)", "Later seizure or epilepsy diagnosis after acute symptomatic seizures in critically ill children, from 4 clinical and continuous-EEG items.", "g1", "acute_sympt", { pop: "paed" }],
     ["calc-2helps2b", "2HELPS2B (cEEG seizure risk)", "Probability of an electrographic seizure on continuous EEG in critically ill patients, from 6 EEG/clinical features.", "g1", "critical_eeg"],
 
     ["calc-first-seizure-driving", "First Seizure & Driving", "Recurrence risk (COSY) after a first-ever seizure by aetiology, and when driving thresholds are met.", "g2", "first_seizure"],

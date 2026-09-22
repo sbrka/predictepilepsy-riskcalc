@@ -896,8 +896,12 @@
       const total = link(scoreTotal);
       const centerTxt = dispFn ? dispFn(scoreTotal) : fmtPct(total);
       const totContrib = active.reduce((a, c) => a + Math.abs(c.contrib), 0) || 1;
-      const fillFrac = total / 100;
+      // The baseline patient's own risk is a neutral wedge; only the rise above it is split
+      // among the active factors. (Before, a non-zero baseline drew an empty ring at score 0.)
+      const baseRisk = Math.max(0, Math.min(link(base), total));
+      const fillFrac = (total - baseRisk) / 100;
       let ang = -Math.PI / 2, segs = "";
+      if (baseRisk > 0) { const a2 = ang + (baseRisk / 100) * 2 * Math.PI; segs += baseRisk >= 99.99 ? `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="none" stroke="#9fb4c7" stroke-width="${w}"/>` : arcPath(cx, cy, rad, ang, a2, "#9fb4c7", w); ang = a2; }
       active.forEach((c, k) => {
         const frac = (Math.abs(c.contrib) / totContrib) * fillFrac, a2 = ang + frac * 2 * Math.PI;
         segs += arcPath(cx, cy, rad, ang, a2, PAL[k % PAL.length], w); ang = a2;
