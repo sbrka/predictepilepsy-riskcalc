@@ -1,0 +1,185 @@
+{
+ "schema_version": "1.0",
+ "id": "kwon_peds_dre",
+ "kind": "formula",
+ "meta": {
+  "title": "Drug-resistant epilepsy risk at diagnosis (children)",
+  "abbrev": "DRE",
+  "doi": "10.1016/j.seizure.2026.07.021",
+  "pmid": "42585883",
+  "citation": "Seizure 2026;142:8–17",
+  "authors": "Kwon O, Nam YS, Kim HJ, Yeh HR, Kim MJ, Lee YJ, Kim E, Lee EH, You SJ, Ko TS, Yum MS",
+  "year": 2026,
+  "journal": "Seizure: European Journal of Epilepsy",
+  "outcome": "Probability that a child with newly diagnosed epilepsy develops drug-resistant epilepsy, from eight features known at diagnosis.",
+  "clinical_utility": "Risk stratification at the first epilepsy diagnosis: earlier referral to a specialist centre, closer follow-up and earlier consideration of advanced therapy for high-risk children. Single-centre model with internal validation only.",
+  "source_link": {
+   "label": "original tool",
+   "url": "https://amc-ped.github.io/DRE_calculator/",
+   "title": "Pediatric DRE Risk Calculator (Kwon, Asan Medical Center)"
+  },
+  "cff_info": "<p><b>What this shows.</b> The probability that a child with newly diagnosed epilepsy will develop <b>drug-resistant epilepsy</b> (DRE) — failure of two appropriate antiseizure medications to achieve one year of seizure freedom, per the ILAE definition — estimated from eight features available at diagnosis (Kwon et&nbsp;al., <i>Seizure</i> 2026).</p><p><b>Cohort.</b> Single tertiary centre (Asan Medical Center, Seoul), 4208 children aged 0–18 years diagnosed 1995–2017 and followed to 2024; 1419 (33.7%) developed DRE. Predictors were selected by LASSO and fitted by multivariable logistic regression, with a random 70/30 training–validation split.</p><p><b>Performance.</b> Area under the ROC curve 0.765 (95% CI 0.747–0.783) in training and 0.778 (0.751–0.805) in the held-out validation set; optimism-corrected 0.761 after 1000 bootstrap resamples. Calibration was good (calibration-in-the-large −0.010, slope 1.062; Brier 0.176). At the Youden threshold, sensitivity was 0.63 and specificity 0.78, with a positive predictive value of 0.59.</p><p><b>Limits.</b> <b>No external validation</b> — the validation set is a random split of the same centre's data, so this is internal validation only. The centre is a tertiary referral hospital, where 33.7% had DRE against 20–30% in population studies, so risks here are likely higher than in general practice. Medication choice and sequence were deliberately left out, so the estimate is a baseline risk at diagnosis, not a treatment-response prediction. The absence of a documented finding was treated as absence of that finding.</p><p><b>Original tool.</b> The authors publish their own calculator at <a href=\"https://amc-ped.github.io/DRE_calculator/\" target=\"_blank\" rel=\"noopener\">amc-ped.github.io/DRE_calculator</a> (Ohcheol Kwon, Asan Medical Center Children's Hospital). This page reproduces the published model and matches the paper's worked example (76.2%).</p>"
+ },
+ "predictors": [
+  {
+   "name": "Seizure onset before 1 year of age",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.6446
+    }
+   ],
+   "assess": "Age at first seizure below 12 months (OR 1.91)."
+  },
+  {
+   "name": "Seizure frequency before treatment",
+   "coef": 1,
+   "layout": "stack",
+   "options": [
+    {
+     "label": "Yearly (at least once a year)",
+     "points": 0
+    },
+    {
+     "label": "Monthly (at least monthly, less than weekly)",
+     "points": 0.6598
+    },
+    {
+     "label": "Weekly (at least weekly, less than daily)",
+     "points": 1.2232
+    },
+    {
+     "label": "Daily (at least once a day)",
+     "points": 1.455
+    }
+   ],
+   "assess": "Pretreatment seizure frequency — the strongest predictor in the model (daily OR 4.28, weekly 3.40, monthly 1.93 versus yearly)."
+  },
+  {
+   "name": "History of status epilepticus",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.7256
+    }
+   ],
+   "assess": "Continuous seizure activity ≥5 min, or recurrent seizures without recovery of consciousness, before the epilepsy diagnosis (OR 2.07)."
+  },
+  {
+   "name": "Developmental disorders",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.6457
+    }
+   ],
+   "assess": "Documented developmental delay or intellectual disability present before the epilepsy diagnosis (OR 1.91)."
+  },
+  {
+   "name": "Neurological abnormalities on examination",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.3158
+    }
+   ],
+   "assess": "Focal deficits, abnormal tone, pathological reflexes or cranial nerve abnormalities at diagnosis (OR 1.37)."
+  },
+  {
+   "name": "Epilepsy type",
+   "coef": 1,
+   "layout": "stack",
+   "options": [
+    {
+     "label": "Generalized",
+     "points": 0
+    },
+    {
+     "label": "Focal",
+     "points": 0.3029
+    },
+    {
+     "label": "Combined generalized and focal",
+     "points": 0.7948
+    },
+    {
+     "label": "Unknown",
+     "points": 0.4179
+    }
+   ],
+   "assess": "ILAE 2017 epilepsy type. Combined generalized and focal epilepsy carries the highest risk (OR 2.21 versus generalized)."
+  },
+  {
+   "name": "Structural aetiology",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.7359
+    }
+   ],
+   "assess": "A brain MRI abnormality judged causally related to the epilepsy (OR 2.09). Aetiology categories are not mutually exclusive, so structural and infectious/immune can both be selected."
+  },
+  {
+   "name": "Infectious or immune aetiology",
+   "coef": 1,
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 0.8275
+    }
+   ],
+   "assess": "Epilepsy attributed to a documented CNS infection or an immune-mediated process (OR 2.29)."
+  }
+ ],
+ "model": {
+  "type": "logistic",
+  "center": 0,
+  "panel_title": "Probability of drug-resistant epilepsy",
+  "wf_base": "Baseline child",
+  "outputs": [
+   {
+    "label": "Drug-resistant epilepsy",
+    "intercept": -2.1437
+   }
+  ],
+  "donut_sub": "predicted risk",
+  "donut_tone": "risk",
+  "note": "Single-centre tertiary-referral cohort (n=4208) with internal validation only (random 70/30 split, AUC 0.778; optimism-corrected 0.761). DRE was 33.7% in this centre against 20–30% in population studies, so absolute risks are probably higher than in general practice. The model describes risk at diagnosis and does not account for which medication is chosen.",
+  "viz_info": "The donut shows the predicted probability of drug-resistant epilepsy. The waterfall starts from a baseline child (yearly seizures, generalized epilepsy, no other feature) and shows how each feature raises that probability; the model is additive on the log-odds scale, so the steps are not simple percentage additions."
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Kwon et al., Seizure 2026;142:8–17 (doi 10.1016/j.seizure.2026.07.021, PMID 42585883). Odds ratios from Table 2A / Results 2.5.2; performance from Results 2.5.3 and Fig. 3; worked example from the Fig. 2 nomogram caption. Coefficient values cross-checked against the authors' own calculator (https://amc-ped.github.io/DRE_calculator/, no licence file — nothing copied).",
+  "review_status": "unreviewed",
+  "notes": "Logistic model: p = 1/(1+exp(-(intercept + Σβx))). Every β matches its published OR to <0.011. The intercept (-2.1437) is the value stated in the authors' own calculator; the paper's worked example (logit(0.762) - Σβ for onset<1y + weekly + developmental + combined) independently gives -2.1446, agreeing to within 0.001 (rounding of the printed 76.2%, worth 0.02 pp). build_kwon_peds_dre.py asserts both. Aetiology enters as two separate binary indicators (present vs absent), as in the paper. Set review_status to human_reviewed after a person reproduces the worked example on the live page."
+ }
+}

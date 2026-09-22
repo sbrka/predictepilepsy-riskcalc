@@ -114,6 +114,7 @@
     ["calc-sudep-risk-markers", "SUDEP Risk Markers", "Reference for individual SUDEP risk markers (living alone, frequent tonic–clonic seizures, peri-ictal apnoea) and their 5-year SUDEP risk — markers only, not a combined score.", "g5", "sudep"],
 
     // g6 — established / chronic epilepsy
+    ["calc-peds-dre-at-diagnosis", "Drug Resistance at Diagnosis (children)", "Probability that a child with newly diagnosed epilepsy develops drug-resistant epilepsy, from eight features known at diagnosis.", "g6", "drug_resistance", { pop: "paed" }],
     ["calc-jme-drug-resistance", "JME — Drug Resistance", "Risk of drug-resistant epilepsy in juvenile myoclonic epilepsy.", "g6", "drug_resistance"],
     ["calc-pse-dre", "Post-Stroke Epilepsy — Drug Resistance", "Probability of drug-resistant epilepsy in people with post-stroke epilepsy, from 5 factors.", "g6", "drug_resistance"],
     ["calc-pte-dre", "Post-Traumatic Epilepsy — Drug Resistance", "Probability of drug-resistant epilepsy in people with post-traumatic epilepsy, from 4 factors.", "g6", "drug_resistance"],
@@ -144,6 +145,7 @@
     "calc-epilepsy-first-seizure-dementia": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1039)."],
     "calc-first-seizure-driving": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1714)."],
     "calc-hops": ["rec", "Recommended — clinically useful with good evidence (tier B, n=1267)."],
+    "calc-peds-dre-at-diagnosis": ["rec", "Recommended — large derivation cohort (n=4208) and the only model for drug resistance at diagnosis in children, but tier B: single tertiary centre, internal validation only."],
     "calc-peds-postop-seizure-freedom": ["rec", "Recommended — the only model for seizure freedom after focal resection in children, but tier B: single centre (n=256), validated only in a later cohort from the same centre."],
     "calc-ischemia": ["ec", "Editor's choice — best of the post-ischaemic-stroke seizure models: tier A, n=1436, externally validated (alongside SeLECT)."],
     "calc-jehi-nomogram": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=846, externally validated)."],
