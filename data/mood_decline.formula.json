@@ -5,7 +5,7 @@
   "meta": {
     "title": "Mood Decline after Temporal Lobe Surgery",
     "doi": "10.1111/epi.16800",
-    "pmid": "33368200",
+    "pmid": "33464568",
     "authors": "Doherty C, et al.",
     "year": 2021,
     "journal": "Epilepsia",
@@ -125,7 +125,7 @@
   },
   "provenance": {
     "extraction_method": "paper_formula",
-    "source": "Doherty 2021 Epilepsia Table 2 (published logistic coefficients + intercept) and Figure 1 nomogram — PMID 33368200, doi 10.1111/epi.16800.",
+    "source": "Doherty 2021 Epilepsia Table 2 (published logistic coefficients + intercept) and Figure 1 nomogram — PMID 33464568, doi 10.1111/epi.16800.",
     "review_status": "human_reviewed",
     "notes": "Logistic model (Firth-penalized): LP = -3.318 + 1.010·[psych history] + 0.652·[dominant] + 0.036·verbal_fluency + [relationship: widowed -1.228 / in-relationship -0.543 / single 0 / married 0.326 / divorced 1.090] - 0.021·age + 0.569·[MCD present]; pct = 100/(1+exp(-LP)). Coefficients & intercept from Table 2; relationship reference = single. Plausibility check: psych-history Yes, dominant, fluency 35, single, age 39, MCD absent → LP -1.215 → 22.9% (consistent with external-cohort 22% base rate). Optimism-adjusted c-statistic 0.70; well calibrated to ~40%, slight overestimation above 40%. Third of the Cleveland Clinic surgical-neuropsych nomogram trio (naming/memory/mood). Extracted 2026-07-08."
   }

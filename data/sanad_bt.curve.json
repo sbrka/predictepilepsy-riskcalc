@@ -8,7 +8,7 @@
     "journal": "PLOS ONE",
     "year": 2017,
     "doi": "10.1371/journal.pone.0190035",
-    "pmid": "28698335",
+    "pmid": "29267375",
     "outcome": "Breakthrough seizure, subsequent seizure recurrence, and re-remission after a period of 12-month remission (SANAD)",
     "clinical_utility": "Three group-average outcomes after a first 12-month remission on treatment (SANAD; Bonnett 2017): whether a breakthrough seizure returns, whether more seizures follow a breakthrough, and the chance of regaining a 12-month remission. Not a personal risk score.",
     "cff_info": "<p><b>What this shows.</b> Three group-average outcomes for people with newly-diagnosed epilepsy who first became seizure-free for 12 months on medication (SANAD trial; Bonnett et al., PLOS ONE 2017). It is not a personal risk score — each is an overall curve.</p><h4>Key findings</h4><ul><li>A first breakthrough seizure is common over time — about 1 in 4 within a year, and ~55% by 5–6 years.</li><li>Once a breakthrough happens, a further seizure is likely — ~74% within 2 years (often within a month).</li><li>But most people regain control — ~64% re-achieve a 12-month remission within 2 years.</li></ul><p>Use the outcome selector to switch curves and the time slider to read any month. Clinical factors (neurological insult, more prior tonic-clonic seizures, a longer time to first remission) raised breakthrough risk in the study, but came from separate models and are not combined here.</p>"
@@ -335,7 +335,7 @@
   },
   "provenance": {
     "extraction_method": "figure_digitized",
-    "source_paper": "PMID28698335_2017_Risk of a seizure recurrence after a breakthrough seizu.pdf",
+    "source_paper": "PMID29267375_2017_Breakthrough_seizuresFurther_analysis_of_the_Stand.pdf",
     "figure_ref": "Fig 2 (breakthrough), Fig 3 (recurrence), Fig 4 (remission)",
     "digitizer": "riskcalc auto-trace (contiguous-run axis detection + topmost-dark trace)",
     "review_status": "human_reviewed",

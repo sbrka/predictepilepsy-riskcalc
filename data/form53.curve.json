@@ -50,14 +50,22 @@
       "options": [
         {
           "label": "Age <65",
-          "points": 0
+          "points": 1
         },
         {
           "label": "Age ≥65",
-          "points": 1
+          "points": 0
         }
       ],
-      "assess": "Age at ICH onset."
+      "assess": "Age at ICH onset.",
+      "points_source": {
+        "doi": "10.1177/23969873251350882",
+        "page": "p.3 (Results, Model development) and Table 3",
+        "quote": "one point for any neurosurgical procedure and age under 65",
+        "reason": "The CFF export (export_53) had the age options reversed (<65 = 0, >=65 = 1); the paper assigns the point to age under 65.",
+        "approved": "2026-08-16",
+        "reverified": "2026-09-22"
+      }
     },
     {
       "name": "Any neurosurgical intervention",
@@ -2052,9 +2060,12 @@
     }
   },
   "provenance": {
-    "extraction_method": "cff_export",
+    "extraction_method": "cff_export_with_source_paper_scoring_correction",
     "source": "export_53_2026-04-07_172908.cpfm",
     "review_status": "unreviewed",
-    "notes": "Cumulative+COSY parsed from CFF curve equations; complete meta from paper; verify vs live form."
+    "notes": "Cumulative and COSY curves remain inherited from the CFF export and are not yet visually human-reviewed. Source-backed scoring correction approved 2026-08-16: paper p.3 assigns one point to age under 65, overriding the reversed inherited CFF age options. All 16 binary input combinations were tested; curves were unchanged. Canonical correction is held from release pending the project release workflow.",
+    "source_paper": "10.1177/23969873251350882",
+    "reviewer": "Michael Schubert (user approval in Codex task)",
+    "review_date": "2026-08-16"
   }
 }
