@@ -110,8 +110,8 @@ html,body{margin:0;background:var(--bg);color:var(--ink);
 
   <section class="controls">
     <div class="ctrl-group">
-      <span class="ctrl-label">Aetiology</span>
-      <div id="aet-seg" class="segmented" role="group" aria-label="Aetiology"></div>
+      <span class="ctrl-label">Stroke subtype</span>
+      <div id="aet-seg" class="segmented" role="group" aria-label="Stroke subtype"></div>
     </div>
     <div class="ctrl-group hz-group">
       <span class="ctrl-label">Recurrence-risk horizon &mdash; <output id="hz-out">10 years</output></span>
@@ -363,7 +363,7 @@ window.SELECT_DATA = {"meta":{"aetiologies":["IS","ICH","SAH","CVT"],"aetiologyL
     document.getElementById("info-body").innerHTML =
       '<p>This figure shows the spline-smoothed <strong>cumulative incidence of seizure recurrence</strong> ' +
       'as a function of the <strong>timing of the first post-stroke seizure</strong>, separately for each ' +
-      'aetiology, at the selected time horizon (slider, default 10 years), with a 95% confidence interval. ' +
+      'stroke subtype, at the selected time horizon (slider, default 10 years), with a 95% confidence interval. ' +
       'Hover over the curve to read the risk at any first-seizure timing.</p>' +
       '<h3>Data</h3>' +
       '<p>Pooled individual-patient data from 2,434 patients with a first seizure after ischaemic stroke ' +
