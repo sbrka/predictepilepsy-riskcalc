@@ -1177,7 +1177,8 @@
         return mm ? { p: +mm[1], lo: +mm[2], hi: +mm[3] } : null;
       };
       const dec = m.decimals != null ? m.decimals : 1, pf = (v) => (+v).toFixed(dec) + "%";
-      const W = isPhone() ? 400 : 680, pL = 18, pR = 18, plotW = W - pL - pR, top = 34, gH = 26, rowH = 46, axisH = 24;   // narrower viewBox on phones keeps labels legible
+      // viewBox = the rendered width, so text draws at true size on any screen (floor 400: below that it scales down)
+      const W = Math.max(400, Math.round(svg.getBoundingClientRect().width) || 680), pL = 18, pR = 18, plotW = W - pL - pR, top = 34, gH = 26, rowH = 46, axisH = 24;
       const axMax = ch.axis_max || 100;
       const sx = (v) => pL + Math.min(Math.max(v, 0), axMax) / axMax * plotW;
       const H = top + groups.length * (gH + series.length * rowH) + axisH;
