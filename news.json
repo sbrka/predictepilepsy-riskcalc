@@ -1,0 +1,702 @@
+{
+ "generated": "2026-09-28",
+ "items": [
+  {
+   "id": "2026-09-28-driving-after-epilepsy-surgery",
+   "date": "2026-09-28",
+   "type": "new",
+   "title": "Driving after Epilepsy Surgery",
+   "summary": "Chance of a seizure with impaired awareness in the next year after epilepsy surgery, for people who are seizure-free or still have auras only.",
+   "details": [
+    "819 patients operated at the National Hospital for Neurology and Neurosurgery, London (1990–2014), with 9307 graded patient-years.",
+    "Seizure-free for 1, 2 or 3 years: 4.9%, 3.5% and 2.4%. Auras only over the same periods: 11.3%, 9.2% and 7.8%.",
+    "Every combination is shown with its 95% confidence interval, next to the 20% and 2% orientation cut-offs used in some driving rules."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "Driving",
+    "group": "g4"
+   },
+   "calcs": [
+    {
+     "key": "fairclough_postop_driving",
+     "name": "Driving after Epilepsy Surgery",
+     "desc": "Chance of a seizure with impaired awareness in the next year after epilepsy surgery, for people who are seizure-free or have auras only.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-driving-after-epilepsy-surgery/",
+     "badge_text": "Driving",
+     "outcome": "Chance of a seizure with impaired awareness in the next 12 months (COSY) after epilepsy surgery, by the worst ILAE outcome grade over the previous 1, 2 or 3 years.",
+     "cite": {
+      "authors": "Fairclough S, O'Keeffe AG, de Tisi J, Duncan JS",
+      "journal": "J Neurol Neurosurg Psychiatry",
+      "year": 2018,
+      "doi": "10.1136/jnnp-2017-316578",
+      "pmid": "29223975"
+     },
+     "tier": "B",
+     "n": "819",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Large single-centre surgical cohort (n=819, 9307 graded patient-years, up to 25 years, NHNN London) giving robust-SE GEE estimates of next-year risk by ILAE grade over the previous 1-3 years; descriptive conditional risks, not externally validated, and auras are self-reported.",
+     "rec": "rec",
+     "rec_why": "Recommended — clinically useful with good evidence (tier B, n=819)."
+    }
+   ]
+  },
+  {
+   "id": "2026-09-28-safer-brain-metastases",
+   "date": "2026-09-28",
+   "type": "update",
+   "title": "Brain metastases: first prospective seizure data after radiosurgery",
+   "summary": "Interim results of the SAFER study, 75 patients treated with stereotactic radiosurgery, added as context to our two brain-metastasis calculators.",
+   "details": [
+    "8 of 75 patients (10.7%, 95% CI 4.7–19.9) had a seizure within 12 months; 9.2% were new-onset seizures.",
+    "Of those seizure-free at 6 months, 5.8% had a seizure by 12 months, and no first seizure occurred after month 9.",
+    "This is an interim analysis of 75 of 375 planned patients with no risk-factor model, so it neither validates nor refutes either calculator."
+   ],
+   "sources": [
+    {
+     "cite": "de Boisanger J, et al. Clin Oncol 2026;57:104222",
+     "doi": "10.1016/j.clon.2026.104222",
+     "pmid": "42418941"
+    }
+   ],
+   "badge": {
+    "text": "SRS",
+    "group": "g1"
+   },
+   "calcs": [
+    {
+     "key": "form14",
+     "name": "BMERS",
+     "desc": "Epilepsy risk in patients with brain metastases.",
+     "group": "g1",
+     "url": "https://predictepilepsy.com/calc-bmers/",
+     "badge_text": "BMERS",
+     "outcome": "Risk factors for the development of epilepsy in patients with brain metastases",
+     "cite": {
+      "authors": "Wolpert F, Lareida A, Terziev R, et al.",
+      "journal": "Neuro-Oncology",
+      "year": 2020,
+      "doi": "10.1093/neuonc/noz172",
+      "pmid": ""
+     },
+     "tier": "B",
+     "n": "799",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Reasonable-sized single-centre retrospective derivation (n=799, 226 epilepsy events) yielding a 0-8 points score with AUC 0.75, but only post-hoc internal confirmation and no independent external validation.",
+     "rec": "rec",
+     "rec_why": "Recommended — clinically useful with good evidence (tier B, n=799)."
+    },
+    {
+     "key": "bm_seizure_makkawi",
+     "name": "Brain Metastases Seizures",
+     "desc": "Probability of a seizure in a patient with brain metastases, from 3 factors (small cohort).",
+     "group": "g1",
+     "url": "https://predictepilepsy.com/calc-bm-seizures/",
+     "badge_text": "Brain",
+     "outcome": "Probability of developing a seizure in a patient with brain metastases, from 3 factors (single static estimate)",
+     "cite": {
+      "authors": "Makkawi S, Alqurashi RM, Aljabri A, et al.",
+      "journal": "Seizure: European Journal of Epilepsy",
+      "year": 2025,
+      "doi": "10.1016/j.seizure.2025.05.013",
+      "pmid": "40440856"
+     },
+     "tier": "C",
+     "n": "272",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Single-centre retrospective cohort of 272 patients (80 seizure events) with only internal bootstrap validation (AUC 0.82) and no independent external validation, so preliminary.",
+     "rec": "",
+     "rec_why": ""
+    }
+   ]
+  },
+  {
+   "id": "2026-09-28-glioma-postoperative-seizures",
+   "date": "2026-09-28",
+   "type": "update",
+   "title": "Glioma surgery: how often do seizures follow?",
+   "summary": "Two new studies show the overall size of postoperative seizure risk, added as context to our glioma calculators.",
+   "details": [
+    "SPRING trial, 94 seizure-naive adults: about one in three had a first seizure within 12 months, with or without levetiracetam prophylaxis. The trial closed early and was underpowered.",
+    "Glioblastoma, 39 Japanese centres, 1099 patients: 26% had a late postoperative seizure, at a mean of 194 days after surgery.",
+    "Neither study is a prediction model; both are shown as reference points only."
+   ],
+   "sources": [
+    {
+     "cite": "Jenkinson MD, et al. Neuro-Oncol Pract (online 2025)",
+     "doi": "10.1093/nop/npaf114",
+     "pmid": "42111024"
+    },
+    {
+     "cite": "Inoue A, et al. Neuro-Oncol Adv 2026;8:vdag205",
+     "doi": "10.1093/noajnl/vdag205",
+     "pmid": "42626705"
+    }
+   ],
+   "badge": {
+    "text": "Glioma",
+    "group": "g1"
+   },
+   "calcs": [
+    {
+     "key": "form44",
+     "name": "Glioma-Related Epilepsy",
+     "desc": "Epilepsy in diffuse high-grade glioma.",
+     "group": "g1",
+     "url": "https://predictepilepsy.com/calc-glioma-epilepsy/",
+     "badge_text": "Glioma-Relat",
+     "outcome": "Glioma-related epilepsy in patients with diffuse high-grade glioma after the 2016 WHO update: seizure characteristics, risk factors, and clinical outcomes",
+     "cite": {
+      "authors": "Li L, Fang S, Li G, et al.",
+      "journal": "Journal of Neurosurgery",
+      "year": 2022,
+      "doi": "10.3171/2020.12.JNS203351",
+      "pmid": ""
+     },
+     "tier": "C",
+     "n": "449",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Single-centre (Beijing Tiantan) retrospective cohort of 449 high-grade glioma patients reporting predictor odds ratios with no internal or external validation of a formal model.",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "form17",
+     "name": "PGREM",
+     "desc": "Post-operative glioma-related epilepsy risk.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-pgrem/",
+     "badge_text": "PGREM",
+     "outcome": "Development of an integrated predictive model for postoperative glioma-related epilepsy using gene-signature and clinical data",
+     "cite": {
+      "authors": "Li L, Zhang C, Wang Z, et al.",
+      "journal": "BMC Cancer",
+      "year": 2023,
+      "doi": "10.1186/s12885-022-10385-x",
+      "pmid": ""
+     },
+     "tier": "C",
+     "n": "166",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Retrospective single-centre (Beijing Tiantan) study, n=208 split into training 166/validation 42 with only internal random-split validation and requiring tumour RNA-seq; authors themselves flag small sample and need for external validation.",
+     "rec": "",
+     "rec_why": ""
+    }
+   ]
+  },
+  {
+   "id": "2026-09-22-peds-dre-at-diagnosis",
+   "date": "2026-09-22",
+   "type": "new",
+   "title": "Drug Resistance at Diagnosis (children)",
+   "summary": "Probability that a child with newly diagnosed epilepsy will develop drug-resistant epilepsy, from eight features available at diagnosis.",
+   "details": [
+    "4208 children from a single tertiary centre in Seoul, followed to 2024; 33.7% developed drug-resistant epilepsy.",
+    "AUC 0.778 in a held-out validation set (optimism-corrected 0.761), with good calibration.",
+    "Internal validation only, and a referral population, so absolute risks may be higher than in general practice."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "DRE",
+    "group": "g6"
+   },
+   "calcs": [
+    {
+     "key": "kwon_peds_dre",
+     "name": "Drug Resistance at Diagnosis (children)",
+     "desc": "Probability that a child with newly diagnosed epilepsy develops drug-resistant epilepsy, from eight features known at diagnosis.",
+     "group": "g6",
+     "url": "https://predictepilepsy.com/calc-peds-dre-at-diagnosis/",
+     "badge_text": "Drug",
+     "outcome": "Probability that a child with newly diagnosed epilepsy develops drug-resistant epilepsy, from eight features known at diagnosis.",
+     "cite": {
+      "authors": "Kwon O, Nam YS, Kim HJ, Yeh HR, Kim MJ, Lee YJ, Kim E, Lee EH, You SJ, Ko TS, Yum MS",
+      "journal": "Seizure: European Journal of Epilepsy",
+      "year": 2026,
+      "doi": "10.1016/j.seizure.2026.07.021",
+      "pmid": "42585883"
+     },
+     "tier": "B",
+     "n": "4208",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Large single-centre tertiary cohort (n=4208, 1419 DRE events) with LASSO-selected logistic model; AUC 0.778 (95% CI 0.751-0.805) in a held-out random 30% split, optimism-corrected 0.761, good calibration (slope 1.06). Validation is internal only (same-centre random split), and the 33.7% DRE rate reflects tertiary referral, so tier B. Only model on the site predicting general paediatric drug resistance at diagnosis; the authors publish a matching calculator, and our page reproduces their worked example (76.2%).",
+     "rec": "rec",
+     "rec_why": "Recommended — large derivation cohort (n=4208) and the only model for drug resistance at diagnosis in children, but tier B: single tertiary centre, internal validation only."
+    }
+   ]
+  },
+  {
+   "id": "2026-09-22-peds-postop-seizure-freedom",
+   "date": "2026-09-22",
+   "type": "new",
+   "title": "Seizure Freedom after Focal Resection (children)",
+   "summary": "Chance that a child stays seizure-free 1 and 2 years after focal or lobar resection, from five features known at the first postoperative review.",
+   "details": [
+    "256 children aged 1–18 years from one centre, 90 recurrences.",
+    "C-index 0.81 after bootstrap correction and 0.79 in a later temporal validation cohort.",
+    "No external validation yet."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "Post-op",
+    "group": "g4"
+   },
+   "calcs": [
+    {
+     "key": "dong_peds_postop",
+     "name": "Seizure Freedom after Focal Resection (children)",
+     "desc": "Chance of staying seizure-free 1 and 2 years after focal or lobar resection in children, from five features known at the first postoperative review.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-peds-postop-seizure-freedom/",
+     "badge_text": "Seizure",
+     "outcome": "Chance of staying seizure-free 1 and 2 years after focal or lobar resection in children, from five clinical, surgical, histopathological and EEG features known at the first postoperative review.",
+     "cite": {
+      "authors": "Dong X, Sun T",
+      "journal": "Frontiers in Pediatrics",
+      "year": 2026,
+      "doi": "10.3389/fped.2026.1869297",
+      "pmid": "42729367"
+     },
+     "tier": "B",
+     "n": "181",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Single-centre paediatric cohort (n=256; 181 training / 75 temporal validation, 90 recurrences) with LASSO-selected Cox model; bootstrap-corrected C 0.81 and 0.79 in a same-centre temporal cohort applied without recalibration. No external validation, and the >38 spikes/h cut-off was derived in this cohort, so tier B. Only model on the site for seizure freedom after focal resection in children (Jehi is adult and preoperative; HOPS is hemispheric surgery).",
+     "rec": "rec",
+     "rec_why": "Recommended — the only model for seizure freedom after focal resection in children, but tier B: single centre (n=256), validated only in a later cohort from the same centre."
+    }
+   ]
+  },
+  {
+   "id": "2026-09-22-picu-seizure-epilepsy-score",
+   "date": "2026-09-22",
+   "type": "new",
+   "title": "Seizure/Epilepsy Risk Score (PICU)",
+   "summary": "For critically ill children with acute symptomatic seizures or encephalopathy: the chance of a later seizure or epilepsy diagnosis after discharge.",
+   "details": [
+    "A 0–4 point score from developmental delay, seizures before and during continuous EEG, and epileptiform discharges.",
+    "Observed risk rises from 13% at score 0 to 71–96% at scores 1–4.",
+    "Single-centre prospective cohort from the Children's Hospital of Philadelphia PICU."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "PICU",
+    "group": "g1"
+   },
+   "calcs": [
+    {
+     "key": "abend_asys_peds",
+     "name": "Seizure/Epilepsy Risk Score (PICU)",
+     "desc": "Later seizure or epilepsy diagnosis after acute symptomatic seizures in critically ill children, from 4 clinical and continuous-EEG items.",
+     "group": "g1",
+     "url": "https://predictepilepsy.com/calc-picu-seizure-epilepsy-score/",
+     "badge_text": "Seizure/Epil",
+     "outcome": "Subsequent seizure or epilepsy diagnosis after acute symptomatic seizures in the PICU, from four clinical and continuous-EEG items.",
+     "cite": {
+      "authors": "Abend NS, Fung FW, Parikh DS, Ramos M, Xiao R, Topjian AA",
+      "journal": "Epilepsia",
+      "year": 2026,
+      "doi": "10.1002/epi.70452",
+      "pmid": "42631926"
+     },
+     "tier": "C",
+     "n": "365",
+     "external_validation": false,
+     "setting": "single-centre",
+     "rationale": "Single-centre prospective PICU cohort (CHOP, n=365 with follow-up, 234 events); AUC 0.81 is apparent (derivation cohort only) with no internal or external validation, the outcome is an ICD-10 code at variable follow-up and the follow-up subset was enriched for higher-risk children; the authors state it needs external validation. Only paediatric acute-symptomatic tool on the site (complements adult EPI-PASS, also tier C).",
+     "rec": "",
+     "rec_why": ""
+    }
+   ]
+  },
+  {
+   "id": "2026-07-19-status-epilepticus-section",
+   "date": "2026-07-19",
+   "type": "section",
+   "title": "New section: status epilepticus",
+   "summary": "Nine tools on mortality, functional outcome and later epilepsy after status epilepticus, including the ACARD score for 30-day mortality.",
+   "details": [
+    "ACARD (Neurology 2026) was externally validated in Salzburg (AUC 0.845) and outperformed STESS, mSTESS, EMSE and SACE; it is our editor's choice for short-term mortality.",
+    "The ACD score covers 2-year mortality, and the Alanís-Bernal curves show 5-year survival by group.",
+    "Also included: STESS, EMSE, END-IT, STEPSS (children), AFTER and a Thai national mortality score."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "SE",
+    "group": "g7"
+   },
+   "calcs": [
+    {
+     "key": "acard_se_mortality",
+     "name": "ACARD Score — 30-day Mortality after Status Epilepticus",
+     "desc": "Risk of death within 30 days of status epilepticus from 5 routine factors (age, consciousness, aetiology, refractoriness, disability) — externally validated (Lattanzi 2026).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-acard-se-mortality/",
+     "badge_text": "ACARD",
+     "outcome": "Risk of death within 30 days of the onset of non-hypoxic status epilepticus, from the Age–Consciousness–Aetiology–Refractoriness–Disability (ACARD) score.",
+     "cite": {
+      "authors": "Lattanzi S, Trinka E, Bosque-Varela P, et al., Meletti S",
+      "journal": "Neurology",
+      "year": 2026,
+      "doi": "10.1212/WNL.0000000000218281",
+      "pmid": "42479996"
+     },
+     "tier": "A",
+     "n": "689",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Derived in 689 SE episodes (Modena) and externally validated in an independent multinational cohort (569 episodes, Salzburg) with excellent, well-retained discrimination (AUC 0.864 derivation, 0.845 validation) and good calibration (Hosmer-Lemeshow p=0.29/0.85). Directly outperformed STESS, mSTESS, EMSE and SACE for 30-day mortality across both convulsive SE and NCSE. Point table + per-score risks taken from the paper (exact, not digitized). The best available tool for short-term (30-day) mortality after status epilepticus.",
+     "rec": "ec",
+     "rec_why": "Editor’s choice for short-term (30-day) mortality after status epilepticus — the strongest available tool for this question (tier A; derived n=689, externally validated n=569, AUC 0.86/0.85; outperforms STESS/mSTESS/EMSE/SACE). Point table and per-score risks are exact from the paper. (For long-term 2-year mortality, see the ACD score.)"
+    },
+    {
+     "key": "acd_se_mortality",
+     "name": "ACD Score — Mortality after Status Epilepticus",
+     "desc": "Two-year mortality after non-anoxic status epilepticus from the Age–Consciousness–Duration (ACD) score (Roberg 2022; validated Alanís-Bernal 2026).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-acd-se-mortality/",
+     "badge_text": "ACD",
+     "outcome": "Two-year mortality after an episode of non-anoxic status epilepticus, from the Age–Consciousness–Duration (ACD) score (Roberg 2022 nomogram).",
+     "cite": {
+      "authors": "Roberg LE, Monsson O, Kristensen SB, et al., Beier CP",
+      "journal": "JAMA Neurology",
+      "year": 2022,
+      "doi": "10.1001/jamaneurol.2022.0609",
+      "pmid": "35404392"
+     },
+     "tier": "A",
+     "n": "261",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "ACD score derived in a Danish cohort (n=261; subset n=145 with non/less-damaging causes) and externally validated in independent German (n=906) and Norwegian (n=139) cohorts, with acceptable transported discrimination (AUC 0.69-0.76, best in non-brain-damaging causes) and an almost linear score-mortality relationship (Pearson r2=0.848). Further externally validated for 5-year mortality by Alanís-Bernal 2026 (AUC 0.72). The only tool for mortality after status epilepticus. Note: per-score 2-year mortality here is read from the published nomogram (extraction pending human review).",
+     "rec": "rec",
+     "rec_why": "Recommended — the only tool for mortality after status epilepticus. The ACD score is externally validated across Denmark, Germany and Norway (Roberg 2022) and again in Spain (Alanís-Bernal 2026). Per-score 2-year mortality is read from the published nomogram; pending human review of the extraction (would otherwise be Editor’s choice as the sole tier-A tool for this question)."
+    },
+    {
+     "key": "alanis_se_survival",
+     "name": "Survival Curves after Status Epilepticus (5-year)",
+     "desc": "Cumulative 5-year mortality after status epilepticus by ACD band and by Lattanzi aetiology — digitized Kaplan–Meier curves (Alanís-Bernal 2026).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-se-survival-5yr/",
+     "badge_text": "Survival",
+     "outcome": "Cumulative mortality over 5 years after non-anoxic status epilepticus, by ACD score band and by Lattanzi aetiological category.",
+     "cite": {
+      "authors": "Alanís-Bernal M, Campos-Fernández D, Abraira L, et al., Santamarina E",
+      "journal": "Epilepsia",
+      "year": 2026,
+      "doi": "10.1002/epi.70363",
+      "pmid": "42396999"
+     },
+     "tier": "C",
+     "n": "786",
+     "external_validation": false,
+     "setting": "se_prognosis",
+     "rationale": "Descriptive single-centre 5-year survival analysis (n=786) — reference curves, not a validated prediction model: it reports observed mortality by ACD band and Lattanzi aetiology, with no external validation of these stratified estimates. Useful for counselling context alongside the ACD score calculator. Lattanzi/overall 5-year endpoints are exact from the paper; per-band curve shapes are figure-digitized (unreviewed).",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "stess",
+     "name": "STESS — Status Epilepticus Severity Score",
+     "desc": "The most validated bedside score for survival after status epilepticus: 4 pre-treatment items (Rossetti 2008). Favorable 0–2 vs unfavorable 3–6.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-stess/",
+     "badge_text": "STESS",
+     "outcome": "In-hospital survival vs death after an episode of status epilepticus, from four pre-treatment predictors (age, history of seizures, worst seizure type, level of consciousness).",
+     "cite": {
+      "authors": "Rossetti AO, Logroscino G, Milligan TA, Michaelides C, Ruffieux C, Bromfield EB",
+      "journal": "Journal of Neurology",
+      "year": 2008,
+      "doi": "10.1007/s00415-008-0989-1",
+      "pmid": "18769858"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "emse",
+     "name": "EMSE — 30-day mortality nomogram",
+     "desc": "Individualised 30-day mortality after status epilepticus from aetiology, age, comorbidity and EEG — the EMSE-parameter nomogram (Brigo/Meletti 2022, AUC 0.83).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-emse/",
+     "badge_text": "EMSE",
+     "outcome": "Individual probability of 30-day mortality after status epilepticus, from the EMSE parameters (aetiology, EEG, age, comorbidity) re-fitted into a logistic nomogram.",
+     "cite": {
+      "authors": "Brigo F, Turcato G, Lattanzi S, Orlandi N, Giovannini G, Zaboli A, Meletti S",
+      "journal": "Neurocritical Care",
+      "year": 2022,
+      "doi": "10.1007/s12028-022-01548-6",
+      "pmid": "35778648"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "endit",
+     "name": "END-IT — functional outcome after CSE",
+     "desc": "Risk of poor functional outcome (mRS 3–6) at 3 months after convulsive status epilepticus, from 5 bedside items (Gao 2016). Cut-off ≥3.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-endit/",
+     "badge_text": "END-IT",
+     "outcome": "Risk of an unfavorable functional outcome (modified Rankin Scale 3–6, i.e. death or dependence) at 3 months after discharge, in adults with convulsive status epilepticus.",
+     "cite": {
+      "authors": "Gao Q, Ou-Yang T-P, Sun X-L, Yang F, Wu C, Kang T, Kang X-G, Jiang W",
+      "journal": "Critical Care",
+      "year": 2016,
+      "doi": "10.1186/s13054-016-1221-9",
+      "pmid": "26916702"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "stepss",
+     "name": "STEPSS — paediatric SE severity score",
+     "desc": "Risk of poor outcome (POPC ≥3) in children with status epilepticus — the paediatric STESS (Sidharth 2019). Cut-off >3.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-stepss/",
+     "badge_text": "STEPSS",
+     "outcome": "Risk of an unfavourable short-term outcome (Paediatric Overall Performance Category ≥3, i.e. moderate disability to death, at discharge) in children with status epilepticus.",
+     "cite": {
+      "authors": "Sidharth, Sankhyan N, Malhi P, Jayashree M",
+      "journal": "Seizure",
+      "year": 2019,
+      "doi": "10.1016/j.seizure.2019.09.005",
+      "pmid": "31536850"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "after",
+     "name": "AFTER — epilepsy after status epilepticus",
+     "desc": "Risk of developing epilepsy in the 5 years after a de novo status epilepticus, from 4 clinical/EEG items (Rodrigo-Gisbert 2023). Cut-off ≥2.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-after/",
+     "badge_text": "AFTER",
+     "outcome": "Risk of developing epilepsy (a first unprovoked/remote seizure meeting ILAE criteria) within 5 years after a de novo episode of status epilepticus, in adults with no prior epilepsy.",
+     "cite": {
+      "authors": "Rodrigo-Gisbert M, Toledo M, Santamarina E, et al.",
+      "journal": "Epilepsy & Behavior",
+      "year": 2023,
+      "doi": "10.1016/j.yebeh.2023.109531",
+      "pmid": "37995538"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    },
+    {
+     "key": "tiamkao",
+     "name": "SE Mortality Score (national database)",
+     "desc": "Purely clinical mortality risk after status epilepticus (age, comorbidities, complications) — no EEG/imaging needed (Tiamkao 2018, n>10,000).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-tiamkao/",
+     "badge_text": "SE",
+     "outcome": "Risk of death (in hospital or within 30 days) after status epilepticus, from a clinical risk score built on age, comorbidities and SE complications — no EEG or imaging needed.",
+     "cite": {
+      "authors": "Tiamkao S, Pranbul S, Sawanyawisuth K, Thepsuthammarat K, Integrated Epilepsy Research Group",
+      "journal": "Epilepsia",
+      "year": 2018,
+      "doi": "10.1111/epi.14489",
+      "pmid": "30159871"
+     },
+     "tier": "",
+     "n": "",
+     "external_validation": false,
+     "setting": "",
+     "rationale": "",
+     "rec": "",
+     "rec_why": ""
+    }
+   ]
+  },
+  {
+   "id": "2026-07-16-utrecht-partner-models",
+   "date": "2026-07-16",
+   "type": "section",
+   "title": "Six models from epilepsypredictiontools.info",
+   "summary": "Prediction models from UMC Utrecht, now hosted here with the authors' agreement: childhood epilepsy after a first event, withdrawal after paediatric surgery, cognitive outcome after surgery and JME withdrawal.",
+   "details": [
+    "Ported from the authors' own published implementation rather than re-read from figures.",
+    "Each model's About panel credits and links the original tool at epilepsypredictiontools.info."
+   ],
+   "sources": [],
+   "badge": {
+    "text": "UMCU",
+    "group": "g2"
+   },
+   "calcs": [
+    {
+     "key": "fsc_childhood_epilepsy",
+     "name": "First Seizure in Children — Epilepsy Diagnosis",
+     "desc": "Probability of an epilepsy diagnosis in a child after one or more paroxysmal events, from 11 clinical features + EEG.",
+     "group": "g2",
+     "url": "https://predictepilepsy.com/calc-fsc-childhood-epilepsy/",
+     "badge_text": "First",
+     "outcome": "Probability that a child presenting after one or more paroxysmal events will be diagnosed with epilepsy, from 11 clinical features and the interictal EEG available at the first consultation",
+     "cite": {
+      "authors": "van Diessen E, Lamberink HJ, Otte WM, Doornebal N, Brouwer OF, Jansen FE, Braun KPJ",
+      "journal": "Pediatrics",
+      "year": 2018,
+      "doi": "10.1542/peds.2018-0931",
+      "pmid": "30389715"
+     },
+     "tier": "A",
+     "n": "451",
+     "external_validation": true,
+     "setting": "first_seizure",
+     "rationale": "Developed in 451 children and externally validated in an independent cohort (n=187) with excellent discrimination (AUC 0.86, 95% CI 0.80-0.92; PPV 0.93, NPV 0.76). Retains useful discrimination (AUC 0.73) in the diagnostically uncertain subgroup where it matters most. The only model for this question in children.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=451, externally validated in an independent cohort of 187; AUC 0.86). The only model for epilepsy diagnosis in children after paroxysmal events."
+    },
+    {
+     "key": "tts_postop_withdrawal",
+     "name": "Postoperative Relapse after ASM Withdrawal in Children",
+     "desc": "Seizure recurrence (2 & 5 yr), long-term seizure freedom and cure after stopping ASM in children who had epilepsy surgery — TimeToStop nomograms.",
+     "group": "g3",
+     "url": "https://predictepilepsy.com/calc-tts-postop-withdrawal/",
+     "badge_text": "TTS",
+     "outcome": "Individualised risk of seizure recurrence (2 and 5 years), chance of long-term seizure freedom, and chance of cure after withdrawal of antiseizure medication following epilepsy surgery in children.",
+     "cite": {
+      "authors": "Lamberink HJ, Boshuisen K, Otte WM, Geleijns K, Braun KPJ, on behalf of the TimeToStop Study Group",
+      "journal": "Epilepsia",
+      "year": 2018,
+      "doi": "10.1111/epi.14020",
+      "pmid": "29446447"
+     },
+     "tier": "B",
+     "n": "766",
+     "external_validation": false,
+     "setting": "withdrawal",
+     "rationale": "Large multicentre paediatric cohort (766 children, 15 centres, 8 countries) and the only tool for ASM withdrawal after epilepsy surgery in children. Downgraded to B: discrimination is modest (adjusted c 0.68 for recurrence, 0.73 for eventual freedom) and the nomograms were internally (optimism-)adjusted, not validated in an external cohort.",
+     "rec": "rec",
+     "rec_why": "Recommended — the only tool for ASM withdrawal after epilepsy surgery in children (n=766, 15 centres, 8 countries). Tier B: internally adjusted only, not externally validated, and discrimination is modest (c 0.68-0.73). WAMS is the editor's choice for this question overall."
+    },
+    {
+     "key": "cloppenborg_iq85",
+     "name": "Cognitive Outcome after Surgery — IQ > 85",
+     "desc": "Probability of an IQ above 85 two years after paediatric epilepsy surgery, from pre-surgical IQ, resection extent and invasive diagnostics.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-postop-iq85/",
+     "badge_text": "IQ>85",
+     "outcome": "Probability of post-operative IQ > 85",
+     "cite": {
+      "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
+      "journal": "Neurology",
+      "year": 2022,
+      "doi": "10.1212/WNL.0000000000013065",
+      "pmid": "34795046"
+     },
+     "tier": "A",
+     "n": "258",
+     "external_validation": true,
+     "setting": "surg_neuropsych",
+     "rationale": "Developed in the Bielefeld/Bethel cohort (n=258) and externally validated in the Utrecht cohort (n=102) with high accuracy (0.82) and excellent discrimination (AUC 0.90, 95% CI 0.84-0.96). The only model predicting intellectual outcome at this threshold in children.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=258, externally validated in 102; accuracy 0.82, AUC 0.90)."
+    },
+    {
+     "key": "cloppenborg_iq70",
+     "name": "Cognitive Outcome after Surgery — IQ > 70",
+     "desc": "Probability of an IQ above 70 two years after paediatric epilepsy surgery, from pre-surgical IQ and resection extent.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-postop-iq70/",
+     "badge_text": "IQ>70",
+     "outcome": "Probability of post-operative IQ > 70",
+     "cite": {
+      "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
+      "journal": "Neurology",
+      "year": 2022,
+      "doi": "10.1212/WNL.0000000000013065",
+      "pmid": "34795046"
+     },
+     "tier": "A",
+     "n": "258",
+     "external_validation": true,
+     "setting": "surg_neuropsych",
+     "rationale": "Developed in the Bielefeld/Bethel cohort (n=258) and externally validated in the Utrecht cohort (n=102) with high accuracy (0.84) and excellent discrimination (AUC 0.92, 95% CI 0.87-0.97). The only model predicting intellectual outcome at this threshold in children.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=258, externally validated in 102; accuracy 0.84, AUC 0.92)."
+    },
+    {
+     "key": "cloppenborg_dq50",
+     "name": "Cognitive Outcome after Surgery — DQ > 50",
+     "desc": "For children with developmental delay: probability of a developmental quotient above 50 two years after epilepsy surgery.",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-postop-dq50/",
+     "badge_text": "DQ>50",
+     "outcome": "Probability of post-operative DQ > 50",
+     "cite": {
+      "authors": "Cloppenborg T, van Schooneveld MMJ, Hagemann A, Hopf JL, Kalbhenn T, Otte WM, Polster T, Bien CG, Braun KPJ",
+      "journal": "Neurology",
+      "year": 2022,
+      "doi": "10.1212/WNL.0000000000013065",
+      "pmid": "34795046"
+     },
+     "tier": "B",
+     "n": "127",
+     "external_validation": false,
+     "setting": "surg_neuropsych",
+     "rationale": "The only tool for developmental outcome after epilepsy surgery in children with developmental delay. Downgraded to B relative to its IQ siblings from the same paper: developed in a small cohort (n=127) with 10-fold cross-validation only — no external cohort — and lower correct classification (76%).",
+     "rec": "rec",
+     "rec_why": "Recommended — the only tool for developmental outcome in children with developmental delay. Tier B: small cohort (n=127), 10-fold cross-validation only, correct classification 76% — weaker than its IQ siblings from the same paper."
+    },
+    {
+     "key": "stevelink_jme_withdrawal",
+     "name": "JME — Post-Withdrawal Relapse Risk",
+     "desc": "For someone with juvenile myoclonic epilepsy who is seizure-free: risk of recurrence 2 and 5 years after stopping medication.",
+     "group": "g3",
+     "url": "https://predictepilepsy.com/calc-jme-withdrawal/",
+     "badge_text": "JME",
+     "outcome": "Individualised risk of seizure recurrence at 2 and 5 years after withdrawal of antiseizure medication in a currently seizure-free person with juvenile myoclonic epilepsy (JME).",
+     "cite": {
+      "authors": "Stevelink R, Al-Toma D, Jansen FE, Lamberink HJ, Asadi-Pooya AA, Farazdaghi M, et al., Otte WM, Braun KPJ",
+      "journal": "eClinicalMedicine",
+      "year": 2022,
+      "doi": "10.1016/j.eclinm.2022.101732",
+      "pmid": "36467455"
+     },
+     "tier": "A",
+     "n": "368",
+     "external_validation": true,
+     "setting": "withdrawal",
+     "rationale": "Individual-participant-data meta-analysis (24 studies) with internal-external (leave-one-cohort-out) cross-validation, c-statistic 0.70 (95% CI 0.68-0.73) — the same methodology that grades the companion JME drug-resistance model. The only model for ASM withdrawal in JME. Note the withdrawal model rests on the 368 participants who actually attempted withdrawal, not the full 2518-person cohort.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — the only model for ASM withdrawal in JME (tier A; IPD meta-analysis of 24 studies with internal-external cross-validation, c 0.70). Note it rests on the 368 people who attempted withdrawal, not the full 2518-person cohort."
+    }
+   ]
+  }
+ ]
+}
