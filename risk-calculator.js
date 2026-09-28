@@ -1108,7 +1108,12 @@
         <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">${tids.map(scoreBox).join("")}</div>`;
     }
 
-    /* ---------------- LOOKUP (combination table -> point estimates) ---------------- */
+    /* ---------------- LOOKUP (combination table -> point estimates) ----------------
+       Rows are {cosy:"x% (lo%-hi%)", drive?} (MESS) or {pct, lo, hi, n?} (structured).
+       Optional model knobs: metric_label, result_text ("{0}"/"{1}" = the chosen options'
+       `phrase`||label), chart:{rows_by, series_by, colors?, title?, info?} → dot-and-CI
+       chart of every cell (_drawLookupDots). Without `drive` values the verdict compares
+       the estimate with the Group 1/2 orientation cut-offs instead of a months-to-drive. */
     _renderLookup() {
       const d = this.data, m = d.model, preds = d.predictors || [], th = d.thresholds || { group1: 20, group2: 2};
       if (!this._predSel) this._predSel = preds.map(() => 0);
@@ -1116,25 +1121,101 @@
       const row = (m.table || {})[key];
       const cosyRaw = (row && row.cosy) || "", driveRaw = (row && row.drive) || "";
       const cm = cosyRaw.match(/([\d.]+)%\s*\(([^)]*)\)/);
-      const cosyPct = cm ? cm[1] : (cosyRaw.match(/([\d.]+)%/) || [])[1];
-      const cosyCI = cm ? cm[2].replace(/%/g, "").replace(/\s*-\s*/, "–") : "";
+      const dec = m.decimals != null ? m.decimals : 1, fx = (x) => (+x).toFixed(dec);
+      const cosyPct = row && row.pct != null ? fx(row.pct) : cm ? cm[1] : (cosyRaw.match(/([\d.]+)%/) || [])[1];
+      const cosyCI = row && row.lo != null && row.hi != null ? `${fx(row.lo)}–${fx(row.hi)}` : cm ? cm[2].replace(/%/g, "").replace(/\s*-\s*/, "–") : "";
       const driveOk = driveRaw && driveRaw.toLowerCase() !== "nan";
+      const hasDrive = Object.values(m.table || {}).some((r) => r && r.drive != null);
       const monthsLabel = ((preds[0].options || [])[this._predSel[0]] || {}).label || "";
+      const optPhrase = (i) => { const o = ((preds[i] || {}).options || [])[this._predSel[i]] || {}; return o.phrase || o.label || ""; };
+      const sub = m.result_text
+        ? esc(m.result_text).replace(/\{(\d+)\}/g, (_, i) => `<b>${esc(optPhrase(+i))}</b>`)
+        : `Estimated chance of a further seizure within 12 months, given the patient has been seizure-free for <b>${esc(monthsLabel)}</b> after a first seizure.`;
+      const v = cosyPct != null ? +cosyPct : null;
+      const cutRow = (lab, col, cut, what) => `<div class="vrow"><span class="lab"><i style="background:${col}"></i><span class="lt"><b>${lab}</b><span class="t">${what} &middot; COSY &lt; ${cut}%</span></span></span><span class="val" style="color:${col}">${v == null ? "—" : v < cut ? "below" : "above"}</span></div>`;
+      const verdict = hasDrive ? `
+          <div class="vhead">Driving orientation &middot; seizure-free interval <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY and the orientation cut-offs">i</button></div>
+          <div class="vrow"><span class="lab"><i style="background:var(--amber-deep)"></i><span class="lt"><b>Group 1</b><span class="t">private &middot; annual risk &lt; ${th.group1}%</span></span></span><span class="val" style="color:var(--amber-deep)">${driveOk ? "after ~" + esc(driveRaw) + " mo" : "not reached"}</span></div>
+          <div class="vnote">${th.group1}% is an orientation cut-off used in some jurisdictions — not an established limit. COSY at long seizure-free intervals rests on few patients and can be unstable; weigh it against the absolute numbers. Local laws and guidelines apply.</div>` : `
+          <div class="vhead">Driving orientation &middot; this estimate vs the cut-offs <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY and the orientation cut-offs">i</button></div>
+          ${cutRow("Group 1", "var(--amber-deep)", th.group1, "private")}
+          ${cutRow("Group 2", "var(--red)", th.group2, "commercial")}
+          <div class="vnote">${th.group1}% and ${th.group2}% are orientation cut-offs used in some jurisdictions — not established limits, and not a fitness-to-drive decision. Local laws and guidelines apply.</div>`;
+      const ch = m.chart;
       let rail = "";
       preds.forEach((p, i) => { rail += this._predField(p, i); });
-      rail += `<div class="scorewrap"><div class="metric"><div class="k">COSY</div><div class="v" style="color:var(--amber-deep)">${cosyPct != null ? cosyPct + "%" : "—"}</div></div>
-        <div class="metric sm"><div class="k">Fit to drive (Group 1)</div><div class="v" style="font-size:19px">${driveOk ? "~" + driveRaw + " mo" : "—"}</div></div></div>`;
+      rail += `<div class="scorewrap"><div class="metric"><div class="k">${esc(m.metric_label || "COSY")}</div><div class="v" style="color:var(--amber-deep)">${cosyPct != null ? cosyPct + "%" : "—"}</div>${!hasDrive && cosyCI ? `<div class="cisub">95% CI ${esc(cosyCI)}%</div>` : ""}</div>
+        ${hasDrive ? `<div class="metric sm"><div class="k">Fit to drive (Group 1)</div><div class="v" style="font-size:19px">${driveOk ? "~" + driveRaw + " mo" : "—"}</div></div>` : ""}</div>`;
+      if (m.note) rail += `<div class="warn">${esc(m.note)}</div>`;
       this._rail.innerHTML = rail;
       this._panel.innerHTML = `<div class="panelhead"><div class="flabel" style="margin:0">${esc(m.panel_title || "Result")} <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY">i</button></div></div>
         ${row ? `<div class="lookbig"><span class="lkpct">${cosyPct}%</span>${cosyCI ? `<span class="lkci">95% CI ${esc(cosyCI)}%</span>` : ""}</div>
-        <p class="lksub">Estimated chance of a further seizure within 12 months, given the patient has been seizure-free for <b>${esc(monthsLabel)}</b> after a first seizure.</p>
-        <div class="verdict" style="margin-top:22px">
-          <div class="vhead">Driving orientation &middot; seizure-free interval <button class="info-dot" data-info="${attr(COSY_INFO)}" aria-label="About COSY and the orientation cut-offs">i</button></div>
-          <div class="vrow"><span class="lab"><i style="background:var(--amber-deep)"></i><span class="lt"><b>Group 1</b><span class="t">private &middot; annual risk &lt; ${th.group1}%</span></span></span><span class="val" style="color:var(--amber-deep)">${driveOk ? "after ~" + esc(driveRaw) + " mo" : "not reached"}</span></div>
-          <div class="vnote">${th.group1}% is an orientation cut-off used in some jurisdictions — not an established limit. COSY at long seizure-free intervals rests on few patients and can be unstable; weigh it against the absolute numbers. Local laws and guidelines apply.</div>
+        <p class="lksub">${sub}</p>
+        ${ch ? `<div class="flabel" style="margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--line)">${esc(ch.title || "All groups")}${ch.info ? ` <button class="info-dot" data-info="${attr(ch.info)}" aria-label="How to read this chart">i</button>` : ""}</div>
+        <div class="plotwrap"><svg class="plot" id="lkplot" role="img" aria-label="${esc(ch.title || "Estimate for every group, with 95% CI")}"></svg></div>` : ""}
+        <div class="verdict" style="margin-top:22px">${verdict}
         </div>` : `<p class="lksub">Data are not available for this exact combination of factors.</p>`}`;
+      if (row && ch) this._drawLookupDots(ch, th);
       this._rail.querySelectorAll(".seg[data-pi]").forEach((seg) => seg.addEventListener("click", (e) => {
         const b = e.target.closest("button"); if (!b) return; this._predSel[+seg.dataset.pi] = +b.dataset.oi; this._renderLookup();
+      }));
+    }
+
+    /* every lookup cell as a dot + 95% CI whisker, grouped by one predictor and coloured by
+       another (other predictors held at the current choice); dashed Group 1/2 cut-offs;
+       the selected cell is highlighted and any row is clickable. */
+    _drawLookupDots(ch, th) {
+      const svg = this._panel.querySelector("#lkplot"); if (!svg) return;
+      const d = this.data, m = d.model, preds = d.predictors || [];
+      const rb = ch.rows_by || 0, sb = ch.series_by != null ? ch.series_by : 1;
+      const groups = (preds[rb] || {}).options || [], series = (preds[sb] || {}).options || [];
+      const cols = ch.colors || ["#0f7a54", "#e0912b", "#d1495b", "#135ba8", "#7b52c9"];
+      const est = (r) => {
+        if (!r) return null;
+        if (r.pct != null) return { p: +r.pct, lo: r.lo != null ? +r.lo : null, hi: r.hi != null ? +r.hi : null };
+        const mm = String(r.cosy || "").match(/([\d.]+)%\s*\(\s*([\d.]+)%?\s*-\s*([\d.]+)%?\s*\)/);
+        return mm ? { p: +mm[1], lo: +mm[2], hi: +mm[3] } : null;
+      };
+      const dec = m.decimals != null ? m.decimals : 1, pf = (v) => (+v).toFixed(dec) + "%";
+      const W = isPhone() ? 400 : 680, pL = 18, pR = 18, plotW = W - pL - pR, top = 34, gH = 26, rowH = 46, axisH = 24;   // narrower viewBox on phones keeps labels legible
+      const axMax = ch.axis_max || 100;
+      const sx = (v) => pL + Math.min(Math.max(v, 0), axMax) / axMax * plotW;
+      const H = top + groups.length * (gH + series.length * rowH) + axisH;
+      const bot = H - axisH;
+      let g = "";
+      for (let t = 0; t <= axMax; t += axMax > 50 ? 20 : 10) g += `<line x1="${sx(t)}" y1="${top - 4}" x2="${sx(t)}" y2="${bot}" stroke="#f4f7fa"/><text x="${sx(t)}" y="${bot + 16}" text-anchor="middle" font-size="10" fill="#98a6b5">${t}%</text>`;
+      // cut-offs: labelled at the top, then drawn only across each row's track (never through the labels)
+      // (the higher cut-off is labelled on the lower line, so the lower cut-off's line never crosses its label)
+      const cuts = [[th.group1, "#b26a06", 1], [th.group2, "#b02020", 2]].filter(([c]) => c != null && c <= axMax);
+      const cutSeg = (y1, y2) => cuts.map(([c, col]) => `<line x1="${sx(c)}" y1="${y1}" x2="${sx(c)}" y2="${y2}" stroke="${col}" stroke-dasharray="3 3" stroke-width="1.2"/>`).join("");
+      cuts.forEach(([c, col, grp], k) => {
+        g += `<text x="${sx(c) + 4}" y="${top - 10 - k * 13}" font-size="10" fill="${col}">Group ${grp} cut-off ${c}%</text>`;
+        g += `<line x1="${sx(c)}" y1="${top - 18 - k * 13}" x2="${sx(c)}" y2="${top - 2}" stroke="${col}" stroke-dasharray="3 3" stroke-width="1.2"/>`;
+      });
+      let y = top;
+      groups.forEach((go, gi) => {
+        g += `<text x="${pL}" y="${y + 16}" font-size="12.5" font-weight="700" fill="#0e1c2b">${esc(go.label)}</text>`;
+        y += gH;
+        series.forEach((so, si) => {
+          const sel = this._predSel.slice(); sel[rb] = gi; sel[sb] = si;
+          const k = preds.map((p, i) => ((p.options || [])[sel[i]] || {}).value).join("|");
+          const e = est((m.table || {})[k]);
+          const on = sel.every((v, i) => v === this._predSel[i]);
+          const col = cols[si % cols.length], ty = y + 28;
+          if (on) g += `<rect x="0" y="${y - 2}" width="${W}" height="${rowH - 4}" rx="8" fill="var(--azure-wash)" opacity="0.6"/><rect x="0" y="${y}" width="3" height="${rowH - 8}" rx="1.5" fill="#1f83e6"/>`;
+          g += `<text x="${pL}" y="${y + 12}" font-size="12" fill="${on ? "#0e1c2b" : "#5c6b7a"}" font-weight="${on ? 650 : 400}">${esc(so.short || so.label)}</text>`;
+          g += `<text x="${W - pR}" y="${y + 12}" text-anchor="end" font-size="12" fill="${on ? "#0e1c2b" : "#5c6b7a"}" font-weight="${on ? 700 : 500}" font-variant-numeric="tabular-nums">${e ? pf(e.p) + (e.lo != null ? ` (${pf(e.lo)}–${pf(e.hi)})` : "") : "—"}</text>`;
+          g += `<line x1="${pL}" x2="${pL + plotW}" y1="${ty}" y2="${ty}" stroke="#eef2f6" stroke-width="2"/>` + cutSeg(ty - 10, ty + 10);
+          if (e && e.lo != null) g += `<line x1="${sx(e.lo)}" x2="${sx(e.hi)}" y1="${ty}" y2="${ty}" stroke="${col}" stroke-opacity="${on ? 0.55 : 0.3}" stroke-width="7" stroke-linecap="round"/>`;
+          if (e) g += `<circle cx="${sx(e.p)}" cy="${ty}" r="${on ? 7 : 5.5}" fill="${col}" fill-opacity="${on ? 1 : 0.75}" stroke="#fff" stroke-width="1.5"/>`;
+          g += `<rect x="0" y="${y - 2}" width="${W}" height="${rowH - 4}" fill="transparent" style="cursor:pointer" data-g="${gi}" data-s="${si}"><title>${esc(go.label)} · ${esc(so.label)}</title></rect>`;
+          y += rowH;
+        });
+      });
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+      svg.innerHTML = g;
+      svg.querySelectorAll("rect[data-g]").forEach((r) => r.addEventListener("click", () => {
+        this._predSel[rb] = +r.dataset.g; this._predSel[sb] = +r.dataset.s; this._renderLookup();
       }));
     }
 

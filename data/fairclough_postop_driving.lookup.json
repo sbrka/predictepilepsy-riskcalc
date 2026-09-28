@@ -1,0 +1,156 @@
+{
+ "schema_version": "1.0",
+ "id": "fairclough_postop_driving",
+ "kind": "lookup",
+ "meta": {
+  "title": "Driving after Epilepsy Surgery — COSY for auras only vs seizure-free",
+  "authors": "Fairclough S, O'Keeffe AG, de Tisi J, Duncan JS",
+  "year": 2018,
+  "journal": "J Neurol Neurosurg Psychiatry",
+  "doi": "10.1136/jnnp-2017-316578",
+  "pmid": "29223975",
+  "outcome": "Chance of a seizure with impaired awareness in the next 12 months (COSY) after epilepsy surgery, by the worst ILAE outcome grade over the previous 1, 2 or 3 years.",
+  "clinical_utility": "Driving counselling after epilepsy surgery, in particular for people who continue to have auras only.",
+  "cff_info": "<p><b>What this shows.</b> The chance of a <b>seizure with impaired awareness</b> in the next 12 months (<b>COSY</b>) for a person who has had epilepsy surgery, given the worst seizure outcome over the last 1, 2 or 3 years (Fairclough et&nbsp;al., <i>J Neurol Neurosurg Psychiatry</i> 2018). Its main question is whether people who still have <b>auras only</b> (focal aware seizures) after surgery have a risk comparable with people who are completely seizure-free.</p><p><b>Cohort.</b> 819 patients operated at the National Hospital for Neurology and Neurosurgery, London, between 1990 and 2014, followed for 2–25 years (mean 11.4), 9307 patient-years in total. 77% had a temporal lobectomy; the commonest pathology was hippocampal sclerosis (61%). Every post-operative year was graded prospectively on the ILAE surgery-outcome scale.</p><p><b>Method.</b> The estimates come from generalised estimating equations (logistic, robust standard errors), so the 95% confidence intervals account for the same patient contributing many years. Time since surgery did not change the risk (odds ratio 1.00 per year, 0.99–1.02).</p><h4>Key findings</h4><ul><li>Seizure-free (ILAE 1) for 1, 2 and 3 years: COSY <b>4.9%</b>, <b>3.5%</b> and <b>2.4%</b>.</li><li>Auras only (ILAE 2) for 1, 2 and 3 years: COSY <b>11.3%</b>, <b>9.2%</b> and <b>7.8%</b> — higher than seizure-free, but the upper 95% limit stays well below 20% (14.0% at 1 year).</li><li>A seizure beyond auras (ILAE 3–6) in the last year: COSY <b>87.6%</b>.</li></ul><p><b>Limits.</b> One specialist centre, and no external validation. Auras are self-reported and their frequency is often poorly recalled, so the auras-only group may be misclassified. The estimates are marginal: they do not adjust for patient factors such as pathology, antiseizure-medication changes or withdrawal. The 34 deaths (4.2%) were not modelled. Surgery took place 1990–2014.</p><p><b>Driving.</b> The authors argue that, if a COSY below 20% is accepted for private driving, people with auras only after surgery could be allowed to drive. This is their proposal, not a licensing rule: at the time of publication UK rules did not allow it for anyone with a past seizure with impaired awareness. Local laws and guidelines apply.</p>"
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 2
+ },
+ "predictors": [
+  {
+   "name": "Period considered",
+   "options": [
+    {
+     "label": "Last 1 year",
+     "value": "1",
+     "phrase": "the last year"
+    },
+    {
+     "label": "Last 2 years",
+     "value": "2",
+     "phrase": "the last 2 years"
+    },
+    {
+     "label": "Last 3 years",
+     "value": "3",
+     "phrase": "the last 3 years"
+    }
+   ],
+   "assess": "How many of the most recent post-operative years to consider. The outcome below is the WORST grade in any of those years: 'last 2 years' with 'auras only' means no seizure beyond auras in either year and auras in at least one of them."
+  },
+  {
+   "name": "Worst outcome in that period",
+   "layout": "stack",
+   "options": [
+    {
+     "label": "Completely seizure-free, no auras (ILAE 1)",
+     "value": "1",
+     "short": "Seizure-free, no auras (ILAE 1)",
+     "phrase": "completely seizure-free, with no auras (ILAE 1)"
+    },
+    {
+     "label": "Auras / focal aware seizures only (ILAE 2)",
+     "value": "2",
+     "short": "Auras only (ILAE 2)",
+     "phrase": "auras only (ILAE 2)"
+    },
+    {
+     "label": "Seizures beyond auras on ≥1 day (ILAE 3–6)",
+     "value": "3",
+     "short": "Seizures beyond auras (ILAE 3–6)",
+     "phrase": "seizures beyond auras (ILAE 3–6)"
+    }
+   ],
+   "assess": "ILAE epilepsy-surgery outcome scale, applied to each post-operative year. ILAE 1 = completely seizure-free, no auras. ILAE 2 = auras (focal seizures without impaired awareness) only. ILAE 3–6 = at least one seizure day beyond auras (3 = one to three seizure days a year; 4–6 = more). The paper pools grades 3–6 and treats them as seizures with impaired awareness."
+  }
+ ],
+ "model": {
+  "type": "table",
+  "panel_title": "Chance of a seizure with impaired awareness in the next year (COSY)",
+  "metric_label": "COSY",
+  "result_text": "Estimated chance of a seizure with impaired awareness in the next 12 months after epilepsy surgery, for a person who over {0} was {1}.",
+  "chart": {
+   "rows_by": 0,
+   "series_by": 1,
+   "colors": [
+    "#0f7a54",
+    "#e0912b",
+    "#d1495b"
+   ],
+   "title": "Every period and outcome, with 95% CI",
+   "info": "Each dot is the published COSY for one combination of period and worst outcome, with its 95% confidence interval as a bar. Dashed lines mark the 20% (private) and 2% (commercial) orientation cut-offs. Click a row to select it."
+  },
+  "table": {
+   "1|1": {
+    "pct": 4.9,
+    "lo": 4.1,
+    "hi": 5.7,
+    "events": 237,
+    "patient_years": 4881
+   },
+   "1|2": {
+    "pct": 11.3,
+    "lo": 9.1,
+    "hi": 14.0,
+    "events": 101,
+    "patient_years": 891
+   },
+   "1|3": {
+    "pct": 87.6,
+    "lo": 85.6,
+    "hi": 89.4,
+    "events": 2380,
+    "patient_years": 2716
+   },
+   "2|1": {
+    "pct": 3.5,
+    "lo": 2.9,
+    "hi": 4.2,
+    "events": 143,
+    "patient_years": 4101
+   },
+   "2|2": {
+    "pct": 9.2,
+    "lo": 7.2,
+    "hi": 11.6,
+    "events": 74,
+    "patient_years": 808
+   },
+   "2|3": {
+    "pct": 81.1,
+    "lo": 78.2,
+    "hi": 83.6,
+    "events": 2237,
+    "patient_years": 2760
+   },
+   "3|1": {
+    "pct": 2.4,
+    "lo": 1.9,
+    "hi": 3.0,
+    "events": 84,
+    "patient_years": 3492
+   },
+   "3|2": {
+    "pct": 7.8,
+    "lo": 6.0,
+    "hi": 10.1,
+    "events": 56,
+    "patient_years": 718
+   },
+   "3|3": {
+    "pct": 76.4,
+    "lo": 73.0,
+    "hi": 79.5,
+    "events": 2055,
+    "patient_years": 2689
+   }
+  }
+ },
+ "provenance": {
+  "extraction_method": "paper_table",
+  "source": "Fairclough et al., J Neurol Neurosurg Psychiatry 2018;89(6):599–602 (doi 10.1136/jnnp-2017-316578, PMID 29223975). COSY and 95% CI from Table 4 (GEE, robust SEs); event and patient-year counts from Table 3.",
+  "review_status": "unreviewed",
+  "notes": "Exact printed values, not digitized. build_fairclough_postop_driving.py asserts that every Table 3 count ratio reproduces its printed proportion, that Table 4 equals Table 3 to print rounding (saturated GEE), and that the six abstract figures match. Table 3's unclustered CIs are not shipped. n per window: 819 / 770 / 724 patients (1 / 2 / 3 years). Set review_status to human_reviewed after a person checks the nine cells on the live page against Table 4."
+ }
+}

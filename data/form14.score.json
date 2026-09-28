@@ -1,110 +1,110 @@
 {
-  "schema_version": "1.0",
-  "id": "form14",
-  "kind": "score",
-  "meta": {
-    "title": "Brain Metastases Epilepsy Risk Score",
-    "doi": "10.1093/neuonc/noz172",
-    "cff_info": "<div id=\"fieldInfoBrainMetastases\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Brain Metastases Epilepsy Risk Score</h4>\n  <p><i>Wolpert et al., 2020</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1093/neuonc/noz172\" target=\"_blank\">10.1093/neuonc/noz172</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Supratentorial Brain Metastases (BM):</b> 4 points</li>\n    <li><b>Incomplete Resection:</b> 3 points</li>\n    <li><b>Multiple Surgeries:</b> 1 point</li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Predicted risk of epilepsy after 5 years based on the score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">1 point</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">2 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No data</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">3 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">6.3%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">4 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">8.7%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">5 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">11.1%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">6 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No data</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">7 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">22.9%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">47.4%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 799 patients, Zurich (2004-2014).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Univariate and multivariate Cox regression models.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC: 0.75 (derivation).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited by retrospective design).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Helps identify high-risk patients for anti-seizure medication (ASM) treatment or potential prophylaxis.</td>\n      </tr>\n    </tbody>\n  </table>\n</div>",
-    "authors": "Wolpert F, Lareida A, Terziev R, et al.",
-    "journal": "Neuro-Oncology",
-    "year": 2020,
-    "clinical_utility": "Background Current guidelines do not recommend primary prophylactic anti-epileptic drug (AED) therapy for patients with brain metastases (BM). Yet, subgroups of patients at high seizure risk might still benefit from prophylaxis.",
-    "outcome": "Risk factors for the development of epilepsy in patients with brain metastases"
-  },
-  "thresholds": {
-    "group1": 20,
-    "group2": 2
-  },
-  "predictors": [
+ "schema_version": "1.0",
+ "id": "form14",
+ "kind": "score",
+ "meta": {
+  "title": "Brain Metastases Epilepsy Risk Score",
+  "doi": "10.1093/neuonc/noz172",
+  "cff_info": "<div id=\"fieldInfoBrainMetastases\" style=\" margin-top: 10px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;\">\n  <h4>Brain Metastases Epilepsy Risk Score</h4>\n  <p><i>Wolpert et al., 2020</i></p>\n  <p><b>DOI:</b> <a href=\"https://doi.org/10.1093/neuonc/noz172\" target=\"_blank\">10.1093/neuonc/noz172</a></p>\n  <h4>Factors and Points</h4>\n  <ul>\n    <li><b>Supratentorial Brain Metastases (BM):</b> 4 points</li>\n    <li><b>Incomplete Resection:</b> 3 points</li>\n    <li><b>Multiple Surgeries:</b> 1 point</li>\n  </ul>\n  <h4>Risk Estimates</h4>\n  <p>Predicted risk of epilepsy after 5 years based on the score:</p>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px; border: 1px solid #ddd;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Score</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Risk</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">1 point</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">0%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">2 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No data</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">3 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">6.3%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">4 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">8.7%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">5 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">11.1%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">6 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">No data</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">7 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">22.9%</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">8 points</td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">47.4%</td>\n      </tr>\n    </tbody>\n  </table>\n  <h4>Additional Study Information</h4>\n  <table style=\"width: 100%; border-collapse: collapse; margin-top: 10px;\">\n    <thead>\n      <tr style=\"background-color: #f2f2f2;\">\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Category</th>\n        <th style=\"border: 1px solid #ddd; padding: 8px;\">Details</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Population</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Derivation: 799 patients, Zurich (2004-2014).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Statistical Methods</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Univariate and multivariate Cox regression models.</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Performance Metrics</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">AUC: 0.75 (derivation).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Generalizability</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Moderate (limited by retrospective design).</td>\n      </tr>\n      <tr>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\"><b>Clinical Utility</b></td>\n        <td style=\"border: 1px solid #ddd; padding: 8px;\">Helps identify high-risk patients for anti-seizure medication (ASM) treatment or potential prophylaxis.</td>\n      </tr>\n    </tbody>\n  </table>\n<h4 data-note=\"2026-09-28\">Newer evidence: seizures after radiosurgery (SAFER interim analysis, 2026)</h4><p>The first prospective study with seizures as its primary endpoint (de Boisanger et&nbsp;al., <i>Clin Oncol</i> 2026, <a href=\"https://doi.org/10.1016/j.clon.2026.104222\" target=\"_blank\" rel=\"noopener\">doi:10.1016/j.clon.2026.104222</a>) followed 75 adults treated with stereotactic radiosurgery (SRS) at one UK centre in 2022–2023. 8 of 75 (10.7%, 95% CI 4.7–19.9) had a seizure within 12 months; the cumulative incidence with death as a competing risk was also 10.7% (5.0–18.8), and 9.2% (6/65) for new-onset seizures. Of those seizure-free at 6 months, 3 of 52 (5.8%) had a seizure by 12 months, and no first seizure occurred after month 9. 36 of the 75 had died by 12 months.</p><p><b>How it compares.</b> This score gives a <b>5-year</b> risk: 8.7% for a supratentorial metastasis without incomplete resection or repeat surgery (score 4). SAFER's <b>12-month</b> figure is already at or above that, although most SAFER patients were not operated on (12% had a previous craniotomy) and the outcome definitions differ.</p><p>This is an interim analysis (375 patients planned; final results expected in 3–4 years) and it reports no risk-factor model, so it neither validates nor refutes this calculator. Seizures were not defined in the protocol, and the paper gives the new-onset rate as 9.2% in the results but 8.2% in its conclusion.</p></div>",
+  "authors": "Wolpert F, Lareida A, Terziev R, et al.",
+  "journal": "Neuro-Oncology",
+  "year": 2020,
+  "clinical_utility": "Background Current guidelines do not recommend primary prophylactic anti-epileptic drug (AED) therapy for patients with brain metastases (BM). Yet, subgroups of patients at high seizure risk might still benefit from prophylaxis.",
+  "outcome": "Risk factors for the development of epilepsy in patients with brain metastases"
+ },
+ "thresholds": {
+  "group1": 20,
+  "group2": 2
+ },
+ "predictors": [
+  {
+   "name": "Supratentorial Brain Metastasis",
+   "options": [
     {
-      "name": "Supratentorial Brain Metastasis",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 4
-        }
-      ],
-      "assess": "Brain metastases located in the supratentorial region (above the tentorium cerebelli), which are linked to a higher seizure risk"
+     "label": "No",
+     "points": 0
     },
     {
-      "name": "Incomplete resection",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 3
-        }
-      ],
-      "assess": "The presence of residual tumor after surgery, significantly associated with an increased risk of postoperative seizures, compared to gross total resection."
-    },
-    {
-      "name": "Multiple surgeries",
-      "options": [
-        {
-          "label": "No",
-          "points": 0
-        },
-        {
-          "label": "Yes",
-          "points": 1
-        }
-      ],
-      "assess": "Undergoing two or more surgeries for brain metastases, which trends toward an increased risk of postoperative seizures."
+     "label": "Yes",
+     "points": 4
     }
-  ],
-  "model": {
-    "score_type": "points",
-    "horizon": "5 years",
-    "rows": [
-      {
-        "label": "score 0",
-        "score": 0,
-        "pct": 0.0
-      },
-      {
-        "label": "score 1",
-        "score": 1,
-        "pct": 0.0
-      },
-      {
-        "label": "score 3",
-        "score": 3,
-        "pct": 6.3
-      },
-      {
-        "label": "score 4",
-        "score": 4,
-        "pct": 8.7
-      },
-      {
-        "label": "score 5",
-        "score": 5,
-        "pct": 11.1
-      },
-      {
-        "label": "score 7",
-        "score": 7,
-        "pct": 22.9
-      },
-      {
-        "label": "score 8",
-        "score": 8,
-        "pct": 47.4
-      }
-    ]
+   ],
+   "assess": "Brain metastases located in the supratentorial region (above the tentorium cerebelli), which are linked to a higher seizure risk"
   },
-  "provenance": {
-    "extraction_method": "cff_export",
-    "source": "export_14_2026-04-07_172655.cpfm",
-    "review_status": "unreviewed",
-    "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form."
+  {
+   "name": "Incomplete resection",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 3
+    }
+   ],
+   "assess": "The presence of residual tumor after surgery, significantly associated with an increased risk of postoperative seizures, compared to gross total resection."
+  },
+  {
+   "name": "Multiple surgeries",
+   "options": [
+    {
+     "label": "No",
+     "points": 0
+    },
+    {
+     "label": "Yes",
+     "points": 1
+    }
+   ],
+   "assess": "Undergoing two or more surgeries for brain metastases, which trends toward an increased risk of postoperative seizures."
   }
+ ],
+ "model": {
+  "score_type": "points",
+  "horizon": "5 years",
+  "rows": [
+   {
+    "label": "score 0",
+    "score": 0,
+    "pct": 0.0
+   },
+   {
+    "label": "score 1",
+    "score": 1,
+    "pct": 0.0
+   },
+   {
+    "label": "score 3",
+    "score": 3,
+    "pct": 6.3
+   },
+   {
+    "label": "score 4",
+    "score": 4,
+    "pct": 8.7
+   },
+   {
+    "label": "score 5",
+    "score": 5,
+    "pct": 11.1
+   },
+   {
+    "label": "score 7",
+    "score": 7,
+    "pct": 22.9
+   },
+   {
+    "label": "score 8",
+    "score": 8,
+    "pct": 47.4
+   }
+  ]
+ },
+ "provenance": {
+  "extraction_method": "cff_export",
+  "source": "export_14_2026-04-07_172655.cpfm",
+  "review_status": "unreviewed",
+  "notes": "Predictors/points/rows from CFF export; complete meta from paper; verify vs live form. | 2026-09-28: context note added to cff_info (SAFER interim, PMID 42418941); model values unchanged."
+ }
 }
