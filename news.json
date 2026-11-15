@@ -1,6 +1,288 @@
 {
- "generated": "2026-09-28",
+ "generated": "2026-11-15",
  "items": [
+  {
+   "id": "2026-11-15-dias3-decompressive-surgery",
+   "date": "2026-11-15",
+   "type": "update",
+   "title": "DIAS3: not valid after decompressive surgery",
+   "summary": "A prospective multicentre study found that DIAS3 does not predict late seizures in people with cerebral venous thrombosis treated by decompressive surgery; a caution is now shown on the calculator.",
+   "details": [
+    "89 surgically treated CVT patients (DECOMPRESS2 substudy); 22 (24.7%) had late seizures within 1 year.",
+    "DIAS3 predicted a mean 1-year risk of 28.4%, close to the observed rate, but could not tell who would have seizures (AUC 0.44, 95% CI 0.30–0.59) and was poorly calibrated.",
+    "DIAS3 remains our editor's choice for the general CVT population, where it was externally validated in two independent cohorts (C 0.76–0.80)."
+   ],
+   "sources": [
+    {
+     "cite": "Taveira MC, et al. Eur Neurol 2026",
+     "doi": "10.1159/ene/acsag001",
+     "pmid": "42490350"
+    }
+   ],
+   "badge": {
+    "text": "CVT",
+    "group": "g1"
+   },
+   "calcs": [
+    {
+     "key": "form11",
+     "name": "DIAS3",
+     "desc": "Remote seizure / epilepsy risk after cerebral venous thrombosis.",
+     "group": "g1",
+     "url": "https://predictepilepsy.com/calc-dias3/",
+     "badge_text": "DIAS3",
+     "outcome": "Development and Validation of a Clinical Score to Predict Epilepsy After Cerebral Venous Thrombosis",
+     "cite": {
+      "authors": "Lindgren E, Shu L, Simaan N, et al.",
+      "journal": "JAMA Neurology",
+      "year": 2024,
+      "doi": "10.1001/jamaneurol.2024.3481",
+      "pmid": ""
+     },
+     "tier": "A",
+     "n": "1128",
+     "external_validation": true,
+     "setting": "multi-centre",
+     "rationale": "DIAS3 derived in a large international multicentre CVT consortium (n=1128, 128 epilepsy events) and externally validated in two independent multicentre cohorts (n=543 and n=556) with C statistics 0.74-0.80 and good calibration.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=1128, externally validated). Not valid after decompressive surgery: AUC 0.44 in the DECOMPRESS2 surgical cohort (Taveira 2026)."
+    }
+   ]
+  },
+  {
+   "id": "2026-11-15-aes-cns-surgery-guideline",
+   "date": "2026-11-15",
+   "type": "update",
+   "title": "New epilepsy surgery guideline puts cognitive risk into the decision",
+   "summary": "The AES/CNS guideline strongly recommends temporal lobectomy for mesial temporal lobe epilepsy when the risk of cognitive decline is low, and only conditionally when it is high. Our memory and naming decline calculators estimate that risk.",
+   "details": [
+    "Strong recommendation, moderate certainty: anterior temporal lobectomy for people with mesial temporal lobe epilepsy at low risk of cognitive decline.",
+    "Conditional recommendations, with shared decision-making: lobectomy at high cognitive risk, selective amygdalohippocampectomy, laser ablation, neocortical resection and callosotomy.",
+    "Verbal memory loss is a critical outcome; naming and fluency decline are important outcomes. The guideline does not validate a specific prediction tool."
+   ],
+   "sources": [
+    {
+     "cite": "Jobst BC, et al. Epilepsy Curr 2026",
+     "doi": "10.1177/15357597261465347",
+     "pmid": "42948139"
+    }
+   ],
+   "badge": {
+    "text": "Guideline",
+    "group": "g4"
+   },
+   "calcs": [
+    {
+     "key": "calc-memory-decline",
+     "name": "Verbal Memory Decline (TLR)",
+     "desc": "Risk of verbal memory (RAVLT) decline after temporal lobe resection (Busch nomogram).",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-memory-decline/",
+     "badge_text": "Verbal",
+     "outcome": "Predicted probability of clinically significant delayed verbal-memory decline after temporal lobe resection (TLR) for epilepsy. This calculator implements the RAVLT Delay model (word-list learning; c = 0.81), the strongest of the three models in Busch 2021.",
+     "cite": {
+      "authors": "Busch RM, et al.",
+      "journal": "Neurology",
+      "year": 2021,
+      "doi": "10.1212/WNL.0000000000012221",
+      "pmid": "34011574"
+     },
+     "tier": "A",
+     "n": "359",
+     "external_validation": true,
+     "setting": "multi-centre",
+     "rationale": "Nomograms developed in 359 Cleveland Clinic TLR patients and externally validated in 290 patients across five other US/Canadian centres with good-to-excellent discrimination (c 0.76-0.81), rated Class II evidence.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=359, externally validated)."
+    },
+    {
+     "key": "calc-naming-decline",
+     "name": "Naming Decline (TLE surgery)",
+     "desc": "Risk of naming decline after temporal-lobe epilepsy surgery (Busch nomogram).",
+     "group": "g4",
+     "url": "https://predictepilepsy.com/calc-naming-decline/",
+     "badge_text": "Naming",
+     "outcome": "Predicted probability of clinically relevant postoperative naming decline (a drop of ≥5 raw points on the 60-item Boston Naming Test) in adults undergoing temporal lobe resection for pharmacoresistant epilepsy, from 5 easily obtained preoperative predictors.",
+     "cite": {
+      "authors": "Busch RM, et al.",
+      "journal": "Neurology",
+      "year": 2018,
+      "doi": "10.1212/WNL.0000000000006629",
+      "pmid": "30404781"
+     },
+     "tier": "A",
+     "n": "719",
+     "external_validation": true,
+     "setting": "multi-centre",
+     "rationale": "Naming-decline nomograms derived in 719 Cleveland Clinic temporal-lobe surgery patients and externally validated in 138 patients from three independent US centres with excellent discrimination (C 0.81-0.84) and good calibration.",
+     "rec": "ec",
+     "rec_why": "Editor's choice — strongest available evidence for this question (tier A, n=719, externally validated)."
+    }
+   ]
+  },
+  {
+   "id": "2026-11-15-se-evidence-tiers",
+   "date": "2026-11-15",
+   "type": "update",
+   "title": "Status epilepticus tools now carry evidence grades",
+   "summary": "Six status epilepticus calculators now show an evidence tier and, where earned, a Recommended badge; END-IT also gains a 2026 external validation.",
+   "details": [
+    "STESS is graded A (externally validated in many cohorts); EMSE nomogram, END-IT, STEPSS and the Thai national score are graded B; AFTER is graded C (single centre, not yet validated).",
+    "END-IT: in a prospective Egyptian cohort of 114 adults, the score at 3 or more had sensitivity 0.52 and specificity 0.84 for a poor 3-month outcome (AUC 0.747); comorbidity added independent information.",
+    "ACARD remains the editor's choice for 30-day mortality after status epilepticus."
+   ],
+   "sources": [
+    {
+     "cite": "Magdy R, et al. Epilepsy Behav 2026;185:111220",
+     "doi": "10.1016/j.yebeh.2026.111220",
+     "pmid": "42710181"
+    }
+   ],
+   "badge": {
+    "text": "Tiers",
+    "group": "g7"
+   },
+   "calcs": [
+    {
+     "key": "stess",
+     "name": "STESS — Status Epilepticus Severity Score",
+     "desc": "The most validated bedside score for survival after status epilepticus: 4 pre-treatment items (Rossetti 2008). Favorable 0–2 vs unfavorable 3–6.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-stess/",
+     "badge_text": "STESS",
+     "outcome": "In-hospital survival vs death after an episode of status epilepticus, from four pre-treatment predictors (age, history of seizures, worst seizure type, level of consciousness).",
+     "cite": {
+      "authors": "Rossetti AO, Logroscino G, Milligan TA, Michaelides C, Ruffieux C, Bromfield EB",
+      "journal": "Journal of Neurology",
+      "year": 2008,
+      "doi": "10.1007/s00415-008-0989-1",
+      "pmid": "18769858"
+     },
+     "tier": "A",
+     "n": "154",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Prospectively applied in 154 adults at three centres (NPV for in-hospital death 0.97) and since externally validated in many independent cohorts (21 pooled in Yuan et al., Epilepsia 2022). Its strength is ruling out death at low scores; positive predictive value is modest, so it is best used to identify patients likely to survive.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier A (n=154 at derivation, externally validated in many cohorts). Best at ruling out death at low scores; ACARD is the editor's choice for 30-day mortality."
+    },
+    {
+     "key": "emse",
+     "name": "EMSE — 30-day mortality nomogram",
+     "desc": "Individualised 30-day mortality after status epilepticus from aetiology, age, comorbidity and EEG — the EMSE-parameter nomogram (Brigo/Meletti 2022, AUC 0.83).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-emse/",
+     "badge_text": "EMSE",
+     "outcome": "Individual probability of 30-day mortality after status epilepticus, from the EMSE parameters (aetiology, EEG, age, comorbidity) re-fitted into a logistic nomogram.",
+     "cite": {
+      "authors": "Brigo F, Turcato G, Lattanzi S, Orlandi N, Giovannini G, Zaboli A, Meletti S",
+      "journal": "Neurocritical Care",
+      "year": 2022,
+      "doi": "10.1007/s12028-022-01548-6",
+      "pmid": "35778648"
+     },
+     "tier": "B",
+     "n": "698",
+     "external_validation": false,
+     "setting": "se_prognosis",
+     "rationale": "Nomogram built on the externally validated EMSE parameters in 698 SE patients (202 deaths at 30 days) with bootstrap-corrected AUC 0.830 and good calibration, outperforming EMSE alone (0.777). The nomogram itself has internal validation only.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier B (n=698, AUC 0.83, internal validation of the nomogram; EMSE parameters externally validated). ACARD is the editor's choice for 30-day mortality."
+    },
+    {
+     "key": "endit",
+     "name": "END-IT — functional outcome after CSE",
+     "desc": "Risk of poor functional outcome (mRS 3–6) at 3 months after convulsive status epilepticus, from 5 bedside items (Gao 2016). Cut-off ≥3.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-endit/",
+     "badge_text": "END-IT",
+     "outcome": "Risk of an unfavorable functional outcome (modified Rankin Scale 3–6, i.e. death or dependence) at 3 months after discharge, in adults with convulsive status epilepticus.",
+     "cite": {
+      "authors": "Gao Q, Ou-Yang T-P, Sun X-L, Yang F, Wu C, Kang T, Kang X-G, Jiang W",
+      "journal": "Critical Care",
+      "year": 2016,
+      "doi": "10.1186/s13054-016-1221-9",
+      "pmid": "26916702"
+     },
+     "tier": "B",
+     "n": "132",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Retrospective single-centre derivation (n=132, 62 unfavourable outcomes) with independent external validations showing moderate transported discrimination, e.g. Magdy 2026 (prospective, n=114, AUC 0.747, sensitivity 0.52 / specificity 0.84 at >=3; comorbidity added independent information). Usable with caution; the only score built for 3-month functional outcome.",
+     "rec": "rec",
+     "rec_why": "Recommended — the only score for 3-month functional outcome after status epilepticus. Tier B: small single-centre derivation (n=132); external validations show moderate discrimination (AUC 0.747 in Magdy 2026)."
+    },
+    {
+     "key": "stepss",
+     "name": "STEPSS — paediatric SE severity score",
+     "desc": "Risk of poor outcome (POPC ≥3) in children with status epilepticus — the paediatric STESS (Sidharth 2019). Cut-off >3.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-stepss/",
+     "badge_text": "STEPSS",
+     "outcome": "Risk of an unfavourable short-term outcome (Paediatric Overall Performance Category ≥3, i.e. moderate disability to death, at discharge) in children with status epilepticus.",
+     "cite": {
+      "authors": "Sidharth, Sankhyan N, Malhi P, Jayashree M",
+      "journal": "Seizure",
+      "year": 2019,
+      "doi": "10.1016/j.seizure.2019.09.005",
+      "pmid": "31536850"
+     },
+     "tier": "B",
+     "n": "140",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Prospective single-centre paediatric derivation (n=140, 7 deaths, 15 unfavourable outcomes; NPV 0.99 at >3) with small independent external validations (e.g. Soydan Ekin 2022; Mahesh 2026 PICU n=50, 0% mortality at <=2). Few events overall, so best used to rule out a poor outcome.",
+     "rec": "rec",
+     "rec_why": "Recommended — the only severity score for children with status epilepticus. Tier B: n=140, few events; small external validations support ruling out a poor outcome at low scores."
+    },
+    {
+     "key": "tiamkao",
+     "name": "SE Mortality Score (national database)",
+     "desc": "Purely clinical mortality risk after status epilepticus (age, comorbidities, complications) — no EEG/imaging needed (Tiamkao 2018, n>10,000).",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-tiamkao/",
+     "badge_text": "SE",
+     "outcome": "Risk of death (in hospital or within 30 days) after status epilepticus, from a clinical risk score built on age, comorbidities and SE complications — no EEG or imaging needed.",
+     "cite": {
+      "authors": "Tiamkao S, Pranbul S, Sawanyawisuth K, Thepsuthammarat K, Integrated Epilepsy Research Group",
+      "journal": "Epilepsia",
+      "year": 2018,
+      "doi": "10.1111/epi.14489",
+      "pmid": "30159871"
+     },
+     "tier": "B",
+     "n": "10924",
+     "external_validation": false,
+     "setting": "se_prognosis",
+     "rationale": "Very large national-database derivation (n=10,924) with validation in a second split of the same database (n=10,808; ROC 0.836/0.835). The validation is within the same database rather than an independent cohort, and coding-based variables may transport poorly outside Thailand.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier B (national database, n=10,924, validated in a second split of the same database, ROC 0.84); purely clinical, for settings without EEG or imaging."
+    },
+    {
+     "key": "after",
+     "name": "AFTER — epilepsy after status epilepticus",
+     "desc": "Risk of developing epilepsy in the 5 years after a de novo status epilepticus, from 4 clinical/EEG items (Rodrigo-Gisbert 2023). Cut-off ≥2.",
+     "group": "g7",
+     "url": "https://predictepilepsy.com/calc-after/",
+     "badge_text": "AFTER",
+     "outcome": "Risk of developing epilepsy (a first unprovoked/remote seizure meeting ILAE criteria) within 5 years after a de novo episode of status epilepticus, in adults with no prior epilepsy.",
+     "cite": {
+      "authors": "Rodrigo-Gisbert M, Toledo M, Santamarina E, et al.",
+      "journal": "Epilepsy & Behavior",
+      "year": 2023,
+      "doi": "10.1016/j.yebeh.2023.109531",
+      "pmid": "37995538"
+     },
+     "tier": "C",
+     "n": "230",
+     "external_validation": false,
+     "setting": "se_prognosis",
+     "rationale": "Single-centre prospective registry (n=230 de novo acute symptomatic or cryptogenic SE, 23.9% later epilepsy) with time-dependent AUC 0.743 and no external validation, so preliminary. The only tool on the site for epilepsy after de novo SE.",
+     "rec": "",
+     "rec_why": ""
+    }
+   ]
+  },
   {
    "id": "2026-09-28-driving-after-epilepsy-surgery",
    "date": "2026-09-28",
@@ -417,13 +699,13 @@
       "doi": "10.1007/s00415-008-0989-1",
       "pmid": "18769858"
      },
-     "tier": "",
-     "n": "",
-     "external_validation": false,
-     "setting": "",
-     "rationale": "",
-     "rec": "",
-     "rec_why": ""
+     "tier": "A",
+     "n": "154",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Prospectively applied in 154 adults at three centres (NPV for in-hospital death 0.97) and since externally validated in many independent cohorts (21 pooled in Yuan et al., Epilepsia 2022). Its strength is ruling out death at low scores; positive predictive value is modest, so it is best used to identify patients likely to survive.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier A (n=154 at derivation, externally validated in many cohorts). Best at ruling out death at low scores; ACARD is the editor's choice for 30-day mortality."
     },
     {
      "key": "emse",
@@ -440,13 +722,13 @@
       "doi": "10.1007/s12028-022-01548-6",
       "pmid": "35778648"
      },
-     "tier": "",
-     "n": "",
+     "tier": "B",
+     "n": "698",
      "external_validation": false,
-     "setting": "",
-     "rationale": "",
-     "rec": "",
-     "rec_why": ""
+     "setting": "se_prognosis",
+     "rationale": "Nomogram built on the externally validated EMSE parameters in 698 SE patients (202 deaths at 30 days) with bootstrap-corrected AUC 0.830 and good calibration, outperforming EMSE alone (0.777). The nomogram itself has internal validation only.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier B (n=698, AUC 0.83, internal validation of the nomogram; EMSE parameters externally validated). ACARD is the editor's choice for 30-day mortality."
     },
     {
      "key": "endit",
@@ -463,13 +745,13 @@
       "doi": "10.1186/s13054-016-1221-9",
       "pmid": "26916702"
      },
-     "tier": "",
-     "n": "",
-     "external_validation": false,
-     "setting": "",
-     "rationale": "",
-     "rec": "",
-     "rec_why": ""
+     "tier": "B",
+     "n": "132",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Retrospective single-centre derivation (n=132, 62 unfavourable outcomes) with independent external validations showing moderate transported discrimination, e.g. Magdy 2026 (prospective, n=114, AUC 0.747, sensitivity 0.52 / specificity 0.84 at >=3; comorbidity added independent information). Usable with caution; the only score built for 3-month functional outcome.",
+     "rec": "rec",
+     "rec_why": "Recommended — the only score for 3-month functional outcome after status epilepticus. Tier B: small single-centre derivation (n=132); external validations show moderate discrimination (AUC 0.747 in Magdy 2026)."
     },
     {
      "key": "stepss",
@@ -486,13 +768,13 @@
       "doi": "10.1016/j.seizure.2019.09.005",
       "pmid": "31536850"
      },
-     "tier": "",
-     "n": "",
-     "external_validation": false,
-     "setting": "",
-     "rationale": "",
-     "rec": "",
-     "rec_why": ""
+     "tier": "B",
+     "n": "140",
+     "external_validation": true,
+     "setting": "se_prognosis",
+     "rationale": "Prospective single-centre paediatric derivation (n=140, 7 deaths, 15 unfavourable outcomes; NPV 0.99 at >3) with small independent external validations (e.g. Soydan Ekin 2022; Mahesh 2026 PICU n=50, 0% mortality at <=2). Few events overall, so best used to rule out a poor outcome.",
+     "rec": "rec",
+     "rec_why": "Recommended — the only severity score for children with status epilepticus. Tier B: n=140, few events; small external validations support ruling out a poor outcome at low scores."
     },
     {
      "key": "after",
@@ -509,11 +791,11 @@
       "doi": "10.1016/j.yebeh.2023.109531",
       "pmid": "37995538"
      },
-     "tier": "",
-     "n": "",
+     "tier": "C",
+     "n": "230",
      "external_validation": false,
-     "setting": "",
-     "rationale": "",
+     "setting": "se_prognosis",
+     "rationale": "Single-centre prospective registry (n=230 de novo acute symptomatic or cryptogenic SE, 23.9% later epilepsy) with time-dependent AUC 0.743 and no external validation, so preliminary. The only tool on the site for epilepsy after de novo SE.",
      "rec": "",
      "rec_why": ""
     },
@@ -532,13 +814,13 @@
       "doi": "10.1111/epi.14489",
       "pmid": "30159871"
      },
-     "tier": "",
-     "n": "",
+     "tier": "B",
+     "n": "10924",
      "external_validation": false,
-     "setting": "",
-     "rationale": "",
-     "rec": "",
-     "rec_why": ""
+     "setting": "se_prognosis",
+     "rationale": "Very large national-database derivation (n=10,924) with validation in a second split of the same database (n=10,808; ROC 0.836/0.835). The validation is within the same database rather than an independent cohort, and coding-based variables may transport poorly outside Thailand.",
+     "rec": "rec",
+     "rec_why": "Recommended — tier B (national database, n=10,924, validated in a second split of the same database, ROC 0.84); purely clinical, for settings without EEG or imaging."
     }
    ]
   },

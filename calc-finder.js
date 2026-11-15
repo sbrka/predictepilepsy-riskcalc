@@ -139,7 +139,7 @@
     "calc-autoimmune-enceph-recurrence": ["rec", "Recommended — clinically useful with good evidence (tier B, n=981)."],
     "calc-bmers": ["rec", "Recommended — clinically useful with good evidence (tier B, n=799)."],
     "calc-cave-score": ["ec", "Editor's choice — best of CAVE / LEAN / LANE / CAVE²: tier A, n=993, externally validated."],
-    "calc-dias3": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=1128, externally validated)."],
+    "calc-dias3": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=1128, externally validated). Not valid after decompressive surgery: AUC 0.44 in the DECOMPRESS2 surgical cohort (Taveira 2026)."],
     "calc-driving-after-epilepsy-surgery": ["rec", "Recommended — clinically useful with good evidence (tier B, n=819)."],
     "calc-drug-withdrawal": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=231, externally validated)."],
     "calc-empire": ["ec", "Editor's choice — strongest available evidence for this question (tier A, n=399, externally validated)."],
@@ -178,6 +178,11 @@
     "calc-postop-dq50": ["rec", "Recommended — the only tool for developmental outcome in children with developmental delay. Tier B: small cohort (n=127), 10-fold cross-validation only, correct classification 76% — weaker than its IQ siblings from the same paper."],
     "calc-acd-se-mortality": ["rec", "Recommended — the only tool for mortality after status epilepticus. The ACD score is externally validated across Denmark, Germany and Norway (Roberg 2022) and again in Spain (Alanís-Bernal 2026). Per-score 2-year mortality is read from the published nomogram; pending human review of the extraction (would otherwise be Editor\u2019s choice as the sole tier-A tool for this question)."],
     "calc-acard-se-mortality": ["ec", "Editor\u2019s choice for short-term (30-day) mortality after status epilepticus \u2014 the strongest available tool for this question (tier A; derived n=689, externally validated n=569, AUC 0.86/0.85; outperforms STESS/mSTESS/EMSE/SACE). Point table and per-score risks are exact from the paper. (For long-term 2-year mortality, see the ACD score.)"],
+    "calc-stess": ["rec", "Recommended — tier A (n=154 at derivation, externally validated in many cohorts). Best at ruling out death at low scores; ACARD is the editor's choice for 30-day mortality."],
+    "calc-emse": ["rec", "Recommended — tier B (n=698, AUC 0.83, internal validation of the nomogram; EMSE parameters externally validated). ACARD is the editor's choice for 30-day mortality."],
+    "calc-endit": ["rec", "Recommended — the only score for 3-month functional outcome after status epilepticus. Tier B: small single-centre derivation (n=132); external validations show moderate discrimination (AUC 0.747 in Magdy 2026)."],
+    "calc-stepss": ["rec", "Recommended — the only severity score for children with status epilepticus. Tier B: n=140, few events; small external validations support ruling out a poor outcome at low scores."],
+    "calc-tiamkao": ["rec", "Recommended — tier B (national database, n=10,924, validated in a second split of the same database, ROC 0.84); purely clinical, for settings without EEG or imaging."],
 };
   const bySlug = Object.fromEntries(CALCS.map((c) => [c[0], c]));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
